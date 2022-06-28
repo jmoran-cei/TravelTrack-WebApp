@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # TravelTrack
-=======
-# Travel Track
->>>>>>> 2f9f3a9bb41f29289bac323be4fe46caf9e804b8
 
 This project was developed by Jon Moran of Computer Enterprises, Inc. (CEI) for the purpose of grasping and applying a better understanding of web development with Angular.
 
