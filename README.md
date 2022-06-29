@@ -1,16 +1,18 @@
-# TravelTrack
+# TravelTrack 
 
 This project was developed by Jon Moran of Computer Enterprises, Inc. (CEI) for the purpose of grasping and applying a better understanding of web development with Angular.
 
 Travel Track is a web-application that tracks users traveling and vacations. Users have accounts and the ability to log previous and current trips, add people as participants of trips, schedule trips, etc. 
+
+[Open README.md](https://github.com/jmoran-cei/TravelTrack-WebApp/#readme)
 
 ---
 ---
 ## Page Layouts
 
 This section covers briefly the overall layout of the webpages for Travel Track.
-<br/>
-<br/>
+&#013; 
+&#013; 
 *Asterik signifies something that can be clicked or interacted with by a user  
 
 > ### Header
@@ -75,7 +77,7 @@ This page will include the list of all trips that the user created or is a part 
       - if clicked on, refers user to 'Trip (Overview)' page
     - *ICON: Filter by:
       - date, location (a-z)  
-<br/>
+&#013;   
 - **Trip Thumbnail:**
   - Displays:
     - Trip Image (will be stock based on location)
@@ -137,9 +139,9 @@ This page will include the list of all trips that the user created or is a part 
       - event location
       - event description
       - event cost
-  <br/>
+  &#013; 
     ---
-  >### Trip To-Do 
+  > ### Trip To-Do 
 
   - Displays: 
     - *input box: 'What task do you need done for this trip?'
@@ -149,9 +151,9 @@ This page will include the list of all trips that the user created or is a part 
       - hover over task, button appears
         - *BUTTON: 'DONE' 
         - removes task from view, deletes task
-  <br/>
+  &#013; 
     ---
-  >### Trip Photos
+  > ### Trip Photos
 
   - Displays: 
     - *ICON: paperclip icon
@@ -203,17 +205,17 @@ This page will include the list of all trips that the user created or is a part 
 
 - Displays:
   - *Trip Title
-    -input
+    - input
   - *Start Date
-    -input
+    - input
   - *End Date
-    -input
+    - input
   - *Location(s)
     - Search Autofill/Suggesitons (using API)
     - BUTTON: 'Add Location'
     - resets to blank, can add unlimited locations
   - *Description
-    -input
+    - input
   - *BUTTON: "Create Trip"
   ---
 
@@ -242,9 +244,9 @@ This page will include the list of all trips that the user created or is a part 
     - Suggested/autofill list of users
   - *BUTTON: "Add Member
 
-<br/>
-<br/>
-<br/>
+&#013; 
+&#013; 
+&#013; 
 
 ---
 ---
