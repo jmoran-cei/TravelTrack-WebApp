@@ -1,0 +1,63 @@
+<div>
+  <h1 class="page-title">Your Trips</h1>
+  <hr />
+
+  <!-- UPCOMING TRIPS -->
+  <div>
+    <!-- TITLE SECTION -->
+    <trips-title-section [title]="upcomingTrips_SectionTitle"></trips-title-section>
+
+    <!-- THUMBNAILS SECTION -->
+    <div class="thumbnail-section">
+      <!-- all thumbnails -->
+      <div class="collapse in row" id="upcoming-dropdown">
+        <!-- list of upcoming trip thumbnails -->
+        <ng-container *ngFor="let trip of upcomingTrips">
+          <div class="col-md-6">
+            <trip-thumbnail class="wrapper" [trip]="trip"></trip-thumbnail>
+          </div>
+        </ng-container>
+
+
+        <!-- create new trip thumbnail -->
+        <div class="col-md-6">
+          <new-trip-thumbnail class="wrapper" [title]="createUpcomingTrip_Title"
+            [description]="createUpcomingTrip_Description">
+          </new-trip-thumbnail>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- PREVIOUS TRIPS -->
+  <div>
+    <!-- TITLE SECTION -->
+    <trips-title-section [title]="previousTrips_SectionTitle"></trips-title-section>
+
+    <!-- THUMBNAILS SECTION -->
+    <div class="thumbnail-section">
+      <!-- all thumbnails -->
+      <div class="collapse in row" id="previous-dropdown">
+        <!-- list of previous trip thumbnails -->
+
+        <ng-container *ngFor="let trip of previousTrips">
+          <div class="col-md-6">
+            <trip-thumbnail #createTrip class="wrapper" [trip]="trip"></trip-thumbnail>
+          </div>
+        </ng-container>
+
+
+        <!-- create new trip thumbnail -->
+        <div class="col-md-6">
+          <new-trip-thumbnail class="wrapper" [title]="createPreviousTrip_Title"
+            [description]="createPreviousTrip_Description">
+          </new-trip-thumbnail>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+</div>
