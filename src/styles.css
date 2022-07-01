@@ -3,5 +3,17 @@
 body {
   color: rgb(255, 255, 255);
   background-color: rgba(71, 103, 191, 0.663);
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Courier', sans-serif;
+  letter-spacing: -.12rem;
+  word-spacing: -.8rem;
+}
+
+.container-fluid {
+  margin: 20px auto;
+  width: 90%;
+}
+
+.font600 {
+  font-weight: 600;
+  letter-spacing: 0rem; /* makes it easier for applying 600 weight cause it's line spacing is a little different than the rest */
 }

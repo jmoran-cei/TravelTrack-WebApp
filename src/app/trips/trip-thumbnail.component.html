@@ -4,14 +4,12 @@
   <div class="thumbnail_mask">
     <div class="thumbnail_box_info">
 
-      <div class="thumbnail-title">
-        <h2>{{trip.title}}</h2>
-      </div>
+      <h2 class="thumbnail-title">{{trip.title}}</h2>
 
-      <div class="thumbnail_details">
-        <h4>
 
-          <span class="thumbnail-date">
+        <div class="thumbnail_details">
+
+          <span class="thumbnail-date font600">
             {{trip.startDate.toLocaleDateString('en-us', { month:"short", day:"numeric"})}}
             &mdash;
             {{trip.endDate.toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"})}}
@@ -20,7 +18,7 @@
           <div class="thumbnail_location">
             Destination<span *ngIf="multipleLocations(trip.locations)">s</span>:
             <br />
-            <ng-container class="destinations" *ngFor="let location of trip.locations">
+            <ng-container *ngFor="let location of trip.locations">
               <div class="destinations">
                 <span [ngSwitch]="location.country">
                   <span *ngSwitchCase="'United States'">{{location.city}}, {{location.stateProv}}, U.S.</span>
@@ -32,8 +30,7 @@
             </ng-container>
           </div>
 
-        </h4>
-      </div>
+        </div>
 
     </div>
   </div>

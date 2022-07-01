@@ -77,7 +77,7 @@ const TRIPS:ITrip[] = [
 
   }, {
     id: 3,
-    title: 'Smokey Mountains Thanksgiving',
+    title: 'Smoky Mountains Thanksgiving',
     startDate: new Date('11/23/2019'),
     endDate: new Date('11/30/2019'),
     locations: [

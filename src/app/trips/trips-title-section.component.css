@@ -4,13 +4,14 @@
   direction: row;
   align-items: center;
   height: 60px;
-  width: 1140px;
+  margin: 40px;
+  margin-bottom: 0px;
   padding: 10px;
 }
 
   .trips-title {
     margin: 5px;
-    font-size: 3.2rem;
+    font-size: 3.5rem;
   }
 
   .trips-title:hover {
@@ -20,43 +21,59 @@
   .drop-icon {
     color: white;
     margin: 5px;
-    align-self:flex-end;
     background: transparent;
     border: 0;
     font-size: 1.5rem;
   }
 
+  .toggle:after {
+    font-family: 'Glyphicons Halflings';
+    content: "\e114";
+    float: right;
+    color: #ffffff;
+    /* margin-right: 15px; */
+    transform: rotate(0deg);
+  }
+
+  .toggle.collapsed:after {
+    transform: rotate(180deg);
+}
+
   .filter {
     margin-left: auto;
   }
 
-  .filter-icon {
-    font-size: 1.7rem;
-    color: white;
-    background: transparent;
-    border: 0;
-  }
+    .filter-icon {
+      font-size: 2rem;
+      color: white;
+      background: transparent;
+      border: 0;
+    }
 
-  .dropdown-menu {
-    left: unset;
-    right: 0%;
-  }
+    .dropdown-menu {
+      left: unset;
+      right: 0%;
+    }
 
-  .dropdown-menu li{
-    display: inline-block;
-    position: relative;
-    line-height: 21px;
-    text-align: left;
-    width: 100%;
-  }
+    .filter:hover .dropdown-menu {
+      display: block;
+    }
 
-  .dropdown-menu li a{
-    display: block;
-    padding: 8px 25px;
-    color: #333;
-    text-decoration: none;
-  }
-  .dropdown-menu li a:hover{
-    color: #fff;
-    background: #939393;
-  }
+    .dropdown-menu li{
+      display: inline-block;
+      position: relative;
+      line-height: 21px;
+      text-align: left;
+      width: 100%;
+      font-size: 1.6rem;
+    }
+
+    .dropdown-menu li a{
+      display: block;
+      padding: 8px 25px;
+      color: #333;
+    }
+    .dropdown-menu li a:hover{
+      color: #fff;
+      background: #939393;
+    }

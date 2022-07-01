@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { HomePageComponent } from './home/home-page.component';
-import { NavbarComponent } from './nav/nav-bar.component';
+import { NavbarComponent } from './nav/navbar.component';
 import { TravelAppComponent } from './travel-app.component';
 import { NewTripThumbnailComponent } from './trips/new-trip-thumbnail.component';
 import { TripService } from './trips/shared/trip.service';

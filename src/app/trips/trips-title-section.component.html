@@ -1,16 +1,15 @@
 <!-- TITLE SECTION -->
 <div class="trips_title_box">
+
   <!-- dropdown -->
-  <div>
-    <button type="button" class="drop-icon btn btn-default btn-xs" data-toggle="collapse"
-      data-target="#upcoming-dropdown" id="upcoming-collapse">
-      <span class="glyphicon glyphicon-menu-down"></span>
-    </button>
-  </div>
+  <button type="button" class="toggle drop-icon btn btn-default btn-xs" data-toggle="collapse"
+    attr.data-target="#{{collapseID}}" id="{{collapseID}}-forlabel">
+  </button>
+
 
   <!-- title -->
-  <h2 class="trips-title">
-    <label for="upcoming-collapse">
+  <h2 class="trips-title font600">
+    <label for="{{collapseID}}-forlabel">
       {{title}}
     </label>
   </h2>
@@ -25,4 +24,5 @@
       <li class="pull-left"><a>Title (A-Z)</a></li>
     </ul>
   </div>
+
 </div>

@@ -8,4 +8,5 @@ import { Component, Input } from "@angular/core";
 
 export class TripsTitleSectionComponent {
   @Input() title:any
+  @Input() collapseID:any
 }

@@ -3,8 +3,8 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  height: 400px;
-  width: 550px;
+  height: 90%;
+  width: 98%;
   border-radius: 20px;
   overflow: hidden;
   box-shadow:
@@ -28,8 +28,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 400px;
-  width: 550px;
+  min-height: 400px;
+  height: 100%;
+  width: 100%;
   background: rgba(0, 50, 177, 0.0);
 }
 
@@ -42,6 +43,7 @@
     object-fit: cover;
     z-index:-5;
     position: absolute;
+    min-height: 450px;
     opacity: 1.0;
   }
 
@@ -53,7 +55,9 @@
 
     /* thumbnail_box_info */
     .thumbnail_box_info {
-      width: 555px;
+      margin: auto;
+      height: 95%;
+      width: 95%;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -61,30 +65,29 @@
 
       /* title */
       .thumbnail-title {
-        margin: 10px 20px;
+        margin: 30px 25px;
         position: absolute;
         bottom: 0;
         text-shadow: 0px 0px 9px black;
-        /* font-weight: ; */
+        font-size: 3.7rem;
+        font-weight: 600;
       }
 
       .thumbnail_box:hover .thumbnail-title {
         position: relative;
         margin-bottom: 0px;
         margin-top: 0px;
-        text-shadow: 0 0 31px black;
+        text-shadow: 0 0 39px black;
         transition: 10ms;
-      }
-
-      h4 {
-        margin: 0px;
       }
 
       /* date and location div */
       .thumbnail_details {
         opacity: 0.0;
-        margin-left: 40px;
-        margin-right: 20px;
+        margin-top: 7px;
+        margin-left: 60px;
+        margin-right: 25px;
+        font-weight: 500;
       }
 
       .thumbnail_box:hover .thumbnail_details {
@@ -96,23 +99,27 @@
       /* date */
       .thumbnail-date {
         font-style: italic;
-        font-size: 18px;
+        font-size: 2.5rem;
       }
 
       /* location*/
       .thumbnail_location {
-        margin-top: 5px;
+        margin-top: 0px;
         padding-bottom: 5px;
-        font-size: 16px;
+        font-size: 2.2rem;
       }
 
       /* specific destinations */
       .destinations {
-        margin: 5px;
+        margin: 0 0px;
         position: relative;
-        left: 10px;
-        font-size: 17px;
+        left: 20px;
+        font-size: 2.35rem;
         font-style: italic;
+      }
+
+      .font600 {
+        font-weight: 600;
       }
 
 /* .test {

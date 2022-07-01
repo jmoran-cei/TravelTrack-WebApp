@@ -28,6 +28,10 @@ export class TripsListComponent {
     // Previous Trips section title
     previousTrips_SectionTitle = "Previous Trips"
 
+    // collapse id for toggling collapse for Upcoming and Previous sections
+    upcomingCollapse = "upcoming-collapse"
+    previousCollapse = "previous-collapse"
+
 
 
   constructor(private tripService: TripService) {

@@ -1,15 +1,26 @@
 .page-title {
+  text-align: center;
   margin: 20px 20px;
   font-size: 4.2rem;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+.title_and_thumbnail_area {
+  margin: auto;
+  min-width: 80%;
+}
+
+hr {
+  margin-top: 0;
 }
 
 .thumbnail-section {
   padding: 5px;
 }
 
-  .wrapper {
-    padding: 10px;
-  }
+.wrapper {
+  padding: 35px 40px;
+}
 
 /* .test {
   background: red;
