@@ -1,30 +1,30 @@
 <div class="thumbnail_box">
-  <img src="{{trip.imgUrl}}" alt="{{trip.title}}" class="bg-img"/>
+  <img src="{{trip?.imgUrl}}" alt="{{trip?.title}}" class="bg-img"/>
 
   <div class="thumbnail_mask">
     <div class="thumbnail_box_info">
 
-      <h2 class="thumbnail-title">{{trip.title}}</h2>
+      <h2 class="thumbnail-title">{{trip?.title}}</h2>
 
 
         <div class="thumbnail_details">
 
           <span class="thumbnail-date font600">
-            {{trip.startDate.toLocaleDateString('en-us', { month:"short", day:"numeric"})}}
+            {{trip?.startDate?.toLocaleDateString('en-us', { month:"short", day:"numeric"})}}
             &mdash;
-            {{trip.endDate.toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"})}}
+            {{trip?.endDate?.toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"})}}
           </span>
 
           <div class="thumbnail_location">
-            Destination<span *ngIf="multipleLocations(trip.locations)">s</span>:
+            Destination<span *ngIf="multipleLocations(trip?.locations)">s</span>:
             <br />
-            <ng-container *ngFor="let location of trip.locations">
+            <ng-container *ngFor="let location of trip?.locations">
               <div class="destinations">
-                <span [ngSwitch]="location.country">
-                  <span *ngSwitchCase="'United States'">{{location.city}}, {{location.stateProv}}, U.S.</span>
-                  <span *ngSwitchDefault>{{location.city}}, {{location.country}}</span>
+                <span [ngSwitch]="location?.country">
+                  <span *ngSwitchCase="'United States'">{{location?.city}}, {{location?.stateProv}}, U.S.</span>
+                  <span *ngSwitchDefault>{{location?.city}}, {{location?.country}}</span>
 
-                  <span *ngIf="multipleLocations(trip.locations)"><br /></span>
+                  <span *ngIf="multipleLocations(trip?.locations)"><br /></span>
                 </span>
               </div>
             </ng-container>

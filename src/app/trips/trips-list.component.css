@@ -1,3 +1,4 @@
+/* page title styling */
 .page-title {
   text-align: center;
   margin: 20px 20px;
@@ -5,29 +6,24 @@
   text-transform: uppercase;
   font-weight: 300;
 }
+/* div for each title/thumbnail section
+  upcoming vs. previous */
 .title_and_thumbnail_area {
   margin: auto;
   min-width: 80%;
 }
 
+/* horizontal rule */
 hr {
   margin-top: 0;
 }
 
+/* thumbnail section */
 .thumbnail-section {
   padding: 5px;
 }
 
+/* wrapping for thumbanil boxes in row-col */
 .wrapper {
   padding: 35px 40px;
 }
-
-/* .test {
-  background: red;
-}
-.test2 {
-  background: blue;
-}
-.test3 {
-  background: green;
-} */

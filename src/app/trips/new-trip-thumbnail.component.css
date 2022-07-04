@@ -19,25 +19,24 @@
   color: white;
   text-shadow: 2px 2px 10px black;
 }
-
-
 .thumbnail_box:hover {
   transform: scale(1.02);
 }
 
+  /* trip background image */
   .bg-img {
     object-fit: cover;
     z-index:-5;
     position: absolute;
     opacity: 1;
   }
-
   .thumbnail_box:hover .bg-img {
     transform: scale(1.02);
     opacity: 1.0;
     transition-duration: 700ms;
   }
 
+  /* ,asking over image */
   .thumbnail_mask {
     display: flex; /* center only img and plus-icon */
     flex-direction: column;
@@ -48,35 +47,35 @@
     width: 100%;
     background: rgba(0, 50, 177, 0.70);
   }
-
   .thumbnail_box:hover .thumbnail_mask {
     background: rgba(0, 50, 177, 0.50);
   }
 
+    /* plus icon */
     .plus-icon {
       font-size: 70px;
       opacity: 0.6;
     }
-
     .thumbnail_box:hover .plus-icon {
       transform: scale(1.05);
       opacity: 1;
       transition: 700ms;
     }
 
+    /* create trip/add previous trip text */
     .create-trip {
       top: 56%; /* 'separate' from flexbox */
       font-size: 30px;
       position: absolute;
       opacity: 0.6;
     }
-
     .thumbnail_box:hover .create-trip {
       transform: scale(1.).05;
       opacity: 1;
       transition: 700ms;
     }
 
+    /* description text */
     .description {
       top: 72%; /* 'separate' from flexbox */
       font-size: 20px;
@@ -85,7 +84,6 @@
       font-size: 2.4rem;
       opacity: 0.0;
     }
-
     .thumbnail_box:hover .description {
       opacity: 1;
       transition: 700ms;

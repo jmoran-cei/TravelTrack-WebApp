@@ -1,3 +1,5 @@
+
+/* title section: title's box */
 .trips_title_box {
   display: flex;
   flex-direction: flex-start;
@@ -9,23 +11,23 @@
   padding: 10px;
 }
 
+  /* title section: title */
   .trips-title {
     margin: 5px;
     font-size: 3.5rem;
   }
-
   .trips-title:hover {
     color: whitesmoke;
   }
 
-  .drop-icon {
+  /* collapse caret icon */
+  .collapse-icon {
     color: white;
     margin: 5px;
     background: transparent;
     border: 0;
     font-size: 1.5rem;
   }
-
   .toggle:after {
     font-family: 'Glyphicons Halflings';
     content: "\e114";
@@ -34,31 +36,29 @@
     /* margin-right: 15px; */
     transform: rotate(0deg);
   }
-
   .toggle.collapsed:after {
     transform: rotate(180deg);
-}
+  }
 
+  /* filter icon box */
   .filter {
     margin-left: auto;
   }
-
+    /* filter icon */
     .filter-icon {
       font-size: 2rem;
       color: white;
       background: transparent;
       border: 0;
     }
-
+    /* filter dropdown */
     .dropdown-menu {
       left: unset;
       right: 0%;
     }
-
     .filter:hover .dropdown-menu {
       display: block;
     }
-
     .dropdown-menu li{
       display: inline-block;
       position: relative;
@@ -67,7 +67,6 @@
       width: 100%;
       font-size: 1.6rem;
     }
-
     .dropdown-menu li a{
       display: block;
       padding: 8px 25px;
