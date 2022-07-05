@@ -4,8 +4,8 @@
   margin: 20px 20px;
   font-size: 4.2rem;
   text-transform: uppercase;
-  font-weight: 300;
 }
+
 /* div for each title/thumbnail section
   upcoming vs. previous */
 .title_and_thumbnail_area {
@@ -16,6 +16,7 @@
 /* horizontal rule */
 hr {
   margin-top: 0;
+  border-color: rgb(31,31,31);
 }
 
 /* thumbnail section */

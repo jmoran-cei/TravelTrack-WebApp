@@ -71,7 +71,6 @@
         bottom: 0;
         text-shadow: 0px 0px 9px black;
         font-size: 3.7rem;
-        font-weight: 600;
       }
       .thumbnail_box:hover .thumbnail-title {
         position: relative;
@@ -87,7 +86,6 @@
         margin-top: 7px;
         margin-left: 60px;
         margin-right: 25px;
-        font-weight: 500;
       }
       .thumbnail_box:hover .thumbnail_details {
         opacity: 1;
@@ -114,10 +112,8 @@
         position: relative;
         left: 20px;
         font-size: 2.35rem;
-        font-style: italic;
       }
 
-      /* 600 font-weight */
-      .font600 {
-        font-weight: 600;
+      .font-adjust {
+        font-size: 3.2rem;
       }

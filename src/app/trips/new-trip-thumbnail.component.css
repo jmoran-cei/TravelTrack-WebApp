@@ -37,7 +37,7 @@
     transition-duration: 700ms;
   }
 
-  /* ,asking over image */
+  /* masking over image */
   .thumbnail_mask {
     display: flex; /* center only img and plus-icon */
     flex-direction: column;
