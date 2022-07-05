@@ -6,6 +6,7 @@
   position: relative;
   height: 90%;
   width: 98%;
+  max-width: 750px;
   border-radius: 20px;
   overflow: hidden;
   box-shadow:
