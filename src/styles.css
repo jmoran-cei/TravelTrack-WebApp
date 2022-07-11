@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+@import url('https://fonts.googleapis.com/css2?family=Sura:wght@400;700&display=swap');
+
+body {
+  color: rgb(31, 31, 31);
+  background-color: rgb(245, 245, 245);
+  /* color: rgb(255, 255, 255);
+  background-color: rgba(71, 103, 191, 0.663); */
+  font-family: 'Sura', 'Open Sans', sans-serif;
+}
+
+.container-fluid {
+  margin: 20px auto;
+  width: 90%;
+}
+
+.font400 {
+  font-weight: 400;
+}
+
+.font700 {
+  font-weight: 700;
+  letter-spacing: 0.05rem;
+}

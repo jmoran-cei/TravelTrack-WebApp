@@ -1,16 +1,29 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
+import { HomePageComponent } from './home/home-page.component';
+import { NavbarComponent } from './nav/navbar.component';
+import { TravelAppComponent } from './travel-app.component';
+import { NewTripThumbnailComponent } from './trips/new-trip-thumbnail.component';
+import { TripService } from './trips/shared/trip.service';
+import { TripThumbnailComponent } from './trips/trip-thumbnail.component';
+import { TripsListComponent } from './trips/trips-list.component';
+import { TripsTitleSectionComponent } from './trips/trips-title-section.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    TravelAppComponent,
+    NavbarComponent,
+    HomePageComponent,
+    TripsListComponent,
+    TripThumbnailComponent,
+    NewTripThumbnailComponent,
+    TripsTitleSectionComponent
   ],
   imports: [
     BrowserModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [TripService],
+  bootstrap: [TravelAppComponent]
 })
 export class AppModule { }
