@@ -2,12 +2,15 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 @import url('https://fonts.googleapis.com/css2?family=Sura:wght@400;700&display=swap');
 
+/* prevents any */
+body {
+}
+
 body {
   color: rgb(31, 31, 31);
   background-color: rgb(245, 245, 245);
-  /* color: rgb(255, 255, 255);
-  background-color: rgba(71, 103, 191, 0.663); */
   font-family: 'Sura', 'Open Sans', sans-serif;
+  overflow-x: hidden !important; /* prevents any possibility of horizontal scrollbar displaying (ex: if user dropdown menu somehow went off the right side) */
 }
 
 .container-fluid {
