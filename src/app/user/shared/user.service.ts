@@ -22,6 +22,6 @@ const USERS:any[] = [
     firstName: 'Dummy',
     lastName: 'User',
     address: [],
-    pictureURL: 'assets/images/dummy1.jpg'
+    pictureURL: 'assets/images/users/dummy1.jpg'
   }
 ]

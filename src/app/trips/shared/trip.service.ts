@@ -1,33 +1,34 @@
 import { LocationStrategy } from "@angular/common";
 import { Injectable } from "@angular/core";
-import { ILocation, ITrip } from "./trip.model";
+import { Observable, Subject } from "rxjs";
+import { ITrip } from "./trip.model";
 
 @Injectable()
 export class TripService{
 
   getAllTrips() {
-    return TRIPS
+    let subject = new Subject()
+    setTimeout(() => {subject.next(TRIPS); subject.complete();}, 100)
+    console.log(subject)
+    return subject
   }
 
-  getUpcomingOrPreviousTrips() {
-    let currentTime = new Date()
-    let upcomingTrips:ITrip[] = []
-    let previousTrips:ITrip[] = []
-
-    TRIPS.forEach(trip => {
-      if (trip.startDate.getTime() >= currentTime.getTime()) {
-        upcomingTrips.push(trip)
-        console.log("upcoming")
-      } else {
-        previousTrips.push(trip)
-        console.log("previous")
-      }
-    });
-
-    // index 0: upcomingTrips
-    // index 1: previous Trips
-    return [upcomingTrips,previousTrips]
+  getTrip(id:number) {
+    return TRIPS.find(trip => trip.id == id)
   }
+
+  sortByTitle(trips:ITrip[]) {
+    console.log("Trips sorted alphabetically by Title");
+    return trips = trips.sort((a, b) => a.title.localeCompare(b.title))
+  }
+
+  sortByDate(trips:ITrip[]) {
+    console.log("Trips sorted by Date");
+
+    // MOST RECENT trips will be at the top (oldest trip will be the last one after scrolling down)
+    return trips = trips.sort((a: any, b: any) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime())
+  }
+  
 }
 
 const TRIPS:ITrip[] = [
@@ -49,7 +50,7 @@ const TRIPS:ITrip[] = [
     pictures: [],
     itinerary: [],
     toDo: [],
-    imgUrl: "assets/images/anguila1.jpg"
+    imgUrl: "assets/images/trips/anguila1.jpg"
 
   }, {
     id: 2,
@@ -73,7 +74,7 @@ const TRIPS:ITrip[] = [
     pictures: [],
     itinerary: [],
     toDo: [],
-    imgUrl: "assets/images/myrtlebeach1.jpg"
+    imgUrl: "assets/images/trips/myrtlebeach1.jpg"
 
   }, {
     id: 3,
@@ -92,7 +93,7 @@ const TRIPS:ITrip[] = [
     pictures: [],
     itinerary: [],
     toDo: [],
-    imgUrl: "assets/images/gatlinburg1.jpg"
+    imgUrl: "assets/images/trips/gatlinburg1.jpg"
   },{
     id: 4,
     title: 'Hawaii Family Trip 2023',
@@ -109,7 +110,7 @@ const TRIPS:ITrip[] = [
     pictures: [],
     itinerary: [],
     toDo: [],
-    imgUrl: "assets/images/hawaii1.jpg"
+    imgUrl: "assets/images/trips/hawaii1.jpg"
 
   }
 ]

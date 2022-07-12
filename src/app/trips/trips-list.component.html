@@ -8,15 +8,16 @@
     <!-- TITLE SECTION -->
     <trips-title-section
       [collapseID]="upcomingCollapse"
-      [title]="upcomingTrips_SectionTitle">
+      [title]="upcomingTrips_SectionTitle"
+      [tripList]="upcomingTrips">
     </trips-title-section>
 
     <!-- THUMBNAILS SECTION -->
     <div class="thumbnail-section container-fluid">
       <!-- all thumbnails -->
       <div class="collapse in row-fluid" id="{{upcomingCollapse}}">
-        <!-- list of upcoming trip thumbnails -->
-        <ng-container *ngFor="let trip of upcomingTrips">
+        <!-- list of upcoming trip thumbnails (filtered to have receny prioritized at the top)-->
+        <ng-container *ngFor="let trip of upcomingTrips | byDate">
           <div class="col-md-6 wrapper">
             <trip-thumbnail [trip]="trip"></trip-thumbnail>
           </div>
@@ -41,7 +42,8 @@
     <!-- TITLE SECTION -->
     <trips-title-section
       [collapseID]="previousCollapse"
-      [title]="previousTrips_SectionTitle">
+      [title]="previousTrips_SectionTitle"
+      [tripList]="previousTrips">
     </trips-title-section>
 
     <!-- THUMBNAILS SECTION -->
@@ -50,7 +52,7 @@
       <div class="collapse in row-fluid" id="{{previousCollapse}}">
         <!-- list of previous trip thumbnails -->
 
-        <ng-container *ngFor="let trip of previousTrips">
+        <ng-container *ngFor="let trip of previousTrips | byDate">
           <div class="col-md-6 wrapper">
             <trip-thumbnail [trip]="trip"></trip-thumbnail>
           </div>

@@ -29,6 +29,10 @@ a {
   color: rgb(31, 31, 31);
   text-decoration: none;
 }
+/* when routerlinkactive */
+.active {
+  color:#859ad4;
+}
 
 
 /* box: used to define placement / set up tabs (trips, bucket list, user icon)  */
@@ -58,9 +62,6 @@ a {
   }
   .nav-title:hover a{
     color: #859ad4;
-  }
-  .nav-title:hover .glyphicon-globe {
-    color: rgb(31,31,31);
   }
   .glyphicon-globe {
     color: #859ad4;
@@ -118,7 +119,6 @@ a {
   }
   .glyphicon-user {
     font-size: x-large;
-    transform: translateY(5%); /* aids in visual appeal of centering */
   }
   .box:hover .glyphicon-user,.box:hover .hi-username {
     color:#859ad4;
@@ -176,7 +176,8 @@ a {
     }
       /* wrap profile pic */
       .img-wrapper {
-        margin-right: 4px;
+        margin-left: 3px;
+        margin-right: 3px;
         overflow: hidden;
         height: 30px;
         width: 30px;
@@ -187,18 +188,19 @@ a {
       }
       /* user profile pic image */
       .user-picture {
-        transform: scale(2); /* currently adjusted for dummy profile */
-        height: auto;
+        transform: scale(2.1); /* currently adjusted for dummy profile */
+        height: 100%;
         width: 100%;
       }
       /* container for text content */
       .user-text-content {
-        padding-top: 5px;
+        padding-top: 6px;
         margin-left: 1px;
+        margin-right: 1px;
         display: flex;
         flex-direction: column;
         height: 100%;
-        width: 79%;
+        width: 75%;
         max-width: 207px;
       }
         /* full name text */
@@ -225,6 +227,6 @@ a {
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow: hidden;
-          min-width: 30px;
-          max-width: 135px;
+          min-width: 25px;
+          max-width: 130px;
         }

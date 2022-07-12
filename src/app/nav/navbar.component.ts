@@ -10,7 +10,6 @@ import { UserService } from "../user/shared/user.service";
 
 export class NavbarComponent {
   @Input() user:any
-  firstName:any = 'Jon'
 
   constructor(private userService:UserService){
 

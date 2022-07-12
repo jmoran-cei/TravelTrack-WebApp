@@ -16,12 +16,24 @@
 
   <!-- filter: ADD FUNCITONALITY -->
   <div class="dropdown filter">
+    <!-- filter icon -->
     <button type="button" class="filter-icon btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
       <span class="glyphicon glyphicon-filter"></span>
     </button>
+    <!-- menu -->
     <ul class="dropdown-menu">
-      <li><a>Date</a></li>
-      <li><a>Title (A-Z)</a></li>
+      <!-- filter by TITLE (A-Z) -->
+      <li>
+        <a (click)="this.tripService.sortByTitle(tripList); filterToggle=true;"
+        [ngClass]="{'filter-toggle': filterToggle}">
+        Title (A-Z)</a>
+      </li>
+      <!-- filter by DATE (recent-oldest) -->
+      <li>
+        <a (click)="this.tripService.sortByDate(tripList); filterToggle=false;"
+          [ngClass]="{'filter-toggle': !filterToggle}">
+          Date</a>
+      </li>
     </ul>
   </div>
 
