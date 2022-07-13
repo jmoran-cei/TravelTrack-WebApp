@@ -11,7 +11,3 @@ export class EarliestDateFirstPipe implements PipeTransform {
   }
 }
 
-
-// Possibilities:
-  // - switch that filters from certain pipe based on a value that is changed from user clicking
-  // - when user clicks a function resorts that list by that type of filter and applies it to the page
