@@ -21,17 +21,17 @@ export class TripService{
     return trips = trips.sort((a:ITrip, b:ITrip) => a.title.localeCompare(b.title))
   }
 
-  sortByEarliestDate(trips:ITrip[]) {
+  sortByEarliestDate(trips:ITrip[]) {  // default for PREVIOUS dates
     // console.log("Trips sorted by earliest date");
 
-    // MOST RECENT trips will be at the top (oldest trip will be the last one after scrolling down)
+    // sorting by EARLIEST DATE: sorts dates oldest-newest
     return trips = trips.sort((a: ITrip, b: ITrip) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime())
   }
 
-  sortByLatestDate(trips:ITrip[]) {
+  sortByLatestDate(trips:ITrip[]) { // default for UPCOMING dates
     // console.log("Trips sorted by latest date");
 
-    // MOST RECENT trips will be at the top (oldest trip will be the last one after scrolling down)
+    // sorting by LATEST DATE: sorts dates newest-oldest
     return trips = trips.sort((a: ITrip, b: ITrip) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime())
   }
 
