@@ -25,9 +25,8 @@ import {
 } from './trips/index'
 
 import {
-  UserService,
-  UserModule
-} from './user/index'
+  UserService
+} from './user'
 
 @NgModule({
   declarations: [

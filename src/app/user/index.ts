@@ -1,7 +1,6 @@
-export * from './shared/index'
-export * from './user.module'
 export * from './user.routes'
+export * from './shared/index'
 
-  // components
+// components
 export * from './edit-profile.component'
 export * from './settings.component'
