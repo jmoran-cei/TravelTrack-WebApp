@@ -12,7 +12,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 export class TripsListComponent {
   currentTime = new Date()
-  upcomingOrPreviousTrips: any[] = []
   upcomingTrips: ITrip[] = []
   previousTrips: ITrip[] = []
 
@@ -45,11 +44,11 @@ export class TripsListComponent {
 
     // get all upcoming trips
     this.upcomingTrips = this.route.snapshot.data['trips']
-      .filter( (trip:any) => trip.startDate.getTime() >= this.currentTime.getTime() )
+      .filter( (trip:ITrip) => trip.startDate.getTime() >= this.currentTime.getTime() )
 
     // get all previous trips
     this.previousTrips = this.route.snapshot.data['trips']
-      .filter( (trip:any) => trip.startDate.getTime() < this.currentTime.getTime() )
+      .filter( (trip:ITrip) => trip.startDate.getTime() < this.currentTime.getTime() )
 
     }
 }

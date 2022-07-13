@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
+import { IUser } from "./user.model";
 
 @Injectable()
 export class UserService {
-  getUserByUsername(username:string) {
-    return USERS.find(user => user.username == username)
+  getUserByUsername(username:string):IUser {
+    return USERS.find((user:IUser) => user.username == username)
   }
 }
 

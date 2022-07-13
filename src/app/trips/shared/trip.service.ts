@@ -1,4 +1,3 @@
-import { LocationStrategy } from "@angular/common";
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { ITrip } from "./trip.model";
@@ -6,29 +5,29 @@ import { ITrip } from "./trip.model";
 @Injectable()
 export class TripService{
 
-  getAllTrips() {
-    let subject = new Subject()
+  getAllTrips():Observable<ITrip[]> {
+    let subject = new Subject<ITrip[]>()
     setTimeout(() => {subject.next(TRIPS); subject.complete();}, 100)
     console.log(subject)
     return subject
   }
 
-  getTrip(id:number) {
-    return TRIPS.find(trip => trip.id == id)
+  getTrip(id:number):ITrip {
+    return TRIPS.find(trip => trip.id === id)!
   }
 
   sortByTitle(trips:ITrip[]) {
     console.log("Trips sorted alphabetically by Title");
-    return trips = trips.sort((a, b) => a.title.localeCompare(b.title))
+    return trips = trips.sort((a:ITrip, b:ITrip) => a.title.localeCompare(b.title))
   }
 
   sortByDate(trips:ITrip[]) {
     console.log("Trips sorted by Date");
 
     // MOST RECENT trips will be at the top (oldest trip will be the last one after scrolling down)
-    return trips = trips.sort((a: any, b: any) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime())
+    return trips = trips.sort((a: ITrip, b: ITrip) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime())
   }
-  
+
 }
 
 const TRIPS:ITrip[] = [
@@ -94,6 +93,24 @@ const TRIPS:ITrip[] = [
     itinerary: [],
     toDo: [],
     imgUrl: "assets/images/trips/gatlinburg1.jpg"
+  },{
+    id: 4,
+    title: 'Hawaii Family Trip 2023',
+    startDate: new Date('6/24/2023'),
+    endDate: new Date('7/5/2023'),
+    locations: [
+      { locationId: 1,
+      city: 'Maui',
+      stateProv: 'Hawaii',
+      country: 'United States'
+      },
+    ],
+    members: [],
+    pictures: [],
+    itinerary: [],
+    toDo: [],
+    imgUrl: "assets/images/trips/hawaii1.jpg"
+
   },{
     id: 4,
     title: 'Hawaii Family Trip 2023',
