@@ -11,7 +11,7 @@ export class TripsTitleSectionComponent {
   @Input() title = '';
   @Input() collapseID = '';
   @Input() tripList: ITrip[] = [];
-  @Input() filterToggle = '';
+  @Input() sortToggle = '';
 
   constructor(public tripService: TripService) {}
 }

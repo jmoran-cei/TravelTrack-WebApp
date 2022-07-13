@@ -7,7 +7,7 @@
   <div class="title_and_thumbnail_area">
     <!-- TITLE SECTION -->
     <trips-title-section [collapseID]="upcomingCollapse" [title]="upcomingTrips_SectionTitle" [tripList]="upcomingTrips"
-      [filterToggle]="'sortByEarliestDate'">
+      [sortToggle]="'sortByEarliestDate'">
     </trips-title-section>
 
     <!-- THUMBNAILS SECTION -->
@@ -15,7 +15,7 @@
       <!-- all thumbnails -->
       <div class="collapse in row-fluid" id="{{upcomingCollapse}}">
 
-        <!-- list of upcoming trip thumbnails (filtered to have soonest upcoming trips at the top)-->
+        <!-- list of upcoming trip thumbnails (sorted to have soonest upcoming trips at the top)-->
         <ng-container *ngFor="let trip of upcomingTrips | byEarliestDate">
           <div class="col-md-6 wrapper">
             <trip-thumbnail [trip]="trip"></trip-thumbnail>
@@ -38,7 +38,7 @@
   <div class="title_and_thumbnail_area">
     <!-- TITLE SECTION -->
     <trips-title-section [collapseID]="previousCollapse" [title]="previousTrips_SectionTitle" [tripList]="previousTrips"
-      [filterToggle]="'sortByLatestDate'">
+      [sortToggle]="'sortByLatestDate'">
     </trips-title-section>
 
     <!-- THUMBNAILS SECTION -->
@@ -46,7 +46,7 @@
       <!-- all thumbnails -->
       <div class="collapse in row-fluid" id="{{previousCollapse}}">
 
-        <!-- list of upcoming trip thumbnails (filtered to have most recent previous trips at the top)-->
+        <!-- list of upcoming trip thumbnails (sorted to have most recent previous trips at the top)-->
         <ng-container *ngFor="let trip of previousTrips | byLatestDate">
           <div class="col-md-6 wrapper">
             <trip-thumbnail [trip]="trip"></trip-thumbnail>

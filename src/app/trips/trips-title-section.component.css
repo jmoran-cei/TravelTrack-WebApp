@@ -43,25 +43,25 @@
     transform: rotate(180deg);
   }
 
-  /* filter icon box */
-  .filter {
+  /* sort icon box */
+  .sort {
     margin-left: auto;
   }
-    /* filter icon */
-    .filter-icon {
+    /* sort icon */
+    .sort-icon {
       font-size: 2rem;
       color: rgb(31, 31, 31);
       background: transparent;
       border: 0;
     }
-    /* filter dropdown */
+    /* sort dropdown */
     .dropdown-menu {
       padding:0px;
       transform: translateY(-1px); /* prevents tiny gap between icon and menu, when trying to hover */
       left: unset;
       right: 0%;
     }
-    .filter:hover .dropdown-menu {
+    .sort:hover .dropdown-menu {
       display: block;
     }
     .dropdown-menu li{
@@ -81,7 +81,7 @@
       color: #fff;
       background: #859ad4;
     }
-    .filter-toggle {
+    .sort-toggle {
       color: #fff;
       background: #859ad4;
     }

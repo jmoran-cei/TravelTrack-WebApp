@@ -14,34 +14,34 @@
     </label>
   </h2>
 
-  <!-- filter: ADD FUNCITONALITY -->
-  <div class="dropdown filter">
-    <!-- filter icon -->
-    <button type="button" class="filter-icon btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-      <span class="glyphicon glyphicon-filter"></span>
+  <!-- sort: ADD FUNCITONALITY -->
+  <div class="dropdown sort">
+    <!-- sort icon -->
+    <button type="button" class="sort-icon btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+      <span class="glyphicon glyphicon-sort"></span>
     </button>
     <!-- menu -->
     <ul class="dropdown-menu">
-      <!-- filter by TITLE (A-Z) -->
+      <!-- sort by TITLE (A-Z) -->
       <li>
-        <a (click)="tripService.sortByTitle(tripList); filterToggle='sortByTitle';"
-          [ngClass]="{'filter-toggle': filterToggle==='sortByTitle'}">
+        <a (click)="tripService.sortByTitle(tripList); sortToggle='sortByTitle';"
+          [ngClass]="{'sort-toggle': sortToggle==='sortByTitle'}">
           Title (A-Z)
         </a>
       </li>
 
-      <!-- filter by EARLIEST DATE (new-old) -->
+      <!-- sort by EARLIEST DATE (new-old) -->
       <li>
-        <a (click)="tripService.sortByEarliestDate(tripList); filterToggle='sortByEarliestDate';"
-          [ngClass]="{'filter-toggle': filterToggle==='sortByEarliestDate'}">
+        <a (click)="tripService.sortByEarliestDate(tripList); sortToggle='sortByEarliestDate';"
+          [ngClass]="{'sort-toggle': sortToggle==='sortByEarliestDate'}">
           Earliest Date
         </a>
       </li>
 
-      <!-- filter by LATEST DATE (new-old) -->
+      <!-- sort by LATEST DATE (new-old) -->
       <li>
-        <a (click)="tripService.sortByLatestDate(tripList); filterToggle='sortByLatestDate';"
-          [ngClass]="{'filter-toggle': filterToggle==='sortByLatestDate'}">
+        <a (click)="tripService.sortByLatestDate(tripList); sortToggle='sortByLatestDate';"
+          [ngClass]="{'sort-toggle': sortToggle==='sortByLatestDate'}">
           Latest Date
         </a>
       </li>
