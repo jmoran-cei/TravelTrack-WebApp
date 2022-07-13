@@ -1,4 +1,5 @@
 import { Component, Input, Output } from "@angular/core";
+import { ITrip } from "./shared/trip.model";
 import { TripService } from "./shared/trip.service";
 
 @Component({
@@ -8,15 +9,13 @@ import { TripService } from "./shared/trip.service";
 })
 
 export class TripsTitleSectionComponent {
-  @Input() title:any
-  @Input() collapseID:any
-  @Input() tripList:any[]=[]
+  @Input() title = ''
+  @Input() collapseID =''
+  @Input() tripList:ITrip[]=[]
 
   // true => filtering by Title (A-Z)
   // false => filtering by Date (recent-oldest)
   filterToggle=false
 
-  constructor(public tripService:TripService) {
-
-  }
+  constructor(public tripService:TripService) {}
 }

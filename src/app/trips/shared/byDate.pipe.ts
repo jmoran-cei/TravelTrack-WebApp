@@ -1,12 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { ITrip } from './trip.model';
 
 @Pipe({
   name: 'byDate'
 })
 export class TripByDatePipe implements PipeTransform {
 
-  transform(values: any[]): any[] {
-    return values.sort((a: any, b: any) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
+  transform(values: ITrip[]):ITrip[] {
+    return values.sort((a: ITrip, b: ITrip) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
   }
 }
 

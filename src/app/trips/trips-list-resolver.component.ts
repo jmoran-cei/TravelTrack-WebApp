@@ -5,9 +5,8 @@ import { TripService } from "./shared/trip.service";
 
 @Injectable()
 export class TripListResolver implements Resolve<any> {
-  constructor(private tripService:TripService) {
-
-  }
+  constructor(private tripService:TripService) {}
+  
   resolve() {
     return this.tripService.getAllTrips().pipe(map(trips=>trips))
   }

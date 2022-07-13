@@ -1,9 +1,7 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { map } from "rxjs";
 import { ITrip } from "./shared/trip.model";
 import { TripService } from "./shared/trip.service";
-import { Pipe, PipeTransform } from '@angular/core';
 
 @Component({
   templateUrl: 'trips-list.component.html',
@@ -34,11 +32,7 @@ export class TripsListComponent {
     upcomingCollapse = "upcoming-collapse"
     previousCollapse = "previous-collapse"
 
-
-
-  constructor(private tripService: TripService, private route:ActivatedRoute) {
-
-  }
+  constructor(private route:ActivatedRoute) {}
 
   ngOnInit() {
 

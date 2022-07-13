@@ -9,7 +9,7 @@
 </span>
 
 <div class="">
-  Destination<span *ngIf="multipleLocations(trip?.locations)">s</span>:
+  Destination<span *ngIf="tripService.multipleLocations(trip.locations)">s</span>:
   <br />
   <ng-container *ngFor="let location of trip?.locations">
     <div class="">
@@ -17,7 +17,7 @@
         <span *ngSwitchCase="'United States'">{{location?.city}}, {{location?.stateProv}}, U.S.</span>
         <span *ngSwitchDefault>{{location?.city}}, {{location?.country}}</span>
 
-        <span *ngIf="multipleLocations(trip?.locations)"><br /></span>
+        <span *ngIf="tripService.multipleLocations(trip.locations)"><br /></span>
       </span>
     </div>
   </ng-container>

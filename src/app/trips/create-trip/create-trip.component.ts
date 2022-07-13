@@ -11,10 +11,7 @@ import { Router } from "@angular/router";
 export class CreateTripComponent {
   isDirty:boolean = true
 
-  constructor(private router:Router) {
-
-  }
-
+  constructor(private router:Router) {}
 
   cancel() {
     this.router.navigate(['/trips'])

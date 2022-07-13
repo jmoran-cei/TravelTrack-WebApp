@@ -4,9 +4,7 @@ import { TripService } from "../shared/trip.service";
 
 @Injectable()
 export class TripRouteActivator implements CanActivate {
-  constructor(private tripService:TripService, private router:Router) {
-
-  }
+  constructor(private tripService:TripService, private router:Router) {}
 
   canActivate(route: ActivatedRouteSnapshot) {
     const eventExists = !!this.tripService.getTrip(+route.params['id'])

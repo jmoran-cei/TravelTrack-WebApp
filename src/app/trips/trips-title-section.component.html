@@ -24,13 +24,13 @@
     <ul class="dropdown-menu">
       <!-- filter by TITLE (A-Z) -->
       <li>
-        <a (click)="this.tripService.sortByTitle(tripList); filterToggle=true;"
+        <a (click)="tripService.sortByTitle(tripList); filterToggle=true;"
         [ngClass]="{'filter-toggle': filterToggle}">
         Title (A-Z)</a>
       </li>
       <!-- filter by DATE (recent-oldest) -->
       <li>
-        <a (click)="this.tripService.sortByDate(tripList); filterToggle=false;"
+        <a (click)="tripService.sortByDate(tripList); filterToggle=false;"
           [ngClass]="{'filter-toggle': !filterToggle}">
           Date</a>
       </li>

@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
+import { ILocation } from "./location.model";
 import { ITrip } from "./trip.model";
 
 @Injectable()
@@ -26,6 +27,13 @@ export class TripService{
 
     // MOST RECENT trips will be at the top (oldest trip will be the last one after scrolling down)
     return trips = trips.sort((a: ITrip, b: ITrip) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime())
+  }
+
+  multipleLocations(locations:ILocation[]) {
+    if (locations.length > 1) {
+      return true
+    }
+    return false
   }
 
 }
@@ -112,22 +120,22 @@ const TRIPS:ITrip[] = [
     imgUrl: "assets/images/trips/hawaii1.jpg"
 
   },{
-    id: 4,
-    title: 'Hawaii Family Trip 2023',
-    startDate: new Date('6/24/2023'),
-    endDate: new Date('7/5/2023'),
+    id: 5,
+    title: 'Ireland Trip',
+    startDate: new Date('3/11/2023'),
+    endDate: new Date('3/20/2023'),
     locations: [
       { locationId: 1,
-      city: 'Maui',
-      stateProv: 'Hawaii',
-      country: 'United States'
+      city: 'Dublin',
+      stateProv: 'Lienster',
+      country: 'Ireland'
       },
     ],
     members: [],
     pictures: [],
     itinerary: [],
     toDo: [],
-    imgUrl: "assets/images/trips/hawaii1.jpg"
+    imgUrl: "assets/images/trips/ireland1.jpg"
 
   }
 ]

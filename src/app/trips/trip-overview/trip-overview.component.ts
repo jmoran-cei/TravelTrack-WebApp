@@ -10,17 +10,9 @@ import { TripService } from "../shared/trip.service";
 })
 
 export class TripOverviewComponent {
-  trip:any
+  trip!:ITrip
 
-  constructor(private tripService:TripService, private route:ActivatedRoute) {
-  }
-
-  multipleLocations(locations:any) {
-    if (locations.length > 1) {
-      return true
-    }
-    return false
-  }
+  constructor(public tripService:TripService, private route:ActivatedRoute) {}
 
   ngOnInit() {
     this.trip = this.tripService.getTrip(+this.route.snapshot.params['id'])
