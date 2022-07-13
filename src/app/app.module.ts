@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { TravelAppComponent } from './travel-app.component';
 import { appRoutes } from './routes';
 
+// components
 import { BucketlistComponent } from './bucketlist/bucketlist.component';
 import { Error404Component } from './errors/404.component';
 import { HomePageComponent } from './home/home-page.component';
@@ -12,7 +13,8 @@ import { NavbarComponent } from './nav/navbar.component';
 import {
   checkDirtyState, CreateTripComponent,
   NewTripThumbnailComponent,
-  TripByDatePipe,
+  EarliestDateFirstPipe,
+  LatestDateFirstPipe,
   TripService,
   TripOverviewComponent,
   TripRouteActivator,
@@ -40,7 +42,8 @@ import {
     TripsTitleSectionComponent,
     CreateTripComponent,
     TripOverviewComponent,
-    TripByDatePipe
+    EarliestDateFirstPipe,
+    LatestDateFirstPipe
   ],
   imports: [
     BrowserModule,

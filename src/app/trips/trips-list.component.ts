@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ITrip } from "./shared/trip.model";
 import { TripService } from "./shared/trip.service";
@@ -32,7 +32,7 @@ export class TripsListComponent {
     upcomingCollapse = "upcoming-collapse"
     previousCollapse = "previous-collapse"
 
-  constructor(private route:ActivatedRoute) {}
+  constructor(private tripService: TripService, private route:ActivatedRoute) {}
 
   ngOnInit() {
 

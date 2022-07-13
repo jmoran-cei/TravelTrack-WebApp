@@ -8,3 +8,4 @@ export * from './trips-title-section.component'
 export * from './trip-thumbnail.component'
 export * from './new-trip-thumbnail.component'
 export * from './trips-list-resolver.component'
+

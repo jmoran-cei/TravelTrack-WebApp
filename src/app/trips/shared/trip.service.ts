@@ -9,7 +9,6 @@ export class TripService{
   getAllTrips():Observable<ITrip[]> {
     let subject = new Subject<ITrip[]>()
     setTimeout(() => {subject.next(TRIPS); subject.complete();}, 100)
-    console.log(subject)
     return subject
   }
 
@@ -18,12 +17,19 @@ export class TripService{
   }
 
   sortByTitle(trips:ITrip[]) {
-    console.log("Trips sorted alphabetically by Title");
+    // console.log("Trips sorted alphabetically by title");
     return trips = trips.sort((a:ITrip, b:ITrip) => a.title.localeCompare(b.title))
   }
 
-  sortByDate(trips:ITrip[]) {
-    console.log("Trips sorted by Date");
+  sortByEarliestDate(trips:ITrip[]) {
+    // console.log("Trips sorted by earliest date");
+
+    // MOST RECENT trips will be at the top (oldest trip will be the last one after scrolling down)
+    return trips = trips.sort((a: ITrip, b: ITrip) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime())
+  }
+
+  sortByLatestDate(trips:ITrip[]) {
+    // console.log("Trips sorted by latest date");
 
     // MOST RECENT trips will be at the top (oldest trip will be the last one after scrolling down)
     return trips = trips.sort((a: ITrip, b: ITrip) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime())

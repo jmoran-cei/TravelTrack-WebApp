@@ -2,7 +2,8 @@
 export * from './trip.service'
 
   // pipes
-export * from './byDate.pipe'
+export * from './byLatestDateFirst.pipe'
+export * from './byEarliestDateFirst.pipe'
 
   // models
 export * from './trip.model'
