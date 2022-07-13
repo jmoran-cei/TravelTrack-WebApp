@@ -121,7 +121,7 @@ const TRIPS:ITrip[] = [
 
   },{
     id: 5,
-    title: 'Ireland Trip',
+    title: 'Our Ireland Trip',
     startDate: new Date('3/11/2023'),
     endDate: new Date('3/20/2023'),
     locations: [
