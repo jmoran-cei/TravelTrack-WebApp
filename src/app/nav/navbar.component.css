@@ -63,11 +63,9 @@ a {
   .nav-title:hover a{
     color: #859ad4;
   }
-  .glyphicon-globe {
+  .bi-pin-map-fill {
     color: #859ad4;
     font-size: xx-large;
-    transform:translateY(9%); /* aids in visual appeal of centering */
-    margin-right: 8px;
   }
 
 
