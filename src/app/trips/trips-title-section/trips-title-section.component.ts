@@ -1,6 +1,6 @@
 import { Component, Input, Output } from '@angular/core';
-import { ITrip } from './shared/trip.model';
-import { TripService } from './shared/trip.service';
+import { ITrip } from '../shared/trip.model';
+import { TripService } from '../shared/trip.service';
 
 @Component({
   selector: 'trips-title-section',

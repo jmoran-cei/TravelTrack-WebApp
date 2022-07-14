@@ -5,8 +5,8 @@ import { HomePageComponent } from "./home/home-page.component";
 import { CreateTripComponent } from "./trips/create-trip/create-trip.component";
 import { TripOverviewComponent } from "./trips/trip-overview/trip-overview.component";
 import { TripRouteActivator } from "./trips/trip-overview/trip-route-activator.component";
-import { TripListResolver } from "./trips/trips-list-resolver.component";
-import { TripsListComponent } from "./trips/trips-list.component";
+import { TripListResolver } from "./trips/trips-list/trips-list-resolver.component";
+import { TripsListComponent } from "./trips/trips-list/trips-list.component";
 
 export const appRoutes:Routes =[
   {path: 'home', component: HomePageComponent},
