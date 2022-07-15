@@ -1,6 +1,5 @@
 <div class="container-fluid">
   <h1 class="page-title">Your Trips</h1>
-  <hr />
 
 
   <!-- UPCOMING TRIPS -->
@@ -32,18 +31,17 @@
     </div>
   </div>
 
-  <hr />
 
   <!-- PREVIOUS TRIPS -->
-  <div class="title_and_thumbnail_area">
+  <div class="title_and_thumbnail_area marg-btm">
     <!-- TITLE SECTION -->
     <trips-title-section [collapseID]="previousCollapse" [title]="previousTrips_SectionTitle" [tripList]="previousTrips"
-      [sortToggle]="'sortByLatestDate'">
-    </trips-title-section>
+    [sortToggle]="'sortByLatestDate'">
+  </trips-title-section>
 
-    <!-- THUMBNAILS SECTION -->
-    <div class="thumbnail-section container-fluid">
-      <!-- all thumbnails -->
+  <!-- THUMBNAILS SECTION -->
+  <div class="thumbnail-section container-fluid">
+    <!-- all thumbnails -->
       <div class="collapse in row-fluid" id="{{previousCollapse}}">
 
         <!-- list of upcoming trip thumbnails (sorted to have most recent previous trips at the top)-->
@@ -64,5 +62,4 @@
     </div>
   </div>
 
-  <hr />
 </div>

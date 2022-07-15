@@ -16,5 +16,7 @@ export class TripOverviewComponent {
 
   ngOnInit() {
     this.trip = this.tripService.getTrip(+this.route.snapshot.params['id'])
+
+    this.trip.multipleLocations = this.tripService.multipleLocations(this.trip.locations);
   }
 }

@@ -12,4 +12,7 @@ export class TripThumbnailComponent {
 
   constructor(public tripService:TripService) {}
 
+  ngOnInit() {
+    this.trip.multipleLocations = this.tripService.multipleLocations(this.trip.locations);
+  }
 }

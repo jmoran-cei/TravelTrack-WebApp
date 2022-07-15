@@ -7,12 +7,14 @@ import { ITrip } from "./trip.model";
 export class TripService{
 
   getAllTrips():Observable<ITrip[]> {
+    // this will be better implemented via http.get().pipe() when I update it (after implementing API)
     let subject = new Subject<ITrip[]>()
     setTimeout(() => {subject.next(TRIPS); subject.complete();}, 100)
     return subject
   }
 
   getTrip(id:number):ITrip {
+    // this will be better implemented via http.get().pipe() when I update it (after implementing API)
     return TRIPS.find(trip => trip.id === id)!
   }
 
@@ -59,6 +61,7 @@ const TRIPS:ITrip[] = [
       country: 'Anguilla',
       }
     ],
+    multipleLocations:false, // default, is set by method
     members: [],
     pictures: [],
     itinerary: [],
@@ -72,17 +75,18 @@ const TRIPS:ITrip[] = [
     endDate: new Date('6/5/2022'),
     locations: [
       { locationId: 1,
-      city: 'Myrtle Beach',
-      stateProv: 'South Carolina',
-      country: 'United States'
+        city: 'Myrtle Beach',
+        stateProv: 'South Carolina',
+        country: 'United States'
       },
       {
-      locationId: 2,
+        locationId: 2,
         city: 'Charleston',
         stateProv: 'South Carolina',
         country: 'United States'
       },
     ],
+    multipleLocations:false, // default, is set by method
     members: [],
     pictures: [],
     itinerary: [],
@@ -96,12 +100,13 @@ const TRIPS:ITrip[] = [
     endDate: new Date('11/30/2019'),
     locations: [
       {
-      locationId: 1,
-      city: 'Gatlinburg',
-      stateProv: 'Tennessee',
-      country: 'United States'
+        locationId: 1,
+        city: 'Gatlinburg',
+        stateProv: 'Tennessee',
+        country: 'United States'
       }
     ],
+    multipleLocations:false, // default, is set by method
     members: [],
     pictures: [],
     itinerary: [],
@@ -114,11 +119,12 @@ const TRIPS:ITrip[] = [
     endDate: new Date('7/5/2023'),
     locations: [
       { locationId: 1,
-      city: 'Maui',
-      stateProv: 'Hawaii',
-      country: 'United States'
+        city: 'Maui',
+        stateProv: 'Hawaii',
+        country: 'United States'
       },
     ],
+    multipleLocations:false, // default, is set by method
     members: [],
     pictures: [],
     itinerary: [],
@@ -132,11 +138,12 @@ const TRIPS:ITrip[] = [
     endDate: new Date('3/20/2023'),
     locations: [
       { locationId: 1,
-      city: 'Dublin',
-      stateProv: 'Lienster',
-      country: 'Ireland'
+        city: 'Dublin',
+        stateProv: 'Lienster',
+        country: 'Ireland'
       },
     ],
+    multipleLocations:false, // default, is set by method
     members: [],
     pictures: [],
     itinerary: [],

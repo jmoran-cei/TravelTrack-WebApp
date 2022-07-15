@@ -6,6 +6,7 @@ export interface ITrip {
   startDate: Date
   endDate: Date
   locations: ILocation[]
+  multipleLocations: boolean // is set OnInit by multipleLocations() method
   //temporarily type never[]
   members: never[]    //update
   pictures: never[]   //update
