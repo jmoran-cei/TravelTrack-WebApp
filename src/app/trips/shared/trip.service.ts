@@ -61,7 +61,6 @@ const TRIPS:ITrip[] = [
       country: 'Anguilla',
       }
     ],
-    multipleLocations:false, // default, is set by method
     members: [],
     pictures: [],
     itinerary: [],
@@ -86,7 +85,6 @@ const TRIPS:ITrip[] = [
         country: 'United States'
       },
     ],
-    multipleLocations:false, // default, is set by method
     members: [],
     pictures: [],
     itinerary: [],
@@ -106,7 +104,6 @@ const TRIPS:ITrip[] = [
         country: 'United States'
       }
     ],
-    multipleLocations:false, // default, is set by method
     members: [],
     pictures: [],
     itinerary: [],
@@ -124,7 +121,6 @@ const TRIPS:ITrip[] = [
         country: 'United States'
       },
     ],
-    multipleLocations:false, // default, is set by method
     members: [],
     pictures: [],
     itinerary: [],
@@ -143,7 +139,6 @@ const TRIPS:ITrip[] = [
         country: 'Ireland'
       },
     ],
-    multipleLocations:false, // default, is set by method
     members: [],
     pictures: [],
     itinerary: [],

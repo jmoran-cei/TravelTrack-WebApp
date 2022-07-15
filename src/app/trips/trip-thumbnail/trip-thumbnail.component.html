@@ -20,7 +20,7 @@
           <!-- Destinations -->
           <div class="thumbnail_destinations">
             <!-- toggle destination(s) as singular or plural -->
-            <p>Destination<span *ngIf="this.trip?.multipleLocations">s</span>:</p>
+            <p>Destination<span *ngIf="multipleLocations">s</span>:</p>
 
             <!-- list of trip destinations -->
             <ng-container *ngFor="let location of trip?.locations">

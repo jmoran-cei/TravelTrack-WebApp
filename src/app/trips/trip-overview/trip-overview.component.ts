@@ -11,12 +11,13 @@ import { TripService } from "../shared/trip.service";
 
 export class TripOverviewComponent {
   trip!:ITrip
+  multipleLocations!:boolean
 
   constructor(public tripService:TripService, private route:ActivatedRoute) {}
 
   ngOnInit() {
     this.trip = this.tripService.getTrip(+this.route.snapshot.params['id'])
 
-    this.trip.multipleLocations = this.tripService.multipleLocations(this.trip.locations);
+    this.multipleLocations = this.tripService.multipleLocations(this.trip.locations);
   }
 }

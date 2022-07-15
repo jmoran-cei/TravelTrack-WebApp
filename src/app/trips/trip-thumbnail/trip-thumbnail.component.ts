@@ -9,10 +9,11 @@ import { TripService } from "../shared/trip.service";
 
 export class TripThumbnailComponent {
   @Input() trip:any
+  multipleLocations!:boolean
 
   constructor(public tripService:TripService) {}
 
   ngOnInit() {
-    this.trip.multipleLocations = this.tripService.multipleLocations(this.trip.locations);
+    this.multipleLocations = this.tripService.multipleLocations(this.trip.locations);
   }
 }
