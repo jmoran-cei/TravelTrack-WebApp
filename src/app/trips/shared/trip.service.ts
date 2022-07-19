@@ -1,33 +1,49 @@
-import { LocationStrategy } from "@angular/common";
 import { Injectable } from "@angular/core";
-import { ILocation, ITrip } from "./trip.model";
+import { Observable, Subject } from "rxjs";
+import { ILocation } from "./location.model";
+import { ITrip } from "./trip.model";
 
 @Injectable()
 export class TripService{
 
-  getAllTrips() {
-    return TRIPS
+  getAllTrips():Observable<ITrip[]> {
+    // this will be better implemented via http.get().pipe() when I update it (after implementing API)
+    let subject = new Subject<ITrip[]>()
+    setTimeout(() => {subject.next(TRIPS); subject.complete();}, 100)
+    return subject
   }
 
-  getUpcomingOrPreviousTrips() {
-    let currentTime = new Date()
-    let upcomingTrips:ITrip[] = []
-    let previousTrips:ITrip[] = []
-
-    TRIPS.forEach(trip => {
-      if (trip.startDate.getTime() >= currentTime.getTime()) {
-        upcomingTrips.push(trip)
-        console.log("upcoming")
-      } else {
-        previousTrips.push(trip)
-        console.log("previous")
-      }
-    });
-
-    // index 0: upcomingTrips
-    // index 1: previous Trips
-    return [upcomingTrips,previousTrips]
+  getTrip(id:number):ITrip {
+    // this will be better implemented via http.get().pipe() when I update it (after implementing API)
+    return TRIPS.find(trip => trip.id === id)!
   }
+
+  sortByTitle(trips:ITrip[]) {
+    // console.log("Trips sorted alphabetically by title");
+    return trips = trips.sort((a:ITrip, b:ITrip) => a.title.localeCompare(b.title))
+  }
+
+  sortByEarliestDate(trips:ITrip[]) {  // default for PREVIOUS dates
+    // console.log("Trips sorted by earliest date");
+
+    // sorting by EARLIEST DATE: sorts dates oldest-newest
+    return trips = trips.sort((a: ITrip, b: ITrip) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime())
+  }
+
+  sortByLatestDate(trips:ITrip[]) { // default for UPCOMING dates
+    // console.log("Trips sorted by latest date");
+
+    // sorting by LATEST DATE: sorts dates newest-oldest
+    return trips = trips.sort((a: ITrip, b: ITrip) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime())
+  }
+
+  multipleLocations(locations:ILocation[]) {
+    if (locations.length > 1) {
+      return true
+    }
+    return false
+  }
+
 }
 
 const TRIPS:ITrip[] = [
@@ -49,7 +65,7 @@ const TRIPS:ITrip[] = [
     pictures: [],
     itinerary: [],
     toDo: [],
-    imgUrl: "assets/images/anguila1.jpg"
+    imgUrl: "assets/images/trips/anguila1.jpg"
 
   }, {
     id: 2,
@@ -58,12 +74,12 @@ const TRIPS:ITrip[] = [
     endDate: new Date('6/5/2022'),
     locations: [
       { locationId: 1,
-      city: 'Myrtle Beach',
-      stateProv: 'South Carolina',
-      country: 'United States'
+        city: 'Myrtle Beach',
+        stateProv: 'South Carolina',
+        country: 'United States'
       },
       {
-      locationId: 2,
+        locationId: 2,
         city: 'Charleston',
         stateProv: 'South Carolina',
         country: 'United States'
@@ -73,7 +89,7 @@ const TRIPS:ITrip[] = [
     pictures: [],
     itinerary: [],
     toDo: [],
-    imgUrl: "assets/images/myrtlebeach1.jpg"
+    imgUrl: "assets/images/trips/myrtlebeach1.jpg"
 
   }, {
     id: 3,
@@ -82,17 +98,17 @@ const TRIPS:ITrip[] = [
     endDate: new Date('11/30/2019'),
     locations: [
       {
-      locationId: 1,
-      city: 'Gatlinburg',
-      stateProv: 'Tennessee',
-      country: 'United States'
+        locationId: 1,
+        city: 'Gatlinburg',
+        stateProv: 'Tennessee',
+        country: 'United States'
       }
     ],
     members: [],
     pictures: [],
     itinerary: [],
     toDo: [],
-    imgUrl: "assets/images/gatlinburg1.jpg"
+    imgUrl: "assets/images/trips/gatlinburg1.jpg"
   },{
     id: 4,
     title: 'Hawaii Family Trip 2023',
@@ -100,16 +116,34 @@ const TRIPS:ITrip[] = [
     endDate: new Date('7/5/2023'),
     locations: [
       { locationId: 1,
-      city: 'Maui',
-      stateProv: 'Hawaii',
-      country: 'United States'
+        city: 'Maui',
+        stateProv: 'Hawaii',
+        country: 'United States'
       },
     ],
     members: [],
     pictures: [],
     itinerary: [],
     toDo: [],
-    imgUrl: "assets/images/hawaii1.jpg"
+    imgUrl: "assets/images/trips/hawaii1.jpg"
+
+  },{
+    id: 5,
+    title: 'Our Ireland Trip',
+    startDate: new Date('3/11/2023'),
+    endDate: new Date('3/20/2023'),
+    locations: [
+      { locationId: 1,
+        city: 'Dublin',
+        stateProv: 'Lienster',
+        country: 'Ireland'
+      },
+    ],
+    members: [],
+    pictures: [],
+    itinerary: [],
+    toDo: [],
+    imgUrl: "assets/images/trips/ireland1.jpg"
 
   }
 ]

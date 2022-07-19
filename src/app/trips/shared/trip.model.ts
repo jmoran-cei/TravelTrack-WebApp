@@ -1,3 +1,5 @@
+import { ILocation } from "./location.model"
+
 export interface ITrip {
   id: number
   title: string
@@ -10,11 +12,4 @@ export interface ITrip {
   itinerary: never[]  //update
   toDo: never[]       //update
   imgUrl: string
-}
-
-export interface ILocation {
-  locationId: number
-  city: string
-  stateProv: string
-  country: string
 }

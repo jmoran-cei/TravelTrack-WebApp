@@ -1,4 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
+import { IUser } from "../user/shared/user.model";
+import { UserService } from "../user/shared/user.service";
 
 @Component({
   selector: 'nav-bar',
@@ -7,5 +9,21 @@ import { Component } from "@angular/core";
 })
 
 export class NavbarComponent {
+  @Input() user:any
 
+  constructor(private userService:UserService){
+
+  }
+
+  ngOnInit() {
+    this.user = this.userService.getUserByUsername('dummyuser@dummy.dum')
+  }
+
+  adjustNameLength(name:string,numChars:number) {
+    if (name.length>numChars) {
+      return name.substring(0,numChars) + '..'
+    }
+    return name
+  }
 }
+

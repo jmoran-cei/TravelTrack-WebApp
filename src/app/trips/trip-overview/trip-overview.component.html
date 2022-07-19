@@ -1,0 +1,23 @@
+<div class="container">
+
+<h1>{{trip.title}}</h1>
+
+<span class="font700">
+  {{trip?.startDate?.toLocaleDateString('en-us', { month:"short", day:"numeric"})}}
+  &mdash;
+  {{trip?.endDate?.toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"})}}
+</span>
+
+<div>
+  <p>Destination<span *ngIf="multipleLocations">s</span>:</p>
+  <ng-container *ngFor="let location of trip?.locations">
+    <div>
+      <span [ngSwitch]="location?.country">
+        <p *ngSwitchCase="'United States'">{{location?.city}}, {{location?.stateProv}}, U.S.</p>
+        <p *ngSwitchDefault>{{location?.city}}, {{location?.country}}</p>
+      </span>
+    </div>
+  </ng-container>
+</div>
+
+</div>

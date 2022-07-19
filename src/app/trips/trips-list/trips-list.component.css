@@ -1,22 +1,25 @@
 /* page title styling */
 .page-title {
   text-align: center;
-  margin: 20px 20px;
+  margin: 20px 0px;
   font-size: 4.2rem;
   text-transform: uppercase;
+  padding-bottom: 25px;
+  border-bottom: 2px solid darkgray;
+  width: auto;
 }
 
 /* div for each title/thumbnail section
   upcoming vs. previous */
 .title_and_thumbnail_area {
-  margin: auto;
   min-width: 80%;
+  padding-bottom: 40px;
+  border-bottom: 2px solid darkgray;
 }
 
-/* horizontal rule */
-hr {
-  margin-top: 0;
-  border-color: rgb(31,31,31);
+/* space under entire previous trips section */
+.marg-btm {
+  margin-bottom: 100px;
 }
 
 /* thumbnail section */
@@ -28,3 +31,4 @@ hr {
 .wrapper {
   padding: 35px 40px;
 }
+

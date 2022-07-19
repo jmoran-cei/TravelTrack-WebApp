@@ -1,0 +1,41 @@
+<div [routerLink]="['/trips', trip.id]" class="thumbnail_box">
+  <!-- thumbnail image -->
+  <img src="{{trip?.imgUrl}}" alt="{{trip?.title}}" class="bg-img"/>
+
+  <div class="thumbnail_mask">
+    <div class="thumbnail_box_info">
+
+      <!-- Trip Title -->
+      <h2 class="thumbnail-title font700 font-adjust">{{trip?.title}}</h2>
+
+
+        <div class="thumbnail_details">
+          <!-- Dates -->
+          <p class="thumbnail-date font700">
+            {{trip?.startDate?.toLocaleDateString('en-us', { month:"short", day:"numeric"})}}
+            &mdash;
+            {{trip?.endDate?.toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"})}}
+          </p>
+
+          <!-- Destinations -->
+          <div class="thumbnail_destinations">
+            <!-- toggle destination(s) as singular or plural -->
+            <p>Destination<span *ngIf="multipleLocations">s</span>:</p>
+
+            <!-- list of trip destinations -->
+            <ng-container *ngFor="let location of trip?.locations">
+              <div class="destination">
+                <!-- if the country of a given destination is "United States", then abbreviate it as "U.S."-->
+                <span [ngSwitch]="location?.country">
+                  <p *ngSwitchCase="'United States'">{{location?.city}}, {{location?.stateProv}}, U.S.</p>
+                  <p *ngSwitchDefault>{{location?.city}}, {{location?.country}}</p>
+                </span>
+              </div>
+            </ng-container>
+          </div>
+
+        </div>
+
+    </div>
+  </div>
+</div>

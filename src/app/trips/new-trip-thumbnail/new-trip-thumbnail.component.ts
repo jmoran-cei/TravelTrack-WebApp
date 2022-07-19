@@ -1,5 +1,4 @@
 import { Component, Input } from "@angular/core";
-import { TripService } from "./shared/trip.service";
 
 @Component({
   selector: 'new-trip-thumbnail',
@@ -10,8 +9,5 @@ import { TripService } from "./shared/trip.service";
 export class NewTripThumbnailComponent {
   @Input() title = ''
   @Input() description = ''
-
-  constructor(private tripService:TripService) {}
-
 
 }

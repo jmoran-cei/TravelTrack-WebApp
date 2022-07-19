@@ -1,0 +1,51 @@
+<!-- TITLE SECTION -->
+<div class="trips_title_box">
+
+  <!-- dropdown -->
+  <button type="button" class="toggle collapse-icon btn btn-default btn-xs" data-toggle="collapse"
+    attr.data-target="#{{collapseID}}" id="{{collapseID}}-forlabel">
+  </button>
+
+
+  <!-- title -->
+  <h2 class="trips-title font600">
+    <label for="{{collapseID}}-forlabel">
+      {{title}}
+    </label>
+  </h2>
+
+  <!-- sort: ADD FUNCITONALITY -->
+  <div class="dropdown sort">
+    <!-- sort icon -->
+    <button type="button" class="sort-icon btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+      <span class="glyphicon glyphicon-sort"></span>
+    </button>
+    <!-- menu -->
+    <ul class="dropdown-menu">
+      <!-- sort by TITLE (A-Z) -->
+      <li>
+        <a (click)="tripService.sortByTitle(tripList); sortToggle='sortByTitle';"
+          [ngClass]="{'sort-toggle': sortToggle==='sortByTitle'}">
+          Title (A-Z)
+        </a>
+      </li>
+
+      <!-- sort by EARLIEST DATE (new-old) -->
+      <li>
+        <a (click)="tripService.sortByEarliestDate(tripList); sortToggle='sortByEarliestDate';"
+          [ngClass]="{'sort-toggle': sortToggle==='sortByEarliestDate'}">
+          Earliest Date
+        </a>
+      </li>
+
+      <!-- sort by LATEST DATE (new-old) -->
+      <li>
+        <a (click)="tripService.sortByLatestDate(tripList); sortToggle='sortByLatestDate';"
+          [ngClass]="{'sort-toggle': sortToggle==='sortByLatestDate'}">
+          Latest Date
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</div>

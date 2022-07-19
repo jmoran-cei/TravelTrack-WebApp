@@ -1,22 +1,21 @@
 <div class="container-fluid">
   <h1 class="page-title">Your Trips</h1>
-  <hr/>
 
 
   <!-- UPCOMING TRIPS -->
   <div class="title_and_thumbnail_area">
     <!-- TITLE SECTION -->
-    <trips-title-section
-      [collapseID]="upcomingCollapse"
-      [title]="upcomingTrips_SectionTitle">
+    <trips-title-section [collapseID]="upcomingCollapse" [title]="upcomingTrips_SectionTitle" [tripList]="upcomingTrips"
+      [sortToggle]="'sortByEarliestDate'">
     </trips-title-section>
 
     <!-- THUMBNAILS SECTION -->
     <div class="thumbnail-section container-fluid">
       <!-- all thumbnails -->
       <div class="collapse in row-fluid" id="{{upcomingCollapse}}">
-        <!-- list of upcoming trip thumbnails -->
-        <ng-container *ngFor="let trip of upcomingTrips">
+
+        <!-- list of upcoming trip thumbnails (sorted to have soonest upcoming trips at the top)-->
+        <ng-container *ngFor="let trip of upcomingTrips | byEarliestDate">
           <div class="col-md-6 wrapper">
             <trip-thumbnail [trip]="trip"></trip-thumbnail>
           </div>
@@ -25,32 +24,28 @@
 
         <!-- create new trip thumbnail -->
         <div class="col-md-6 wrapper">
-          <new-trip-thumbnail
-            [title]="createUpcomingTrip_Title"
-            [description]="createUpcomingTrip_Description">
+          <new-trip-thumbnail [title]="createUpcomingTrip_Title" [description]="createUpcomingTrip_Description">
           </new-trip-thumbnail>
         </div>
       </div>
     </div>
   </div>
 
-  <hr/>
 
   <!-- PREVIOUS TRIPS -->
-  <div class="title_and_thumbnail_area">
+  <div class="title_and_thumbnail_area marg-btm">
     <!-- TITLE SECTION -->
-    <trips-title-section
-      [collapseID]="previousCollapse"
-      [title]="previousTrips_SectionTitle">
-    </trips-title-section>
+    <trips-title-section [collapseID]="previousCollapse" [title]="previousTrips_SectionTitle" [tripList]="previousTrips"
+    [sortToggle]="'sortByLatestDate'">
+  </trips-title-section>
 
-    <!-- THUMBNAILS SECTION -->
-    <div class="thumbnail-section container-fluid">
-      <!-- all thumbnails -->
+  <!-- THUMBNAILS SECTION -->
+  <div class="thumbnail-section container-fluid">
+    <!-- all thumbnails -->
       <div class="collapse in row-fluid" id="{{previousCollapse}}">
-        <!-- list of previous trip thumbnails -->
 
-        <ng-container *ngFor="let trip of previousTrips">
+        <!-- list of upcoming trip thumbnails (sorted to have most recent previous trips at the top)-->
+        <ng-container *ngFor="let trip of previousTrips | byLatestDate">
           <div class="col-md-6 wrapper">
             <trip-thumbnail [trip]="trip"></trip-thumbnail>
           </div>
@@ -59,9 +54,7 @@
 
         <!-- create new trip thumbnail -->
         <div class="col-md-6 wrapper">
-          <new-trip-thumbnail
-            [title]="createPreviousTrip_Title"
-            [description]="createPreviousTrip_Description">
+          <new-trip-thumbnail [title]="createPreviousTrip_Title" [description]="createPreviousTrip_Description">
           </new-trip-thumbnail>
         </div>
 
@@ -69,5 +62,4 @@
     </div>
   </div>
 
-  <hr />
 </div>

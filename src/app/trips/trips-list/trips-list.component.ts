@@ -1,15 +1,15 @@
-import { Component } from "@angular/core";
-import { ITrip } from "./shared/trip.model";
-import { TripService } from "./shared/trip.service";
+import { Component, Input } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { ITrip } from "../shared/trip.model";
+import { TripService } from "../shared/trip.service";
 
 @Component({
-  selector: 'trips-list',
   templateUrl: 'trips-list.component.html',
   styleUrls: ['trips-list.component.css']
 })
 
 export class TripsListComponent {
-  upcomingOrPreviousTrips: any[] = []
+  currentTime = new Date()
   upcomingTrips: ITrip[] = []
   previousTrips: ITrip[] = []
 
@@ -32,16 +32,17 @@ export class TripsListComponent {
     upcomingCollapse = "upcoming-collapse"
     previousCollapse = "previous-collapse"
 
-
-
-  constructor(private tripService: TripService) {
-
-  }
+  constructor(private tripService: TripService, private route:ActivatedRoute) {}
 
   ngOnInit() {
-    this.upcomingOrPreviousTrips = this.tripService.getUpcomingOrPreviousTrips()
-    this.upcomingTrips = this.upcomingOrPreviousTrips[0]
-    this.previousTrips = this.upcomingOrPreviousTrips[1]
-    //this.locations = this.tripService.getLocations()
-  }
+
+    // get all upcoming trips
+    this.upcomingTrips = this.route.snapshot.data['trips']
+      .filter( (trip:ITrip) => trip.startDate.getTime() >= this.currentTime.getTime() )
+
+    // get all previous trips
+    this.previousTrips = this.route.snapshot.data['trips']
+      .filter( (trip:ITrip) => trip.startDate.getTime() < this.currentTime.getTime() )
+
+    }
 }
