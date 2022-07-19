@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'travel-app',
@@ -6,5 +7,7 @@ import { Component } from "@angular/core";
 })
 
 export class TravelAppComponent {
+  // router?:any
 
+  constructor(public router:Router) {}
 }

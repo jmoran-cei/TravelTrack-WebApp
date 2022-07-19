@@ -2,5 +2,6 @@ export * from './user.routes'
 export * from './shared/index'
 
 // components
-export * from './edit-profile.component'
-export * from './settings.component'
+export * from './edit-profile/edit-profile.component'
+export * from './settings/settings.component'
+export * from './login/login.component'

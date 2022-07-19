@@ -1,2 +1,4 @@
-<nav-bar></nav-bar>
+
+<nav-bar *ngIf="this.router.url!=='/user/login'
+  && this.router.url!=='/user/newaccount'" navigation></nav-bar>
 <router-outlet></router-outlet>

@@ -1,0 +1,66 @@
+/* entire card  */
+  .card {
+    color: white;
+    margin: 40px auto;
+    height: 380px;
+    min-width: 545px;
+    max-width: 100%;
+    background: hsla(0, 0%, 100%, 0.8);
+    backdrop-filter: blur(30px);
+    border-radius: 10px;
+    box-shadow: .8px .8px 15px .8px rgba(0,0,0,.1);
+    overflow: hidden;
+  }
+
+/* background image */
+  .card-img {
+    position: absolute;
+    transform: translateY(-40%);
+    height: auto;
+    width: 100%;
+    z-index: -5;
+  }
+  @media (max-width: 1100px) {
+    .card-img {
+      width: 1280px;
+    }
+  }
+
+/* contains all content (except img) */
+  .card-body {
+    padding: 60px;
+  }
+
+/* DISCOVER.. large text */
+  h2 {
+    font-size: 50px;
+  }
+/* make text transparent, outlined and underlined */
+  .clear-underline {
+    color: rgb(31,31,31,.09);
+    text-decoration: underline;
+    -webkit-text-stroke: 1px white;
+  }
+
+/* START TRACKING button */
+  #start-tracking-btn {
+    position: absolute;
+    right: 10%;
+    bottom: 12%;
+    color: black;
+    background-color: white;
+    font-size: 25px;
+    padding: 13px 25px;
+  }
+  #start-tracking-btn:hover {
+    color: rgb(31,31,31);
+    background-color:whitesmoke;
+  }
+
+/* take out black outline from all button clicks */
+  .btn {
+    outline: none;
+  }
+  .btn:active {
+    outline: none;
+  }

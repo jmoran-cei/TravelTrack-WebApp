@@ -1,12 +1,32 @@
-<div class="container-fluid">
-  <h1>{{ title }}</h1>
-  <hr/>
-  <h2>Discover the world and remember every moment. Plan your next trip now!</h2>
-  <br/>
-  <br/>
-  <br/>
+<div class="marg">
+  <!--'DISCOVER THE WORLD AND..' (card) -->
+  <home-section1></home-section1>
+
+  <!-- 3 DESCRIPTIVE BOXES -->
+  <section class="col-container">
+    <!-- 'FINISH YOUR BUCKET LIST' -->
+    <col-box class="col"
+      [boxTitle]="boxTitle1"[boxDesc]="boxDesc1">
+    </col-box>
+    <!-- 'TRAVEL THE WORLD' -->
+    <col-box class="col"
+      [boxTitle]="boxTitle2"[boxDesc]="boxDesc2">
+    </col-box>
+  <!-- 'NEVER FORGET IT' -->
+    <col-box class="col"
+      [boxTitle]="boxTitle3"[boxDesc]="boxDesc3">
+    </col-box>
+  </section>
+
+  <!-- show/hide 'CREATE ACCOUNT' based on iuser's logged-in status -->
+  <ng-container *ngIf="!auth.isLoggedIn$.getValue()">
+    <!-- 'CREATE ACCOUNT' button -->
+    <button id="create-account-btn" class="btn btn-primary" [routerLink]="['/user/new-account']">Create a TravelTrack
+      Account</button>
+  </ng-container>
+
+
   <h4>[ THIS PAGE WILL BE FURTHER DEVELOPED SOON... ]</h4>
 </div>
 
-<!-- obviously, I have a lot more to do and add to this page.
-  This will remain hidden until I configure authentication etc. -->
+<!-- I'll continue to slowly add to this (and some other pages) as time goes by -->

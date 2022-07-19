@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable, Subject } from "rxjs";
+import { Observable, of, Subject } from "rxjs";
 import { ILocation } from "./location.model";
 import { ITrip } from "./trip.model";
 
@@ -8,9 +8,7 @@ export class TripService{
 
   getAllTrips():Observable<ITrip[]> {
     // this will be better implemented via http.get().pipe() when I update it (after implementing API)
-    let subject = new Subject<ITrip[]>()
-    setTimeout(() => {subject.next(TRIPS); subject.complete();}, 100)
-    return subject
+    return of(TRIPS)
   }
 
   getTrip(id:number):ITrip {
@@ -50,7 +48,6 @@ const TRIPS:ITrip[] = [
   {
     id: 1,
     title: 'Brothers\' Anguila Trip',
-    //change dates to type Date (and on ITrip)
     startDate: new Date('3/15/2022'),
     endDate: new Date('3/20/2022'),
     locations: [

@@ -1,5 +1,7 @@
 import { Component, Input } from "@angular/core";
-import { IUser } from "../user/shared/user.model";
+import { Observable } from "rxjs";
+import { AuthService } from "../user/shared/authentication.service";
+// import { IUser } from "../user/shared/user.model";
 import { UserService } from "../user/shared/user.service";
 
 @Component({
@@ -11,12 +13,10 @@ import { UserService } from "../user/shared/user.service";
 export class NavbarComponent {
   @Input() user:any
 
-  constructor(private userService:UserService){
-
-  }
+  constructor(public auth:AuthService){}
 
   ngOnInit() {
-    this.user = this.userService.getUserByUsername('dummyuser@dummy.dum')
+    // this.user = this.userService.getUserByUsername('dummyuser@dummy.dum')
   }
 
   adjustNameLength(name:string,numChars:number) {
