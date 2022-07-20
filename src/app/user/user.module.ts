@@ -8,7 +8,8 @@ import {
   EditProfileComponent,
   LoginComponent,
   SettingsComponent,
-  UserService
+  UserService,
+  NewAccountComponent
 } from './index'
 
 @NgModule({
@@ -20,7 +21,8 @@ import {
   declarations: [
     EditProfileComponent,
     SettingsComponent,
-    LoginComponent
+    LoginComponent,
+    NewAccountComponent
   ],
   providers: [
     UserService

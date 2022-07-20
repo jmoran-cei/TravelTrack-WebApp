@@ -1,0 +1,114 @@
+<!-- background image -->
+<img id="bg-img" src="assets/images/general/form-bg.jpg" />
+
+<!-- page container -->
+<section class="center">
+
+  <div class="contain">
+
+    <!-- Title: TRAVEL TRACK -->
+    <h1 class="text-center">
+      <a [routerLink]="['/home']"><span class="bi bi-pin-map-fill"></span>Travel Track</a>
+    </h1>
+
+    <!-- register card -->
+    <div class="card">
+      <div class="row text-center">
+        <!-- image side: left side of card -->
+        <div class="col-md-4 img-side">
+          <img src="assets/images/general/register.jpg" class="card-img" alt="register-bg-image card-img">
+        </div>
+
+        <!-- login content side: right side of card -->
+        <div class="col-md-8 login-side">
+
+          <!-- CENTER LOGIN CONTENT ON LEFT SIDE -->
+          <div class="center2">
+            <div class="contain2">
+
+              <div class="card-body">
+                <!-- Subtitle: SIGN INTO YOUR ACCOUNT -->
+                <h3 class="card-title subtitle">Register your new account.</h3>
+
+                <form #createAccountForm="ngForm" (ngSubmit)="createAccount()">
+                  <!-- FULL NAME -->
+                  <div class="flex-row">
+
+                    <!-- FIRST NAME -->
+                    <div class="left pad">
+                      <!-- alert placement -->
+                      <div class="alert-placeholder flex">
+                        <div class="alert alert-danger"
+                          [hidden]="firstName.valid || (!mouseoverSubmit && (firstName.valid || firstName.untouched))">
+                          <p>First name is required</p>
+                        </div>
+                      </div>
+                      <!-- input box -->
+                      <input required type="text" id="firstName" #firstName="ngModel" (ngModel)="firstName"
+                        name="firstName" class="form-control form-control-lg ng-invalid input-half"
+                        placeholder="First name" />
+                    </div>
+
+                    <!-- LAST NAME -->
+                    <div class="right">
+                      <!-- alert placement -->
+                      <div class="alert-placeholder flex">
+                        <div class="alert alert-danger"
+                          [hidden]="lastName.valid || (!mouseoverSubmit && (lastName.valid || lastName.untouched))">
+                          <p>Last name is required</p>
+                        </div>
+                      </div>
+                      <!-- input box -->
+                      <input required type="text" id="lastName" #lastName="ngModel" (ngModel)="lastName"
+                        name="lastName" class="form-control form-control-lg ng-invalid input-half"
+                        placeholder="Last name" />
+                    </div>
+                  </div>
+
+                  <!-- USERNAME -->
+                  <div>
+                    <!-- alert placement -->
+                    <div class="alert-placeholder flex">
+                      <div class="alert alert-danger"
+                        [hidden]="username.valid || (!mouseoverSubmit && (username.valid || username.untouched))">
+                        <p>Username is required</p>
+                      </div>
+                    </div>
+                    <!-- input box -->
+                    <input required type="text" id="username" #username="ngModel" (ngModel)="username"
+                      name="username" class="form-control form-control-lg ng-invalid" placeholder="Username" />
+                  </div>
+
+                  <!-- PASSWORD -->
+                  <div>
+                    <div class="alert-placeholder flex">
+                      <div class="alert alert-danger"
+                        [hidden]="password.valid || (!mouseoverSubmit && (password.valid || password.untouched))">
+                        <p>Password is required</p>
+                      </div>
+                    </div>
+                    <!-- input box -->
+                    <input required type="password" id="password" #password="ngModel" (ngModel)="password"
+                      name="password" class="form-control form-control-lg ng-invalid" placeholder="Password" />
+                    <!-- alert placement -->
+                  </div>
+
+                  <!-- update mouseoverSubmit variable -->
+                  <span (mouseenter)="mouseoverSubmit=true" (mouseleave)="mouseoverSubmit=false">
+                    <!-- LOGIN button -->
+                    <button type="submit" [disabled]="!createAccountForm.valid" class="btn btn-default submit-btn">Create Account</button>
+                  </span>
+                  <p class="card-text"><a class="forgot-pwd">Forgot password?</a></p>
+                </form>
+
+                <hr />
+                <!-- CREATE ACCOUNT button -->
+                <p class="card-text text-larger">Already have an account? <a class="forgot-pwd font700" [routerLink]="['/user/login']">Sign in</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
