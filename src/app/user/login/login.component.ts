@@ -8,8 +8,8 @@ import { AuthService } from "../shared/authentication.service";
 })
 
 export class LoginComponent {
-  username:any
-  password:any
+  username?:string
+  password?:string
   mouseoverLogin?:boolean
 
   constructor(private authService:AuthService, private router:Router) {}

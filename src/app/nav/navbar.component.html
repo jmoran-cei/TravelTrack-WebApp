@@ -6,7 +6,7 @@
   </div>
 
 <!-- if user NOT LOGGED IN -->
-  <ng-container *ngIf="!auth.isLoggedIn$.getValue()">
+  <ng-container *ngIf="!(isLoggedIn | async)">
     <!-- User Icon & Login -->
     <div class="box move-right" id="login">
       <a [routerLink]="['/user/login']"><span class="glyphicon glyphicon-user"></span> Login</a>
@@ -15,7 +15,7 @@
   </ng-container>
 
 <!-- if user IS LOGGED IN -->
-  <ng-container *ngIf="auth.isLoggedIn$.getValue()">
+  <ng-container *ngIf="isLoggedIn | async">
 
     <!-- trips tab -->
     <div class="box move-right font400 margin">
@@ -69,7 +69,7 @@
         </div>
         <a [routerLink]="['user/profile']">Edit Profile</a>
         <a [routerLink]="['user/settings']">Settings</a>
-        <a href="">Logout</a>
+        <a (click)="logoutUser()">Logout</a>
       </div>
 
       <!-- username is hardcoded for simplicity currently, will be updated in the future -->

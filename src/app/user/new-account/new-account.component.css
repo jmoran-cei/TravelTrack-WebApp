@@ -1,60 +1,55 @@
 /* background image */
-#bg-img {
-  position: fixed;
-  z-index: -6;
-  width: 100%;
-  bottom: -20%;
-  opacity: .2;
-}
+  #bg-img {
+    position: fixed;
+    z-index: -6;
+    width: 100%;
+    bottom: -20%;
+    opacity: .2;
+  }
 
 /* center divs of content */
-.center {
-  min-height: 800px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.center2 {
-  min-height: 400px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.contain {
-  width: 100%;
-}
-.contain2 {
-  width: 80%;
-}
+  .allcontent-center {
+    min-height: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+/* set all page content width 100% */
+  .content-fullwidth {
+    width: 100%;
+  }
+/* set register-side content to 80% (squishes input boxes) */
+  .registercontent-80width {
+    width: 80%;
+  }
 
-/* entire card for login area */
-.card {
-  padding: 0;
-  margin: 20px auto;
-  margin-bottom: 50px;
-  max-height: 500px;
-  max-width: 900px;
-  width: 100%;
-  background: hsla(0, 0%, 100%, 0.8);
-  backdrop-filter: blur(5px);
-  border-radius: 10px;
-  box-shadow: .8px .8px 15px .8px rgba(0,0,0,.1);
-  overflow: hidden;
-}
+/* entire card for registration area */
+  .card {
+    padding: 0;
+    margin: 20px auto;
+    margin-bottom: 50px;
+    max-height: 500px;
+    max-width: 900px;
+    width: 100%;
+    background: hsla(0, 0%, 100%, 0.8);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    box-shadow: .8px .8px 15px .8px rgba(0,0,0,.1);
+    overflow: hidden;
+  }
 
 /* logo icon & site title */
-h1 {
-  margin: 30px 0;
-  font-size: 50px;
-}
-h1 a {
-  color: #859ad4;
-  text-decoration: none;
-}
+  h1 {
+    margin: 30px 0;
+    font-size: 50px;
+  }
+  h1 a {
+    color: #859ad4;
+    text-decoration: none;
+  }
 
 /* image side of card (on left) */
   .img-side {
-    width: 33.334%;
     padding: 0;
     overflow: hidden;
   }
@@ -64,11 +59,14 @@ h1 a {
     height: 500px;
   }
 
-/* login content side of card (on right) */
-  .login-side {
-    height: 500px;
+/* registration content side of card (on right) */
+  .register-side {
     padding: 30px 40px;
     padding-right: 55px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   /* title: (logo) Travel Track */
@@ -77,7 +75,7 @@ h1 a {
       font-size: 25px;
     }
 
-  /* title: Sign into your account */
+  /* title: Register your new account */
     h3 {
       margin: 0
     }
@@ -103,28 +101,22 @@ h1 a {
     }
 
   /* inputs */
-    .left {
-      margin-right: auto;
-    }
-    .pad {
+    .username {
       padding-right: 10px;
     }
-    .right {
-      margin-right: auto;
-    }
 
-    /* login button */
-    .submit-btn {
-      font-size: 15px;
-      color: white;
-      background-color: #859ad4;
-      padding: 5px 25px;
-      margin-top: 15px;
-      margin-bottom: 15px;
-    }
-    .submit-btn:hover {
-      background-color: #9fb3eb;
-    }
+    /* create account button */
+      .submit-btn {
+        font-size: 15px;
+        color: white;
+        background-color: #859ad4;
+        padding: 5px 25px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+      }
+      .submit-btn:hover {
+        background-color: #9fb3eb;
+      }
 
     /* validation stylings */
     /* left side: red, green toggle based on state */
@@ -174,11 +166,11 @@ h1 a {
     }
 
   /* ALREADY HAVE AN ACCOUNT: text size */
-  .text-larger {
-    font-size: 15px;
-  }
+    .text-larger {
+      font-size: 15px;
+    }
 
-  /* allows login content to stay on the page for smaller devices */
+  /* allows registration content to stay on the page for smaller devices */
     @media (max-width:1000px) {
       .row .col-md-8 {
           float:left;

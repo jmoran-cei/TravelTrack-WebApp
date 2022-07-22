@@ -20,11 +20,7 @@
     width: 100%;
     z-index: -5;
   }
-  @media (max-width: 1100px) {
-    .card-img {
-      width: 1280px;
-    }
-  }
+
 
 /* contains all content (except img) */
   .card-body {
@@ -63,4 +59,11 @@
   }
   .btn:active {
     outline: none;
+  }
+
+  /* adjust card-img */
+  @media (max-width: 1100px) {
+    .card-img {
+      width: 1280px;
+    }
   }
