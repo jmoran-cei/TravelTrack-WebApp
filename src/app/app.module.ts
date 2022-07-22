@@ -7,7 +7,6 @@ import { appRoutes } from './routes';
 // components
 import { BucketlistComponent } from './bucketlist/bucketlist.component';
 import { Error404Component } from './errors/404.component';
-import { HomePageComponent } from './home/home-page.component';
 import { NavbarComponent } from './nav/navbar.component';
 
 import {
@@ -25,14 +24,24 @@ import {
 } from './trips/index'
 
 import {
-  UserService
+  UserService,
+  AuthService,
+  AuthGuard
 } from './user'
+
+import {
+  HomePageComponent,
+  HomeSection1Component,
+  ColumnBoxComponent
+} from './home'
 
 @NgModule({
   declarations: [
     TravelAppComponent,
     NavbarComponent,
     HomePageComponent,
+    HomeSection1Component,
+    ColumnBoxComponent,
     BucketlistComponent,
     Error404Component,
     TripsListComponent,
@@ -51,6 +60,8 @@ import {
   providers: [
     TripService,
     UserService,
+    AuthService,
+    AuthGuard,
     TripRouteActivator,
     TripListResolver,
     { provide: 'canDeactivateCreateTrip', useValue: checkDirtyState }

@@ -1,12 +1,35 @@
-<div class="container-fluid">
-  <h1>{{ title }}</h1>
-  <hr/>
-  <h2>Discover the world and remember every moment. Plan your next trip now!</h2>
-  <br/>
-  <br/>
-  <br/>
+<div class="page-margin">
+  <!--'DISCOVER THE WORLD AND..' (card) -->
+  <home-section1></home-section1>
+
+  <!-- 3 DESCRIPTIVE BOXES -->
+  <section class="col-container">
+    <!-- 'FINISH YOUR BUCKET LIST' -->
+    <col-box class="col"
+      [boxTitle]="'Finish your bucket list.'"
+      [boxDesc]="'Nunc non varius metus. Cras vitae libero sed leo ultrices malesuada. Nullam luctus enim et luctus euismod. Maecenas quis vulputate nibh, non molestie ligula. Nulla at luctus quam. Donec ultrices urna vel quam tempus, vel molestie purus bibendum. Cras nec sollicitudin nulla.'">
+    </col-box>
+    <!-- 'TRAVEL THE WORLD' -->
+    <col-box class="col"
+      [boxTitle]="'Travel the World.'"
+      [boxDesc]="'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer condimentum, nunc ut ultricies tincidunt, mi orci venenatis orci, sit amet elementum felis sem non metus. Nam id aliquam urna. Curabitur tincidunt gravida rhoncus. Etiam ac diam odio. Sed bibendum id sem in aliquet. Maecenas lacus quam, dignissim non.'">
+    </col-box>
+  <!-- 'NEVER FORGET IT' -->
+    <col-box class="col"
+      [boxTitle]="'Never forget it.'"
+      [boxDesc]="'Fusce placerat, felis ac euismod congue, nunc mi hendrerit leo, at pretium neque augue vel metus. In hac habitasse platea dictumst. Sed fringilla odio lectus, ac condimentum ligula rhoncus scelerisque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.'">
+    </col-box>
+  </section>
+
+  <!-- show/hide 'CREATE ACCOUNT' based on iuser's logged-in status -->
+  <ng-container *ngIf="!(isLoggedIn | async)">
+    <!-- 'CREATE ACCOUNT' button -->
+    <button id="create-account-btn" class="btn btn-primary" [routerLink]="['/user/new-account']">Create a TravelTrack
+      Account</button>
+  </ng-container>
+
+
   <h4>[ THIS PAGE WILL BE FURTHER DEVELOPED SOON... ]</h4>
 </div>
 
-<!-- obviously, I have a lot more to do and add to this page.
-  This will remain hidden until I configure authentication etc. -->
+<!-- I'll continue to slowly add to this (and some other pages) as time goes by -->

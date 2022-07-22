@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
-import { IUser } from "../user/shared/user.model";
-import { UserService } from "../user/shared/user.service";
+import { take } from "rxjs";
+import { AuthService } from "../user/shared/authentication.service";
 
 @Component({
   selector: 'nav-bar',
@@ -9,21 +9,19 @@ import { UserService } from "../user/shared/user.service";
 })
 
 export class NavbarComponent {
-  @Input() user:any
+  isLoggedIn= this.auth.isLoggedIn$.pipe(take(1));
 
-  constructor(private userService:UserService){
-
-  }
-
-  ngOnInit() {
-    this.user = this.userService.getUserByUsername('dummyuser@dummy.dum')
-  }
+  constructor(public auth:AuthService){}
 
   adjustNameLength(name:string,numChars:number) {
     if (name.length>numChars) {
       return name.substring(0,numChars) + '..'
     }
     return name
+  }
+
+  logoutUser() {
+    this.auth.logoutUser();
   }
 }
 

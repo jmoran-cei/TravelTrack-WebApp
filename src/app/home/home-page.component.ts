@@ -1,11 +1,15 @@
 import { Component } from "@angular/core";
+import { take } from "rxjs";
+import { AuthService } from "../user/shared/authentication.service";
 
 @Component({
-  // selector: 'home-page',
   templateUrl: 'home-page.component.html',
   styleUrls: ['home-page.component.css']
 })
 
 export class HomePageComponent {
-  title = "Travel Track"
+  isLoggedIn = this.auth.isLoggedIn$.pipe(take(1));
+
+  constructor(public auth:AuthService) {}
+
 }
