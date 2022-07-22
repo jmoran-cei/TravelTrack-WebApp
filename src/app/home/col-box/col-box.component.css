@@ -1,0 +1,16 @@
+/* descriptive box section */
+.box {
+  text-align: justify;
+  padding: 20px 35px;
+}
+  /* box title */
+    .box > h3 {
+      text-align:center;
+    }
+  /* box text content */
+    .box > p {
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+

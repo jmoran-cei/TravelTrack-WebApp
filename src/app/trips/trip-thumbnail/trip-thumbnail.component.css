@@ -40,7 +40,6 @@
 
   /* background image */
   .bg-img {
-    object-fit: cover;
     z-index:-5;
     position: absolute;
     min-height: 450px;
