@@ -1,4 +1,5 @@
-import { Component, Input } from "@angular/core";
+import { Component } from "@angular/core";
+import { take } from "rxjs";
 import { AuthService } from "src/app/user";
 
 @Component({
@@ -8,6 +9,7 @@ import { AuthService } from "src/app/user";
 })
 
 export class HomeSection1Component {
+  isLoggedIn = this.auth.isLoggedIn$.pipe(take(1));
 
   constructor(public auth:AuthService) {}
 

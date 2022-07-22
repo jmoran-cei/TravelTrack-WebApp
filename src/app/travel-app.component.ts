@@ -7,7 +7,6 @@ import { Router } from "@angular/router";
 })
 
 export class TravelAppComponent {
-  // router?:any
 
   constructor(public router:Router) {}
 }

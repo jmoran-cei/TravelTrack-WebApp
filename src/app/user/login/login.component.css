@@ -1,57 +1,55 @@
 /* background image */
-#bg-img {
-  position: fixed;
-  z-index: -6;
-  width: 100%;
-  bottom: -20%;
-  opacity: .2;
-}
+  #bg-img {
+    position: fixed;
+    z-index: -6;
+    width: 100%;
+    bottom: -20%;
+    opacity: .2;
+  }
 
 /* center divs of content */
-.center {
-  min-height: 800px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.center2 {
-  min-height: 400px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.contain {
-  width: 100%;
-}
+  .allcontent-center {
+    min-height: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+/* set all page content width 100% */
+  .content-fullwidth {
+    width: 100%;
+  }
+/* set login-side content to 80% (squishes input boxes) */
+  .logincontent-80width {
+    width: 80%;
+  }
 
 /* entire card for login area */
-.card {
-  padding: 0;
-  margin: 20px auto;
-  margin-bottom: 50px;
-  max-height: 500px;
-  max-width: 900px;
-  width: 100%;
-  background: hsla(0, 0%, 100%, 0.8);
-  backdrop-filter: blur(5px);
-  border-radius: 10px;
-  box-shadow: .8px .8px 15px .8px rgba(0,0,0,.1);
-  overflow: hidden;
-}
+  .card {
+    padding: 0;
+    margin: 20px auto;
+    margin-bottom: 50px;
+    max-height: 500px;
+    max-width: 900px;
+    width: 100%;
+    background: hsla(0, 0%, 100%, 0.8);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    box-shadow: .8px .8px 15px .8px rgba(0,0,0,.1);
+    overflow: hidden;
+  }
 
 /* logo icon & site title */
-h1 {
-  margin: 30px 0;
-  font-size: 50px;
-}
-h1 a {
-  color: #859ad4;
-  text-decoration: none;
-}
+  h1 {
+    margin: 30px 0;
+    font-size: 50px;
+  }
+  h1 a {
+    color: #859ad4;
+    text-decoration: none;
+  }
 
 /* image side of card (on left) */
   .img-side {
-    width: 33.334%;
     padding: 0;
     overflow: hidden;
   }
@@ -61,6 +59,9 @@ h1 a {
 
 /* login content side of card (on right) */
   .login-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 500px;
     padding: 30px 40px;
     padding-right: 55px;
@@ -89,13 +90,9 @@ h1 a {
   /* flexbox for horiz. centering */
     .flex {
       display: flex;
+      justify-content: center;
       align-items: center;
       flex-direction: column;
-    }
-
-  /* inputs */
-    input {
-      width: 80%;
     }
 
     /* login button */
@@ -130,7 +127,7 @@ h1 a {
       z-index: -2;
       transform: translateY(7px);
       font-size: 12px;
-      width: 80%;
+      width:100%;
       margin-bottom: 0;
       padding: 5px 0px;
     }
