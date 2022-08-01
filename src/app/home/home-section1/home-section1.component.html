@@ -1,0 +1,19 @@
+<!-- this will be placed into a new component -->
+<section class="card">
+  <!-- bg image -->
+  <img src="assets/images/general/home-top-bg.jpg" class="card-img" alt="login-bg-image card-img">
+
+  <!-- content -->
+  <div class="card-body">
+    <!-- text -->
+    <h2 class="font700">Discover the <span class="clear-underline">world</span> and remember <span
+        class="clear-underline">every moment.</span></h2>
+    <!-- button -->
+    <ng-container *ngIf="!(this.isLoggedIn | async)">
+      <button id="start-tracking-btn" class="btn btn-secondary" [routerLink]="['/user/login']">Start Tracking</button>
+    </ng-container>
+    <ng-container *ngIf="(this.isLoggedIn | async)">
+      <button id="start-tracking-btn" class="btn btn-secondary" [routerLink]="['/trips']">Continue Tracking</button>
+    </ng-container>
+  </div>
+</section>

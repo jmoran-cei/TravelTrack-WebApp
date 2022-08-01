@@ -1,8 +1,17 @@
 import { Routes } from "@angular/router";
-import { EditProfileComponent } from "./edit-profile.component";
-import { SettingsComponent } from "./settings.component";
+
+import {
+  NewAccountComponent,
+  EditProfileComponent,
+  LoginComponent,
+  SettingsComponent,
+  AuthGuard
+} from '.'
 
 export const userRoutes:Routes = [
-  { path: 'profile', component: EditProfileComponent},
-  { path: 'settings', component: SettingsComponent}
+  { path: 'profile', component: EditProfileComponent, canActivate: [AuthGuard]},
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
+  { path: 'login', component: LoginComponent},
+  { path: 'new-account', component: NewAccountComponent }
+
 ]
