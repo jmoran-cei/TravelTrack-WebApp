@@ -70,7 +70,6 @@ export class CreateTripComponent {
         if (this.titleOfTrip === "") {
           this.titleOfTrip="Your New Trip";
         }
-        console.log(this.endDate?.value);
       }
       );
   }
