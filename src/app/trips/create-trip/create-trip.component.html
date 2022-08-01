@@ -1,9 +1,313 @@
-<div class="container-fluid">
-  <h1>Create Trip</h1>
+<!-- background image -->
+<img id="bg-img" src="assets/images/general/form-bg.jpg" alt="background-image" />
 
-  <h3> [ FORM FOR CREATING A TRIP WILL BE CREATED SOON... ]</h3>
-  <br/>
-  <br/>
-  <button type="submit" class="btn btn-primary">Create</button>
-  <button type="submit" class="btn btn-default" (click)="cancel()">Cancel</button>
+
+<div class="card">
+  <div class="row">
+
+    <!-- Page title -->
+    <div class="card-header">
+      <h1 class="add-trip-title font700">{{ titleOfTrip }}</h1>
+    </div>
+
+    <!-- FORM -->
+    <div class="card-body">
+      <form class="form-group" novalidate (ngSubmit)="addTrip()" [formGroup]="newTripForm">
+
+        <!-- TITLE -->
+        <div>
+          <div class="col-xs-12">
+            <!-- label -->
+            <label for="title">
+              Title<span class="required">*</span>
+            </label>
+
+            <!-- input -->
+            <input class="form-control col-md-6" id="title" type="text" placeholder="Title" formControlName="title"
+              [ngClass]="{'input-red':
+                title?.touched
+                && title?.invalid
+                && title?.errors}" />
+          </div>
+
+          <!-- TITLE validation alerts -->
+          <div class="col-xs-12">
+            <div *ngIf="title?.touched && title?.invalid" class="alert alert-danger">
+              <!-- required -->
+              <div *ngIf="title?.errors && title?.errors!['required']">
+                <span class="glyphicon glyphicon glyphicon-remove-circle"></span> Title is required
+              </div>
+
+              <!-- minlength -->
+              <div *ngIf="title?.errors && title?.errors!['minlength']">
+                <span class="glyphicon glyphicon glyphicon-remove-circle"></span> Title should be at least 3 characters.
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+
+
+        <!-- DATES -->
+        <div formGroupName="datesGroup">
+
+          <div>
+            <!-- START DATE -->
+            <div class="col-xs-6 control">
+              <!-- label -->
+              <label for="startDate">
+                Start Date<span class="required">*</span>
+              </label>
+
+              <!-- input -->
+              <input class="form-control" id="startDate" type="date" formControlName="startDate" min="1900-01-01"
+                max="2100-01-01" [ngClass]="{'input-red': startDate?.touched && startDate?.invalid}" />
+            </div>
+
+            <!-- END DATE -->
+            <div class="col-xs-6 control">
+              <!-- label -->
+              <label for="startDate">End Date<span class="required">*</span></label>
+
+              <!-- input -->
+              <input class="form-control" id="endDate" type="date" formControlName="endDate" min="1900-01-01"
+                max="2100-01-01"
+                [ngClass]="{'input-red': endDate?.touched && endDate?.invalid && endDate?.errors!['pattern']}" />
+            </div>
+
+            <div class="col-xs-12">
+              <!-- START DATE validation alert -->
+              <div *ngIf="startDate?.touched && startDate?.invalid" class="startDate-alert">
+
+                <!-- pattern -->
+                <ng-container *ngIf="endDate?.errors!['pattern']">
+                  <div class="alert alert-danger">
+                    <span class="glyphicon glyphicon glyphicon-remove-circle"></span> Date must be valid. Valid time
+                    frame: 01/01/1900 - 01/01/2100
+                  </div>
+                </ng-container>
+              </div>
+
+              <!-- END DATE validation alert -->
+              <div *ngIf="endDate?.touched && endDate?.invalid" class="endDate-alert">
+
+                <!-- pattern -->
+                <ng-container *ngIf="endDate?.errors!['pattern']">
+                  <div class="alert alert-danger">
+                    <span class="glyphicon glyphicon glyphicon-remove-circle"></span> Date must be valid. Valid time
+                    frame: 01/01/1900 - 01/01/2100
+                  </div>
+                </ng-container>
+              </div>
+
+              <!-- NOT IN ORDER validation alert (startDate > endDate) -->
+              <div *ngIf="datesGroup?.errors!" class="alert alert-danger">
+                <span class="glyphicon glyphicon glyphicon-remove-circle"></span> Start Date must occur after End Date.
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+
+
+        <!-- DESTINATIONS -->
+        <div>
+          <!-- label -->
+          <div class="col-xs-12 control">
+            <label attr.for="{{'destinations' + 0 }}">
+              Destination(s)<span class="required">*</span>
+            </label>
+          </div>
+
+          <!-- DESTINATIONS form array -->
+          <ng-container formArrayName="destinations"
+            *ngFor="let destination of destinations?.controls; let i=index; let last=last;">
+            <div class="col-xs-12 addable-field" id="{{ 'destinationsField'+i }}">
+
+              <!-- geo icon -->
+              <div class="icon-addable">
+                <label attr.for="{{'destinations' + i }}">
+                  <i class="bi bi-geo-alt-fill icon"></i>
+                </label>
+              </div>
+
+              <!-- input -->
+              <input class="addable-input" id="{{ 'destinations' + i }}" type="text"
+                placeholder="City,  Region,  Country" [formControlName]="i" [ngClass]="{'input-red':
+                (isTouched('destinations',i) && !isValid('destinations',i) && hasError('destinations',i) && hasRequiredError('destinations',i))
+                || (this.mouseoverAddDestination && !isValid('destinations',i))}" />
+
+              <!-- first destination -->
+              <ng-container *ngIf="i===0">
+                <!-- plus icon -->
+                <ng-container *ngIf="destinations.length<2">
+                  <span (mouseenter)="mouseoverAddDestination=true" (mouseleave)="mouseoverAddDestination=false">
+                    <button class="btn btn-secondary addremove-right-button" (click)="addDestination(i)" type="button"
+                      [disabled]="this.newTripForm.get('destinations')?.invalid">
+                      <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                  </span>
+                </ng-container>
+
+                <!-- trash icon -->
+                <ng-container *ngIf="destinations.length>1">
+                  <button (click)="removeDestination(i)" type="button" class="btn btn-secondary addremove-right-button">
+                    <span class="glyphicon glyphicon-trash"></span>
+                  </button>
+                </ng-container>
+              </ng-container>
+
+              <!-- proceeding destination(s) -->
+              <ng-container *ngIf="i>0">
+                <!-- plus icon -->
+                <ng-container *ngIf="last">
+                  <span (mouseenter)="mouseoverAddDestination=true" (mouseleave)="mouseoverAddDestination=false">
+                    <button class="btn btn-secondary addremove-left-button" (click)="addDestination(i)" type="button"
+                      [disabled]="this.newTripForm.get('destinations')?.invalid">
+                      <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                  </span>
+                </ng-container>
+
+                <!-- trash icon -->
+                <button (click)="removeDestination(i)" type="button" class="btn btn-secondary addremove-right-button">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
+              </ng-container>
+            </div>
+
+            <!-- DESTINATIONS validation alert -->
+            <div class="col-xs-12">
+              <!-- required -->
+              <div class="alert alert-danger"
+                [hidden]="this.mouseoverAddDestination && this.newTripForm.get('destinations')?.invalid && !isValid('destinations',i)"
+                *ngIf="isTouched('destinations',i) && !isValid('destinations',i) && hasError('destinations',i) && hasRequiredError('destinations',i)">
+                <span class="glyphicon glyphicon glyphicon-remove-circle"></span> Destination is required.
+              </div>
+
+              <!-- can't add new destination unless all other member fields are valid -->
+              <div class="alert alert-danger"
+                *ngIf="this.mouseoverAddDestination && this.newTripForm.get('destinations')?.invalid && !isValid('destinations',i)">
+                <span class="glyphicon glyphicon glyphicon-remove-circle"></span> Destination must be valid before
+                adding another destination.
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        <!--  -->
+
+
+        <!-- MEMBERS -->
+        <div>
+          <!-- label -->
+          <div class="col-xs-12 control">
+            <label attr.for="{{'members' + 0 }}">
+              Member(s)
+            </label>
+          </div>
+
+          <!-- MEMBERS form array -->
+          <ng-container formArrayName="members" *ngFor="let member of members?.controls; let i=index; let last=last">
+            <div class="col-xs-12 addable-field" id="{{'membersField' + i }}">
+
+              <!-- person icon -->
+              <div class="icon-addable">
+                <label attr.for="{{'members' + i }}">
+                  <i class="bi bi-person-plus-fill icon"></i>
+                </label>
+              </div>
+
+              <!-- input -->
+              <input class="addable-input" id="{{ 'members' + i }}" type="text" placeholder="Username"
+                [formControlName]="i" [ngClass]="{'input-red':
+            (this.mouseoverAddMember && this.newTripForm.get('members')?.invalid && !isValid('members',i))}"
+                [readonly]="false" />
+
+              <!-- first member -->
+              <ng-container *ngIf="i===0">
+                <!-- plus icon -->
+                <ng-container *ngIf="members.length<2">
+                  <span (mouseenter)="mouseoverAddMember=true" (mouseleave)="mouseoverAddMember=false">
+                    <button class="btn btn-secondary addremove-right-button" (click)="addMember(i)" type="button"
+                      [disabled]="this.newTripForm.get('members.'+i)?.value===''">
+                      <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                  </span>
+                </ng-container>
+                <!-- trash icon -->
+                <ng-container *ngIf="members.length>1">
+                  <button (click)="removeMember(i)" type="button" class="btn btn-secondary addremove-right-button">
+                    <span class="glyphicon glyphicon-trash"></span>
+                  </button>
+                </ng-container>
+              </ng-container>
+
+              <!-- proceeding member(s) -->
+              <ng-container *ngIf="i>0">
+
+                <!-- trash icon -->
+                <button (click)="removeMember(i)" type="button" class="btn btn-secondary addremove-right-button">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
+
+                <!-- last member -->
+                <ng-container *ngIf="last">
+                  <!-- plus icon -->
+                  <span (mouseenter)="mouseoverAddMember=true" (mouseleave)="mouseoverAddMember=false">
+                    <button class="btn btn-secondary addremove-left-button" (click)="addMember(i)" type="button"
+                      [disabled]="this.newTripForm.get('members.'+i)?.value===''">
+                      <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                  </span>
+                </ng-container>
+              </ng-container>
+            </div>
+
+            <!-- MEMBERS validation alert -->
+            <div class="col-xs-12">
+              <div class="alert alert-danger"
+                *ngIf="this.newTripForm.get('members.'+i)?.value==='' && mouseoverAddMember===true">
+                <span class="glyphicon glyphicon glyphicon-remove-circle"></span> Member must be valid before adding
+                another member.
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        <!--  -->
+
+
+        <!-- DETAILS control -->
+        <div>
+          <div class="col-xs-12 control">
+            <!-- label -->
+            <label for="details">Details</label>
+            <!-- input -->
+            <textarea class="form-control" id="details" type="text"
+              placeholder="Share a description of what your trip will be about, why you are doing it, etc."
+              formControlName="details" rows="3" cols="80">
+        </textarea>
+          </div>
+        </div>
+      </form>
+
+      <!-- BUTTONS -->
+      <div class="buttons">
+
+        <!-- ADD -->
+        <ng-container *ngIf="this.newTripForm.invalid">
+          <span data-toggle="tooltip" title="There is still information that needs filled out or adjusted.">
+            <button (click)="addTrip()" type="ngSubmit" class="btn btn-primary"
+              [disabled]="this.newTripForm.invalid">Add Trip</button>
+          </span>
+        </ng-container>
+
+        <ng-container *ngIf="!this.newTripForm.invalid">
+          <button (click)="addTrip()" type="ngSubmit" class="btn btn-primary">Add Trip</button>
+        </ng-container>
+
+        <!-- CANCEL -->
+        <button class="btn btn-default" (click)="cancel()">Cancel</button>
+      </div>
+    </div>
+  </div>
 </div>

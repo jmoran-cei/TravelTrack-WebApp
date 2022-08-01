@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TravelAppComponent } from './travel-app.component';
 import { appRoutes } from './routes';
@@ -54,6 +55,7 @@ import {
     LatestDateFirstPipe
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     RouterModule.forRoot(appRoutes)
   ],
