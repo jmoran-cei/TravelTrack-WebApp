@@ -7,4 +7,4 @@ export * from './byEarliestDateFirst.pipe'
 
   // models
 export * from './trip.model'
-export * from './location.model'
+export * from './destination.model'

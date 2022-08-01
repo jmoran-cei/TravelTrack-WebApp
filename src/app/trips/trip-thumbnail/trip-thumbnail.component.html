@@ -20,15 +20,15 @@
           <!-- Destinations -->
           <div class="thumbnail_destinations">
             <!-- toggle destination(s) as singular or plural -->
-            <p>Destination<span *ngIf="multipleLocations">s</span>:</p>
+            <p>Destination<span *ngIf="multipleDestinations">s</span>:</p>
 
             <!-- list of trip destinations -->
-            <ng-container *ngFor="let location of trip?.locations">
+            <ng-container *ngFor="let destination of trip?.destinations">
               <div class="destination">
                 <!-- if the country of a given destination is "United States", then abbreviate it as "U.S."-->
-                <span [ngSwitch]="location?.country">
-                  <p *ngSwitchCase="'United States'">{{location?.city}}, {{location?.stateProv}}, U.S.</p>
-                  <p *ngSwitchDefault>{{location?.city}}, {{location?.country}}</p>
+                <span [ngSwitch]="destination?.country">
+                  <p *ngSwitchCase="'United States'">{{destination?.city}}, {{destination?.stateProv}}, U.S.</p>
+                  <p *ngSwitchDefault>{{destination?.city}}, {{destination?.country}}</p>
                 </span>
               </div>
             </ng-container>

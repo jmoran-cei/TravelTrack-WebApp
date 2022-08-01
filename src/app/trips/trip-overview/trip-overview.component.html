@@ -9,12 +9,12 @@
 </span>
 
 <div>
-  <p>Destination<span *ngIf="multipleLocations">s</span>:</p>
-  <ng-container *ngFor="let location of trip?.locations">
+  <p>Destination<span *ngIf="multipleDestinations">s</span>:</p>
+  <ng-container *ngFor="let destination of trip?.destinations">
     <div>
-      <span [ngSwitch]="location?.country">
-        <p *ngSwitchCase="'United States'">{{location?.city}}, {{location?.stateProv}}, U.S.</p>
-        <p *ngSwitchDefault>{{location?.city}}, {{location?.country}}</p>
+      <span [ngSwitch]="destination?.country">
+        <p *ngSwitchCase="'United States'">{{destination?.city}}, {{destination?.stateProv}}, U.S.</p>
+        <p *ngSwitchDefault>{{destination?.city}}, {{destination?.country}}</p>
       </span>
     </div>
   </ng-container>
