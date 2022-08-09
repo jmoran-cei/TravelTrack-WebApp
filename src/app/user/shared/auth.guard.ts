@@ -14,12 +14,12 @@ export class AuthGuard implements CanActivate {
   canActivate():boolean {
     this.isLoggedIn = this.auth.isLoggedIn$.pipe(take(1))
       .subscribe(value =>{
-        console.log('current value = ', value)
+        // console.log('current value = ', value)
         this.authenticated = value
       });
 
     this.isLoggedIn.unsubscribe();
-    console.log("authenticated =", this.authenticated)
+    // console.log("authenticated =", this.authenticated)
     if (this.authenticated) {
       return true
     }
