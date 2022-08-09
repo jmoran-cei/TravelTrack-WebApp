@@ -28,11 +28,10 @@ export class FormArrayComponent {
 
   // locally set props
   alertMessage!:string;
-  destAlertText!:string;
 
   //for dynamically added destination autocomplete ids
   autocompleteOptions:Options = new Options ({
-    fields: ["address_components","geometry", "name", "icon"],
+    fields: ["address_components", "name", "formatted_address", "place_id"],
     types: ["(cities)"]
   });
   autocompletePlaceholder!:string;
@@ -43,7 +42,6 @@ export class FormArrayComponent {
     this.form = this.rootFormGroup.control;
     this.array = this.form.get(this.$formArrayName) as FormControl;
     this.alertMessage = this.itemText + ' must be valid before adding another ' + this.itemText + '.';
-    this.destAlertText ='Destination(s) is required.';
     this.autocompletePlaceholder = this.$placeholder;
   }
 

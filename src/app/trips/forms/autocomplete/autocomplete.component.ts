@@ -36,19 +36,12 @@ export class AutocompleteComponent {
     this.form = <FormGroup>this.controlContainer.control;
   }
 
-  componentMap = {
-        country: 'country',
-        locality: 'locality',
-        administrative_area_level_1 : 'administrative_area_level_1',
-  };
-
   public DestinationChange(address: any) {
     let addr_comps = address.address_components
     let city!:string;
     let region!:string;
     let country!:string;
 
-    console
 
     // for each address component
     for (let comp in addr_comps) {
