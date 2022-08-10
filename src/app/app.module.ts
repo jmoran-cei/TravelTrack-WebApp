@@ -5,6 +5,10 @@ import { RouterModule } from '@angular/router';
 import { TravelAppComponent } from './travel-app.component';
 import { appRoutes } from './routes';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { DataService } from './data/data.service';
+import { HttpClientModule } from '@angular/common/http';
+
 
 // components
 import { BucketlistComponent } from './bucketlist/bucketlist.component';
@@ -72,6 +76,8 @@ import {
     ReactiveFormsModule,
     BrowserModule,
     GooglePlaceModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(DataService),
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
