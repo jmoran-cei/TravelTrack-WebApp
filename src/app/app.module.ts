@@ -5,6 +5,10 @@ import { RouterModule } from '@angular/router';
 import { TravelAppComponent } from './travel-app.component';
 import { appRoutes } from './routes';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { DataService } from './shared/data/data.service';
+import { HttpClientModule } from '@angular/common/http';
+import { AgmCoreModule } from '@agm/core';
 
 // components
 import { BucketlistComponent } from './bucketlist/bucketlist.component';
@@ -13,36 +17,40 @@ import { NavbarComponent } from './nav/navbar.component';
 
 import {
   checkDirtyState,
-  CreateTripComponent,
-  TripFormComponent,
-  FormFieldComponent,
-  ValidationAlertComponent,
-  FormArrayComponent,
-  AutocompleteComponent,
+  NewTripComponent,
   NewTripThumbnailComponent,
   EarliestDateFirstPipe,
   LatestDateFirstPipe,
   TripService,
   TripOverviewComponent,
-  TripRouteActivator,
   TripThumbnailComponent,
   TripListResolver,
   TripsListComponent,
   TripsTitleSectionComponent,
-  DestinationsListComponent
-} from './trips/index'
+  DestinationsListComponent,
+  TripFormComponent,
+  TripResolver
+} from './trips/index';
 
 import {
   UserService,
   AuthService,
   AuthGuard
-} from './user'
+} from './user';
 
 import {
   HomePageComponent,
   HomeSection1Component,
-  ColumnBoxComponent
-} from './home'
+  ColumnBoxComponent,
+} from './home';
+
+import {
+  FormFieldComponent,
+  FormArrayComponent,
+  ValidationAlertComponent,
+  DestinationAutocompleteComponent,
+  DestinationsAutocompleteService
+} from './forms';
 
 @NgModule({
   declarations: [
@@ -57,31 +65,38 @@ import {
     TripThumbnailComponent,
     NewTripThumbnailComponent,
     TripsTitleSectionComponent,
-    CreateTripComponent,
-    TripFormComponent,
+    NewTripComponent,
     FormFieldComponent,
     ValidationAlertComponent,
     FormArrayComponent,
-    AutocompleteComponent,
+    DestinationAutocompleteComponent,
     TripOverviewComponent,
     EarliestDateFirstPipe,
     LatestDateFirstPipe,
-    DestinationsListComponent
+    DestinationsListComponent,
+    TripFormComponent,
   ],
   imports: [
     ReactiveFormsModule,
     BrowserModule,
     GooglePlaceModule,
-    RouterModule.forRoot(appRoutes)
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCHB2iGhcuOoU4_eEsYtQA4d5hfs69EFDI',
+      libraries: ['places'],
+    }),
+    HttpClientInMemoryWebApiModule.forRoot(DataService),
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [
     TripService,
     UserService,
     AuthService,
+    DestinationsAutocompleteService,
     AuthGuard,
-    TripRouteActivator,
     TripListResolver,
-    { provide: 'canDeactivateCreateTrip', useValue: checkDirtyState }
+    TripResolver,
+    { provide: 'canDeactivateCreateTrip', useValue: checkDirtyState },
   ],
   bootstrap: [TravelAppComponent]
 })

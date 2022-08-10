@@ -1,19 +1,62 @@
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
-import { IDestination } from "./destination.model";
-import { ITrip } from "./trip.model";
+import { catchError, Observable, of, retry, tap } from "rxjs";
+import { IDestination } from "../../shared/models/destination.model";
+import { ITrip } from "../../shared/models/trip.model";
 
 @Injectable()
-export class TripService{
+export class TripService {
+  tripsUrl = '/api/trips'
 
-  getAllTrips():Observable<ITrip[]> {
-    // this will be better implemented via http.get().pipe() when I update it (after implementing API)
-    return of(TRIPS)
+  constructor(private http: HttpClient) {}
+
+  // get all trips
+  getTrips(): Observable<ITrip[]> {
+    return this.http
+      .get<ITrip[]>(this.tripsUrl)
+      .pipe(retry(2), catchError(this.handleError<ITrip[]>('getTrips()', [])));
   }
 
-  getTrip(id:number):ITrip {
-    // this will be better implemented via http.get().pipe() when I update it (after implementing API)
-    return TRIPS.find(trip => trip.id === id)!
+  // get a specific trip
+  getTrip(id: number): Observable<ITrip> {
+    const url = `${this.tripsUrl}/${id}`;
+
+    return this.http
+    .get<ITrip>(url)
+    .pipe(retry(2), catchError(this.handleError<ITrip>('getTrip()')));
+  }
+
+  // create new trip
+  createTrip(trip:ITrip) {
+    const headers = new HttpHeaders({ 'Content-Type' : 'application/json' });
+
+    return this.http.post<ITrip>(this.tripsUrl, trip, { headers: headers })
+    .pipe(
+      tap((data:any) => console.table(data)),
+      catchError(this.handleError('createTrip()'))
+      );
+  }
+
+  // save an edited trip
+  updateTrip(trip:ITrip) {
+    const headers = new HttpHeaders({ 'Content-Type' : 'application/json' });
+
+    return this.http.put<ITrip>(this.tripsUrl, trip, { headers: headers })
+    .pipe(
+      tap((data:any) => console.table(data)),
+      catchError(this.handleError('createTrip()'))
+      );
+  }
+
+  // delete an existing trip
+  deleteTrip(id: number) {
+    const url = `${this.tripsUrl}/${id}`;
+
+    return this.http.delete(url)
+    .pipe(
+      tap((data:any) => console.table(data)),
+      catchError(this.handleError('createTrip()'))
+    );
   }
 
   sortByTitle(trips:ITrip[]) {
@@ -26,7 +69,7 @@ export class TripService{
 
     // sorting by EARLIEST DATE: sorts dates oldest-newest
     return trips = trips.sort((a: ITrip, b: ITrip) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime())
-  }
+    }
 
   sortByLatestDate(trips:ITrip[]) { // default for UPCOMING dates
     // console.log("Trips sorted by latest date");
@@ -35,117 +78,19 @@ export class TripService{
     return trips = trips.sort((a: ITrip, b: ITrip) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime())
   }
 
-  multipleDestinations(destinations:IDestination[]) {
+  // returns boolean based on whether a trip has multiple destinations or not
+  hasMultipleDestinations(destinations:IDestination[]) {
     if (destinations.length > 1) {
       return true
     }
     return false
   }
 
-}
-
-const TRIPS:ITrip[] = [
-  {
-    id: 1,
-    details: '',
-    title: 'Brothers\' Anguila Trip',
-    startDate: new Date('3/15/2022'),
-    endDate: new Date('3/20/2022'),
-    destinations: [
-      {
-        destinationId: 1,
-        city: 'Zemi Beach',
-        stateProv: 'West End',
-        country: 'Anguilla',
-      }
-    ],
-    members: [],
-    photos: [],
-    itinerary: [],
-    toDo: [],
-    imgUrl: "assets/images/trips/anguila1.jpg"
-
-  }, {
-    id: 2,
-    title: 'Myrtle Beach and Charleston Family Vacay 2022',
-    details: '',
-    startDate: new Date('5/27/2022'),
-    endDate: new Date('6/5/2022'),
-    destinations: [
-      { destinationId: 1,
-        city: 'Myrtle Beach',
-        stateProv: 'South Carolina',
-        country: 'United States'
-      },
-      {
-        destinationId: 2,
-        city: 'Charleston',
-        stateProv: 'South Carolina',
-        country: 'United States'
-      },
-    ],
-    members: [],
-    photos: [],
-    itinerary: [],
-    toDo: [],
-    imgUrl: "assets/images/trips/myrtlebeach1.jpg"
-
-  }, {
-    id: 3,
-    title: 'Smoky Mountains Thanksgiving',
-    details: '',
-    startDate: new Date('11/23/2019'),
-    endDate: new Date('11/30/2019'),
-    destinations: [
-      {
-        destinationId: 1,
-        city: 'Gatlinburg',
-        stateProv: 'Tennessee',
-        country: 'United States'
-      }
-    ],
-    members: [],
-    photos: [],
-    itinerary: [],
-    toDo: [],
-    imgUrl: "assets/images/trips/gatlinburg1.jpg"
-  },{
-    id: 4,
-    title: 'Hawaii Family Trip 2023',
-    details: '',
-    startDate: new Date('6/24/2023'),
-    endDate: new Date('7/5/2023'),
-    destinations: [
-      { destinationId: 1,
-        city: 'Maui',
-        stateProv: 'Hawaii',
-        country: 'United States'
-      },
-    ],
-    members: [],
-    photos: [],
-    itinerary: [],
-    toDo: [],
-    imgUrl: "assets/images/trips/hawaii1.jpg"
-
-  },{
-    id: 5,
-    title: 'Our Ireland Trip',
-    details: '',
-    startDate: new Date('3/11/2023'),
-    endDate: new Date('3/20/2023'),
-    destinations: [
-      { destinationId: 1,
-        city: 'Dublin',
-        stateProv: 'Lienster',
-        country: 'Ireland'
-      },
-    ],
-    members: [],
-    photos: [],
-    itinerary: [],
-    toDo: [],
-    imgUrl: "assets/images/trips/ireland1.jpg"
-
+  // function for handling errors
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      return of(result as T);
+    };
   }
-]
+}
