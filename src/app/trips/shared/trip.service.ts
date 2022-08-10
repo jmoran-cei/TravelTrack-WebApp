@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { IDestination } from "./destination.model";
-import { ITrip } from "./trip.model";
+import { IDestination } from "../../shared/models/destination.model";
+import { ITrip } from "../../shared/models/trip.model";
 
 @Injectable()
 export class TripService{

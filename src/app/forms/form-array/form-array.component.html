@@ -43,7 +43,7 @@
 
     <!-- autocomplete input -->
     <autocomplete *ngIf="$formArrayName==='destinations'" class="addable-input"
-      [id]="'destinations'+ i" [index]="i" [fArrayName]="'destinations'"
+      [id]="'destinations'+ i" [index]="i" [isDynamic]="true"
       [options]="autocompleteOptions" [placeholder]="autocompletePlaceholder"
       [hasInvalidStyling]=" (this.mouseoverAddValue && this.form.get($formArrayName+'.'+i)?.invalid)
       || (this.form.get($formArrayName+'.'+i)?.invalid && this.form.get($formArrayName+'.'+i)?.touched)">

@@ -3,8 +3,8 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Valida
 import { Router } from '@angular/router';
 import { Options } from "ngx-google-places-autocomplete/objects/options/options";
 import { Subscription } from 'rxjs';
-import { datesInOrderValidator } from "../../shared";
-import { CreateTripComponent } from "../create-trip/create-trip.component";
+import { datesInOrderValidator } from "src/app/forms";
+import { NewTripComponent } from "../new-trip.component";
 
 @Component({
   selector: 'trip-form',
@@ -52,7 +52,7 @@ export class TripFormComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private tripComponent:CreateTripComponent
+    private tripComponent:NewTripComponent
   ) {}
 
   ngOnInit() {

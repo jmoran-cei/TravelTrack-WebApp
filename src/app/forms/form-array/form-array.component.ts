@@ -8,7 +8,7 @@ import { Options } from "ngx-google-places-autocomplete/objects/options/options"
   styleUrls: [
     'form-array.component.css',
     '../form-field/form-field.component.css',
-    '../trip-form/trip-form.component.css'
+    '../../trips/new-trip/trip-form/trip-form.component.css'
   ]
 })
 
