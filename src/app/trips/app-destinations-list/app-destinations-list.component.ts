@@ -1,5 +1,4 @@
 import { Component, Input } from "@angular/core";
-import { IDestination } from "../shared";
 
 @Component({
   selector: 'app-destinations-list',

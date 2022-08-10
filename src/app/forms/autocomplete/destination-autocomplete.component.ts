@@ -6,7 +6,7 @@ import { Options } from "ngx-google-places-autocomplete/objects/options/options"
   selector: 'autocomplete',
   template: `
 <ng-container [formGroup]="form">
-    <input ngx-google-places-autocomplete [attr.id]="id" [options]="options!" [formControlName]="index!"
+    <input ngx-google-places-autocomplete [attr.id]="id" [options]="options!" [formControlName]="$formControlName"
     type="text" [placeholder]="placeholder" (onAddressChange)="DestinationChange($event)"
     [ngClass]="{'input-red': hasInvalidStyling}"/>
 </ng-container>
@@ -19,21 +19,28 @@ import { Options } from "ngx-google-places-autocomplete/objects/options/options"
   `]
 })
 
-export class AutocompleteComponent {
+export class DestinationAutocompleteComponent {
   form!:FormGroup;
-  @Input() index?:number;
+  @Input() index!:number;
   @Input() id!:string;
   @Input() hasInvalidStyling?:boolean;
   @Input() options?:Options;
   @Input() placeholder?:string;
-  @Input() fArrayName!:string
-  formattedAddress!:any
-
+  @Input() isDynamic!:boolean;
+  $formControlName!:string;
 
   constructor(private controlContainer: ControlContainer) {}
 
   ngOnInit() {
     this.form = <FormGroup>this.controlContainer.control;
+
+    // isDyanamic (used as input for form array) --> formcontrolname is index of that array
+    // !isDyanamic (used as input for single control) --> formcontrolname is the same as the id
+    if (this.isDynamic) {
+      this.$formControlName = String(this.index);
+    } else {
+      this.$formControlName = this.id;
+    }
   }
 
   public DestinationChange(address: any) {

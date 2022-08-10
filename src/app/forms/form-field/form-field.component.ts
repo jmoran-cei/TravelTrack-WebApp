@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { AbstractControl, ControlContainer, FormControl, FormGroup } from "@angular/forms";
+import { AbstractControl, ControlContainer, FormControl } from "@angular/forms";
 
 @Component({
   selector: 'form-field',
@@ -15,7 +15,6 @@ export class FormFieldComponent {
   @Input() $formControlName!:string;
   @Input() $type!:string;
   @Input() isRequired!:boolean;
-  @Output() updatedControl = new EventEmitter<AbstractControl>();
   $id!:string;
 
   constructor(private controlContainer: ControlContainer) {}

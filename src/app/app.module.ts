@@ -6,7 +6,7 @@ import { TravelAppComponent } from './travel-app.component';
 import { appRoutes } from './routes';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { DataService } from './data/data.service';
+import { DataService } from './shared/data/data.service';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -17,12 +17,7 @@ import { NavbarComponent } from './nav/navbar.component';
 
 import {
   checkDirtyState,
-  CreateTripComponent,
-  TripFormComponent,
-  FormFieldComponent,
-  ValidationAlertComponent,
-  FormArrayComponent,
-  AutocompleteComponent,
+  NewTripComponent,
   NewTripThumbnailComponent,
   EarliestDateFirstPipe,
   LatestDateFirstPipe,
@@ -33,7 +28,8 @@ import {
   TripListResolver,
   TripsListComponent,
   TripsTitleSectionComponent,
-  DestinationsListComponent
+  DestinationsListComponent,
+  TripFormComponent
 } from './trips/index'
 
 import {
@@ -48,6 +44,14 @@ import {
   ColumnBoxComponent
 } from './home'
 
+import {
+  FormFieldComponent,
+  FormArrayComponent,
+  ValidationAlertComponent,
+  DestinationAutocompleteComponent,
+} from './forms'
+
+
 @NgModule({
   declarations: [
     TravelAppComponent,
@@ -61,16 +65,16 @@ import {
     TripThumbnailComponent,
     NewTripThumbnailComponent,
     TripsTitleSectionComponent,
-    CreateTripComponent,
-    TripFormComponent,
+    NewTripComponent,
     FormFieldComponent,
     ValidationAlertComponent,
     FormArrayComponent,
-    AutocompleteComponent,
+    DestinationAutocompleteComponent,
     TripOverviewComponent,
     EarliestDateFirstPipe,
     LatestDateFirstPipe,
-    DestinationsListComponent
+    DestinationsListComponent,
+    TripFormComponent
   ],
   imports: [
     ReactiveFormsModule,

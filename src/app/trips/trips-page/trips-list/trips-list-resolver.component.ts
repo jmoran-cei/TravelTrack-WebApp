@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Resolve } from "@angular/router";
 import { map } from "rxjs";
-import { TripService } from "../shared/trip.service";
+import { TripService } from "../../shared/trip.service";
 
 @Injectable()
 export class TripListResolver implements Resolve<any> {

@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { TripService } from "../shared/trip.service";
+import { TripService } from "../../shared/trip.service";
 
 @Component({
   selector: 'trip-thumbnail',
