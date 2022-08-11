@@ -8,14 +8,18 @@
 
 
   <!-- title -->
-  <h2 class="trips-title font600">
+  <h2 class="trips-title font700">
     <label for="{{collapseID}}-forlabel">
       {{title}}
     </label>
   </h2>
 
+  <div class="add-trip">
+    <a class="font700" [routerLink]="['/trips/new']"><span class="glyphicon glyphicon-plus"></span> Add Trip</a>
+  </div>
+
   <!-- sort: ADD FUNCITONALITY -->
-  <div class="dropdown sort">
+  <div class="dropdown">
     <!-- sort icon -->
     <button type="button" class="sort-icon btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
       <span class="glyphicon glyphicon-sort"></span>

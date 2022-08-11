@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Observable, of, Subject } from "rxjs";
-import { ILocation } from "./location.model";
+import { Observable, of } from "rxjs";
+import { IDestination } from "./destination.model";
 import { ITrip } from "./trip.model";
 
 @Injectable()
@@ -35,8 +35,8 @@ export class TripService{
     return trips = trips.sort((a: ITrip, b: ITrip) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime())
   }
 
-  multipleLocations(locations:ILocation[]) {
-    if (locations.length > 1) {
+  multipleDestinations(destinations:IDestination[]) {
+    if (destinations.length > 1) {
       return true
     }
     return false
@@ -47,19 +47,20 @@ export class TripService{
 const TRIPS:ITrip[] = [
   {
     id: 1,
+    details: '',
     title: 'Brothers\' Anguila Trip',
     startDate: new Date('3/15/2022'),
     endDate: new Date('3/20/2022'),
-    locations: [
+    destinations: [
       {
-      locationId: 1,
-      city: 'Zemi Beach',
-      stateProv: 'West End',
-      country: 'Anguilla',
+        destinationId: 1,
+        city: 'Zemi Beach',
+        stateProv: 'West End',
+        country: 'Anguilla',
       }
     ],
     members: [],
-    pictures: [],
+    photos: [],
     itinerary: [],
     toDo: [],
     imgUrl: "assets/images/trips/anguila1.jpg"
@@ -67,23 +68,24 @@ const TRIPS:ITrip[] = [
   }, {
     id: 2,
     title: 'Myrtle Beach and Charleston Family Vacay 2022',
+    details: '',
     startDate: new Date('5/27/2022'),
     endDate: new Date('6/5/2022'),
-    locations: [
-      { locationId: 1,
+    destinations: [
+      { destinationId: 1,
         city: 'Myrtle Beach',
         stateProv: 'South Carolina',
         country: 'United States'
       },
       {
-        locationId: 2,
+        destinationId: 2,
         city: 'Charleston',
         stateProv: 'South Carolina',
         country: 'United States'
       },
     ],
     members: [],
-    pictures: [],
+    photos: [],
     itinerary: [],
     toDo: [],
     imgUrl: "assets/images/trips/myrtlebeach1.jpg"
@@ -91,35 +93,37 @@ const TRIPS:ITrip[] = [
   }, {
     id: 3,
     title: 'Smoky Mountains Thanksgiving',
+    details: '',
     startDate: new Date('11/23/2019'),
     endDate: new Date('11/30/2019'),
-    locations: [
+    destinations: [
       {
-        locationId: 1,
+        destinationId: 1,
         city: 'Gatlinburg',
         stateProv: 'Tennessee',
         country: 'United States'
       }
     ],
     members: [],
-    pictures: [],
+    photos: [],
     itinerary: [],
     toDo: [],
     imgUrl: "assets/images/trips/gatlinburg1.jpg"
   },{
     id: 4,
     title: 'Hawaii Family Trip 2023',
+    details: '',
     startDate: new Date('6/24/2023'),
     endDate: new Date('7/5/2023'),
-    locations: [
-      { locationId: 1,
+    destinations: [
+      { destinationId: 1,
         city: 'Maui',
         stateProv: 'Hawaii',
         country: 'United States'
       },
     ],
     members: [],
-    pictures: [],
+    photos: [],
     itinerary: [],
     toDo: [],
     imgUrl: "assets/images/trips/hawaii1.jpg"
@@ -127,17 +131,18 @@ const TRIPS:ITrip[] = [
   },{
     id: 5,
     title: 'Our Ireland Trip',
+    details: '',
     startDate: new Date('3/11/2023'),
     endDate: new Date('3/20/2023'),
-    locations: [
-      { locationId: 1,
+    destinations: [
+      { destinationId: 1,
         city: 'Dublin',
         stateProv: 'Lienster',
         country: 'Ireland'
       },
     ],
     members: [],
-    pictures: [],
+    photos: [],
     itinerary: [],
     toDo: [],
     imgUrl: "assets/images/trips/ireland1.jpg"

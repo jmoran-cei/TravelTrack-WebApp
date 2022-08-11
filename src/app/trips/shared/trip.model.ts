@@ -1,14 +1,16 @@
-import { ILocation } from "./location.model"
+import { IUser } from "src/app/user"
+import { IDestination } from "./destination.model"
 
 export interface ITrip {
   id: number
   title: string
+  details: string
   startDate: Date
   endDate: Date
-  locations: ILocation[]
+  destinations: IDestination[]
   //temporarily type never[]
-  members: never[]    //update
-  pictures: never[]   //update
+  members: IUser[]
+  photos: never[]   //update
   itinerary: never[]  //update
   toDo: never[]       //update
   imgUrl: string

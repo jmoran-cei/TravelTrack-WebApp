@@ -1,0 +1,55 @@
+.form-control {
+  box-shadow: none;
+}
+
+/* label */
+label {
+  position: relative;
+  font-size: 16px;
+  padding: 0;
+  padding-left: 10px;
+}
+
+/* color for required input */
+.required {
+  color: #859ad4;
+}
+
+/* all inputs */
+input {
+  margin: 15px 0;
+  font-size: 16px;
+  padding: 10px;
+  border: 2.5px solid #859ad4;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background: white;
+  color: black;
+  outline: none;
+  font-style: italic;
+  background: transparent;
+}
+/* red underline of input boxes */
+.input-red {
+  border: 2.5px solid red;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+/* details text-area */
+textarea {
+  margin: 15px 0;
+  font-size: 16px;
+  padding: 10px;
+  border: 2.5px solid #859ad4;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  outline: none;
+  resize: vertical;
+  color: black;
+  font-style: italic;
+  background: transparent;
+}

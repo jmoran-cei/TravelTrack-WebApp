@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TravelAppComponent } from './travel-app.component';
 import { appRoutes } from './routes';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
 // components
 import { BucketlistComponent } from './bucketlist/bucketlist.component';
@@ -10,7 +12,13 @@ import { Error404Component } from './errors/404.component';
 import { NavbarComponent } from './nav/navbar.component';
 
 import {
-  checkDirtyState, CreateTripComponent,
+  checkDirtyState,
+  CreateTripComponent,
+  TripFormComponent,
+  FormFieldComponent,
+  ValidationAlertComponent,
+  FormArrayComponent,
+  AutocompleteComponent,
   NewTripThumbnailComponent,
   EarliestDateFirstPipe,
   LatestDateFirstPipe,
@@ -20,7 +28,8 @@ import {
   TripThumbnailComponent,
   TripListResolver,
   TripsListComponent,
-  TripsTitleSectionComponent
+  TripsTitleSectionComponent,
+  DestinationsListComponent
 } from './trips/index'
 
 import {
@@ -49,12 +58,20 @@ import {
     NewTripThumbnailComponent,
     TripsTitleSectionComponent,
     CreateTripComponent,
+    TripFormComponent,
+    FormFieldComponent,
+    ValidationAlertComponent,
+    FormArrayComponent,
+    AutocompleteComponent,
     TripOverviewComponent,
     EarliestDateFirstPipe,
-    LatestDateFirstPipe
+    LatestDateFirstPipe,
+    DestinationsListComponent
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
+    GooglePlaceModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [

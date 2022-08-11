@@ -22,10 +22,12 @@
   label {
     cursor: pointer;
   }
+  label:hover .toggle {
+    color: #859ad4;
+  }
 
   /* collapse caret icon */
   .collapse-icon {
-    color: rgb(31, 31, 31);
     margin: 5px;
     background: transparent;
     border: 0;
@@ -36,17 +38,41 @@
     content: "\e114";
     float: right;
     color: rgb(31, 31, 31);
-    /* margin-right: 15px; */
     transform: rotate(0deg);
   }
   .toggle.collapsed:after {
     transform: rotate(180deg);
   }
 
-  /* sort icon box */
-  .sort {
+  /* add trip */
+  .add-trip {
     margin-left: auto;
+    padding-right: 40px;
   }
+  .add-trip a {
+    cursor: pointer;
+    font-size: 18px;
+    text-decoration: none;
+    color: rgb(31,31,31);
+  }
+  .add-trip:hover a {
+    text-decoration: none;
+    color: #859ad4;
+  }
+
+
+  /* all buttons */
+  .btn {
+    outline: transparent;
+  }
+  .btn:active {
+    outline: transparent;
+  }
+  .btn:hover {
+    color: #859ad4;
+  }
+
+  /* DROP DOWN */
     /* sort icon */
     .sort-icon {
       font-size: 2rem;
@@ -61,7 +87,7 @@
       left: unset;
       right: 0%;
     }
-    .sort:hover .dropdown-menu {
+    .dropdown:hover .dropdown-menu {
       display: block;
     }
     .dropdown-menu li{

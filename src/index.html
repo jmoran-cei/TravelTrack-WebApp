@@ -11,5 +11,15 @@
 </head>
 <body>
   <travel-app></travel-app>
+  <!--
+      What is best practice for hiding API keys in angular?
+      I'm assuming that keys will be located on the back-end usually, but was curious of a good way to hide my key from Git, etc.
+      I've seen using git .ignore, .env, but not sure the route I should take
+      (and for my current case, implementing Google Places API, it has to be included as a <script> src)
+  -->
+  <script
+    type="text/javascript" async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHB2iGhcuOoU4_eEsYtQA4d5hfs69EFDI&libraries=places">
+  </script>
 </body>
 </html>

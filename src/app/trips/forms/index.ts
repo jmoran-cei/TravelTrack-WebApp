@@ -1,0 +1,5 @@
+export * from './create-trip/create-trip.component'
+export * from './trip-form/trip-form.component'
+export * from './form-field/form-field.component'
+export * from './validation-alert/validation-alert.component'
+export * from './autocomplete/autocomplete.component'

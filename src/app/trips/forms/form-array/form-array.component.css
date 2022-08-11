@@ -1,0 +1,77 @@
+/* icon sizing (destinations and members icons only) */
+.icon {
+  font-size: 20px;
+  height: 100%;
+}
+
+/* class for containing dynamic inputs */
+.addable-field {
+  border-radius: 10px;
+  margin: 7.5px 5px;
+}
+/* destination input box */
+.addable-input {
+  display: inline-block;
+  width: 96%;
+  margin-right: 0;
+}
+
+/* label class for icons (destinations and members icons only) */
+.icon-addable {
+  display: inline-block;
+  height: 100%;
+  width: 2.5%;
+  margin-right: 1%;
+}
+
+
+/* PLUS and TRASH buttons for adding/removing destinations */
+.addremove-right-button {
+  position: absolute;
+  right: 0;
+  bottom: 20px;
+  z-index:1;
+  margin: 0;
+}
+.addremove-left-button {
+  position: absolute;
+  right:25px;
+  bottom: 20px;
+  z-index:1;
+  margin: 0;
+}
+
+/* PLUS ICON button */
+.btn-secondary {
+  background-color: transparent;
+}
+.btn-secondary:hover {
+  background-color: transparent;
+}
+.btn-secondary:active {
+  color: rgb(31,31,31,.2);
+  box-shadow: none;
+}
+.btn-secondary:focus {
+  background: #859ad4;
+}
+
+/* media queries for responsiveness */
+@media (max-width: 1100px) {
+  .icon-addable {
+    width: 2.5%;
+    margin-right: 2.5%;
+  }
+  .addable-input {
+    width: 95%;
+  }
+}
+@media (max-width: 950px) {
+  .icon-addable {
+    width: 2.5%;
+    margin-right: 4%;
+  }
+  .addable-input {
+    width: 93.5%;
+  }
+}
