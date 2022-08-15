@@ -1,20 +1,20 @@
 <div [routerLink]="['/trips', trip.id]" class="thumbnail_box">
   <!-- thumbnail image -->
-  <img src="{{trip?.imgUrl}}" alt="{{trip?.title}}" class="bg-img"/>
+  <img src="{{trip.imgUrl}}" alt="{{trip.title}}" class="bg-img"/>
 
   <div class="thumbnail_mask">
     <div class="thumbnail_box_info">
 
       <!-- Trip Title -->
-      <h2 class="thumbnail-title font700 font-adjust">{{trip?.title}}</h2>
+      <h2 class="thumbnail-title font700 font-adjust">{{trip.title}}</h2>
 
 
         <div class="thumbnail_details">
           <!-- Dates -->
           <p class="thumbnail-date font700">
-            {{trip?.startDate?.toLocaleDateString('en-us', { month:"short", day:"numeric"})}}
+            {{trip.startDate | date: 'mediumDate'}}
             &mdash;
-            {{trip?.endDate?.toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"})}}
+            {{trip.endDate | date: 'mediumDate'}}
           </p>
 
           <!-- Destinations -->
@@ -24,7 +24,7 @@
 
             <!-- list of trip destinations -->
             <div class="destinations">
-              <app-destinations-list [destinations]="trip?.destinations"></app-destinations-list>
+              <app-destinations-list [destinations]="trip.destinations"></app-destinations-list>
             </div>
           </div>
 
