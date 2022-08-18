@@ -1,7 +1,6 @@
-import { Component, Input } from "@angular/core";
+import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ITrip } from "../../../shared/models/trip.model";
-import { TripService } from "../../shared/trip.service";
 
 @Component({
   templateUrl: 'trips-list.component.html',
@@ -32,17 +31,17 @@ export class TripsListComponent {
     upcomingCollapse = "upcoming-collapse"
     previousCollapse = "previous-collapse"
 
-  constructor(private tripService: TripService, private route:ActivatedRoute) {}
+  constructor(private route:ActivatedRoute) {}
 
   ngOnInit() {
-
     // get all upcoming trips
     this.upcomingTrips = this.route.snapshot.data['trips']
-      .filter( (trip:ITrip) => trip.startDate.getTime() >= this.currentTime.getTime() )
+      .filter(
+        (trip:ITrip) =>  new Date(trip.endDate).getTime() >= this.currentTime.getTime() )
 
     // get all previous trips
     this.previousTrips = this.route.snapshot.data['trips']
-      .filter( (trip:ITrip) => trip.startDate.getTime() < this.currentTime.getTime() )
+      .filter( (trip:ITrip) =>  new Date(trip.endDate).getTime() < this.currentTime.getTime() )
+  }
 
-    }
 }

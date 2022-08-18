@@ -5,10 +5,10 @@ import { HomePageComponent } from "./home/home-page.component";
 import {
   NewTripComponent,
   TripOverviewComponent,
-  TripRouteActivator,
   TripListResolver,
   TripsListComponent
 } from './trips'
+import { TripResolver } from "./trips/trip-overview/trip-resolver.component";
 import { AuthGuard } from "./user/shared/auth.guard";
 
 export const appRoutes:Routes =[
@@ -16,7 +16,7 @@ export const appRoutes:Routes =[
   {path: 'bucketlist', component: BucketlistComponent, canActivate: [AuthGuard]},
   {path: 'trips', component: TripsListComponent, resolve: {trips:TripListResolver}, canActivate: [AuthGuard]},
   {path: 'trips/new', component: NewTripComponent, canActivate: [AuthGuard], canDeactivate: ['canDeactivateCreateTrip']},
-  {path: 'trips/:id', component: TripOverviewComponent, canActivate: [AuthGuard, TripRouteActivator] },
+  {path: 'trips/:id', component: TripOverviewComponent, resolve: {trip:TripResolver} },
   {path: '404', component: Error404Component},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {

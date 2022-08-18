@@ -144,17 +144,12 @@
   <div class="buttons">
 
     <!-- ADD -->
-    <span *ngIf="this.tripForm.invalid"
-      data-toggle="tooltip" title="{{this.findInvalidControls()}}">
+    <span data-toggle="tooltip" title="{{this.tripForm.invalid ? this.findInvalidControls() : ''}}">
       <button type="submit" class="btn btn-primary" [disabled]="this.tripForm.invalid">Add Trip</button>
     </span>
 
-    <ng-container *ngIf="this.tripForm.valid">
-      <button type="submit" class="btn btn-primary">Add Trip</button>
-    </ng-container>
-
     <!-- CANCEL -->
-    <button class="btn btn-default" (click)="cancel()">Cancel</button>
+    <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
   </div>
 
 <!-- end of form -->
