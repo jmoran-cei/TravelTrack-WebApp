@@ -8,6 +8,7 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DataService } from './shared/data/data.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AgmCoreModule } from '@agm/core';
 
 // components
 import { BucketlistComponent } from './bucketlist/bucketlist.component';
@@ -22,13 +23,13 @@ import {
   LatestDateFirstPipe,
   TripService,
   TripOverviewComponent,
-  TripRouteActivator,
   TripThumbnailComponent,
   TripListResolver,
   TripsListComponent,
   TripsTitleSectionComponent,
   DestinationsListComponent,
   TripFormComponent,
+  TripResolver
 } from './trips/index';
 
 import {
@@ -48,10 +49,8 @@ import {
   FormArrayComponent,
   ValidationAlertComponent,
   DestinationAutocompleteComponent,
+  DestinationsAutocompleteService
 } from './forms';
-import { TripResolver } from './trips/trip-overview/trip-resolver.component';
-import { AgmCoreModule } from '@agm/core';
-import { DestinationsAutocompleteService } from './forms/autocomplete/service/destinationAutocomplete.service';
 
 @NgModule({
   declarations: [
@@ -95,7 +94,6 @@ import { DestinationsAutocompleteService } from './forms/autocomplete/service/de
     AuthService,
     DestinationsAutocompleteService,
     AuthGuard,
-    TripRouteActivator,
     TripListResolver,
     TripResolver,
     { provide: 'canDeactivateCreateTrip', useValue: checkDirtyState },
