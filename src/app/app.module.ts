@@ -29,7 +29,8 @@ import {
   TripsTitleSectionComponent,
   DestinationsListComponent,
   TripFormComponent,
-  TripResolver
+  TripResolver,
+  EditTripComponent
 } from './trips/index';
 
 import {
@@ -75,6 +76,7 @@ import {
     LatestDateFirstPipe,
     DestinationsListComponent,
     TripFormComponent,
+    EditTripComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -96,7 +98,7 @@ import {
     AuthGuard,
     TripListResolver,
     TripResolver,
-    { provide: 'canDeactivateCreateTrip', useValue: checkDirtyState },
+    { provide: 'canDeactiveTripForm', useValue: checkDirtyState },
   ],
   bootstrap: [TravelAppComponent]
 })

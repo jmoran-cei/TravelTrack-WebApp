@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ITrip } from 'src/app/shared';
 
 // this function will be probably used in other components down the road (e.g. edit-profile)
 // What seems like the most 'fitting' spot to put this?
@@ -18,18 +19,20 @@ export function checkDirtyState(component: NewTripComponent) {
 })
 export class NewTripComponent {
   isDirty?: boolean;
-  pageTitle!:string;
-  pageTitleDefault= 'Your New Trip';
+  pageTitle!: string;
+  pageTitleDefault = 'Your New Trip';
+  @Input() isEditing!: boolean;
+  @Input() editTrip!: ITrip;
 
   // updated from child component via @Output()
   // method for updating the page's title to match the user's title of their new trip
-  updatePageTitle(updatedTitle:any) {
+  updatePageTitle(updatedTitle: any) {
     this.pageTitle = updatedTitle;
-    if (updatedTitle === "")
-      this.pageTitle = this.pageTitleDefault
+    if (updatedTitle === '') this.pageTitle = this.pageTitleDefault;
   }
 
   ngOnInit() {
-    this.pageTitle=this.pageTitleDefault;
+    if (this.isEditing) this.pageTitle = this.editTrip.title;
+    else this.pageTitle = this.pageTitleDefault;
   }
 }

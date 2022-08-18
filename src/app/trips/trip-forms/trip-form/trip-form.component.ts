@@ -13,7 +13,7 @@ import { datesInOrderValidator } from 'src/app/forms';
 import { DestinationsAutocompleteService } from 'src/app/forms/autocomplete/service/destinationAutocomplete.service';
 import { ITrip } from 'src/app/shared';
 import { TripService } from '../../shared';
-import { NewTripComponent } from '../new-trip.component';
+import { NewTripComponent } from '../../.';
 
 @Component({
   selector: 'trip-form',
@@ -135,7 +135,7 @@ export class TripFormComponent {
       ),
       members: this.fb.array([this.buildMembers()]),
     });
-    
+
     // set datesGroup short-hand prop
     this.datesGroup = this.tripForm.get('datesGroup')!;
   }
