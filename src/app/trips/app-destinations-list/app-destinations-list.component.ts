@@ -6,17 +6,12 @@ import { Component, Input } from "@angular/core";
     <ng-container *ngFor="let destination of destinations">
       <!-- if the country of a given destination is "United States", then abbreviate it as "U.S."-->
       <span [ngSwitch]="destination?.country">
-        <p *ngSwitchCase="'United States'">{{destination?.city}}, {{destination?.stateProv}}, U.S.</p>
+        <p *ngSwitchCase="'United States'">{{destination?.city}}, {{destination?.region}}, U.S.</p>
         <p *ngSwitchDefault>{{destination?.city}}, {{destination?.country}}</p>
       </span>
     </ng-container>
   `,
-  styles: [`
-    p {
-      margin: 2px 0;
-      font-size: 17px;
-    }
-  `]
+  styleUrls: ['app-destinations-list.component.css']
 })
 
 export class DestinationsListComponent {

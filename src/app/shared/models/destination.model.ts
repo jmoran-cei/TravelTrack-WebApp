@@ -1,6 +1,6 @@
 export interface IDestination {
   destinationId: number
   city: string
-  stateProv: string
+  region: string
   country: string
 }

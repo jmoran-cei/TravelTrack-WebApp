@@ -9,7 +9,6 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DataService } from './shared/data/data.service';
 import { HttpClientModule } from '@angular/common/http';
 
-
 // components
 import { BucketlistComponent } from './bucketlist/bucketlist.component';
 import { Error404Component } from './errors/404.component';
@@ -29,28 +28,30 @@ import {
   TripsListComponent,
   TripsTitleSectionComponent,
   DestinationsListComponent,
-  TripFormComponent
-} from './trips/index'
+  TripFormComponent,
+} from './trips/index';
 
 import {
   UserService,
   AuthService,
   AuthGuard
-} from './user'
+} from './user';
 
 import {
   HomePageComponent,
   HomeSection1Component,
-  ColumnBoxComponent
-} from './home'
+  ColumnBoxComponent,
+} from './home';
 
 import {
   FormFieldComponent,
   FormArrayComponent,
   ValidationAlertComponent,
   DestinationAutocompleteComponent,
-} from './forms'
-
+} from './forms';
+import { TripResolver } from './trips/trip-overview/trip-resolver.component';
+import { AgmCoreModule } from '@agm/core';
+import { DestinationsAutocompleteService } from './forms/autocomplete/service/destinationAutocomplete.service';
 
 @NgModule({
   declarations: [
@@ -74,24 +75,30 @@ import {
     EarliestDateFirstPipe,
     LatestDateFirstPipe,
     DestinationsListComponent,
-    TripFormComponent
+    TripFormComponent,
   ],
   imports: [
     ReactiveFormsModule,
     BrowserModule,
     GooglePlaceModule,
     HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCHB2iGhcuOoU4_eEsYtQA4d5hfs69EFDI',
+      libraries: ['places'],
+    }),
     HttpClientInMemoryWebApiModule.forRoot(DataService),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [
     TripService,
     UserService,
     AuthService,
+    DestinationsAutocompleteService,
     AuthGuard,
     TripRouteActivator,
     TripListResolver,
-    { provide: 'canDeactivateCreateTrip', useValue: checkDirtyState }
+    TripResolver,
+    { provide: 'canDeactivateCreateTrip', useValue: checkDirtyState },
   ],
   bootstrap: [TravelAppComponent]
 })
