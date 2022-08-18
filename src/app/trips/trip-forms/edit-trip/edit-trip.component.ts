@@ -17,7 +17,6 @@ import { ITrip } from 'src/app/shared';
 })
 export class EditTripComponent {
   isDirty?: boolean;
-  pageTitle!: string;
   trip!: ITrip;
 
   constructor(private route: ActivatedRoute) {}
@@ -26,7 +25,6 @@ export class EditTripComponent {
     this.route.data.forEach((data) => {
       this.trip = data['trip'];
     });
-    this.pageTitle = this.trip?.title;
     console.log(this.trip)
   }
 }
