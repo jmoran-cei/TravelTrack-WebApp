@@ -7,7 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Options } from 'ngx-google-places-autocomplete/objects/options/options';
-import { DestinationsAutocompleteService } from '../autocomplete/service/destinationAutocomplete.service';
+import { ITrip } from 'src/app/shared/models/trip.model';
+import { DestinationsService } from '../autocomplete/service/destinations.service';
 
 @Component({
   selector: 'form-array',
@@ -15,7 +16,7 @@ import { DestinationsAutocompleteService } from '../autocomplete/service/destina
   styleUrls: [
     'form-array.component.css',
     '../form-field/form-field.component.css',
-    '../../trips/new-trip/trip-form/trip-form.component.css',
+    '../../trips/trip-forms/trip-form/trip-form.component.css',
   ],
 })
 export class FormArrayComponent {
@@ -29,22 +30,25 @@ export class FormArrayComponent {
   @Input() $formArrayName!: string;
   @Input() $id!: string;
   @Input() isRequired!: boolean;
-  isReadOnly = false;
   mouseoverAddValue?: boolean;
 
   // locally set props
   alertMessage!: string;
 
+  // props for EDIT FORM
+  @Input() isEditing!: boolean;
+  @Input() existingTrip?: ITrip;
+
   // for dynamically added destination autocomplete ids
   autocompleteOptions: Options = new Options({
-    fields: ['address_components', 'formatted_address', 'place_id'],
+    fields: ['address_components', 'place_id'],
     types: ['(cities)'],
   });
   autocompletePlaceholder!: string;
 
   constructor(
     private rootFormGroup: FormGroupDirective,
-    private destinationsService: DestinationsAutocompleteService
+    private destinationsService: DestinationsService
   ) {}
 
   ngOnInit() {
@@ -67,12 +71,34 @@ export class FormArrayComponent {
     return new FormControl('');
   }
   addValue(i: number) {
-    // add value to Values array
-    this.values.push(this.buildValues());
     // if its for destinations, save the destination object
     if (this.$formArrayName === 'destinations') {
+
       this.destinationsService.saveDestination();
+
+      // set saved/dest displayed form value
+      let dest = this.destinationsService.savedDestinations[i];
+      // autocomplete doesn't update the value when selecting a suggested destination, so use their data and display appropriate value
+      let destFormValue = (dest.country === 'United States') ? `${dest.city}, ${dest.region}, USA` : `${dest.city}, ${dest.country}`;
+      this.form.get('destinations.'+i)?.setValue(destFormValue)
+
+      /*
+        BUG (only for VIEW):
+        Anytime a user removes a destination (that isn't the last added one) from the form.. the view is still correct.
+        But once a user adds a new destination after this, the view will 'change' it and display a blank value (only shows placeholder),
+        eventhough that specific control value for the destination is correctly added and present in the FormGroup.
+        I think it could be an issue with the ngx-google-places-autocomplete directive for the input component (on destination-autocomplete component), but I'm not sure.
+        The destination value is correct, but it just won't display it when adding action occurs.
+
+        I spent A LOT of time trying to debug and resolve the issue, but I can't figure it out and don't find it necessary to
+        waste toooo much time fixing something like this. Hopefully, I figure out in the future.
+
+        NOTE: the form array values display/works perfectly fine for adding/removing members, just not destinations
+      */
     }
+
+    // add new blank value to Values array
+    this.values.push(this.buildValues());
 
     // set added value as unchangeable and adjust appearance appropriately
     this.styleDivUnchangeable(this.$formArrayName,i);
@@ -82,16 +108,15 @@ export class FormArrayComponent {
     this.values.removeAt(i);
     // if its for destinations, save the destination object
     if (this.$formArrayName === 'destinations') {
-      this.destinationsService.removeDestination(i);
+      this.destinationsService.removeSavedDestination(i);
     }
   }
 
-  // make values READONLY when added
-  // fieldName = $formArrayName+'Field'
+  // make value disabled and style surrounding div when added
   styleDivUnchangeable(fieldName: string, i: number) {
-    // make input READONLY and remove bottom border
+    // make input DISABLED and remove bottom border
     let fieldInput = document.getElementById(fieldName+i);
-    fieldInput!.setAttribute('readonly','readonly');
+    fieldInput!.setAttribute('disabled','disabled');
     fieldInput!.style.borderBottomColor='transparent';
 
     // change div background and border of field
@@ -99,7 +124,7 @@ export class FormArrayComponent {
     field!.style.backgroundColor='#e4e4f4';
     field!.style.borderRadius='10px';
   }
-  // I could make this ^^^^ still happend without manipulating the DOM or even have to use ViewChild Decorator
-  // by making the input as its own child component and using a boolean for "disabled" or "readonly" binded flag.
+  // I could make this ^^^^ still happen without manipulating the DOM
+  // by making the input as its own child component and using a boolean for "disabled" binded flag and conditional styling
   // however, this is a change I'll jot down to hopefully get back to later
 }

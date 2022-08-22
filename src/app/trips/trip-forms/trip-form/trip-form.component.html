@@ -97,7 +97,9 @@
       [labelText]="'Destination(s)'"
       [itemText]="'Destination'"
       [isRequired]="true"
-      [toggleAlert]="true">
+      [toggleAlert]="true"
+      [isEditing]="isEditing"
+      [existingTrip]="existingTrip">
     </form-array>
 
     <!-- destinations VALIDATION ALERTS -->
@@ -145,7 +147,9 @@
 
     <!-- ADD -->
     <span data-toggle="tooltip" title="{{this.tripForm.invalid ? this.findInvalidControls() : ''}}">
-      <button type="submit" class="btn btn-primary" [disabled]="this.tripForm.invalid">Add Trip</button>
+      <button type="submit" class="btn btn-primary" [disabled]="this.tripForm.invalid">
+        <span>{{!isEditing ? 'Add Trip' : 'Save Trip'}}</span>
+      </button>
     </span>
 
     <!-- CANCEL -->
