@@ -10,7 +10,7 @@ import {
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { datesInOrderValidator } from 'src/app/forms';
-import { DestinationsAutocompleteService } from 'src/app/forms/autocomplete/service/destinationAutocomplete.service';
+import { DestinationsService } from 'src/app/forms/autocomplete/service/destinations.service';
 import { ITrip } from 'src/app/shared';
 import { TripService } from '../../shared';
 import { NewTripComponent } from '../../.';
@@ -25,9 +25,11 @@ export class TripFormComponent {
   @Input() pageTitle!: string;
   @Output() onTitleChange = new EventEmitter();
   pageTitleDefault!: string;
+  @Input() isEditing!: boolean;
+  @Input() existingTrip!: ITrip;
 
   // component props
-  newTrip!:ITrip;
+  submittedTrip!: ITrip;
   tripForm!: FormGroup;
   title?: FormControl;
   details?: FormControl;
@@ -55,15 +57,16 @@ export class TripFormComponent {
     private fb: FormBuilder,
     private tripComponent: NewTripComponent,
     private tripService: TripService,
-    private destinationsService: DestinationsAutocompleteService
+    private destinationsService: DestinationsService
   ) {}
 
   ngOnInit() {
     this.pageTitleDefault = this.pageTitle; //set default title (for when user has blank )
     this.createFormControls();
     this.createForm();
-    this.newTrip = this.initializeTrip();
-    this.destinationAlertText = 'Destination(s) is required.';
+    this.submittedTrip = this.initializeTrip();
+    // if editing a trip, update form values according
+    if (this.isEditing) this.setExistingTripValues();
 
     // when the user has changed the value of any field . .
     this.formStatusSubscription = this.tripForm.statusChanges.subscribe((v) => {
@@ -71,6 +74,8 @@ export class TripFormComponent {
       this.tripComponent.isDirty = this.tripForm.dirty;
     });
 
+    // destination alerts
+    this.destinationAlertText = 'Destination(s) is required.';
     this.destinationChangesSubscription =
       this.destinations.statusChanges.subscribe(() => {
         // set datesOrder validation alert message depending on whether there is a valid destination already added or not
@@ -89,11 +94,23 @@ export class TripFormComponent {
     );
   }
 
+  ngAfterViewInit() {
+    if (this.isEditing) {
+      // adjusting styling for existing destinations & members after DOM loads
+      for (let i in this.existingTrip.destinations) {
+        this.styleDivUnchangeable('destinations', parseInt(i));
+      }
+      for (let i in this.existingTrip.members) {
+        this.styleDivUnchangeable('members', parseInt(i));
+      }
+    }
+  }
+
   ngOnDestroy() {
     this.formStatusSubscription?.unsubscribe();
     this.titleChangesSusbscription?.unsubscribe();
     this.destinationChangesSubscription?.unsubscribe();
-    this.destinationsService.clearDestinations();
+    this.destinationsService.clearAllDestinations();
   }
 
   // initialize non-duplicate controls
@@ -130,10 +147,10 @@ export class TripFormComponent {
         { validators: datesInOrderValidator }
       ),
       destinations: this.fb.array(
-        [this.buildDestinations()],
+        [new FormControl('', Validators.required)],
         [Validators.required]
       ),
-      members: this.fb.array([this.buildMembers()]),
+      members: this.fb.array([new FormControl('')]),
     });
 
     // set datesGroup short-hand prop
@@ -141,9 +158,15 @@ export class TripFormComponent {
   }
 
   // intialize new trip
-  initializeTrip():ITrip {
+  initializeTrip(): ITrip {
+    let id: number;
+
+    // if edit form, set to pre-existing id, else set unique id for new trip
+    if (this.isEditing) id = this.existingTrip.id;
+    else id = Date.now();
+
     return {
-      id: Date.now(),
+      id: id,
       title: '',
       startDate: new Date(),
       endDate: new Date(),
@@ -157,60 +180,153 @@ export class TripFormComponent {
     };
   }
 
-  // destination methods
-  buildDestinations(): FormControl {
-    return new FormControl('', Validators.required);
+  // populate form data for edit trip form
+  setExistingTripValues() {
+    this.title?.patchValue(this.existingTrip.title);
+    this.startDate?.patchValue(this.formatDate(this.existingTrip.startDate));
+    this.endDate?.patchValue(this.formatDate(this.existingTrip.endDate));
+    this.updateExistingDestinations();
+    this.updateExistingMembers();
+    this.details?.patchValue(this.existingTrip.details);
   }
+
+  // format date for setting pre-existing date values for edit trip
+  formatDate(date: Date) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    return [year, month, day].join('-');
+  }
+
+  // adds the destination values to edit form
+  updateExistingDestinations() {
+    // remove first intitialized destination
+    if (this.existingTrip.destinations.length > 0) {
+      this.destinations.removeAt(0);
+    }
+
+    let i = 0;
+    let lastDestination = this.existingTrip.destinations.length - 1;
+    // for each existing destination, append it to the trip form's destinations form array
+    for (let dest of this.existingTrip.destinations) {
+      // set value as string
+      let value =
+        dest.country === 'United States'
+          ? `${dest.city}, ${dest.region}, USA`
+          : `${dest.city}, ${dest.country}`;
+
+      // create form control, and append to destinations form array
+      let destination = new FormControl(value, Validators.required);
+      this.destinations.push(destination);
+
+      // add destination to saved destination objects array to keep it updated as well
+      this.destinationsService.addTempDestination(dest);
+      // save all destinations except for the last one, it gets checked on submit
+      if (i === lastDestination) continue;
+      else this.destinationsService.saveDestination();
+      i++;
+    }
+  }
+
+  // adds the member values to edit form
+  updateExistingMembers() {
+    // remove first intitialized destination
+    if (this.existingTrip.members.length > 0) {
+      this.members.removeAt(0);
+    }
+
+    for (let member of this.existingTrip.members) {
+      // create form control, and append to destinations form array
+      let mem = new FormControl(member, Validators.required);
+      this.members.push(mem);
+    }
+  }
+
+  // I understand that this function has bad practice: manipulating DOM directly
+  // It's tricky because it's manipulating styling of the form array duplicate inputs and duplicate surrounding div
+  // I'll try to fix this implementation in the near future
+  styleDivUnchangeable(fieldName: string, i: number) {
+    // make input DISABLED and remove bottom border
+    const fieldInput = document.getElementById(fieldName + i)!;
+    fieldInput.setAttribute('disabled', 'disabled');
+    fieldInput.style.borderBottomColor = 'transparent';
+
+    // change div background and border of field
+    let field = document.getElementById(fieldName + 'Field' + i)!;
+    field.style.backgroundColor = '#e4e4f4';
+    field.style.borderRadius = '10px';
+  }
+
   // if user entered valid location but forgot to hit "add", add it for them on submit (to saved destinations objects [])
-  adjustLastDestination() {
-    if (this.destinations.length > this.destinationsService.savedDestinations.length) {
+  checkLastDestination() {
+    if (
+      this.destinations.length >
+      this.destinationsService.savedDestinations.length
+    ) {
       this.destinationsService.saveDestination();
     }
   }
 
-  // member methods
-  buildMembers(): FormControl {
-    return new FormControl('');
-  }
-  removeMember(i: number) {
-    this.members.removeAt(i);
-  }
   // Because adding members is optional, check and remove last value if it's blank
   // this implementation will be changed and improved in the future
-  lastMemberValid() {
+  checkLastMember() {
     let lastMemberIndex = this.members.length - 1;
     let lastMemberControl = 'members.' + lastMemberIndex;
     if (this.tripForm.get(lastMemberControl)?.value === '')
-      this.removeMember(lastMemberIndex);
+      this.members.removeAt(lastMemberIndex);
   }
 
   // submit method
   onSubmit() {
     console.log('Submit button pushed!');
-    this.addTrip();
-  }
+    this.tripForm.markAllAsTouched();
+    if (this.tripForm.invalid) {
+      return false;
+    }
 
-  // add trip on submit
-  addTrip() {
-    // adding members is OPTIONAL, so make sure any empty strings in members[] get removed before submission
-    // later implementation: will allow users to only select valid users (haven't created api/db) before adding another or submitting
-    this.lastMemberValid();
-    // before submitting, make sure that if the user didn't click "add" after entering the last destination, add it for them
-    this.adjustLastDestination();
+    // double check that blank form array values aren't submitted,
+    // and valid but not 'added' values are still added
+    this.checkLastDestination();
+    this.checkLastMember();
 
     // assign values from user to new trip object
-    this.setNewTripValues();
+    this.setSubmittedTripValues();
 
-    // print added trip in console
-    console.table(this.newTrip);
+    if (this.isEditing) {
+      this.updateTrip();
+    } else {
+      this.addTrip();
+    }
 
+    console.log('Successfully saved!');
+    console.table(this.submittedTrip);
+    return true;
+  }
+
+  // add trip on submit of NEW trip form
+  addTrip() {
     // new trip post request
-    this.tripService.createTrip(this.newTrip).subscribe(() => {
+    this.tripService.createTrip(this.submittedTrip).subscribe(() => {
       // deactivate route guard
       this.tripComponent.isDirty = false;
       //reroute to newly created trip
-      this.router.navigate([`/trips/${this.newTrip.id}`]);
-      this.destinationsService.clearDestinations();
+      this.router.navigate([`/trips/${this.submittedTrip.id}`]);
+      this.destinationsService.clearAllDestinations();
+    });
+  }
+
+  // update trip on submit of EDIT trip form
+  updateTrip() {
+    // new trip put request
+    this.tripService.updateTrip(this.submittedTrip).subscribe(() => {
+      // deactivate route guard
+      this.tripComponent.isDirty = false;
+      //reroute to newly created trip
+      this.router.navigate([`/trips/${this.submittedTrip.id}`]);
+      this.destinationsService.clearAllDestinations();
     });
   }
 
@@ -219,15 +335,24 @@ export class TripFormComponent {
     this.router.navigate(['/trips']);
   }
 
-  // finalizing values as vlaues for new trip
-  setNewTripValues() {
-    this.newTrip.title = this.title?.value;
-    this.newTrip.startDate = new Date(this.startDate?.value);
-    this.newTrip.endDate = new Date(this.endDate?.value);
+  // finalizing values as values for new trip
+  setSubmittedTripValues() {
+    this.submittedTrip.title = this.title?.value;
+    this.submittedTrip.startDate = new Date(this.startDate?.value);
+    this.submittedTrip.endDate = new Date(this.endDate?.value);
     // set destination values to equal the destination objects saved from destination service
-    this.newTrip.destinations = this.destinationsService.savedDestinations;
-    this.newTrip.members = this.members.value;
-    this.newTrip.details = this.details?.value;
+    this.submittedTrip.destinations =
+      this.destinationsService.savedDestinations;
+    this.submittedTrip.members = this.members.value;
+    this.submittedTrip.details = this.details?.value;
+
+    // if edit form, keep trip properties that aren't edited in this form
+    if (this.isEditing) {
+      this.submittedTrip.photos = this.existingTrip.photos;
+      this.submittedTrip.toDo = this.existingTrip.toDo;
+      this.submittedTrip.itinerary = this.existingTrip.itinerary;
+      this.submittedTrip.imgUrl = this.existingTrip.imgUrl;
+    }
   }
 
   // for tool tip when hoverover invalid submit

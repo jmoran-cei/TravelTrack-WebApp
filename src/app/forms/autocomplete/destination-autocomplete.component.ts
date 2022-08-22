@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { ControlContainer, FormGroup } from '@angular/forms';
+import { ControlContainer, FormArray, FormGroup } from '@angular/forms';
 import { Options } from 'ngx-google-places-autocomplete/objects/options/options';
-import { DestinationsAutocompleteService } from './service/destinationAutocomplete.service';
+import { DestinationsService } from './service/destinations.service';
 
 @Component({
   selector: 'autocomplete',
@@ -36,7 +36,7 @@ export class DestinationAutocompleteComponent {
 
   constructor(
     private controlContainer: ControlContainer,
-    private destinationsService: DestinationsAutocompleteService
+    private destinationsService: DestinationsService
   ) {}
 
   ngOnInit() {
@@ -53,7 +53,6 @@ export class DestinationAutocompleteComponent {
 
   public DestinationChange(address: any) {
     let addr_comps = address.address_components;
-    let formValue = address.formatted_address;
     let place_id = address.place_id;
     let city!: string;
     let region!: string;
@@ -90,11 +89,15 @@ export class DestinationAutocompleteComponent {
       country: country,
     };
 
-    // set value for destinations in form
-    // (when clicking/entering on google autocomplete it doesn't update the value automatically, instead it only used the few characters typed)
-    this.form.get(this.$formControlName)?.setValue(formValue);
+    let formValue = (destination.country === 'United States') ? `${destination.city}, ${destination.region}, U.S.` : `${destination.city}, ${destination.country}`;
 
-    // add all possible final destinations to the tempDestinations array in dest, autocomplete service
+    // set value for destination in form
+    // (when clicking/entering on google autocomplete it doesn't update the value automatically, instead it only used the few characters typed)
+    let formArray = this.form.get(this.$formControlName) as FormArray;
+    let lastIndex = formArray?.length - 1;
+    this.form.get(this.$formControlName+'.'+lastIndex)?.setValue(formValue);
+
+    // add potential destinations to the tempDestinations array in destinations service
     this.destinationsService.addTempDestination(destination);
 
     // there is the use case that a user enters any random text or a name that doesn't match Google's API

@@ -50,7 +50,7 @@ import {
   FormArrayComponent,
   ValidationAlertComponent,
   DestinationAutocompleteComponent,
-  DestinationsAutocompleteService
+  DestinationsService
 } from './forms';
 
 @NgModule({
@@ -94,11 +94,11 @@ import {
     TripService,
     UserService,
     AuthService,
-    DestinationsAutocompleteService,
+    DestinationsService,
     AuthGuard,
     TripListResolver,
     TripResolver,
-    { provide: 'canDeactiveTripForm', useValue: checkDirtyState },
+    { provide: 'canDeactivateTripForm', useValue: checkDirtyState },
   ],
   bootstrap: [TravelAppComponent]
 })

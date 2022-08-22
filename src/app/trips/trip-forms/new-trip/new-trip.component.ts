@@ -22,7 +22,7 @@ export class NewTripComponent {
   pageTitle!: string;
   pageTitleDefault = 'Your New Trip';
   @Input() isEditing!: boolean;
-  @Input() editTrip!: ITrip;
+  @Input() existingTrip!: ITrip;
 
   // updated from child component via @Output()
   // method for updating the page's title to match the user's title of their new trip
@@ -32,7 +32,7 @@ export class NewTripComponent {
   }
 
   ngOnInit() {
-    if (this.isEditing) this.pageTitle = this.editTrip.title;
+    if (this.isEditing) this.pageTitle = this.existingTrip.title;
     else this.pageTitle = this.pageTitleDefault;
   }
 }
