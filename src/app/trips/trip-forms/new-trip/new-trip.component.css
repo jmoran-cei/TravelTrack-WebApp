@@ -30,6 +30,7 @@
 
 /* "YOUR NEW TRIP" title */
 .page-title {
+  padding: 0 40px;
   text-align: center;
 }
 
