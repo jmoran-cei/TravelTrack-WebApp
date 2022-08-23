@@ -143,17 +143,22 @@
 
 
   <!-- BUTTONS -->
-  <div class="buttons">
-
+  <div class="buttons" [ngClass]="{'buttons-wide': this.isEditing, 'buttons-narrow' : !this.isEditing}">
     <!-- ADD -->
     <span data-toggle="tooltip" title="{{this.tripForm.invalid ? this.findInvalidControls() : ''}}">
-      <button type="submit" class="btn btn-primary" [disabled]="this.tripForm.invalid">
+      <button type="submit" class="btn btn-primary btn-notdelete" [disabled]="this.tripForm.invalid">
         <span>{{!isEditing ? 'Add Trip' : 'Save Trip'}}</span>
       </button>
     </span>
 
     <!-- CANCEL -->
-    <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
+    <button class="btn btn-default btn-notdelete" type="button" (click)="cancel()">Cancel</button>
+
+    <!-- DELETE -->
+    <button *ngIf="this.isEditing" [ngClass]="{'hide' : !this.isEditing}"
+      class="btn btn-default btn-delete" type="button" (click)="deleteTrip()">
+      <span class="glyphicon glyphicon-trash"></span>
+    </button>
   </div>
 
 <!-- end of form -->
