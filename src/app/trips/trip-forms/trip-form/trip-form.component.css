@@ -9,7 +9,8 @@
   float: right;
   margin-top: 20px;
   margin-right: 2%;
-  width: 226px;
+  min-width: 230px;
+  max-width: 240px;
 }
 /* all button styling */
 .btn {
