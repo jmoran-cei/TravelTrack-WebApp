@@ -61,7 +61,8 @@ export class TripFormComponent {
   ) {}
 
   ngOnInit() {
-    this.pageTitleDefault = this.pageTitle; //set default title (for when user has blank )
+    this.destinationsService.clearAllDestinations();
+    this.pageTitleDefault = this.pageTitle;
     this.createFormControls();
     this.createForm();
     this.submittedTrip = this.initializeTrip();
@@ -333,6 +334,17 @@ export class TripFormComponent {
   // cancel method
   cancel() {
     this.router.navigate(['/trips']);
+  }
+
+  deleteTrip() {
+    // request confirmation
+    if (window.confirm(`Are you sure you would like to permanently delete this trip?`)) {
+      // if confirmed, delete trip
+      this.tripService.deleteTrip(this.existingTrip.id).subscribe((trip) => {
+        console.log('deleted: ', trip)
+        this.router.navigate(['/trips']);
+      });
+    }
   }
 
   // finalizing values as values for new trip

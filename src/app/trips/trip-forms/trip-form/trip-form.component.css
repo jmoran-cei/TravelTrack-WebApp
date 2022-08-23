@@ -4,17 +4,22 @@
 }
 
 
-/* submit and cancel */
+/* submit, cancel, and delete */
 .buttons {
   float: right;
   margin-top: 20px;
-  margin-right: 2%;
-  min-width: 230px;
-  max-width: 240px;
+  min-width: 250px;
+}
+.buttons-wide {
+  min-width: 250px;
+}
+.buttons-narrow {
+  margin-right: -2.5%;
+  min-width: 220px;
 }
 /* all button styling */
 .btn {
-  margin: 0 15px;
+  margin: 0 0px;
   border: none;
   outline: none
 }
@@ -50,7 +55,7 @@
   float: right;
 }
 
-/* CANCEL button */
+/* CANCEL & DELETE buttons */
 .btn-default {
   font-size: 15px;
   color: white;
@@ -58,4 +63,27 @@
 }
 .btn-default:hover {
   background-color: rgb(71, 71, 71);
+}
+
+/* ADD & CANCEL buttons */
+.btn-notdelete {
+  margin-right: 8px;
+}
+
+/* DELETE button */
+.btn-delete:hover {
+  background-color: rgb(218, 0, 0);
+}
+
+/* Hide */
+.hide {
+  display: none;
+  position: absolute;
+}
+
+
+@media (min-width: 1800px) {
+  .buttons-narrow {
+    margin-right: 0;
+  }
 }
