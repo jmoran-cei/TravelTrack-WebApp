@@ -12,7 +12,7 @@
 /* destination input box */
 .addable-input {
   display: inline-block;
-  width: 96%;
+  width: 95.75%;
   margin-right: 0;
 }
 
@@ -21,21 +21,21 @@
   display: inline-block;
   height: 100%;
   width: 2.5%;
-  margin-right: 1%;
+  margin-right: 1.5%;
 }
 
 
 /* PLUS and TRASH buttons for adding/removing destinations */
 .addremove-right-button {
   position: absolute;
-  right: 0;
+  right: 7px;
   bottom: 20px;
   z-index:1;
   margin: 0;
 }
 .addremove-left-button {
   position: absolute;
-  right:25px;
+  right: 32px;
   bottom: 20px;
   z-index:1;
   margin: 0;
