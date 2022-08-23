@@ -5,20 +5,7 @@ import { DestinationsService } from './service/destinations.service';
 
 @Component({
   selector: 'autocomplete',
-  template: `
-    <ng-container [formGroup]="form">
-      <input
-        ngx-google-places-autocomplete
-        [attr.id]="id"
-        [options]="options!"
-        [formControlName]="$formControlName"
-        type="text"
-        [placeholder]="placeholder"
-        (onAddressChange)="DestinationChange($event)"
-        [ngClass]="{ 'input-red': hasInvalidStyling }"
-      />
-    </ng-container>
-  `,
+  templateUrl: 'destination-autocomplete.component.html',
   styleUrls: [
     '../form-field/form-field.component.css',
     './destination-autocomplete.component.css',
