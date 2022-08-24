@@ -22,14 +22,12 @@ import {
   EarliestDateFirstPipe,
   LatestDateFirstPipe,
   TripService,
-  TripOverviewComponent,
   TripThumbnailComponent,
   TripListResolver,
   TripsListComponent,
   TripsTitleSectionComponent,
   DestinationsListComponent,
   TripFormComponent,
-  TripResolver,
   EditTripComponent
 } from './trips/index';
 
@@ -52,6 +50,13 @@ import {
   DestinationAutocompleteComponent,
   DestinationsService
 } from './forms';
+
+import {
+  TripOverviewComponent,
+  TripResolver,
+  TripPageComponent,
+  TripSidebarComponent
+} from './trip-page'
 
 @NgModule({
   declarations: [
@@ -76,7 +81,9 @@ import {
     LatestDateFirstPipe,
     DestinationsListComponent,
     TripFormComponent,
-    EditTripComponent
+    EditTripComponent,
+    TripPageComponent,
+    TripSidebarComponent
   ],
   imports: [
     ReactiveFormsModule,

@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ITrip } from "../../shared/models/trip.model";
-import { TripService } from "../shared/trip.service";
+import { TripService } from "../../trips/shared/trip.service";
 
 @Component({
   selector: 'trip-overview',

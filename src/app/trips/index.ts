@@ -1,5 +1,4 @@
 export * from './shared/index'
-export * from './trip-overview/index'
 
 // components
 export * from './trips-page/trips-list/trips-list.component'
