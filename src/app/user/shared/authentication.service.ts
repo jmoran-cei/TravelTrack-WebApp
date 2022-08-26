@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject, Observable } from "rxjs";
-import { IUser } from "./user.model";
+import { IUser } from "../../shared/models/user.model";
 
 @Injectable()
 export class AuthService {
@@ -16,7 +16,7 @@ export class AuthService {
   private isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isLoggedIn$: Observable<boolean> = this.isLoggedIn.asObservable();
 
-  
+
   constructor(private router:Router) {}
 
 

@@ -1,0 +1,101 @@
+<div [formGroup]="form">
+
+  <!-- label -->
+  <div *ngIf="!isRequired" class="col-xs-12 control">
+    <label attr.for="{{$formArrayName + 0 }}">
+      {{labelText}}
+    </label>
+  </div>
+
+  <!-- label -->
+  <div *ngIf="isRequired" class="col-xs-12 control">
+    <label attr.for="{{$formArrayName + 0 }}">
+      {{labelText}}<span class="required">*</span>
+    </label>
+  </div>
+
+  <!-- VALUES form array -->
+  <ng-container [formArrayName]="$formArrayName" *ngFor="let value of values?.controls; let i=index; let last=last">
+    <div class="col-xs-12 addable-field" id="{{$formArrayName+'Field' + i }}">
+
+  <!-- conditional icons -->
+    <!-- person icon -->
+    <div *ngIf="$formArrayName==='members'" class="icon-addable">
+      <label attr.for="{{$formArrayName + i }}">
+        <i class="bi bi-person-plus-fill icon"></i>
+      </label>
+    </div>
+
+    <!-- geo icon -->
+    <div *ngIf="$formArrayName==='destinations'" class="icon-addable">
+      <label attr.for="{{$formArrayName + i }}">
+        <i class="bi bi-geo-alt-fill icon"></i>
+      </label>
+    </div>
+
+  <!-- conditional input -->
+    <!-- regular input -->
+    <input *ngIf="$formArrayName!=='destinations'"
+    class="addable-input" id="{{ $formArrayName + i }}" type="text" [placeholder]="$placeholder"
+    [formControlName]="i" [ngClass]="{'input-red':
+    (this.mouseoverAddValue && form.get($formArrayName+'.'+i)?.invalid)}"/>
+
+    <!-- autocomplete input -->
+    <autocomplete *ngIf="$formArrayName==='destinations'" class="addable-input"
+      [id]="'destinations'+ i" [index]="i" [isDynamic]="true"
+      [options]="autocompleteOptions" [placeholder]="autocompletePlaceholder"
+      [hasInvalidStyling]=" (this.mouseoverAddValue && this.form.get($formArrayName+'.'+i)?.invalid)
+      || (this.form.get($formArrayName+'.'+i)?.invalid && this.form.get($formArrayName+'.'+i)?.touched)">
+    </autocomplete>
+
+
+    <!-- first value -->
+    <ng-container *ngIf="i===0">
+      <!-- plus icon -->
+      <ng-container *ngIf="values.length<2">
+        <span (mouseenter)="mouseoverAddValue=true" (mouseleave)="mouseoverAddValue=false">
+            <button class="btn btn-secondary addremove-right-button" (click)="addValue(i)" type="button"
+            [disabled]="this.form.get($formArrayName+'.'+i)?.value===''">
+            <span class="glyphicon glyphicon-plus"></span>
+          </button>
+        </span>
+      </ng-container>
+      <!-- trash icon -->
+      <ng-container *ngIf="values.length>1">
+        <button (click)="removeValue(i)" type="button" class="btn btn-secondary addremove-right-button">
+          <span class="glyphicon glyphicon-trash"></span>
+        </button>
+      </ng-container>
+    </ng-container>
+
+    <!-- proceeding value(s) -->
+    <ng-container *ngIf="i>0">
+
+      <!-- last value -->
+      <ng-container *ngIf="last">
+        <!-- plus icon -->
+        <span (mouseenter)="mouseoverAddValue=true" (mouseleave)="mouseoverAddValue=false">
+          <button class="btn btn-secondary addremove-left-button" (click)="addValue(i)" type="button"
+            [disabled]="this.form.get($formArrayName+'.'+i)?.value===''">
+            <span class="glyphicon glyphicon-plus"></span>
+          </button>
+        </span>
+      </ng-container>
+
+      <!-- trash icon -->
+      <button (click)="removeValue(i)" type="button" class="btn btn-secondary addremove-right-button">
+        <span class="glyphicon glyphicon-trash"></span>
+      </button>
+
+    </ng-container>
+  </div>
+
+    <!-- can't add new value unless all values are given & valid -->
+    <div *ngIf="toggleAlert" class="col-xs-12">
+      <validation-alert
+        [validationBoolean]="this.form.get($formArrayName+'.'+i)?.value==='' && mouseoverAddValue===true"
+        [alertText]="alertMessage">
+      </validation-alert>
+    </div>
+  </ng-container>
+</div>

@@ -3,20 +3,20 @@ import { BucketlistComponent } from "./bucketlist/bucketlist.component";
 import { Error404Component } from "./errors/404.component";
 import { HomePageComponent } from "./home/home-page.component";
 import {
-  CreateTripComponent,
+  NewTripComponent,
   TripOverviewComponent,
-  TripRouteActivator,
   TripListResolver,
   TripsListComponent
 } from './trips'
+import { TripResolver } from "./trips/trip-overview/trip-resolver.component";
 import { AuthGuard } from "./user/shared/auth.guard";
 
 export const appRoutes:Routes =[
   {path: 'home', component: HomePageComponent},
   {path: 'bucketlist', component: BucketlistComponent, canActivate: [AuthGuard]},
   {path: 'trips', component: TripsListComponent, resolve: {trips:TripListResolver}, canActivate: [AuthGuard]},
-  {path: 'trips/new', component: CreateTripComponent, canActivate: [AuthGuard], canDeactivate: ['canDeactivateCreateTrip']},
-  {path: 'trips/:id', component: TripOverviewComponent, canActivate: [AuthGuard, TripRouteActivator] },
+  {path: 'trips/new', component: NewTripComponent, canActivate: [AuthGuard], canDeactivate: ['canDeactivateCreateTrip']},
+  {path: 'trips/:id', component: TripOverviewComponent, resolve: {trip:TripResolver} },
   {path: '404', component: Error404Component},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {

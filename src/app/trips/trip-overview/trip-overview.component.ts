@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { ITrip } from "../shared/trip.model";
+import { ITrip } from "../../shared/models/trip.model";
 import { TripService } from "../shared/trip.service";
 
 @Component({
@@ -10,14 +10,16 @@ import { TripService } from "../shared/trip.service";
 })
 
 export class TripOverviewComponent {
-  trip!:ITrip
+  trip?:ITrip
   multipleDestinations!:boolean
 
   constructor(public tripService:TripService, private route:ActivatedRoute) {}
 
   ngOnInit() {
-    this.trip = this.tripService.getTrip(+this.route.snapshot.params['id'])
+    this.route.data.forEach((data) => {
+      this.trip = data['trip']
+    })
 
-    this.multipleDestinations = this.tripService.multipleDestinations(this.trip.destinations);
+    this.multipleDestinations = this.tripService.hasMultipleDestinations(this.trip?.destinations!);
   }
 }
