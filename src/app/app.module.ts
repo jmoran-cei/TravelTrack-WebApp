@@ -99,6 +99,7 @@ import {
     TripListResolver,
     TripResolver,
     { provide: 'canDeactivateTripForm', useValue: checkDirtyState },
+>>>>> master
   ],
   bootstrap: [TravelAppComponent]
 })

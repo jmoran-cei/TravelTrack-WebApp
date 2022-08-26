@@ -10,6 +10,7 @@ import { Options } from 'ngx-google-places-autocomplete/objects/options/options'
 import { ITrip } from 'src/app/shared/models/trip.model';
 import { DestinationsService } from '../autocomplete/service/destinations.service';
 
+
 @Component({
   selector: 'form-array',
   templateUrl: 'form-array.component.html',
@@ -117,6 +118,7 @@ export class FormArrayComponent {
     // make input DISABLED and remove bottom border
     let fieldInput = document.getElementById(fieldName+i);
     fieldInput!.setAttribute('disabled','disabled');
+
     fieldInput!.style.borderBottomColor='transparent';
 
     // change div background and border of field

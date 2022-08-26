@@ -1,0 +1,17 @@
+<!-- background image -->
+<img id="bg-img" src="assets/images/general/form-bg.jpg" alt="background-image" />
+
+<div class="card">
+  <div class="row">
+
+    <!-- Page title -->
+    <div class="card-header">
+      <h1 class="page-title font700">{{ pageTitle }}</h1>
+    </div>
+
+    <!-- FORM -->
+    <section class="card-body">
+      <trip-form [pageTitle]="pageTitle" (onTitleChange)="updatePageTitle($event)"></trip-form>
+    </section>
+  </div>
+</div>
