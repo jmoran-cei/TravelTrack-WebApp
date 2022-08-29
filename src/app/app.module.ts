@@ -54,8 +54,6 @@ import {
 import {
   TripOverviewComponent,
   TripResolver,
-  TripPageComponent,
-  TripSidebarComponent
 } from './trip-page'
 
 @NgModule({
@@ -76,14 +74,12 @@ import {
     ValidationAlertComponent,
     FormArrayComponent,
     DestinationAutocompleteComponent,
-    TripOverviewComponent,
     EarliestDateFirstPipe,
     LatestDateFirstPipe,
     DestinationsListComponent,
     TripFormComponent,
     EditTripComponent,
-    TripPageComponent,
-    TripSidebarComponent
+    TripOverviewComponent
   ],
   imports: [
     ReactiveFormsModule,

@@ -19,8 +19,10 @@ export const appRoutes:Routes =[
   {path: 'bucketlist', component: BucketlistComponent, canActivate: [AuthGuard]},
   {path: 'trips', component: TripsListComponent, resolve: {trips:TripListResolver}, canActivate: [AuthGuard]},
   {path: 'trips/new', component: NewTripComponent, canActivate: [AuthGuard], canDeactivate: ['canDeactivateTripForm']},
-  {path: 'trips/:id/edit', component: EditTripComponent, resolve: {trip:TripResolver}, canActivate: [AuthGuard]},
-  {path: 'trips/:id', component: TripPageComponent, resolve: {trip:TripResolver} },
+  {
+    path: 'trips/:id', component: TripPageComponent, resolve: {trip:TripResolver}, canActivate: [AuthGuard],
+    loadChildren: () => import ('./trip-page/trip.module').then(m => m.TripModule)
+  },
   {path: '404', component: Error404Component},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {

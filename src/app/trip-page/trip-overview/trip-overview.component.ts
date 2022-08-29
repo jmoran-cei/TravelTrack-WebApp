@@ -16,7 +16,7 @@ export class TripOverviewComponent {
   constructor(public tripService:TripService, private route:ActivatedRoute) {}
 
   ngOnInit() {
-    this.route.data.forEach((data) => {
+    this.route.parent?.data.forEach((data) => {
       this.trip = data['trip']
     })
 
