@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
 
 @Component({
-  templateUrl: 'trip-page.component.html'
+  templateUrl: 'trip-page.component.html',
+  styleUrls: ['trip-page.component.css']
 })
 
 

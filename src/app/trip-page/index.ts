@@ -6,6 +6,7 @@ export * from './trip-sidebar/trip-sidebar.component'
 export * from './trip-itinerary/trip-itinerary.component'
 export * from './trip-todo/trip-todo.component'
 export * from './trip-photos/trip-photos.component'
+export * from './trip-sidebar-option.component.ts/trip-sidebar-option.component'
 
 // routes & module
 export * from './trip.routes'

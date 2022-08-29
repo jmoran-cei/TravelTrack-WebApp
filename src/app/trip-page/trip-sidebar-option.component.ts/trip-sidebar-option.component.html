@@ -1,0 +1,14 @@
+<div class="sidebar-option" [routerLink]="[this.properties.subpath]" routerLinkActive="option-active"
+  #rla="routerLinkActive">
+
+  <!-- sidebar option icon -->
+  <div>
+    <span class="{{rla.isActive ? this.properties.activeIcon : this.properties.icon}} icon"
+      routerLinkActive="span-active"></span>
+  </div>
+
+  <!-- sidebar option name -->
+  <div>
+    <span routerLinkActive="span-active">{{this.properties.name}}</span>
+  </div>
+</div>

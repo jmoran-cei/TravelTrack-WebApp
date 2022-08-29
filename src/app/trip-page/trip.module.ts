@@ -8,7 +8,8 @@ import {
   TripPhotosComponent,
   TripSidebarComponent,
   TripToDoComponent,
-  tripRoutes
+  tripRoutes,
+  TripSidebarOptionComponent
 } from '.'
 
 @NgModule({
@@ -21,7 +22,8 @@ import {
     TripPageComponent,
     TripPhotosComponent,
     TripSidebarComponent,
-    TripToDoComponent
+    TripToDoComponent,
+    TripSidebarOptionComponent
   ],
   providers: []
 })
