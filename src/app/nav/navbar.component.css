@@ -1,6 +1,5 @@
 /* navbar styling */
 .navbar {
-  z-index: 600;
   min-width: 610px;
   display: flex;
   flex-direction: row;
@@ -15,8 +14,16 @@
   border-top: 1px solid rgb(185, 185, 185);
 }
 
+/* navbar fixed position */
 .navbar-fixed {
+  z-index: 600;
   position: fixed;
+  width: 100%;
+}
+
+/* fill blank space behind navbar so content starts at bottom of navbar */
+.navbar-fixed-behind {
+  height: 70px;
 }
 
 /* adjust margin */
