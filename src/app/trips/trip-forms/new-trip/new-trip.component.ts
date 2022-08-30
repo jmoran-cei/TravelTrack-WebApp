@@ -6,7 +6,7 @@ import { ITrip } from 'src/app/shared';
 // should it have it's own file (reconfigure it as checkDirtyState.guard, etc.)?  and be put in a shared guards folder or..
 export function checkDirtyState(component: NewTripComponent) {
   if (component.isDirty)
-    return window.confirm(
+    return confirm(
       'You have not saved this trip, do you really want to cancel?'
     );
   return true;

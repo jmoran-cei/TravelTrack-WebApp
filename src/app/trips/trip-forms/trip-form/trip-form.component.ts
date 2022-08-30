@@ -338,7 +338,7 @@ export class TripFormComponent {
 
   deleteTrip() {
     // request confirmation
-    if (window.confirm(`Are you sure you would like to permanently delete this trip?`)) {
+    if (confirm(`Are you sure you would like to permanently delete this trip?`)) {
       // if confirmed, delete trip
       this.tripService.deleteTrip(this.existingTrip.id).subscribe((trip) => {
         console.log('deleted: ', trip)

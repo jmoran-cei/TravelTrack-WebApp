@@ -2,14 +2,6 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ITrip } from 'src/app/shared';
 
-// export function checkDirtyState(component: EditTripComponent) {
-//   if (component.isDirty)
-//     return window.confirm(
-//       'You have not saved this trip, do you really want to cancel?'
-//     );
-//   return true;
-// }
-
 @Component({
   selector: 'edit-trip',
   templateUrl: 'edit-trip.component.html',
