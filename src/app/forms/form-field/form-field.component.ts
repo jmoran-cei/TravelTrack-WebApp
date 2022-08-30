@@ -12,7 +12,7 @@ export class FormFieldComponent {
   @Input() hasInvalidStyling?:boolean;
   @Input() labelText?:string;
   @Input() $placeholder!:string;
-  @Input() $formControlName!:string;
+  @Input() controlName!:string;
   @Input() $type!:string;
   @Input() isRequired!:boolean;
   $id!:string;
@@ -20,8 +20,8 @@ export class FormFieldComponent {
   constructor(private controlContainer: ControlContainer) {}
 
   ngOnInit() {
-    this.control = <FormControl>this.controlContainer.control?.get(this.$formControlName);
-    this.$id = this.$formControlName;
+    this.control = <FormControl>this.controlContainer.control?.get(this.controlName);
+    this.$id = this.controlName;
   }
 
 }

@@ -5,7 +5,7 @@
     <div class="col-xs-12">
       <!-- label & input component -->
       <form-field
-        [$formControlName]="'title'"
+        [controlName]="'title'"
         [labelText]="'Title'"
         [$type]="'text'"
         [$placeholder]="'Your New Trip'"
@@ -41,7 +41,7 @@
         <div class="col-xs-6 control">
           <!-- label & input component -->
           <form-field
-            [$formControlName]="'startDate'"
+            [controlName]="'startDate'"
             [labelText]="'Start Date'"
             [$type]="'date'"
             [hasInvalidStyling]="startDate?.touched && startDate?.invalid"
@@ -52,7 +52,7 @@
         <div class="col-xs-6 control">
           <!-- label & input component -->
           <form-field
-            [$formControlName]="'endDate'"
+            [controlName]="'endDate'"
             [labelText]="'End Date'"
             [$type]="'date'"
             [hasInvalidStyling]="endDate?.touched && endDate?.invalid"
@@ -132,7 +132,7 @@
   <!-- DETAILS -->
   <div class="col-xs-12 control">
     <form-field
-      [$formControlName]="'details'"
+      [controlName]="'details'"
       [labelText]="'Details'"
       [$type]="'textarea'"
       [$placeholder]="'Share a description of what your trip will be/was about, why you are doing it, etc.'"
