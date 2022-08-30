@@ -63,18 +63,6 @@ export class TripService {
     return this.http
       .delete(url)
       .pipe(
-        tap((data:any) => console.table(data)),
-        catchError(this.handleError('createTrip()'))
-      );
-  }
-
-  // delete an existing trip
-  deleteTrip(id: number) {
-    const url = `${this.tripsUrl}/${id}`;
-
-    return this.http
-      .delete(url)
-      .pipe(
         tap((data: any) => console.table(data)),
         catchError(this.handleError('createTrip()'))
     );
