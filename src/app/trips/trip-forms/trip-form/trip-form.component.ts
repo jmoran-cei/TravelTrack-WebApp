@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { datesInOrderValidator } from 'src/app/forms';
 import { DestinationsService } from 'src/app/forms/autocomplete/service/destinations.service';
 import { ITrip } from 'src/app/shared';
@@ -340,7 +340,7 @@ export class TripFormComponent {
     // request confirmation
     if (confirm(`Are you sure you would like to permanently delete this trip?`)) {
       // if confirmed, delete trip
-      this.tripService.deleteTrip(this.existingTrip.id).subscribe((trip) => {
+      this.tripService.deleteTrip(this.existingTrip.id).pipe(take(1)).subscribe((trip) => {
         console.log('deleted: ', trip)
         this.router.navigate(['/trips']);
       });
