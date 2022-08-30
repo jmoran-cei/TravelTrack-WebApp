@@ -11,17 +11,17 @@ export class FormFieldComponent {
   control!:FormControl;
   @Input() hasInvalidStyling?:boolean;
   @Input() labelText?:string;
-  @Input() $placeholder!:string;
-  @Input() $formControlName!:string;
-  @Input() $type!:string;
+  @Input() placeholder!:string;
+  @Input() formControlName!:string;
+  @Input() type!:string;
   @Input() isRequired!:boolean;
-  $id!:string;
+  id!:string;
 
   constructor(private controlContainer: ControlContainer) {}
 
   ngOnInit() {
-    this.control = <FormControl>this.controlContainer.control?.get(this.$formControlName);
-    this.$id = this.$formControlName;
+    this.control = <FormControl>this.controlContainer.control?.get(this.formControlName);
+    this.id = this.formControlName;
   }
 
 }
