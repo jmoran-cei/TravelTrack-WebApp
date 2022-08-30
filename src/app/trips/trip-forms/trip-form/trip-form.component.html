@@ -7,8 +7,8 @@
       <form-field
         [controlName]="'title'"
         [labelText]="'Title'"
-        [$type]="'text'"
-        [$placeholder]="'Your New Trip'"
+        [type]="'text'"
+        [placeholder]="'Your New Trip'"
         [hasInvalidStyling]="title?.touched && title?.invalid"
         [isRequired]="true">
       </form-field>
@@ -43,7 +43,7 @@
           <form-field
             [controlName]="'startDate'"
             [labelText]="'Start Date'"
-            [$type]="'date'"
+            [type]="'date'"
             [hasInvalidStyling]="startDate?.touched && startDate?.invalid"
             [isRequired]="true">
           </form-field>
@@ -54,7 +54,7 @@
           <form-field
             [controlName]="'endDate'"
             [labelText]="'End Date'"
-            [$type]="'date'"
+            [type]="'date'"
             [hasInvalidStyling]="endDate?.touched && endDate?.invalid"
             [isRequired]="true">
           </form-field>
@@ -92,8 +92,8 @@
   <div>
     <!-- Dynamic Input -->
     <form-array
-      [$formArrayName]="'destinations'"
-      [$placeholder]="'City,  Region,  Country'"
+      [formArrayName]="'destinations'"
+      [placeholder]="'City,  Region,  Country'"
       [labelText]="'Destination(s)'"
       [itemText]="'Destination'"
       [isRequired]="true"
@@ -119,8 +119,8 @@
   <div>
     <!-- Dynamic Input -->
     <form-array
-      [$formArrayName]="'members'"
-      [$placeholder]="'Username'"
+      [formArrayName]="'members'"
+      [placeholder]="'Username'"
       [labelText]="'Member(s)'"
       [itemText]="'Member'"
       [isRequired]="false"
@@ -134,8 +134,8 @@
     <form-field
       [controlName]="'details'"
       [labelText]="'Details'"
-      [$type]="'textarea'"
-      [$placeholder]="'Share a description of what your trip will be/was about, why you are doing it, etc.'"
+      [type]="'textarea'"
+      [placeholder]="'Share a description of what your trip will be/was about, why you are doing it, etc.'"
       [isRequired]="false">
     </form-field>
   </div>

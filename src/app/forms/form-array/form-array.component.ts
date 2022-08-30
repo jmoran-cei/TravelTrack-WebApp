@@ -27,9 +27,9 @@ export class FormArrayComponent {
   @Input() toggleAlert?: boolean;
   @Input() labelText?: string;
   @Input() itemText?: string;
-  @Input() $placeholder!: string;
-  @Input() $formArrayName!: string;
-  @Input() $id!: string;
+  @Input() placeholder!: string;
+  @Input() formArrayName!: string;
+  @Input() id!: string;
   @Input() isRequired!: boolean;
   mouseoverAddValue?: boolean;
 
@@ -54,14 +54,14 @@ export class FormArrayComponent {
 
   ngOnInit() {
     this.form = this.rootFormGroup.control;
-    this.array = this.form.get(this.$formArrayName) as FormControl;
+    this.array = this.form.get(this.formArrayName) as FormControl;
     this.alertMessage = this.itemText + ' must be valid before adding another ' + this.itemText + '.';
-    this.autocompletePlaceholder = this.$placeholder;
+    this.autocompletePlaceholder = this.placeholder;
   }
 
   // get values array
   get values():FormArray {
-    return <FormArray>this.form.get(this.$formArrayName);
+    return <FormArray>this.form.get(this.formArrayName);
   }
 
   // value methods
@@ -73,7 +73,7 @@ export class FormArrayComponent {
   }
   addValue(i: number) {
     // if its for destinations, save the destination object
-    if (this.$formArrayName === 'destinations') {
+    if (this.formArrayName === 'destinations') {
 
       this.destinationsService.saveDestination();
 
@@ -102,13 +102,13 @@ export class FormArrayComponent {
     this.values.push(this.buildValues());
 
     // set added value as unchangeable and adjust appearance appropriately
-    this.styleDivUnchangeable(this.$formArrayName,i);
+    this.styleDivUnchangeable(this.formArrayName,i);
     this.mouseoverAddValue=false; // disables mouseover add-button immediately
   }
   removeValue(i: number) {
     this.values.removeAt(i);
     // if its for destinations, save the destination object
-    if (this.$formArrayName === 'destinations') {
+    if (this.formArrayName === 'destinations') {
       this.destinationsService.removeSavedDestination(i);
     }
   }
