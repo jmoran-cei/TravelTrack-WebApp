@@ -5,9 +5,9 @@
   <!-- UPCOMING TRIPS -->
   <div class="title_and_thumbnail_area">
     <!-- TITLE SECTION -->
-    <trips-title-section [collapseID]="upcomingCollapse" [title]="upcomingTrips_SectionTitle" [tripList]="upcomingTrips"
+    <app-trips-title-section [collapseID]="upcomingCollapse" [title]="upcomingTrips_SectionTitle" [tripList]="upcomingTrips"
       sortToggle="sortByEarliestDate">
-    </trips-title-section>
+    </app-trips-title-section>
 
     <!-- THUMBNAILS SECTION -->
     <div class="thumbnail-section container-fluid">
@@ -17,15 +17,15 @@
         <!-- list of upcoming trip thumbnails (sorted to have soonest upcoming trips at the top)-->
         <ng-container *ngFor="let trip of upcomingTrips | byEarliestDate">
           <div class="col-md-6 wrapper">
-            <trip-thumbnail [trip]="trip"></trip-thumbnail>
+            <app-trip-thumbnail [trip]="trip"></app-trip-thumbnail>
           </div>
         </ng-container>
 
 
         <!-- create new trip thumbnail -->
         <div class="col-md-6 wrapper">
-          <new-trip-thumbnail [title]="createUpcomingTrip_Title" [description]="createUpcomingTrip_Description">
-          </new-trip-thumbnail>
+          <app-new-trip-thumbnail [title]="createUpcomingTrip_Title" [description]="createUpcomingTrip_Description">
+          </app-new-trip-thumbnail>
         </div>
       </div>
     </div>
@@ -35,9 +35,9 @@
   <!-- PREVIOUS TRIPS -->
   <div class="title_and_thumbnail_area marg-btm">
     <!-- TITLE SECTION -->
-    <trips-title-section [collapseID]="previousCollapse" [title]="previousTrips_SectionTitle" [tripList]="previousTrips"
+    <app-trips-title-section [collapseID]="previousCollapse" [title]="previousTrips_SectionTitle" [tripList]="previousTrips"
     sortToggle="sortByLatestDate">
-  </trips-title-section>
+  </app-trips-title-section>
 
   <!-- THUMBNAILS SECTION -->
   <div class="thumbnail-section container-fluid">
@@ -47,15 +47,15 @@
         <!-- list of upcoming trip thumbnails (sorted to have most recent previous trips at the top)-->
         <ng-container *ngFor="let trip of previousTrips | byLatestDate">
           <div class="col-md-6 wrapper">
-            <trip-thumbnail [trip]="trip"></trip-thumbnail>
+            <app-trip-thumbnail [trip]="trip"></app-trip-thumbnail>
           </div>
         </ng-container>
 
 
         <!-- create new trip thumbnail -->
         <div class="col-md-6 wrapper">
-          <new-trip-thumbnail [title]="createPreviousTrip_Title" [description]="createPreviousTrip_Description">
-          </new-trip-thumbnail>
+          <app-new-trip-thumbnail [title]="createPreviousTrip_Title" [description]="createPreviousTrip_Description">
+          </app-new-trip-thumbnail>
         </div>
 
       </div>

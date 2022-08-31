@@ -1,13 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ITrip } from 'src/app/shared';
 
 @Component({
-  selector: 'edit-trip',
   templateUrl: 'edit-trip.component.html',
   styleUrls: ['../new-trip/new-trip.component.css'],
 })
-export class EditTripComponent {
+export class EditTripComponent implements OnInit {
   isDirty?: boolean;
   trip!: ITrip;
 

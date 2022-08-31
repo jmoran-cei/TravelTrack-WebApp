@@ -1,15 +1,15 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { filter, take } from "rxjs";
 import { AuthService } from "../user/shared/authentication.service";
 
 @Component({
-  selector: 'nav-bar',
+  selector: 'app-nav-bar',
   templateUrl: 'navbar.component.html',
   styleUrls: ['navbar.component.css']
 })
 
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   isLoggedIn= this.auth.isLoggedIn$.pipe(take(1));
   path!:string;
   isTripPage!:boolean;

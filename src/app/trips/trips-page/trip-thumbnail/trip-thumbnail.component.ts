@@ -1,14 +1,14 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { ITrip } from "src/app/shared";
 import { TripService } from "../../shared/trip.service";
 
 @Component({
-  selector: 'trip-thumbnail',
+  selector: 'app-trip-thumbnail',
   templateUrl: 'trip-thumbnail.component.html',
   styleUrls: ['trip-thumbnail.component.css']
 })
 
-export class TripThumbnailComponent {
+export class TripThumbnailComponent implements OnInit {
   @Input() trip!:ITrip
   multipleDestinations!:boolean
 

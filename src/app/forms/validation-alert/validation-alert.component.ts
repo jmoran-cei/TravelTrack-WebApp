@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: 'validation-alert',
+  selector: 'app-validation-alert',
   template: `
 
     <div *ngIf="validationBoolean" [ngClass]="{'alert alert-danger': enableStyling }">

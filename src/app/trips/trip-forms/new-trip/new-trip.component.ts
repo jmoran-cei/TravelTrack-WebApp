@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ITrip } from 'src/app/shared';
 
 // this function will be probably used in other components down the road (e.g. edit-profile)
@@ -13,11 +13,11 @@ export function checkDirtyState(component: NewTripComponent) {
 }
 
 @Component({
-  selector: 'new-trip',
+  selector: 'app-new-trip',
   templateUrl: 'new-trip.component.html',
   styleUrls: ['new-trip.component.css'],
 })
-export class NewTripComponent {
+export class NewTripComponent implements OnInit {
   isDirty?: boolean;
   pageTitle!: string;
   pageTitleDefault = 'Your New Trip';

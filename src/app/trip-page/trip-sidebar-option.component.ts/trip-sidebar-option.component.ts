@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'trip-sidebar-option',
+  selector: 'app-trip-sidebar-option',
   templateUrl: 'trip-sidebar-option.component.html',
   styleUrls: ['trip-sidebar-option.component.css'],
 })

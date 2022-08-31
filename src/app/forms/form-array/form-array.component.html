@@ -41,12 +41,12 @@
     (this.mouseoverAddValue && form.get(formArrayName+'.'+i)?.invalid)}"/>
 
     <!-- autocomplete input -->
-    <autocomplete *ngIf="formArrayName==='destinations'" class="addable-input"
+    <app-autocomplete *ngIf="formArrayName==='destinations'" class="addable-input"
       [id]="'destinations'+ i" [index]="i" [isDynamic]="true"
       [options]="autocompleteOptions" [placeholder]="autocompletePlaceholder"
       [hasInvalidStyling]=" (this.mouseoverAddValue && this.form.get(formArrayName+'.'+i)?.invalid)
       || (this.form.get(formArrayName+'.'+i)?.invalid && this.form.get(formArrayName+'.'+i)?.touched)">
-    </autocomplete>
+    </app-autocomplete>
 
 
     <!-- first value -->
@@ -92,10 +92,10 @@
 
     <!-- can't add new value unless all values are given & valid -->
     <div *ngIf="toggleAlert" class="col-xs-12">
-      <validation-alert
+      <app-validation-alert
         [validationBoolean]="this.form.get(formArrayName+'.'+i)?.value==='' && mouseoverAddValue===true"
         [alertText]="alertMessage">
-      </validation-alert>
+      </app-validation-alert>
     </div>
   </ng-container>
 </div>

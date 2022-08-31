@@ -1,17 +1,17 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormArray, FormGroup } from '@angular/forms';
 import { Options } from 'ngx-google-places-autocomplete/objects/options/options';
 import { DestinationsService } from './service/destinations.service';
 
 @Component({
-  selector: 'autocomplete',
+  selector: 'app-autocomplete',
   templateUrl: 'destination-autocomplete.component.html',
   styleUrls: [
     '../form-field/form-field.component.css',
     './destination-autocomplete.component.css',
   ],
 })
-export class DestinationAutocompleteComponent {
+export class DestinationAutocompleteComponent implements OnInit {
   form!: FormGroup;
   @Input() index!: number;
   @Input() id!: string;

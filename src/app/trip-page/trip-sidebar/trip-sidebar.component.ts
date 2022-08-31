@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ITrip } from 'src/app/shared';
 
 @Component({
-  selector: 'trip-sidebar',
+  selector: 'app-trip-sidebar',
   templateUrl: 'trip-sidebar.component.html',
   styleUrls: ['trip-sidebar.component.css'],
 })
 
-export class TripSidebarComponent {
+export class TripSidebarComponent implements OnInit {
   trip?: ITrip;
   overview = {
     name: 'Overview',

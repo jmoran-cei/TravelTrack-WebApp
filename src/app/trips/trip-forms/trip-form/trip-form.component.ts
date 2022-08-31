@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import {
   AbstractControl,
   FormArray,
@@ -16,14 +16,14 @@ import { TripService } from '../../shared';
 import { NewTripComponent } from '../../.';
 
 @Component({
-  selector: 'trip-form',
+  selector: 'app-trip-form',
   templateUrl: 'trip-form.component.html',
   styleUrls: ['trip-form.component.css'],
 })
-export class TripFormComponent {
+export class TripFormComponent implements OnInit, OnDestroy {
   // props in/out of parent component
   @Input() pageTitle!: string;
-  @Output() onTitleChange = new EventEmitter();
+  @Output() changeTitle = new EventEmitter();
   pageTitleDefault!: string;
   @Input() isEditing!: boolean;
   @Input() existingTrip!: ITrip;
@@ -91,11 +91,11 @@ export class TripFormComponent {
     // when the user has changed the value of their trip title,
     // send the value to the parent component so it can be used to change the page title
     this.titleChangesSusbscription = this.title?.valueChanges.subscribe((v) =>
-      this.onTitleChange.emit(v)
+      this.changeTitle.emit(v)
     );
   }
 
-  ngAfterViewInit() {
+  AfterViewInit() {
     if (this.isEditing) {
       // adjusting styling for existing destinations & members after DOM loads
       for (let i in this.existingTrip.destinations) {

@@ -1,15 +1,14 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ITrip } from "../../shared/models/trip.model";
 import { TripService } from "../../trips/shared/trip.service";
 
 @Component({
-  selector: 'trip-overview',
   templateUrl: 'trip-overview.component.html',
   styleUrls: ['trip-overview.component.css']
 })
 
-export class TripOverviewComponent {
+export class TripOverviewComponent implements OnInit {
   trip?:ITrip
   multipleDestinations!:boolean
 

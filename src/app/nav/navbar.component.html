@@ -7,7 +7,7 @@
     </div>
 
   <!-- if user NOT LOGGED IN -->
-    <ng-container *ngIf="!(isLoggedIn | async)">
+    <ng-container *ngIf="(isLoggedIn | async) === false">
       <!-- User Icon & Login -->
       <div class="box move-right" id="login">
         <a [routerLink]="['/user/login']"><span class="glyphicon glyphicon-user"></span> Login</a>

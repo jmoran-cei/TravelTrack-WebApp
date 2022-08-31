@@ -9,7 +9,7 @@
     <h2 class="font700">Discover the <span class="clear-underline">world</span> and remember <span
         class="clear-underline">every moment.</span></h2>
     <!-- button -->
-    <ng-container *ngIf="!(this.isLoggedIn | async)">
+    <ng-container *ngIf="(this.isLoggedIn | async) === false">
       <button id="start-tracking-btn" class="btn btn-secondary" [routerLink]="['/user/login']">Start Tracking</button>
     </ng-container>
     <ng-container *ngIf="(this.isLoggedIn | async)">

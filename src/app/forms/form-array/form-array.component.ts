@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -12,7 +12,7 @@ import { DestinationsService } from '../autocomplete/service/destinations.servic
 
 
 @Component({
-  selector: 'form-array',
+  selector: 'app-form-array',
   templateUrl: 'form-array.component.html',
   styleUrls: [
     'form-array.component.css',
@@ -20,7 +20,7 @@ import { DestinationsService } from '../autocomplete/service/destinations.servic
     '../../trips/trip-forms/trip-form/trip-form.component.css',
   ],
 })
-export class FormArrayComponent {
+export class FormArrayComponent implements OnInit {
   form!: FormGroup;
   array!: FormControl;
   @Input() hasInvalidStyling?: boolean;
