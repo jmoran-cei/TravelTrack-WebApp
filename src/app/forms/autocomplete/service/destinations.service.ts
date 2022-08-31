@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IDestination } from 'src/app/shared';
 
 @Injectable()
-export class DestinationsAutocompleteService {
+export class DestinationsService {
   /*
     PURPOSE: the purpose of this service is to help with creating separate array to keep track of destination objects.
     - When using google autocomplete, the user 'clicking' on an autocorrect prediction it adds that destination to the tempDestinations array
@@ -23,14 +23,19 @@ export class DestinationsAutocompleteService {
     destination = this.tempDestinations[this.tempDestinations.length - 1];
 
     this.savedDestinations.push(destination);
+    this.clearTempDestinations();
   }
 
-  removeDestination(destIndex: number) {
+  removeSavedDestination(destIndex: number) {
     this.savedDestinations.splice(destIndex, 1);
   }
 
-  clearDestinations() {
+  clearTempDestinations() {
     this.tempDestinations = [];
+  }
+
+  clearAllDestinations() {
+    this.clearTempDestinations();
     this.savedDestinations = [];
   }
 }

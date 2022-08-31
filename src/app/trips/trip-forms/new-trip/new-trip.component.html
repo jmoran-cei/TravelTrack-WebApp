@@ -11,7 +11,10 @@
 
     <!-- FORM -->
     <section class="card-body">
-      <trip-form [pageTitle]="pageTitle" (onTitleChange)="updatePageTitle($event)"></trip-form>
+      <trip-form
+      [pageTitle]="pageTitle" (onTitleChange)="updatePageTitle($event)"
+      [isEditing]="isEditing" [existingTrip]="existingTrip">
+      </trip-form>
     </section>
   </div>
 </div>

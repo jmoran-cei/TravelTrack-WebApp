@@ -1,24 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { ControlContainer, FormGroup } from '@angular/forms';
+import { ControlContainer, FormArray, FormGroup } from '@angular/forms';
 import { Options } from 'ngx-google-places-autocomplete/objects/options/options';
-import { DestinationsAutocompleteService } from './service/destinationAutocomplete.service';
+import { DestinationsService } from './service/destinations.service';
 
 @Component({
   selector: 'autocomplete',
-  template: `
-    <ng-container [formGroup]="form">
-      <input
-        ngx-google-places-autocomplete
-        [attr.id]="id"
-        [options]="options!"
-        [formControlName]="$formControlName"
-        type="text"
-        [placeholder]="placeholder"
-        (onAddressChange)="DestinationChange($event)"
-        [ngClass]="{ 'input-red': hasInvalidStyling }"
-      />
-    </ng-container>
-  `,
+  templateUrl: 'destination-autocomplete.component.html',
   styleUrls: [
     '../form-field/form-field.component.css',
     './destination-autocomplete.component.css',
@@ -32,11 +19,11 @@ export class DestinationAutocompleteComponent {
   @Input() options?: Options;
   @Input() placeholder?: string;
   @Input() isDynamic!: boolean;
-  $formControlName!: string;
+  controlName!: string;
 
   constructor(
     private controlContainer: ControlContainer,
-    private destinationsService: DestinationsAutocompleteService
+    private destinationsService: DestinationsService
   ) {}
 
   ngOnInit() {
@@ -45,15 +32,14 @@ export class DestinationAutocompleteComponent {
     // isDyanamic (used as input for form array) --> formcontrolname is index of that array
     // !isDyanamic (used as input for single control) --> formcontrolname is the same as the id
     if (this.isDynamic) {
-      this.$formControlName = String(this.index);
+      this.controlName = String(this.index);
     } else {
-      this.$formControlName = this.id;
+      this.controlName = this.id;
     }
   }
 
   public DestinationChange(address: any) {
     let addr_comps = address.address_components;
-    let formValue = address.formatted_address;
     let place_id = address.place_id;
     let city!: string;
     let region!: string;
@@ -90,11 +76,15 @@ export class DestinationAutocompleteComponent {
       country: country,
     };
 
-    // set value for destinations in form
-    // (when clicking/entering on google autocomplete it doesn't update the value automatically, instead it only used the few characters typed)
-    this.form.get(this.$formControlName)?.setValue(formValue);
+    let formValue = (destination.country === 'United States') ? `${destination.city}, ${destination.region}, U.S.` : `${destination.city}, ${destination.country}`;
 
-    // add all possible final destinations to the tempDestinations array in dest, autocomplete service
+    // set value for destination in form
+    // (when clicking/entering on google autocomplete it doesn't update the value automatically, instead it only used the few characters typed)
+    let formArray = this.form.get(this.controlName) as FormArray;
+    let lastIndex = formArray?.length - 1;
+    this.form.get(this.controlName+'.'+lastIndex)?.setValue(formValue);
+
+    // add potential destinations to the tempDestinations array in destinations service
     this.destinationsService.addTempDestination(destination);
 
     // there is the use case that a user enters any random text or a name that doesn't match Google's API

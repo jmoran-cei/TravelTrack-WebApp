@@ -1,0 +1,12 @@
+<ng-container [formGroup]="form">
+  <input
+    ngx-google-places-autocomplete
+    [attr.id]="id"
+    [options]="options!"
+    [formControlName]="controlName"
+    type="text"
+    [placeholder]="placeholder"
+    (onAddressChange)="DestinationChange($event)"
+    [ngClass]="{ 'input-red': hasInvalidStyling }"
+  />
+</ng-container>

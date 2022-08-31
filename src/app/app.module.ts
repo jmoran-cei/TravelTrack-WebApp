@@ -29,7 +29,8 @@ import {
   TripsTitleSectionComponent,
   DestinationsListComponent,
   TripFormComponent,
-  TripResolver
+  TripResolver,
+  EditTripComponent
 } from './trips/index';
 
 import {
@@ -49,7 +50,7 @@ import {
   FormArrayComponent,
   ValidationAlertComponent,
   DestinationAutocompleteComponent,
-  DestinationsAutocompleteService
+  DestinationsService
 } from './forms';
 
 @NgModule({
@@ -75,6 +76,7 @@ import {
     LatestDateFirstPipe,
     DestinationsListComponent,
     TripFormComponent,
+    EditTripComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -92,11 +94,11 @@ import {
     TripService,
     UserService,
     AuthService,
-    DestinationsAutocompleteService,
+    DestinationsService,
     AuthGuard,
     TripListResolver,
     TripResolver,
-    { provide: 'canDeactivateCreateTrip', useValue: checkDirtyState },
+    { provide: 'canDeactivateTripForm', useValue: checkDirtyState },
   ],
   bootstrap: [TravelAppComponent]
 })

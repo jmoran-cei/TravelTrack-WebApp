@@ -1,16 +1,22 @@
 <div class="container">
 
-<h1>{{trip?.title}}</h1>
+  <h1>{{trip?.title}}</h1>
 
-<span class="font700">
-  {{trip?.startDate | date: 'mediumDate'}}
-  &mdash;
-  {{trip?.endDate | date: 'mediumDate'}}
-</span>
+  <span class="font700">
+    {{trip?.startDate | date: 'mediumDate'}}
+    &mdash;
+    {{trip?.endDate | date: 'mediumDate'}}
+  </span>
 
-<div>
-  <p>Destination<span *ngIf="multipleDestinations">s</span>:</p>
-  <app-destinations-list [destinations]="trip?.destinations"></app-destinations-list>
-</div>
+  <div>
+    <p>Destination<span *ngIf="multipleDestinations">s</span>:</p>
+    <app-destinations-list [destinations]="trip?.destinations"></app-destinations-list>
+  </div>
+
+  <a [routerLink]="['/trips', trip?.id, 'edit']">
+    <button>
+      <span class="glyphicon glyphicon-pencil"></span>
+    </button>
+  </a>
 
 </div>
