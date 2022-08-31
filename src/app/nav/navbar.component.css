@@ -12,6 +12,7 @@
   font-size: 15px;
   box-shadow: 0 1.4px 6px 0 rgba(0,0,0,.2);
   border-top: 1px solid rgb(185, 185, 185);
+  border-radius: 0;
 }
 
 /* navbar fixed position */
