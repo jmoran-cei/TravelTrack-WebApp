@@ -1,13 +1,13 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { AbstractControl, ControlContainer, FormControl } from "@angular/forms";
+import { Component, Input, OnInit } from "@angular/core";
+import { ControlContainer, FormControl } from "@angular/forms";
 
 @Component({
-  selector: 'form-field',
+  selector: 'app-form-field',
   templateUrl: 'form-field.component.html',
   styleUrls: ['form-field.component.css']
 })
 
-export class FormFieldComponent {
+export class FormFieldComponent implements OnInit {
   control!:FormControl;
   @Input() hasInvalidStyling?:boolean;
   @Input() labelText?:string;

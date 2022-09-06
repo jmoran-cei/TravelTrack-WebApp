@@ -4,30 +4,30 @@
   <div>
     <div class="col-xs-12">
       <!-- label & input component -->
-      <form-field
+      <app-form-field
         controlName="title"
         labelText="Title"
         type="text"
         placeholder="Your New Trip"
         [hasInvalidStyling]="title?.touched && title?.invalid"
         [isRequired]="true">
-      </form-field>
+      </app-form-field>
     </div>
 
     <!-- title VALIDATION ALERTS -->
     <div class="col-xs-12">
       <div *ngIf="this.title?.touched && this.title?.invalid">
         <!-- required -->
-        <validation-alert
+        <app-validation-alert
           [validationBoolean]="!!this.title?.errors && !!this.title?.errors!['required']"
           alertText="Title is required.">
-        </validation-alert>
+        </app-validation-alert>
 
         <!-- min-length -->
-        <validation-alert
+        <app-validation-alert
           [validationBoolean]="!!this.title?.errors && !!this.title?.errors!['minlength']"
           alertText="Title must have at least 3 characters.">
-        </validation-alert>
+        </app-validation-alert>
       </div>
     </div>
   </div>
@@ -40,24 +40,24 @@
       <!-- START DATE -->
         <div class="col-xs-6 control">
           <!-- label & input component -->
-          <form-field
+          <app-form-field
             controlName="startDate"
             labelText="Start Date"
             type="date"
             [hasInvalidStyling]="startDate?.touched && startDate?.invalid"
             [isRequired]="true">
-          </form-field>
+          </app-form-field>
         </div>
         <!-- END DATE -->
         <div class="col-xs-6 control">
           <!-- label & input component -->
-          <form-field
+          <app-form-field
             controlName="endDate"
             labelText="End Date"
             type="date"
             [hasInvalidStyling]="endDate?.touched && endDate?.invalid"
             [isRequired]="true">
-          </form-field>
+          </app-form-field>
         </div>
       </div>
       <!-- start date & end date VALIDATION ALERTS -->
@@ -65,24 +65,24 @@
         <!-- START DATE validation alert -->
         <div class="alert-lefthalf">
           <!-- must match pattern and fit in valid time frame -->
-          <validation-alert
+          <app-validation-alert
             [validationBoolean]="startDate?.touched && startDate?.invalid"
             alertText="Date must be valid. Valid time frame: 01/01/1900 - 01/01/2100">
-          </validation-alert>
+          </app-validation-alert>
         </div>
         <!-- END DATE validation alert -->
         <div class="alert-righthalf">
           <!-- must match pattern and fit in valid time frame -->
-          <validation-alert
+          <app-validation-alert
             [validationBoolean]="endDate?.touched && endDate?.invalid"
             alertText="Date must be valid. Valid time frame: 01/01/1900 - 01/01/2100">
-          </validation-alert>
+          </app-validation-alert>
         </div>
         <!-- DATES NOT IN ORDER validation alert (startDate > endDate) -->
-        <validation-alert
+        <app-validation-alert
           [validationBoolean]="!!this.datesGroup?.errors"
           alertText="End Date must occur after Start Date.">
-        </validation-alert>
+        </app-validation-alert>
       </div>
   </div>
   <!--  -->
@@ -91,7 +91,7 @@
   <!-- DESTINATIONS (required) -->
   <div>
     <!-- Dynamic Input -->
-    <form-array
+    <app-form-array
       formArrayName="destinations"
       placeholder="City,  Region,  Country"
       labelText="Destination(s)"
@@ -100,16 +100,16 @@
       [toggleAlert]="true"
       [isEditing]="isEditing"
       [existingTrip]="existingTrip">
-    </form-array>
+    </app-form-array>
 
     <!-- destinations VALIDATION ALERTS -->
     <div class="col-xs-12">
       <!-- required (no blank fields) -->
-      <validation-alert
+      <app-validation-alert
         [validationBoolean]="this.destinations!.touched
           && this.destinations!.invalid"
         [alertText]="destinationAlertText">
-      </validation-alert>
+      </app-validation-alert>
     </div>
   </div>
   <!--  -->
@@ -118,26 +118,26 @@
   <!-- MEMBERS -->
   <div>
     <!-- Dynamic Input -->
-    <form-array
+    <app-form-array
       formArrayName="members"
       placeholder="Username"
       labelText="Member(s)"
       itemText="Member"
       [isRequired]="false"
       [toggleAlert]="true">
-    </form-array>
+    </app-form-array>
   </div>
 
 
   <!-- DETAILS -->
   <div class="col-xs-12 control">
-    <form-field
+    <app-form-field
       controlName="details"
       labelText="Details"
       type="textarea"
       placeholder="Share a description of what your trip will be/was about, why you are doing it, etc."
       [isRequired]="false">
-    </form-field>
+    </app-form-field>
   </div>
   <!--  -->
 

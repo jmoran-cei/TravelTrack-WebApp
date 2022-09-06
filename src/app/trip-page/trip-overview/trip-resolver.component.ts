@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
-import { TripService } from '../shared';
+import { TripService } from '../../trips/.';
 import { take } from 'rxjs';
 
 @Injectable()

@@ -1,9 +1,9 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ITrip } from '../../../shared/models/trip.model';
 import { TripService } from '../../shared/trip.service';
 
 @Component({
-  selector: 'trips-title-section',
+  selector: 'app-trips-title-section',
   templateUrl: 'trips-title-section.component.html',
   styleUrls: ['trips-title-section.component.css'],
 })

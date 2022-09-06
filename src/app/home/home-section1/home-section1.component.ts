@@ -3,7 +3,7 @@ import { take } from "rxjs";
 import { AuthService } from "src/app/user";
 
 @Component({
-  selector: 'home-section1',
+  selector: 'app-home-section1',
   templateUrl: 'home-section1.component.html',
   styleUrls: ['home-section1.component.css']
 })

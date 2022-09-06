@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ITrip } from "../../../shared/models/trip.model";
 
@@ -7,7 +7,7 @@ import { ITrip } from "../../../shared/models/trip.model";
   styleUrls: ['trips-list.component.css']
 })
 
-export class TripsListComponent {
+export class TripsListComponent implements OnInit {
   currentTime = new Date()
   upcomingTrips: ITrip[] = []
   previousTrips: ITrip[] = []

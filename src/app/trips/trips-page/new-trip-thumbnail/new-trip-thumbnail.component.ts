@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: 'new-trip-thumbnail',
+  selector: 'app-new-trip-thumbnail',
   templateUrl: 'new-trip-thumbnail.component.html',
   styleUrls: ['new-trip-thumbnail.component.css']
 })

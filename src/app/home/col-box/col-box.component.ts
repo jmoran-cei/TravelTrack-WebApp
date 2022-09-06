@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: 'col-box',
+  selector: 'app-col-box',
   templateUrl: 'col-box.component.html',
   styleUrls: ['col-box.component.css']
 })

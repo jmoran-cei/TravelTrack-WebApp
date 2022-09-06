@@ -1,85 +1,90 @@
-<nav class="navbar">
+<div [ngClass]="{'navbar-fixed' : this.isTripPage}">
+  <nav class="navbar">
 
-  <!-- Travel Track Title -->
-  <div class="nav-title">
-    <a [routerLink]="['/home']" routerLinkActive="active"><span class="bi bi-pin-map-fill"></span>TravelTrack</a>
-  </div>
-
-<!-- if user NOT LOGGED IN -->
-  <ng-container *ngIf="!(isLoggedIn | async)">
-    <!-- User Icon & Login -->
-    <div class="box move-right" id="login">
-      <a [routerLink]="['/user/login']"><span class="glyphicon glyphicon-user"></span> Login</a>
+    <!-- Travel Track Title -->
+    <div class="nav-title">
+      <a [routerLink]="['/home']" routerLinkActive="active"><span class="bi bi-pin-map-fill"></span>TravelTrack</a>
     </div>
 
-  </ng-container>
-
-<!-- if user IS LOGGED IN -->
-  <ng-container *ngIf="isLoggedIn | async">
-
-    <!-- trips tab -->
-    <div class="box move-right font400 margin">
-      <a [routerLink]="['/trips']" routerLinkActive="active"><span class="glyphicon glyphicon-calendar"></span>Trips</a>
-    </div>
-
-    <!-- bucket list tab -->
-    <div class="box font400 margin">
-      <a [routerLink]="['/bucketlist']" routerLinkActive="active"><span class="bi bi-bucket-fill"></span>Bucket List</a>
-    </div>
-
-    <!-- search bar (not functional yet)-->
-    <form id="searchForm" action="" class="navbar-form">
-      <div class="input-group">
-        <input type="search" placeholder="Find a trip..." class="form-control" />
-        <div class="input-group-btn">
-          <button class="btn btn-info">
-            <span class="glyphicon glyphicon-search"></span>
-          </button>
-        </div>
+  <!-- if user NOT LOGGED IN -->
+    <ng-container *ngIf="(isLoggedIn | async) === false">
+      <!-- User Icon & Login -->
+      <div class="box move-right" id="login">
+        <a [routerLink]="['/user/login']"><span class="glyphicon glyphicon-user"></span> Login</a>
       </div>
-    </form>
 
+    </ng-container>
 
-    <!-- user icon & menu || Hi, Username -->
-    <div class="dropdown box">
-      <!-- icon -->
-      <button class="btn drop-btn" id="personal-menu"><span class="glyphicon glyphicon-user"></span></button>
+  <!-- if user IS LOGGED IN -->
+    <ng-container *ngIf="isLoggedIn | async">
 
-      <!-- menu (adjusts based on length of first name)-->
-      <div class="dropdown-content" [ngClass]="{'dropdown-left': auth.currentUser.firstName.length>9}">
-        <!-- if first name is long, dropdown is aligned left -->
-        <div class="user-details">
-          <!-- user profile picture -->
-          <div class="img-wrapper ">
-            <div class="move-down">
-              <img src="{{auth.currentUser.pictureURL}}" class="user-picture" />
-            </div>
-          </div>
-          <div class="user-text-content">
-            <!-- First and Last Name -->
-            <div class="name">
-              <p>{{auth.currentUser.firstName}} {{auth.currentUser.lastName}}</p>
-            </div>
+      <!-- trips tab -->
+      <div class="box move-right font400 margin">
+        <a [routerLink]="['/trips']" routerLinkActive="active"><span class="glyphicon glyphicon-calendar"></span>Trips</a>
+      </div>
 
-            <!-- Username -->
-            <div class="username">
-              <p>{{auth.currentUser.username}}</p>
-            </div>
+      <!-- bucket list tab -->
+      <div class="box font400 margin">
+        <a [routerLink]="['/bucketlist']" routerLinkActive="active"><span class="bi bi-bucket-fill"></span>Bucket List</a>
+      </div>
+
+      <!-- search bar (not functional yet)-->
+      <form id="searchForm" action="" class="navbar-form">
+        <div class="input-group">
+          <input type="search" placeholder="Find a trip..." class="form-control" />
+          <div class="input-group-btn">
+            <button class="btn btn-info">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
           </div>
         </div>
-        <a [routerLink]="['user/profile']">Edit Profile</a>
-        <a [routerLink]="['user/settings']">Settings</a>
-        <a (click)="logoutUser()">Logout</a>
-      </div>
+      </form>
 
-      <!-- username is hardcoded for simplicity currently, will be updated in the future -->
-      <!-- "Hi, User" -->
-      <div class="hi-username">
-        <label for="personal-menu" class="font400">
-          Hi, {{adjustNameLength(auth.currentUser.firstName,17)}}
-        </label>
-      </div>
-    </div>
-  </ng-container>
 
-</nav>
+      <!-- user icon & menu || Hi, Username -->
+      <div class="dropdown box">
+        <!-- icon -->
+        <button class="btn drop-btn" id="personal-menu"><span class="glyphicon glyphicon-user"></span></button>
+
+        <!-- menu (adjusts based on length of first name)-->
+        <div class="dropdown-content" [ngClass]="{'dropdown-left': auth.currentUser.firstName.length>9}">
+          <!-- if first name is long, dropdown is aligned left -->
+          <div class="user-details">
+            <!-- user profile picture -->
+            <div class="img-wrapper ">
+              <div class="move-down">
+                <img src="{{auth.currentUser.pictureURL}}" class="user-picture" />
+              </div>
+            </div>
+            <div class="user-text-content">
+              <!-- First and Last Name -->
+              <div class="name">
+                <p>{{auth.currentUser.firstName}} {{auth.currentUser.lastName}}</p>
+              </div>
+
+              <!-- Username -->
+              <div class="username">
+                <p>{{auth.currentUser.username}}</p>
+              </div>
+            </div>
+          </div>
+          <a [routerLink]="['user/profile']">Edit Profile</a>
+          <a [routerLink]="['user/settings']">Settings</a>
+          <a (click)="logoutUser()">Logout</a>
+        </div>
+
+        <!-- username is hardcoded for simplicity currently, will be updated in the future -->
+        <!-- "Hi, User" -->
+        <div class="hi-username">
+          <label for="personal-menu" class="font400">
+            Hi, {{adjustNameLength(auth.currentUser.firstName,17)}}
+          </label>
+        </div>
+      </div>
+    </ng-container>
+
+  </nav>
+</div>
+
+<!-- navbar has 'in front' z-index, so need to fill it's height under it when in fixed position -->
+<div [ngClass]="{'navbar-fixed-behind' : this.isTripPage}"></div>
