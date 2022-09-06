@@ -22,7 +22,8 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.router.events
     .pipe(
-      filter(event => event instanceof NavigationEnd))
+      filter(event => event instanceof NavigationEnd),
+      take(1))
     .subscribe(
       () => {
         let paths = this.router.url.split('/');

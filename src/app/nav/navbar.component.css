@@ -17,7 +17,7 @@
 
 /* navbar fixed position */
 .navbar-fixed {
-  z-index: 600;
+  z-index: 1;
   position: fixed;
   width: 100%;
 }
