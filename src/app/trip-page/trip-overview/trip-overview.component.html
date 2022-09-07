@@ -1,4 +1,21 @@
-<div class="container-fluid">
+<div>
+  <img class="trip-img" src="{{trip?.imgUrl}}">
+</div>
+<div class="facts-overlay">
+  <!-- trip fact: # of days from trip-->
+  <app-trip-fact [properties]="daysUntilFact"></app-trip-fact>
+
+  <!-- trip fact: # of destinations -->
+  <app-trip-fact [properties]="destinationsFact"></app-trip-fact>
+
+  <!-- trip fact: # of toDo tasks -->
+  <app-trip-fact [properties]="toDoFact"></app-trip-fact>
+
+  <!-- trip fact: # of photos -->
+  <app-trip-fact [properties]="photosFact"></app-trip-fact>
+
+</div>
+<div class="main-content">
 
   <h1>{{trip?.title}}</h1>
 
@@ -9,7 +26,7 @@
   </span>
 
   <div>
-    <p>Destination<span *ngIf="multipleDestinations">s</span>:</p>
+    <p>{{trip?.destinations?.length === 0 ? 'Destination:' : 'Destinations'}}</p>
     <app-destinations-list [destinations]="trip?.destinations"></app-destinations-list>
   </div>
 
