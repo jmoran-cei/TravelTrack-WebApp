@@ -13,7 +13,8 @@ export class DataService implements InMemoryDbService {
         {
           id: 1,
           title: "Brothers' Anguila Trip",
-          details: 'Oremlay ipsumyay olorday itsay ametyay, onsectetuercay adipiscingyay elityay. Edsay itaevay eolay inyay iamday empersay orttitorpay. Ullamnay idyay augueyay. Aecenasmay atyay acuslay isquay islnay auctoryay imperdietyay. Integeryay incidunttay acinialay elitvay. Uspendissesay aretraphay. Uisday ariusvay. Ellentesquepay abitanthay orbimay istiquetray enectussay etyay etusnay etyay alesuadamay amesfay acyay urpistay egestasyay.',
+          details:
+            'Oremlay ipsumyay olorday itsay ametyay, onsectetuercay adipiscingyay elityay. Edsay itaevay eolay inyay iamday empersay orttitorpay. Ullamnay idyay augueyay. Aecenasmay atyay acuslay isquay islnay auctoryay imperdietyay. Integeryay incidunttay acinialay elitvay. Uspendissesay aretraphay. Uisday ariusvay. Ellentesquepay abitanthay orbimay istiquetray enectussay etyay etusnay etyay alesuadamay amesfay acyay urpistay egestasyay.',
           startDate: new Date('3/15/2022'),
           endDate: new Date('3/20/2022'),
           destinations: [
@@ -24,10 +25,56 @@ export class DataService implements InMemoryDbService {
               country: 'Anguilla',
             },
           ],
-          members: [],
+          members: [
+            {
+              username: 'jmoran@ceiamerica.com',
+              password: 'P@ssw0rd',
+              firstName: 'Jonathan',
+              lastName: 'Moran',
+              address: [],
+              pictureURL: 'assets/images/dummy1.jpg'
+            },
+            {
+              username: 'dummyuser@dummy.dum',
+              password: 'P@ssw0rd',
+              firstName: 'Dummy',
+              lastName: 'User',
+              address: [],
+              pictureURL: 'assets/images/users/dummy1.jpg'
+            },
+            {
+              username: 'fakeuser@fakey.fake',
+              password: 'P@ssw0rd',
+              firstName: 'Fake',
+              lastName: 'User',
+              address: [],
+              pictureURL: 'assets/images/users/dummy1.jpg'
+            }
+          ],
           photos: [],
           itinerary: [],
-          toDo: [],
+          toDo: [
+            {
+              task: 'pack clothes',
+              complete: false,
+            },
+            {
+              task: 'get snacks',
+              complete: true,
+            },
+            {
+              task: 'remember to bring gas rewards card',
+              complete: false,
+            },
+            {
+              task: 'finish booking airbnb',
+              complete: true,
+            },
+            {
+              task: 'buy more toothpaste',
+              complete: false,
+            },
+          ],
           imgUrl: 'assets/images/trips/anguila1.jpg',
         },
         {
@@ -50,16 +97,63 @@ export class DataService implements InMemoryDbService {
               country: 'United States',
             },
           ],
-          members: ['fakeuser123', 'fakeuser321'],
+          members: [
+            {
+              username: 'jmoran@ceiamerica.com',
+              password: 'P@ssw0rd',
+              firstName: 'Jonathan',
+              lastName: 'Moran',
+              address: [],
+              pictureURL: 'assets/images/dummy1.jpg'
+            },
+            {
+              username: 'dummyuser@dummy.dum',
+              password: 'P@ssw0rd',
+              firstName: 'Dummy',
+              lastName: 'User',
+              address: [],
+              pictureURL: 'assets/images/users/dummy1.jpg'
+            },
+            {
+              username: 'fakeuser@fakey.fake',
+              password: 'P@ssw0rd',
+              firstName: 'Fake',
+              lastName: 'User',
+              address: [],
+              pictureURL: 'assets/images/users/dummy1.jpg'
+            }
+          ],
           photos: [],
           itinerary: [],
-          toDo: [],
+          toDo: [
+            {
+              task: 'pack clothes',
+              complete: false,
+            },
+            {
+              task: 'get snacks',
+              complete: true,
+            },
+            {
+              task: 'remember to bring gas rewards card',
+              complete: false,
+            },
+            {
+              task: 'finish booking airbnb',
+              complete: true,
+            },
+            {
+              task: 'buy more toothpaste',
+              complete: false,
+            },
+          ],
           imgUrl: 'assets/images/trips/myrtlebeach1.jpg',
         },
         {
           id: 3,
           title: 'Smoky Mountains Thanksgiving',
-          details: 'Oremlay ipsumyay olorday itsay ametyay, onsectetuercay adipiscingyay elityay. Edsay itaevay eolay inyay iamday empersay orttitorpay. Ullamnay idyay augueyay. Aecenasmay atyay acuslay isquay islnay auctoryay imperdietyay. Integeryay incidunttay acinialay elitvay. Uspendissesay aretraphay. Uisday ariusvay. Ellentesquepay abitanthay orbimay istiquetray enectussay etyay etusnay etyay alesuadamay amesfay acyay urpistay egestasyay.',
+          details:
+            'Oremlay ipsumyay olorday itsay ametyay, onsectetuercay adipiscingyay elityay. Edsay itaevay eolay inyay iamday empersay orttitorpay. Ullamnay idyay augueyay. Aecenasmay atyay acuslay isquay islnay auctoryay imperdietyay. Integeryay incidunttay acinialay elitvay. Uspendissesay aretraphay. Uisday ariusvay. Ellentesquepay abitanthay orbimay istiquetray enectussay etyay etusnay etyay alesuadamay amesfay acyay urpistay egestasyay.',
           startDate: new Date('11/23/2019'),
           endDate: new Date('11/30/2019'),
           destinations: [
@@ -70,16 +164,63 @@ export class DataService implements InMemoryDbService {
               country: 'United States',
             },
           ],
-          members: [],
+          members: [
+            {
+              username: 'jmoran@ceiamerica.com',
+              password: 'P@ssw0rd',
+              firstName: 'Jonathan',
+              lastName: 'Moran',
+              address: [],
+              pictureURL: 'assets/images/dummy1.jpg'
+            },
+            {
+              username: 'dummyuser@dummy.dum',
+              password: 'P@ssw0rd',
+              firstName: 'Dummy',
+              lastName: 'User',
+              address: [],
+              pictureURL: 'assets/images/users/dummy1.jpg'
+            },
+            {
+              username: 'fakeuser@fakey.fake',
+              password: 'P@ssw0rd',
+              firstName: 'Fake',
+              lastName: 'User',
+              address: [],
+              pictureURL: 'assets/images/users/dummy1.jpg'
+            }
+          ],
           photos: [],
           itinerary: [],
-          toDo: [],
+          toDo: [
+            {
+              task: 'pack clothes',
+              complete: false,
+            },
+            {
+              task: 'get snacks',
+              complete: true,
+            },
+            {
+              task: 'remember to bring gas rewards card',
+              complete: false,
+            },
+            {
+              task: 'finish booking airbnb',
+              complete: true,
+            },
+            {
+              task: 'buy more toothpaste',
+              complete: false,
+            },
+          ],
           imgUrl: 'assets/images/trips/gatlinburg1.jpg',
         },
         {
           id: 4,
           title: 'Hawaii Family Trip 2023',
-          details: 'Oremlay ipsumyay olorday itsay ametyay, onsectetuercay adipiscingyay elityay. Edsay itaevay eolay inyay iamday empersay orttitorpay. Ullamnay idyay augueyay. Aecenasmay atyay acuslay isquay islnay auctoryay imperdietyay. Integeryay incidunttay acinialay elitvay. Uspendissesay aretraphay. Uisday ariusvay. Ellentesquepay abitanthay orbimay istiquetray enectussay etyay etusnay etyay alesuadamay amesfay acyay urpistay egestasyay.',
+          details:
+            'Oremlay ipsumyay olorday itsay ametyay, onsectetuercay adipiscingyay elityay. Edsay itaevay eolay inyay iamday empersay orttitorpay. Ullamnay idyay augueyay. Aecenasmay atyay acuslay isquay islnay auctoryay imperdietyay. Integeryay incidunttay acinialay elitvay. Uspendissesay aretraphay. Uisday ariusvay. Ellentesquepay abitanthay orbimay istiquetray enectussay etyay etusnay etyay alesuadamay amesfay acyay urpistay egestasyay.',
           startDate: new Date('6/24/2023'),
           endDate: new Date('7/5/2023'),
           destinations: [
@@ -99,7 +240,8 @@ export class DataService implements InMemoryDbService {
         {
           id: 5,
           title: 'Our Ireland Trip',
-          details: 'Oremlay ipsumyay olorday itsay ametyay, onsectetuercay adipiscingyay elityay. Edsay itaevay eolay inyay iamday empersay orttitorpay. Ullamnay idyay augueyay. Aecenasmay atyay acuslay isquay islnay auctoryay imperdietyay. Integeryay incidunttay acinialay elitvay. Uspendissesay aretraphay. Uisday ariusvay. Ellentesquepay abitanthay orbimay istiquetray enectussay etyay etusnay etyay alesuadamay amesfay acyay urpistay egestasyay.',
+          details:
+            'Oremlay ipsumyay olorday itsay ametyay, onsectetuercay adipiscingyay elityay. Edsay itaevay eolay inyay iamday empersay orttitorpay. Ullamnay idyay augueyay. Aecenasmay atyay acuslay isquay islnay auctoryay imperdietyay. Integeryay incidunttay acinialay elitvay. Uspendissesay aretraphay. Uisday ariusvay. Ellentesquepay abitanthay orbimay istiquetray enectussay etyay etusnay etyay alesuadamay amesfay acyay urpistay egestasyay.',
           startDate: new Date('3/11/2023'),
           endDate: new Date('3/20/2023'),
           destinations: [
@@ -117,6 +259,32 @@ export class DataService implements InMemoryDbService {
           imgUrl: 'assets/images/trips/ireland1.jpg',
         },
       ],
+      Users: [
+        {
+          username: 'jmoran@ceiamerica.com',
+          password: 'P@ssw0rd',
+          firstName: 'Jonathan',
+          lastName: 'Moran',
+          address: [],
+          pictureURL: 'assets/images/dummy1.jpg'
+        },
+        {
+          username: 'dummyuser@dummy.dum',
+          password: 'P@ssw0rd',
+          firstName: 'Dummy',
+          lastName: 'User',
+          address: [],
+          pictureURL: 'assets/images/users/dummy1.jpg'
+        },
+        {
+          username: 'fakeuser@fakey.fake',
+          password: 'P@ssw0rd',
+          firstName: 'Fake',
+          lastName: 'User',
+          address: [],
+          pictureURL: 'assets/images/users/dummy1.jpg'
+        }
+      ]
     };
   }
 }
