@@ -13,17 +13,30 @@
 
   <!-- trip fact: # of photos -->
   <app-trip-fact [properties]="photosFact"></app-trip-fact>
-
 </div>
+
 <div class="main-content">
 
-  <h1>{{trip?.title}}</h1>
+  <!-- trip title -->
+  <h1 class="font700">{{trip?.title}}</h1>
 
-  <span class="font700">
-    {{trip?.startDate | date: 'mediumDate'}}
-    &mdash;
-    {{trip?.endDate | date: 'mediumDate'}}
-  </span>
+  <!-- trip start/end dates & duration -->
+  <div class="dates-and-duration">
+    <!-- start date -->
+    <div class="calendar-date">
+      <app-calendar-date [props]="calStartDate"></app-calendar-date>
+    </div>
+
+    <!-- trip duration -->
+    <div class="duration">
+      <app-trip-fact class="duration-fact" [properties]="durationFact"></app-trip-fact>
+    </div>
+
+    <!-- end date -->
+    <div class="calendar-date">
+      <app-calendar-date [props]="calEndDate"></app-calendar-date>
+    </div>
+  </div>
 
   <div>
     <p>{{trip?.destinations?.length === 0 ? 'Destination:' : 'Destinations'}}</p>

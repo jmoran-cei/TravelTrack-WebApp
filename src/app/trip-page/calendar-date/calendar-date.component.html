@@ -1,0 +1,9 @@
+<div>
+  <h5 *ngIf="!!props?.title" class="font700" [ngStyle]="{'color': props?.color}">{{props?.title}}</h5>
+  <div class="calendar-info" [ngStyle]="{'border-top': '8px solid '+props?.color}">
+    <div>
+      <h3 class="font700">{{props?.date | date:'d'}}</h3>
+      <p>{{props?.date | date:'MMM'}} {{this.props?.date | date:'YY'}}</p>
+    </div>
+  </div>
+</div>

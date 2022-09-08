@@ -55,7 +55,8 @@ import {
   TripOverviewComponent,
   TripResolver,
   TripFactComponent,
-  TripDataService
+  TripDataService,
+  CalendarDateComponent
 } from './trip-page'
 
 @NgModule({
@@ -82,7 +83,8 @@ import {
     TripFormComponent,
     EditTripComponent,
     TripOverviewComponent,
-    TripFactComponent
+    TripFactComponent,
+    CalendarDateComponent
   ],
   imports: [
     ReactiveFormsModule,

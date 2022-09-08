@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ITrip } from '../../shared/models/trip.model';
+import { calendarDateProps } from '../calendar-date/calendar-date.component';
 import { TripDataService } from '../shared/trip-data.service';
 import { factProps } from '../trip-fact/trip-fact.component';
 
@@ -14,6 +15,9 @@ export class TripOverviewComponent implements OnInit {
   toDoFact?: factProps;
   photosFact?: factProps;
   daysUntilFact?: factProps;
+  durationFact?: factProps;
+  calStartDate?: calendarDateProps;
+  calEndDate?: calendarDateProps;
 
   constructor(
     private tripDataService: TripDataService,
@@ -36,6 +40,21 @@ export class TripOverviewComponent implements OnInit {
 
   initChildProps() {
     // trip fact component props
+    var daysUntil = this.tripDataService.numDayDifference(
+      this.trip?.startDate!
+    );
+    var duration = this.tripDataService.numDayDifference(
+      this.trip?.endDate!,
+      this.trip?.startDate!
+    );
+    this.daysUntilFact = {
+      icon: 'bi bi-hourglass-split',
+      digit: Math.abs(daysUntil),
+      text:
+        Math.abs(daysUntil) === 1 ? 'day' : 'days'
+        + (daysUntil >= 0 ? ' left' : ' ago'),
+      color: 'white',
+    };
     this.destinationsFact = {
       icon: 'bi bi-geo-alt-fill',
       digit: this.trip?.destinations?.length!,
@@ -55,16 +74,23 @@ export class TripOverviewComponent implements OnInit {
       text: this.trip?.photos?.length === 1 ? 'photo' : 'photos',
       color: 'white',
     };
-    var daysUntil = this.tripDataService.numDayDifference(
-      this.trip?.startDate!
-    );
-    this.daysUntilFact = {
+    this.durationFact = {
       icon: 'bi bi-stopwatch-fill',
-      digit: Math.abs(daysUntil),
-      text:
-        Math.abs(daysUntil) === 1 ? 'day' : 'days'
-        + (daysUntil >= 0 ? ' left' : ' ago'),
-      color: 'white',
+      digit: duration,
+      text: duration === 1 ? 'day' : 'days',
+      color: 'rgb(31,31,31)',
+    };
+
+    // calendar date component props
+    this.calStartDate = {
+      title: 'start',
+      color: 'green',
+      date: this.trip?.startDate!,
+    };
+    this.calEndDate = {
+      title: 'end',
+      color: 'red',
+      date: this.trip?.endDate!,
     };
   }
 }
