@@ -10,6 +10,7 @@ export * from './trip-sidebar-option.component.ts/trip-sidebar-option.component'
 export * from './shared/trip-data.service'
 export * from './trip-fact/trip-fact.component'
 export * from './calendar-date/calendar-date.component'
+export * from './todo-list/todo-list.component'
 
 // routes & module
 export * from './trip.routes'

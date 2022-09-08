@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ITrip } from '../../shared/models/trip.model';
 import { calendarDateProps } from '../calendar-date/calendar-date.component';
 import { TripDataService } from '../shared/trip-data.service';
+import { toDoListProps } from '../todo-list/todo-list.component';
 import { factProps } from '../trip-fact/trip-fact.component';
 
 @Component({
@@ -18,6 +19,7 @@ export class TripOverviewComponent implements OnInit {
   durationFact?: factProps;
   calStartDate?: calendarDateProps;
   calEndDate?: calendarDateProps;
+  toDoList?: toDoListProps;
 
   constructor(
     private tripDataService: TripDataService,
@@ -51,8 +53,9 @@ export class TripOverviewComponent implements OnInit {
       icon: 'bi bi-hourglass-split',
       digit: Math.abs(daysUntil),
       text:
-        Math.abs(daysUntil) === 1 ? 'day' : 'days'
-        + (daysUntil >= 0 ? ' left' : ' ago'),
+        Math.abs(daysUntil) === 1
+          ? 'day'
+          : 'days' + (daysUntil >= 0 ? ' left' : ' ago'),
       color: 'white',
     };
     this.destinationsFact = {
@@ -91,6 +94,15 @@ export class TripOverviewComponent implements OnInit {
       title: 'end',
       color: 'red',
       date: this.trip?.endDate!,
+    };
+
+    // to do list component prop
+    this.toDoList = {
+      toDo: this.trip?.toDo!,
+      display: {
+        all: true,
+        showIcons: true,
+      },
     };
   }
 }

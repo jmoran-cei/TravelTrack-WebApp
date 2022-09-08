@@ -1,5 +1,6 @@
 import { IUser } from "src/app/user"
 import { IDestination } from "./destination.model"
+import { IToDo } from "./toDo.model"
 
 export interface ITrip {
   id: number
@@ -12,6 +13,6 @@ export interface ITrip {
   members: IUser[]
   photos: never[]   //update
   itinerary: never[]  //update
-  toDo: never[]       //update
+  toDo: IToDo[]       //update
   imgUrl: string
 }

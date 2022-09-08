@@ -1,0 +1,27 @@
+ul {
+  list-style-type: none;
+  padding-left: 40px;
+  position: relative;
+}
+
+.complete::before {
+  font-family: "Bootstrap-icons";
+  font-weight: 700;
+  content: "\F26D";
+  position: absolute;
+  /* make checkmark appear larger than the text the li text */
+  font-size: larger;
+  left: 0px;
+  color: rgb(0, 66, 14);
+}
+
+.incomplete::before {
+  font-family: "Bootstrap-icons";
+  font-weight: 700;
+  content: "\F629";
+  position: absolute;
+  /* make X appear larger than the text the li text */
+  font-size: larger;
+  left: 0px;
+  color: rgb(85, 0, 0);
+}

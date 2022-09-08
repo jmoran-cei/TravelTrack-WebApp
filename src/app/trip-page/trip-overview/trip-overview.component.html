@@ -49,4 +49,30 @@
     </button>
   </a>
 
+  <!-- to do list overview -->
+  <div class="alert alert-info" role="alert">
+
+    <!-- all text content -->
+    <div class="to-do-content">
+
+      <!-- to do heading -->
+      <h4 class="font700">{{trip?.toDo?.length === 0 ? 'Empty To Do List?' : "Don't forget"}}</h4>
+
+      <!-- to do list -->
+      <div *ngIf="trip?.toDo?.length !== 0" class="to-do-list">
+        <app-todo-list [props]="toDoList"></app-todo-list>
+      </div>
+
+      <!-- empty to do list: to do button -->
+      <div *ngIf="trip?.toDo?.length === 0" class="flex-center empty-to-do">
+        <button class="btn btn-primary to-do-btn" [routerLink]="['../todo']">Start Tracking Your Tasks</button>
+      </div>
+    </div>
+
+    <!-- side image -->
+    <div class="clipart-img flex-center">
+      <img src="assets/images/general/clipart-travel-stuff.png">
+    </div>
+  </div>
+
 </div>

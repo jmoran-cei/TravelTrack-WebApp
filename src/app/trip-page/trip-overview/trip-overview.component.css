@@ -25,6 +25,7 @@
   margin-top: -65px;
 }
 
+/* contains: dates + duration */
 .dates-and-duration {
   position: relative;
   margin-left: -1%;
@@ -41,6 +42,7 @@
   align-self: end;
 }
 
+/* contains: duration fact */
 .duration {
   display: inline-flex;
   align-items: center;
@@ -64,4 +66,74 @@
 
 .duration-fact {
   transform: scale(1.2);
+}
+
+.alert-info {
+  display: flex;
+  margin: 30px -1%;
+  padding: 25px 40px;
+  color: rgb(31, 31, 31);
+  background: white;
+  border: none;
+}
+
+/* contains: all to do list related elements */
+.to-do-content {
+  position: relative;
+  width: 75%;
+}
+
+/* to do list heading */
+.to-do-content h4 {
+  margin: 0 0 18px 0;
+}
+
+/* to do list component div */
+.to-do-list {
+  padding-left: 6%;
+  font-size: 16px;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* contains: to-do-btn */
+.empty-to-do {
+  padding-right: 10%;
+  height: 100px;
+  width: 100%;
+}
+
+/* contains: to do clipart img */
+.clipart-img {
+  width: 25%;
+}
+
+.clipart-img img {
+  width: 100%;
+  max-width: 200px;
+  min-width: 68px;
+}
+
+/* to do button */
+.to-do-btn {
+  color: rgb(0, 0, 0);
+  font-size: 22px;
+  background-image: linear-gradient(to bottom right, #a7b6e0, #859ad4);
+  border: none;
+  padding: 15px 30px;
+}
+.to-do-btn:hover {
+  color: rgb(43, 43, 43);
+  background-image: linear-gradient(to bottom right, #859ad4, #a7b6e0);
+}
+
+.btn {
+  outline: none;
+}
+.btn:active {
+  outline: none;
 }
