@@ -7,14 +7,12 @@
     </p>
 
     <!-- Destination -->
-    <p>
-      <span [ngSwitch]="destination?.country">
-        <!-- in U.S. -->
-        <p *ngSwitchCase="'United States'">{{ destination?.city }}, {{ destination?.region }}, U.S.</p>
+    <p [ngSwitch]="destination?.country">
+      <!-- in U.S. -->
+      <span *ngSwitchCase="'United States'">{{ destination?.city }}, {{ destination?.region }}, U.S.</span>
 
-        <!-- not in U.S. -->
-        <p *ngSwitchDefault>{{ destination?.city }}, {{ destination?.country }}</p>
-      </span>
+      <!-- not in U.S. -->
+      <span *ngSwitchDefault>{{ destination?.city }}, {{ destination?.country }}</span>
     </p>
   </div>
 

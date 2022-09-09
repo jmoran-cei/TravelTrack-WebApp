@@ -11,6 +11,7 @@ export * from './shared/trip-data.service'
 export * from './trip-fact/trip-fact.component'
 export * from './calendar-date/calendar-date.component'
 export * from './todo-list/todo-list.component'
+export * from './members-list/members-list.component'
 
 // routes & module
 export * from './trip.routes'
