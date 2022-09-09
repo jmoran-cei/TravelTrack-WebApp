@@ -1,0 +1,21 @@
+<ng-container *ngFor="let destination of destinations">
+
+  <div [ngClass]="{'frame' : showFrame}">
+    <!-- Icon  -->
+    <p *ngIf="showIcon" class="icon">
+      <span class="bi bi-geo-alt-fill"></span>
+    </p>
+
+    <!-- Destination -->
+    <p>
+      <span [ngSwitch]="destination?.country">
+        <!-- in U.S. -->
+        <p *ngSwitchCase="'United States'">{{ destination?.city }}, {{ destination?.region }}, U.S.</p>
+
+        <!-- not in U.S. -->
+        <p *ngSwitchDefault>{{ destination?.city }}, {{ destination?.country }}</p>
+      </span>
+    </p>
+  </div>
+
+</ng-container>
