@@ -38,13 +38,36 @@
     </div>
   </div>
 
-  <div>
-    <p>{{trip?.destinations?.length === 0 ? 'Destination:' : 'Destinations'}}</p>
-    <app-destinations-list [destinations]="trip?.destinations"></app-destinations-list>
+  <div class="text-content">
+    <!-- details -->
+    <p *ngIf="!!trip?.details" class="details col-xs-12">{{trip?.details}}</p>
+
+    <!-- destinations -->
+    <div class="col-sm-6 col-xs-12">
+      <!-- heading -->
+      <h4 class="font700">{{trip?.destinations?.length === 0 ? 'Destination:' : 'Destinations:'}}</h4>
+
+      <!-- destination list -->
+      <div class="list">
+        <app-destinations-list [destinations]="trip?.destinations" [showIcon]="true" [showFrame]="true">
+        </app-destinations-list>
+      </div>
+    </div>
+
+    <!-- members -->
+    <div *ngIf="trip?.members?.length !== 0" class="col-sm-6 col-xs-12">
+      <!-- heading -->
+      <h4 class="list-heading font700">{{trip?.members?.length === 0 ? 'Traveler:' : 'Travelers:'}}</h4>
+
+      <!-- member list -->
+      <div class="list">
+        <app-members-list [props]="membersList"></app-members-list>
+      </div>
+    </div>
   </div>
 
   <!-- to do list overview -->
-  <div class="alert alert-info" role="alert">
+  <div class="alert alert-info col-xs-12" role="alert">
 
     <!-- all text content -->
     <div class="to-do-content">

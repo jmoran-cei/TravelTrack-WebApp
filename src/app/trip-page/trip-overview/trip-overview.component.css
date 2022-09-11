@@ -3,6 +3,10 @@
   margin: 15px 5%;
 }
 
+h1 {
+  margin: 20px 0 20px -1%;
+}
+
 /* background image */
 .trip-img {
   height: 275px;
@@ -68,6 +72,29 @@
   transform: scale(1.2);
 }
 
+.text-content {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.text-content h4 {
+  margin: 0;
+}
+
+.details {
+  text-align: justify;
+  margin-bottom: 35px;
+}
+
+.list-heading {
+  margin: 20px;
+}
+
+.list {
+  margin-top: 20px;
+  padding-left: 0px;
+}
+
 .alert-info {
   display: flex;
   margin: 30px -1%;
@@ -75,6 +102,7 @@
   color: rgb(31, 31, 31);
   background: white;
   border: none;
+  width: 102%;
 }
 
 /* contains: all to do list related elements */
@@ -121,7 +149,7 @@
 /* to do button */
 .to-do-btn {
   color: rgb(0, 0, 0);
-  font-size: 22px;
+  font-size: 19px;
   background-image: linear-gradient(to bottom right, #a7b6e0, #859ad4);
   border: none;
   padding: 15px 30px;

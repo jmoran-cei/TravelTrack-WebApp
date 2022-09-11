@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { membersListProps } from '..';
 import { ITrip } from '../../shared/models/trip.model';
 import { calendarDateProps } from '../calendar-date/calendar-date.component';
 import { TripDataService } from '../shared/trip-data.service';
@@ -20,6 +21,7 @@ export class TripOverviewComponent implements OnInit {
   calStartDate?: calendarDateProps;
   calEndDate?: calendarDateProps;
   toDoList?: toDoListProps;
+  membersList?: membersListProps;
 
   constructor(
     private tripDataService: TripDataService,
@@ -31,16 +33,10 @@ export class TripOverviewComponent implements OnInit {
       this.trip = data['trip'];
     });
 
-    this.initAllProps();
+    this.initProps();
   }
 
-  initAllProps() {
-    // insert component props for init
-
-    this.initChildProps();
-  }
-
-  initChildProps() {
+  initProps() {
     // trip fact component props
     var daysUntil = this.tripDataService.numDayDifference(
       this.trip?.startDate!
@@ -103,6 +99,11 @@ export class TripOverviewComponent implements OnInit {
         all: true,
         showIcons: true,
       },
+    };
+    this.membersList = {
+      members: this.trip?.members!,
+      showIcon: true,
+      showFrame: true,
     };
   }
 }

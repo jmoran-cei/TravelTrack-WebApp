@@ -4,7 +4,7 @@ p {
 }
 
 .icon {
-  margin-right: 10px;
+  margin-right: 7px;
 }
 
 .frame {
@@ -12,5 +12,8 @@ p {
   border-radius: 10px;
   width: fit-content;
   background: rgb(233, 233, 233);
+  margin-bottom: 10px;
+  display: inline-block;
+  margin-right: 10px;
   margin-bottom: 10px;
 }

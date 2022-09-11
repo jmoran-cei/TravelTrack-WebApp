@@ -231,7 +231,16 @@ export class DataService implements InMemoryDbService {
               country: 'United States',
             },
           ],
-          members: [],
+          members: [
+            {
+              username: 'dummyuser@dummy.dum',
+              password: 'P@ssw0rd',
+              firstName: 'Dummy',
+              lastName: 'User',
+              address: [],
+              pictureURL: 'assets/images/users/dummy1.jpg'
+            },
+          ],
           photos: [],
           itinerary: [],
           toDo: [],
@@ -252,7 +261,16 @@ export class DataService implements InMemoryDbService {
               country: 'Ireland',
             },
           ],
-          members: [],
+          members: [
+            {
+              username: 'dummyuser@dummy.dum',
+              password: 'P@ssw0rd',
+              firstName: 'Dummy',
+              lastName: 'User',
+              address: [],
+              pictureURL: 'assets/images/users/dummy1.jpg'
+            },
+          ],
           photos: [],
           itinerary: [],
           toDo: [],
