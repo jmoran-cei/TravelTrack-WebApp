@@ -1,1 +1,40 @@
-This page will be implemented soon.
+<div class="container-fluid">
+  <h1 class="font700">{{trip.title}}</h1>
+  <h2>To Do List</h2>
+
+  <form (ngSubmit)="onSubmit()" novalidate [formGroup]="toDoForm">
+    <ng-container formArrayName="tasks" *ngFor="let task of tasks?.controls; let i=index; let last=last">
+      <div class="task">
+        <!-- status btn-->
+        <button type="button" class="btn btn-secondary font700" (click)="toggleStatus(i)">
+          <span *ngIf="toDoForm.get('statuses.'+i)?.value === true" class="bi bi-check2-circle complete"></span>
+          <span *ngIf="toDoForm.get('statuses.'+i)?.value === false" class="bi bi-circle incomplete"></span>
+        </button>
+
+        <!-- task: text input -->
+        <input class="form-control" type="text" [formControlName]="i" />
+
+        <div class="add-remove-btns">
+          <!-- remove task button -->
+          <button type="button" class="btn btn-secondary font700" (click)="removeTask(i)">
+            <span class="bi bi-dash-circle"></span>
+          </button>
+
+          <!-- add new button -->
+          <ng-container *ngIf="last">
+            <button type="button" class="btn btn-secondary font700" (click)="addTask()">
+              <span class="bi bi-plus-circle"></span>
+            </button>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="submit-cancel-btns">
+      <!-- save -->
+      <button type="submit" class="btn btn-primary">Save</button>
+      <!-- cancel -->
+      <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>

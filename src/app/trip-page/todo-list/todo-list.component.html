@@ -1,19 +1,22 @@
 <ng-container *ngFor="let task of props?.toDo">
-  <!-- toggle: display all tasks -->
-  <ul *ngIf="props?.display?.all">
-    <li [ngClass]="{'complete' : props?.display?.showIcons && task.complete,
+  <ng-container *ngIf="task.task !== ''">
+
+    <!-- toggle: display all tasks -->
+    <ul *ngIf="props?.display?.all">
+      <li [ngClass]="{'complete' : props?.display?.showIcons && task.complete,
       'incomplete' : props?.display?.showIcons && !task.complete}">
-      {{task.task}}
-    </li>
-  </ul>
+        {{task.task}}
+      </li>
+    </ul>
 
-  <!-- toggle: complete all tasks -->
-  <ul *ngIf="props?.display?.complete">
-    <li *ngIf="task.complete" [ngClass]="{'complete' : props?.display?.showIcons}">{{task.task}}</li>
-  </ul>
+    <!-- toggle: complete all tasks -->
+    <ul *ngIf="props?.display?.complete">
+      <li *ngIf="task.complete" [ngClass]="{'complete' : props?.display?.showIcons}">{{task.task}}</li>
+    </ul>
 
-  <!-- toggle: incomplete all tasks -->
-  <ul *ngIf="props?.display?.uncomplete">
-    <li *ngIf="!task.complete" [ngClass]="{'incomplete' : props?.display?.showIcons}">{{task.task}}</li>
-  </ul>
+    <!-- toggle: incomplete all tasks -->
+    <ul *ngIf="props?.display?.uncomplete">
+      <li *ngIf="!task.complete" [ngClass]="{'incomplete' : props?.display?.showIcons}">{{task.task}}</li>
+    </ul>
+  </ng-container>
 </ng-container>
