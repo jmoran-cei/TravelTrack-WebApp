@@ -54,6 +54,11 @@ import {
 import {
   TripOverviewComponent,
   TripResolver,
+  TripFactComponent,
+  TripDataService,
+  CalendarDateComponent,
+  ToDoListComponent,
+  MembersListComponent
 } from './trip-page'
 
 @NgModule({
@@ -79,7 +84,11 @@ import {
     DestinationsListComponent,
     TripFormComponent,
     EditTripComponent,
-    TripOverviewComponent
+    TripOverviewComponent,
+    TripFactComponent,
+    CalendarDateComponent,
+    ToDoListComponent,
+    MembersListComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -101,6 +110,7 @@ import {
     AuthGuard,
     TripListResolver,
     TripResolver,
+    TripDataService,
     { provide: 'canDeactivateTripForm', useValue: checkDirtyState },
   ],
   bootstrap: [TravelAppComponent]

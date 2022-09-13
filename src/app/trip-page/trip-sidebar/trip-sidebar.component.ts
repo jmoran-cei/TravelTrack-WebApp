@@ -34,6 +34,12 @@ export class TripSidebarComponent implements OnInit {
     icon: 'bi bi-camera',
     activeIcon: 'bi bi-camera-fill',
   };
+  edit = {
+    name: 'Edit Trip',
+    subpath: 'edit',
+    icon: 'bi bi-pencil-square',
+    activeIcon: 'bi bi-pencil-square',
+  };
 
   constructor(private route: ActivatedRoute) {}
 

@@ -9,3 +9,11 @@
   background-color: rgb(31, 31, 31);
   text-align: center;
 }
+
+.bottom-option {
+  display: inline-block;
+  position: fixed;
+  width: 105px;
+  left: 0;
+  bottom: 0;
+}

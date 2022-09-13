@@ -1,0 +1,167 @@
+/* content of page */
+.main-content {
+  margin: 15px 5%;
+}
+
+h1 {
+  margin: 20px 0 20px -1%;
+}
+
+/* background image */
+.trip-img {
+  height: 275px;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* overlay of facts & icons */
+.facts-overlay {
+  height: 65px;
+  width: 100%;
+  z-index: 2;
+  padding-left: 2%;
+  background-color: rgb(31, 31, 31, 0.6);
+  backdrop-filter: blur(5px);
+  object-fit: cover;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: -65px;
+}
+
+/* contains: dates + duration */
+.dates-and-duration {
+  position: relative;
+  margin-left: -1%;
+  margin-right: -1%;
+  height: 96.4px;
+  width: 102%;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+/* calendar dates */
+.calendar-date {
+  display: inline-flex;
+  align-self: end;
+}
+
+/* contains: duration fact */
+.duration {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: end;
+  width: 100%;
+  height: 65px;
+  margin-bottom: 2px;
+  background: rgb(70, 255, 81);
+  background: linear-gradient(
+    90deg,
+    rgba(70, 255, 81, 0.3200630594034489) 0%,
+    rgba(206, 255, 209, 0.6842087176667542) 7%,
+    rgba(255, 255, 255, 1) 19%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 255, 255, 1) 81%,
+    rgba(255, 202, 202, 0.5525560566023284) 93%,
+    rgba(255, 73, 73, 0.208018241476278) 100%
+  );
+}
+
+.duration-fact {
+  transform: scale(1.2);
+}
+
+.text-content {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.text-content h4 {
+  margin: 0;
+}
+
+.details {
+  text-align: justify;
+  margin-bottom: 35px;
+}
+
+.list-heading {
+  margin: 20px;
+}
+
+.list {
+  margin-top: 20px;
+  padding-left: 0px;
+}
+
+.alert-info {
+  display: flex;
+  margin: 30px -1%;
+  padding: 25px 40px;
+  color: rgb(31, 31, 31);
+  background: white;
+  border: none;
+  width: 102%;
+}
+
+/* contains: all to do list related elements */
+.to-do-content {
+  position: relative;
+  width: 75%;
+}
+
+/* to do list heading */
+.to-do-content h4 {
+  margin: 0 0 18px 0;
+}
+
+/* to do list component div */
+.to-do-list {
+  padding-left: 6%;
+  font-size: 16px;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* contains: to-do-btn */
+.empty-to-do {
+  padding-right: 10%;
+  height: 100px;
+  width: 100%;
+}
+
+/* contains: to do clipart img */
+.clipart-img {
+  width: 25%;
+}
+
+.clipart-img img {
+  width: 100%;
+  max-width: 200px;
+  min-width: 68px;
+}
+
+/* to do button */
+.to-do-btn {
+  color: white;
+  font-size: 17px;
+  background-image: linear-gradient(to bottom right, #a7b6e0, #859ad4);
+  border: none;
+  padding: 10px 18px;
+}
+.to-do-btn:hover {
+  color: rgb(43, 43, 43);
+  background-image: linear-gradient(to bottom right, #859ad4, #a7b6e0);
+}
+
+.btn {
+  outline: none;
+}
+.btn:active {
+  outline: none;
+}

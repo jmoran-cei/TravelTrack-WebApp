@@ -1,0 +1,44 @@
+/* trip fact */
+.trip-fact {
+  min-height: 40px;
+  width: auto;
+  margin: 0 10px 0 10px;
+  display: flex;
+  align-items: center;
+}
+
+/* fact icon & text */
+.trip-fact span,
+h6,
+p {
+  margin: 0;
+  color: white;
+}
+
+/* fact variable size */
+.trip-fact h6 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* fact static text */
+.trip-fact p {
+  font-size: 15px;
+  font-weight: 300;
+}
+
+/* div for fact icon */
+.trip-fact .icon {
+  display: inline-block;
+  min-width: 40px;
+}
+
+/* fact icon */
+.trip-fact span {
+  font-size: 32px;
+}
+
+/* fact text */
+.trip-fact .text {
+  display: inline-block;
+}

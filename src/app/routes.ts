@@ -5,8 +5,7 @@ import { HomePageComponent } from "./home/home-page.component";
 import {
   NewTripComponent,
   TripListResolver,
-  TripsListComponent,
-  EditTripComponent
+  TripsListComponent
 } from './trips'
 import {
   TripPageComponent,
@@ -20,7 +19,7 @@ export const appRoutes:Routes =[
   {path: 'trips', component: TripsListComponent, resolve: {trips:TripListResolver}, canActivate: [AuthGuard]},
   {path: 'trips/new', component: NewTripComponent, canActivate: [AuthGuard], canDeactivate: ['canDeactivateTripForm']},
   {
-    path: 'trips/:id', component: TripPageComponent, resolve: {trip:TripResolver}, canActivate: [AuthGuard],
+    path: 'trips/:id', component: TripPageComponent, resolve: {trip:TripResolver}, canActivate: [AuthGuard], runGuardsAndResolvers: "always",
     loadChildren: () => import ('./trip-page/trip.module').then(m => m.TripModule)
   },
   {path: '404', component: Error404Component},

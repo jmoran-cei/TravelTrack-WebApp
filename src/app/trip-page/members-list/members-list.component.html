@@ -1,0 +1,22 @@
+<ng-container *ngFor="let member of props?.members">
+
+  <div class="inline-block">
+    <div [ngClass]="{'frame' : props?.showFrame}">
+      <!-- icon  -->
+      <div *ngIf="props?.showIcon" class="icon">
+        <span *ngIf="member.username === auth.currentUser.username" class="bi bi-person-lines-fill"></span>
+        <span *ngIf="member.username !== auth.currentUser.username" class="bi bi-person-square"></span>
+      </div>
+
+      <div class="member-info">
+        <!-- name -->
+        <p class="no-overflow">{{member.firstName}} {{member.lastName}}</p>
+
+        <!-- username -->
+        <h6 class="no-overflow">{{member.username}}</h6>
+      </div>
+
+    </div>
+  </div>
+
+</ng-container>

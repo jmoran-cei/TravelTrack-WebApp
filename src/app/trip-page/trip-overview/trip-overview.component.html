@@ -1,22 +1,95 @@
-<div class="container-fluid">
+<div>
+  <img class="trip-img" src="{{trip?.imgUrl}}">
+</div>
+<div class="facts-overlay">
+  <!-- trip fact: # of days from trip-->
+  <app-trip-fact [properties]="daysUntilFact"></app-trip-fact>
 
-  <h1>{{trip?.title}}</h1>
+  <!-- trip fact: # of destinations -->
+  <app-trip-fact [properties]="destinationsFact"></app-trip-fact>
 
-  <span class="font700">
-    {{trip?.startDate | date: 'mediumDate'}}
-    &mdash;
-    {{trip?.endDate | date: 'mediumDate'}}
-  </span>
+  <!-- trip fact: # of toDo tasks -->
+  <app-trip-fact [properties]="toDoFact"></app-trip-fact>
 
-  <div>
-    <p>Destination<span *ngIf="multipleDestinations">s</span>:</p>
-    <app-destinations-list [destinations]="trip?.destinations"></app-destinations-list>
+  <!-- trip fact: # of photos -->
+  <app-trip-fact [properties]="photosFact"></app-trip-fact>
+</div>
+
+<div class="main-content">
+
+  <!-- trip title -->
+  <h1 class="font700">{{trip?.title}}</h1>
+
+  <!-- trip start/end dates & duration -->
+  <div class="dates-and-duration">
+    <!-- start date -->
+    <div class="calendar-date">
+      <app-calendar-date [props]="calStartDate"></app-calendar-date>
+    </div>
+
+    <!-- trip duration -->
+    <div class="duration">
+      <app-trip-fact class="duration-fact" [properties]="durationFact"></app-trip-fact>
+    </div>
+
+    <!-- end date -->
+    <div class="calendar-date">
+      <app-calendar-date [props]="calEndDate"></app-calendar-date>
+    </div>
   </div>
 
-  <a [routerLink]="['/trips', trip?.id, 'edit']">
-    <button>
-      <span class="glyphicon glyphicon-pencil"></span>
-    </button>
-  </a>
+  <div class="text-content">
+    <!-- details -->
+    <p *ngIf="!!trip?.details" class="details col-xs-12">{{trip?.details}}</p>
+
+    <!-- destinations -->
+    <div class="col-sm-6 col-xs-12">
+      <!-- heading -->
+      <h4 class="font700">{{trip?.destinations?.length === 0 ? 'Destination:' : 'Destinations:'}}</h4>
+
+      <!-- destination list -->
+      <div class="list">
+        <app-destinations-list [destinations]="trip?.destinations" [showIcon]="true" [showFrame]="true">
+        </app-destinations-list>
+      </div>
+    </div>
+
+    <!-- members -->
+    <div *ngIf="trip?.members?.length !== 0" class="col-sm-6 col-xs-12">
+      <!-- heading -->
+      <h4 class="list-heading font700">{{trip?.members?.length === 0 ? 'Traveler:' : 'Travelers:'}}</h4>
+
+      <!-- member list -->
+      <div class="list">
+        <app-members-list [props]="membersList"></app-members-list>
+      </div>
+    </div>
+  </div>
+
+  <!-- to do list overview -->
+  <div class="alert alert-info col-xs-12" role="alert">
+
+    <!-- all text content -->
+    <div class="to-do-content">
+
+      <!-- to do heading -->
+      <h4 class="font700">{{trip?.toDo?.length === 0 ? 'Empty To Do List?' : "Don't forget"}}</h4>
+
+      <!-- to do list -->
+      <div *ngIf="trip?.toDo?.length !== 0" class="to-do-list">
+        <app-todo-list [props]="toDoList"></app-todo-list>
+      </div>
+
+      <!-- empty to do list: to do button -->
+      <div *ngIf="trip?.toDo?.length === 0" class="flex-center empty-to-do">
+        <button class="btn btn-primary to-do-btn font700" [routerLink]="['../todo']">Start Tracking Your Tasks</button>
+      </div>
+    </div>
+
+    <!-- side image -->
+    <div class="clipart-img flex-center">
+      <img src="assets/images/general/clipart-travel-stuff.png">
+    </div>
+  </div>
 
 </div>
