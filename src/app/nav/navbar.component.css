@@ -18,6 +18,8 @@
 
 /* navbar fixed position */
 .navbar-fixed {
+  top: 0;
+  left: 0;
   z-index: 1;
   position: fixed;
   width: 100%;
@@ -26,6 +28,7 @@
 /* fill blank space behind navbar so content starts at bottom of navbar */
 .navbar-fixed-behind {
   height: 70px;
+  width: 100%;
 }
 
 /* adjust margin */
