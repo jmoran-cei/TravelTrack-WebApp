@@ -1,7 +1,4 @@
-import {
-  HttpClient,
-  HttpHeaders,
-} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   catchError,
@@ -22,7 +19,9 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   // have to grab users this way in order to get them from angular web api(can only get by 'id' not by a 'username')
-  users = this.http.get<IUser[]>(this.usersUrl).pipe(retry(2),catchError(this.handleError('getUsers()', [])),shareReplay());
+  users = this.http
+    .get<IUser[]>(this.usersUrl)
+    .pipe(retry(2), catchError(this.handleError('getUsers()', [])));
 
   // check if user is in users
   getUser(username: string): Observable<IUser | undefined> {
@@ -34,20 +33,31 @@ export class UserService {
     );
   }
 
+  // create new user account
+  createUser(user: IUser): Observable<IUser> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http
+      .post<IUser>(this.usersUrl, user, { headers: headers })
+      .pipe(
+        tap((data: IUser) => console.table(data)),
+        catchError(this.handleError<IUser>('createUser()'))
+      );
+  }
+
   // check if user exists
   checkUsernameExists(username: string): Observable<boolean> {
     var userValid = false;
 
-    return this.getUser(username)
-      .pipe(map(
-        result => {
-          if (result !== undefined) {
-            return (userValid = true);
-          } else {
-            return (userValid = false);
-          }
+    return this.getUser(username).pipe(
+      map((result) => {
+        if (result !== undefined) {
+          return (userValid = true);
+        } else {
+          return (userValid = false);
         }
-      ));
+      })
+    );
   }
 
   private handleError<IUser>(

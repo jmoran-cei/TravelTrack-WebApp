@@ -27,7 +27,7 @@
               <!-- Subtitle: REGISTER YOUR NEW ACCOUNT -->
               <h3 class="card-title subtitle">Register your new account.</h3>
 
-              <form #createAccountForm="ngForm" (ngSubmit)="createAccount()">
+              <form [formGroup]="accountForm" (ngSubmit)="createAccount()">
                 <!-- FULL NAME -->
                 <div class="flex-row">
 
@@ -41,9 +41,8 @@
                       </div>
                     </div>
                     <!-- input box -->
-                    <input required type="text" id="firstName" #firstName="ngModel" (ngModel)="firstName"
-                      name="firstName" class="form-control form-control-lg ng-invalid input-half"
-                      placeholder="First name" />
+                    <input formControlName="firstName" required type="text" name="firstName"
+                      class="form-control form-control-lg ng-invalid input-half" placeholder="First name" />
                   </div>
 
                   <!-- LAST NAME -->
@@ -56,7 +55,7 @@
                       </div>
                     </div>
                     <!-- input box -->
-                    <input required type="text" id="lastName" #lastName="ngModel" (ngModel)="lastName" name="lastName"
+                    <input formControlName="lastName" required type="text"
                       class="form-control form-control-lg ng-invalid input-half" placeholder="Last name" />
                   </div>
                 </div>
@@ -67,12 +66,18 @@
                   <div class="alert-placeholder flex">
                     <div class="alert alert-danger"
                       [hidden]="username.valid || (!mouseoverSubmit && (username.valid || username.untouched))">
-                      <p>Username is required</p>
+                      <p>
+                        {{ username.hasError('required') ? 'Username is required' : '' }}
+                        {{ username.hasError('email') && !username.hasError('required') ? 'Username must be an email' :
+                        '' }}
+                        {{ username.hasError('usernameExists') && !username.hasError('email') &&
+                        !username.hasError('required') ? 'Username already exists' : '' }}
+                      </p>
                     </div>
                   </div>
                   <!-- input box -->
-                  <input required type="text" id="username" #username="ngModel" (ngModel)="username" name="username"
-                    class="form-control form-control-lg ng-invalid" placeholder="Username" />
+                  <input formControlName="username" required type="text" class="form-control form-control-lg ng-invalid"
+                    placeholder="Username" />
                 </div>
 
                 <!-- PASSWORD -->
@@ -81,26 +86,31 @@
                   <div class="alert-placeholder flex">
                     <div class="alert alert-danger"
                       [hidden]="password.valid || (!mouseoverSubmit && (password.valid || password.untouched))">
-                      <p>Password is required</p>
+                      <p>
+                        {{ password.hasError('required') ? 'Password is required' : '' }}
+                        {{ password.hasError('pattern') && !password.hasError('required') ? 'Must be at least 8
+                        characters, uppercase, lowercase, number, symbol' : '' }}
+                      </p>
                     </div>
                   </div>
                   <!-- input box -->
-                  <input required type="password" id="password" #password="ngModel" (ngModel)="password" name="password"
+                  <input formControlName="password" required type="password"
                     class="form-control form-control-lg ng-invalid" placeholder="Password" />
                 </div>
 
                 <!-- update mouseoverSubmit variable -->
                 <span (mouseenter)="mouseoverSubmit=true" (mouseleave)="mouseoverSubmit=false">
                   <!-- SUBMIT button -->
-                  <button type="submit" [disabled]="!createAccountForm.valid" class="btn btn-default submit-btn">Create Account</button>
+                  <button type="submit" [disabled]="!accountForm.valid" class="btn btn-default submit-btn">Create
+                    Account</button>
                 </span>
-                <p class="card-text"><a class="forgot-pwd">Forgot password?</a></p>
               </form>
 
               <hr />
               <!-- CREATE ACCOUNT button -->
-              <p class="card-text text-larger">Already have an account? <a class="forgot-pwd font700"
-                  [routerLink]="['/user/login']">Sign in</a></p>
+              <p class="card-text text-larger">Already have an account?
+                <a class="forgot-pwd font700" [routerLink]="['/user/login']">Sign in</a>
+              </p>
             </div>
           </div>
         </div>
