@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { AuthService } from '../shared/authentication.service';
 
 @Component({
@@ -61,11 +61,16 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (this.authService.loginUser(username, password)) {
-      this.router.navigate(['trips']);
-    } else {
-      this.invalidAttempt = true;
-      this.loginForm.markAsUntouched();
-    }
+    this.authService
+      .loginUser(username, password)
+      .pipe(take(1))
+      .subscribe((valid) => {
+        if (valid) {
+          this.router.navigate(['trips']);
+        } else {
+          this.invalidAttempt = true;
+          this.loginForm.markAsUntouched();
+        }
+      });
   }
 }
