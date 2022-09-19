@@ -1,28 +1,62 @@
-import { Injectable } from "@angular/core";
-import { IUser } from "../../shared/models/user.model";
+import {
+  HttpClient,
+  HttpHeaders,
+} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import {
+  catchError,
+  map,
+  Observable,
+  of,
+  retry,
+  shareReplay,
+  take,
+  tap,
+} from 'rxjs';
+import { IUser } from '.';
 
 @Injectable()
 export class UserService {
-  getUserByUsername(username:string):IUser {
-    return USERS.find((user:IUser) => user.username == username)!
+  usersUrl = '/api/users';
+
+  constructor(private http: HttpClient) {}
+
+  // have to grab users this way in order to get them from angular web api(can only get by 'id' not by a 'username')
+  users = this.http.get<IUser[]>(this.usersUrl).pipe(retry(2),catchError(this.handleError('getUsers()', [])),shareReplay());
+
+  // check if user is in users
+  getUser(username: string): Observable<IUser | undefined> {
+    return this.users.pipe(
+      take(1),
+      map((users: IUser[]) => {
+        return users.find((user) => user.username === username);
+      })
+    );
+  }
+
+  // check if user exists
+  checkUsernameExists(username: string): Observable<boolean> {
+    var userValid = false;
+
+    return this.getUser(username)
+      .pipe(map(
+        result => {
+          if (result !== undefined) {
+            return (userValid = true);
+          } else {
+            return (userValid = false);
+          }
+        }
+      ));
+  }
+
+  private handleError<IUser>(
+    operation = 'operation',
+    result?: IUser
+  ): (error: any) => Observable<IUser> {
+    return (error: any): Observable<IUser> => {
+      console.error('error: ', error.status);
+      return of(result as IUser);
+    };
   }
 }
-
-const USERS:IUser[] = [
-  {
-    username: 'jmoran@ceiamerica.com',
-    password: 'P@ssw0rd',
-    firstName: 'Jonathan',
-    lastName: 'Moran',
-    address: [],
-    pictureURL: 'assets/images/dummy1.jpg'
-  },
-  {
-    username: 'dummyuser@dummy.dum',
-    password: 'P@ssw0rd',
-    firstName: 'Dummy',
-    lastName: 'User',
-    address: [],
-    pictureURL: 'assets/images/users/dummy1.jpg'
-  }
-]
