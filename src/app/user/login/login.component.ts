@@ -6,9 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription, take } from 'rxjs';
-import { UsernameValidator } from 'src/app/forms/validators/userExists.validator';
-import { UserService } from '../shared';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../shared/authentication.service';
 
 @Component({
@@ -32,14 +30,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private userService: UserService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit() {
     this.createLoginForm();
 
-    this.formStatusSubscription = this.loginForm.statusChanges.subscribe(() => {
+    // resets invalidAttempt boolean when user starts typing again
+    this.formStatusSubscription = this.loginForm.valueChanges.subscribe(() => {
       if (this.loginForm.invalid) this.invalidAttempt = false;
     });
   }
@@ -55,16 +53,19 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  login(username: string, password: string): boolean {
-    if (this.loginForm.invalid) return false;
+  login(username: string, password: string) {
     this.loginForm.markAllAsTouched();
+    if (this.loginForm.invalid) {
+      this.invalidAttempt = true;
+      this.loginForm.markAsUntouched();
+      return;
+    }
+
     if (this.authService.loginUser(username, password)) {
       this.router.navigate(['trips']);
-      return true;
     } else {
       this.invalidAttempt = true;
       this.loginForm.markAsUntouched();
     }
-    return false;
   }
 }
