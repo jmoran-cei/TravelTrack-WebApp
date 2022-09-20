@@ -15,6 +15,7 @@ export class FormFieldComponent implements OnInit {
   @Input() controlName!:string;
   @Input() type!:string;
   @Input() isRequired!:boolean;
+  @Input() isDisabled!:boolean;
   id!:string;
 
   constructor(private controlContainer: ControlContainer) {}

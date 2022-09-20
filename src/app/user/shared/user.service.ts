@@ -33,7 +33,6 @@ export class UserService {
     );
   }
 
-  // create new user account
   createUser(user: IUser): Observable<IUser> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -42,6 +41,18 @@ export class UserService {
       .pipe(
         tap((data: IUser) => console.table(data)),
         catchError(this.handleError<IUser>('createUser()'))
+      );
+  }
+
+  // create new user account
+  updateUser(user: IUser): Observable<IUser> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http
+      .put<IUser>(this.usersUrl, user, { headers: headers })
+      .pipe(
+        tap((data: IUser) => console.table(data)),
+        catchError(this.handleError<IUser>('updateUser()'))
       );
   }
 
