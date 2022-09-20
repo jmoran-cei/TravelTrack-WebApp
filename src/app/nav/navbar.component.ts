@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
-import { filter, take } from "rxjs";
+import { filter, Subscription, take } from "rxjs";
 import { AuthService } from "../user/shared/authentication.service";
 
 @Component({
@@ -9,10 +9,11 @@ import { AuthService } from "../user/shared/authentication.service";
   styleUrls: ['navbar.component.css']
 })
 
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
   isLoggedIn= this.auth.isLoggedIn$.pipe(take(1));
   path!:string;
   isTripPage!:boolean;
+  pathSubscription!: Subscription;
 
   constructor(
     public auth:AuthService,
@@ -20,10 +21,9 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.router.events
+    this.pathSubscription = this.router.events
     .pipe(
-      filter(event => event instanceof NavigationEnd),
-      take(1))
+      filter(event => event instanceof NavigationEnd))
     .subscribe(
       () => {
         let paths = this.router.url.split('/');
@@ -36,6 +36,10 @@ export class NavbarComponent implements OnInit {
           this.isTripPage = false;
       }
     )
+  }
+
+  ngOnDestroy() {
+    this.pathSubscription.unsubscribe();
   }
 
   adjustNameLength(name:string,numChars:number) {

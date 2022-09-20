@@ -19,8 +19,7 @@ export class UsernameValidator {
             } else {
               return result ? { usernameExists: true } : null
             }
-          }
-          )
+          })
         ) as Observable<ValidationErrors>;
     };
   }

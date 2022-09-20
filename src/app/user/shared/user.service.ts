@@ -33,6 +33,7 @@ export class UserService {
     );
   }
 
+  // create new user account
   createUser(user: IUser): Observable<IUser> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -44,7 +45,7 @@ export class UserService {
       );
   }
 
-  // create new user account
+  // update user account
   updateUser(user: IUser): Observable<IUser> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 

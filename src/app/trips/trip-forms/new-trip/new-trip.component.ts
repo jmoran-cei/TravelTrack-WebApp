@@ -26,7 +26,7 @@ export class NewTripComponent implements OnInit {
 
   // updated from child component via @Output()
   // method for updating the page's title to match the user's title of their new trip
-  updatePageTitle(updatedTitle: any) {
+  updatePageTitle(updatedTitle: string) {
     this.pageTitle = updatedTitle;
     if (updatedTitle === '') this.pageTitle = this.pageTitleDefault;
   }

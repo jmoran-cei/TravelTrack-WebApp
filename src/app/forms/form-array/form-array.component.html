@@ -38,7 +38,8 @@
     <input *ngIf="formArrayName!=='destinations'"
     class="addable-input" id="{{ formArrayName + i }}" type="text" [placeholder]="placeholder"
     [formControlName]="i" [ngClass]="{'input-red':
-    (this.mouseoverAddValue && form.get(formArrayName+'.'+i)?.invalid)}"/>
+    ((this.mouseoverAddValue && this.form.get(formArrayName+'.'+i)?.invalid) ||
+    (this.form.get(formArrayName+'.'+i)?.touched && this.form.get('members.'+i)?.invalid && this.form.get('members.'+i)?.value !== ''))}"/>
 
     <!-- autocomplete input -->
     <app-autocomplete *ngIf="formArrayName==='destinations'" class="addable-input"
@@ -55,7 +56,7 @@
       <ng-container *ngIf="values.length<2">
         <span (mouseenter)="mouseoverAddValue=true" (mouseleave)="mouseoverAddValue=false">
             <button class="btn btn-secondary addremove-right-button" (click)="addValue(i)" type="button"
-            [disabled]="this.form.get(formArrayName+'.'+i)?.value===''">
+            [disabled]="this.form.get(formArrayName+'.'+i)?.value==='' && this.form.get(formArrayName+'.'+i)?.invalid">
             <span class="glyphicon glyphicon-plus"></span>
           </button>
         </span>

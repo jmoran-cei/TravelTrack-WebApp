@@ -8,7 +8,9 @@ import {
 } from '@angular/forms';
 import { Options } from 'ngx-google-places-autocomplete/objects/options/options';
 import { ITrip } from 'src/app/shared/models/trip.model';
+import { UserService } from 'src/app/user';
 import { DestinationsService } from '../autocomplete/service/destinations.service';
+import { UsernameValidator } from '../validators/userExists.validator';
 
 
 @Component({
@@ -49,7 +51,8 @@ export class FormArrayComponent implements OnInit {
 
   constructor(
     private rootFormGroup: FormGroupDirective,
-    private destinationsService: DestinationsService
+    private destinationsService: DestinationsService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -68,6 +71,9 @@ export class FormArrayComponent implements OnInit {
   buildValues():FormControl {
     if (this.isRequired) {
       return new FormControl('',Validators.required);
+    }
+    if (this.formArrayName === 'members') {
+      return new FormControl('', [], [UsernameValidator.createValidator(this.userService)]);
     }
     return new FormControl('');
   }

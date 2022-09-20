@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of, retry, tap } from 'rxjs';
+import { catchError, filter, map, Observable, of, retry, tap } from 'rxjs';
+import { AuthService, IUser } from 'src/app/user';
 import { IDestination } from '../../shared/models/destination.model';
 import { ITrip } from '../../shared/models/trip.model';
 
@@ -8,16 +9,26 @@ import { ITrip } from '../../shared/models/trip.model';
 export class TripService {
   tripsUrl = '/api/trips';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private auth: AuthService) {}
 
   // get all trips
   getTrips(): Observable<ITrip[]> {
     return this.http
       .get<ITrip[]>(this.tripsUrl)
       .pipe(
+        map((trips) => this.filterTripsByUsername(trips, this.auth.currentUser.username)),
         retry(2),
-        catchError(this.handleError<ITrip[]>('getTrips()', [])
+        catchError(this.handleError<ITrip[]>('getTrips()', []),
       ));
+  }
+
+  filterTripsByUsername(trips: ITrip[], username: string): ITrip[] {
+    const filteredTrips = trips.filter((trip:ITrip) => {
+      return (trip.members || [])
+      .some((member: IUser) => member.username === username)
+    })
+
+    return filteredTrips;
   }
 
   // get a specific trip
