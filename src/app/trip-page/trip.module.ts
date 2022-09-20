@@ -4,9 +4,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 
 import {
-  TripItineraryComponent,
   TripPageComponent,
-  TripPhotosComponent,
   TripSidebarComponent,
   TripToDoComponent,
   tripRoutes,
@@ -21,9 +19,7 @@ import {
     RouterModule.forChild(tripRoutes)
   ],
   declarations: [
-    TripItineraryComponent,
     TripPageComponent,
-    TripPhotosComponent,
     TripSidebarComponent,
     TripToDoComponent,
     TripSidebarOptionComponent
