@@ -7,7 +7,6 @@ import { userRoutes } from "./user.routes";
 import {
   EditProfileComponent,
   LoginComponent,
-  SettingsComponent,
   UserService,
   NewAccountComponent
 } from './index'
@@ -20,7 +19,6 @@ import {
   ],
   declarations: [
     EditProfileComponent,
-    SettingsComponent,
     LoginComponent,
     NewAccountComponent
   ],
