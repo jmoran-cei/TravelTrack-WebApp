@@ -126,6 +126,16 @@
       [isRequired]="false"
       [toggleAlert]="true">
     </app-form-array>
+
+    <!-- members VALIDATION ALERT (not required, but must be existing user if provided) -->
+    <div class="col-xs-12">
+      <!-- user exists -->
+      <app-validation-alert
+        [validationBoolean]="this.members!.touched
+          && this.members!.invalid && this.members.controls[0].value !== ''"
+        alertText="Please provide a valid existing username.  (Note: username is case sensitive)">
+      </app-validation-alert>
+    </div>
   </div>
 
 
@@ -146,7 +156,8 @@
   <div class="buttons" [ngClass]="{'buttons-wide': this.isEditing, 'buttons-narrow' : !this.isEditing}">
     <!-- ADD -->
     <span data-toggle="tooltip" title="{{this.tripForm.invalid ? this.findInvalidControls() : ''}}">
-      <button type="submit" class="btn btn-primary btn-notdelete" [disabled]="this.tripForm.invalid">
+      <button type="submit" class="btn btn-primary btn-notdelete"
+      [disabled]="this.tripForm.invalid && this.members.controls[0].value !== ''">
         <span>{{!isEditing ? 'Add Trip' : 'Save Trip'}}</span>
       </button>
     </span>

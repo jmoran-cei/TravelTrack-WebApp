@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ANALYZE_FOR_ENTRY_COMPONENTS, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import {
   AbstractControl,
   FormArray,
@@ -14,6 +14,8 @@ import { DestinationsService } from 'src/app/forms/autocomplete/service/destinat
 import { ITrip } from 'src/app/shared';
 import { TripService } from '../../shared';
 import { NewTripComponent } from '../../.';
+import { AuthService, IUser, UserService } from 'src/app/user';
+import { UsernameValidator } from 'src/app/forms/validators/userExists.validator';
 
 @Component({
   selector: 'app-trip-form',
@@ -57,7 +59,9 @@ export class TripFormComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private tripComponent: NewTripComponent,
     private tripService: TripService,
-    private destinationsService: DestinationsService
+    private destinationsService: DestinationsService,
+    private auth: AuthService,
+    private userService: UserService,
   ) {}
 
   ngOnInit() {
@@ -151,7 +155,7 @@ export class TripFormComponent implements OnInit, OnDestroy {
         [new FormControl('', Validators.required)],
         [Validators.required]
       ),
-      members: this.fb.array([new FormControl('')]),
+      members: this.fb.array([new FormControl('', [], [UsernameValidator.createValidator(this.userService)])]),
     });
 
     // set datesGroup short-hand prop
@@ -241,7 +245,7 @@ export class TripFormComponent implements OnInit, OnDestroy {
 
     for (let member of this.existingTrip.members) {
       // create form control, and append to destinations form array
-      let mem = new FormControl(member, Validators.required);
+      let mem = new FormControl(member.username, Validators.required);
       this.members.push(mem);
     }
   }
@@ -271,27 +275,17 @@ export class TripFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Because adding members is optional, check and remove last value if it's blank
-  // this implementation will be changed and improved in the future
-  checkLastMember() {
-    let lastMemberIndex = this.members.length - 1;
-    let lastMemberControl = 'members.' + lastMemberIndex;
-    if (this.tripForm.get(lastMemberControl)?.value === '')
-      this.members.removeAt(lastMemberIndex);
-  }
-
   // submit method
-  onSubmit() {
+  onSubmit(): boolean {
     console.log('Submit button pushed!');
     this.tripForm.markAllAsTouched();
-    if (this.tripForm.invalid) {
-      return false;
-    }
+    // members is optional , but still has validation per member
+    // make sure all required and provided fields are valid
+    if (this.tripForm.invalid && this.members.controls[0].value !== '') return false;
 
     // double check that blank form array values aren't submitted,
     // and valid but not 'added' values are still added
     this.checkLastDestination();
-    this.checkLastMember();
 
     // assign values from user to new trip object
     this.setSubmittedTripValues();
@@ -355,7 +349,8 @@ export class TripFormComponent implements OnInit, OnDestroy {
     // set destination values to equal the destination objects saved from destination service
     this.submittedTrip.destinations =
       this.destinationsService.savedDestinations;
-    this.submittedTrip.members = this.members.value;
+    this.checkCurrentUserIsAMember();
+    this.submittedTrip.members = this.usernamesToMemberObjects();
     this.submittedTrip.details = this.details?.value;
 
     // if edit form, keep trip properties that aren't edited in this form
@@ -364,6 +359,32 @@ export class TripFormComponent implements OnInit, OnDestroy {
       this.submittedTrip.toDo = this.existingTrip.toDo;
       this.submittedTrip.itinerary = this.existingTrip.itinerary;
       this.submittedTrip.imgUrl = this.existingTrip.imgUrl;
+    }
+  }
+
+  // fit usernames into to user objects before setting submittedtrip.members[]
+  usernamesToMemberObjects(): IUser[] {
+    var members: IUser[] = [];
+    for (let member of this.members.value) {
+      if (member.trim() !== '') {
+        var memberAsUserObject = this.userService.getUserByUsername(member.trim());
+        members.push(memberAsUserObject);
+      }
+    }
+
+    return members;
+  }
+
+  // if they didn't include themselves as a member, then automatically add thehm as a trip member
+  checkCurrentUserIsAMember(): void {
+    var userIsMember = false;
+
+    for (let member of this.members.value) {
+      if (member.trim() === this.auth.currentUser.username) userIsMember = true;
+    }
+
+    if (!userIsMember) {
+      this.members.push(new FormControl(this.auth.currentUser.username));
     }
   }
 
