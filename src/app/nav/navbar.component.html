@@ -23,24 +23,6 @@
         <a [routerLink]="['/trips']" routerLinkActive="active"><span class="glyphicon glyphicon-calendar"></span>Trips</a>
       </div>
 
-      <!-- bucket list tab -->
-      <div class="box font400 margin">
-        <a [routerLink]="['/bucketlist']" routerLinkActive="active"><span class="bi bi-bucket-fill"></span>Bucket List</a>
-      </div>
-
-      <!-- search bar (not functional yet)-->
-      <form id="searchForm" action="" class="navbar-form">
-        <div class="input-group">
-          <input type="search" placeholder="Find a trip..." class="form-control" />
-          <div class="input-group-btn">
-            <button class="btn btn-info">
-              <span class="glyphicon glyphicon-search"></span>
-            </button>
-          </div>
-        </div>
-      </form>
-
-
       <!-- user icon & menu || Hi, Username -->
       <div class="dropdown box">
         <!-- icon -->
@@ -72,7 +54,6 @@
           <a (click)="logoutUser()">Logout</a>
         </div>
 
-        <!-- username is hardcoded for simplicity currently, will be updated in the future -->
         <!-- "Hi, User" -->
         <div class="hi-username">
           <label for="personal-menu" class="font400">
