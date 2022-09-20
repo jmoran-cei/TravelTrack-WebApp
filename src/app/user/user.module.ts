@@ -14,6 +14,7 @@ import {
 import { HttpClientModule } from "@angular/common/http";
 import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
 import { DataService } from "../shared";
+import { SharedModule } from "../shared/module/shared.module";
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { DataService } from "../shared";
     HttpClientInMemoryWebApiModule.forRoot(DataService),
     FormsModule,
     ReactiveFormsModule,
+    SharedModule
   ],
   declarations: [
     EditProfileComponent,

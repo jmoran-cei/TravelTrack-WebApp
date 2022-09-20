@@ -4,11 +4,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TravelAppComponent } from './travel-app.component';
 import { appRoutes } from './routes';
-import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DataService } from './shared/data/data.service';
 import { HttpClientModule } from '@angular/common/http';
-import { AgmCoreModule } from '@agm/core';
 
 // components
 import { BucketlistComponent } from './bucketlist/bucketlist.component';
@@ -44,10 +42,6 @@ import {
 } from './home';
 
 import {
-  FormFieldComponent,
-  FormArrayComponent,
-  ValidationAlertComponent,
-  DestinationAutocompleteComponent,
   DestinationsService
 } from './forms';
 
@@ -60,6 +54,7 @@ import {
   ToDoListComponent,
   MembersListComponent
 } from './trip-page'
+import { SharedModule } from './shared/module/shared.module';
 
 @NgModule({
   declarations: [
@@ -75,10 +70,6 @@ import {
     NewTripThumbnailComponent,
     TripsTitleSectionComponent,
     NewTripComponent,
-    FormFieldComponent,
-    ValidationAlertComponent,
-    FormArrayComponent,
-    DestinationAutocompleteComponent,
     EarliestDateFirstPipe,
     LatestDateFirstPipe,
     DestinationsListComponent,
@@ -93,14 +84,10 @@ import {
   imports: [
     ReactiveFormsModule,
     BrowserModule,
-    GooglePlaceModule,
     HttpClientModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCHB2iGhcuOoU4_eEsYtQA4d5hfs69EFDI',
-      libraries: ['places'],
-    }),
     HttpClientInMemoryWebApiModule.forRoot(DataService),
     RouterModule.forRoot(appRoutes),
+    SharedModule,
   ],
   providers: [
     TripService,
