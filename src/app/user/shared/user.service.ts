@@ -1,14 +1,14 @@
 import { Injectable } from "@angular/core";
-import { IUser } from "../../shared/models/user.model";
+import { User } from "../../shared/models/user.model";
 
 @Injectable()
 export class UserService {
-  getUserByUsername(username:string):IUser {
-    return USERS.find((user:IUser) => user.username == username)!
+  getUserByUsername(username:string):User {
+    return USERS.find((user:User) => user.username == username)!
   }
 }
 
-const USERS:IUser[] = [
+const USERS:User[] = [
   {
     username: 'jmoran@ceiamerica.com',
     password: 'P@ssw0rd',

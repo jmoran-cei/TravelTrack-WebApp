@@ -1,4 +1,4 @@
-export interface IDestination {
+export interface Destination {
   destinationId: string
   city: string
   region: string

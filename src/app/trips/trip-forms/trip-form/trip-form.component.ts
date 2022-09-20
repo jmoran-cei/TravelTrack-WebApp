@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 import { Subscription, take } from 'rxjs';
 import { datesInOrderValidator } from 'src/app/forms';
 import { DestinationsService } from 'src/app/forms/autocomplete/service/destinations.service';
-import { ITrip } from 'src/app/shared';
+import { Trip } from 'src/app/shared';
 import { TripService } from '../../shared';
 import { NewTripComponent } from '../../.';
 
@@ -26,10 +26,10 @@ export class TripFormComponent implements OnInit, OnDestroy {
   @Output() changeTitle = new EventEmitter();
   pageTitleDefault!: string;
   @Input() isEditing!: boolean;
-  @Input() existingTrip!: ITrip;
+  @Input() existingTrip!: Trip;
 
   // component props
-  submittedTrip!: ITrip;
+  submittedTrip!: Trip;
   tripForm!: FormGroup;
   title?: FormControl;
   details?: FormControl;
@@ -159,7 +159,7 @@ export class TripFormComponent implements OnInit, OnDestroy {
   }
 
   // intialize new trip
-  initializeTrip(): ITrip {
+  initializeTrip(): Trip {
     let id: number;
 
     // if edit form, set to pre-existing id, else set unique id for new trip

@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Options } from 'ngx-google-places-autocomplete/objects/options/options';
-import { ITrip } from 'src/app/shared/models/trip.model';
+import { Trip } from 'src/app/shared/models/trip.model';
 import { DestinationsService } from '../autocomplete/service/destinations.service';
 
 
@@ -38,7 +38,7 @@ export class FormArrayComponent implements OnInit {
 
   // props for EDIT FORM
   @Input() isEditing!: boolean;
-  @Input() existingTrip?: ITrip;
+  @Input() existingTrip?: Trip;
 
   // for dynamically added destination autocomplete ids
   autocompleteOptions: Options = new Options({

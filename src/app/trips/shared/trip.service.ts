@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of, retry, tap } from 'rxjs';
-import { IDestination } from '../../shared/models/destination.model';
-import { ITrip } from '../../shared/models/trip.model';
+import { Destination } from '../../shared/models/destination.model';
+import { Trip } from '../../shared/models/trip.model';
 
 @Injectable()
 export class TripService {
@@ -11,94 +11,94 @@ export class TripService {
   constructor(private http: HttpClient) {}
 
   // get all trips
-  getTrips(): Observable<ITrip[]> {
+  getTrips(): Observable<Trip[]> {
     return this.http
-      .get<ITrip[]>(this.tripsUrl)
+      .get<Trip[]>(this.tripsUrl)
       .pipe(
         retry(2),
-        catchError(this.handleError<ITrip[]>('getTrips()', [])
+        catchError(this.handleError<Trip[]>('getTrips()', [])
       ));
   }
 
   // get a specific trip
-  getTrip(id: number): Observable<ITrip> {
+  getTrip(id: number): Observable<Trip> {
     const url = `${this.tripsUrl}/${id}`;
 
     return this.http
-      .get<ITrip>(url)
+      .get<Trip>(url)
       .pipe(
         retry(2),
-        catchError(this.handleError<ITrip>('getTrip()')
+        catchError(this.handleError<Trip>('getTrip()')
       ));
   }
 
   // create new trip
-  createTrip(trip: ITrip): Observable<ITrip> {
+  createTrip(trip: Trip): Observable<Trip> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http
-      .post<ITrip>(this.tripsUrl, trip, { headers: headers })
+      .post<Trip>(this.tripsUrl, trip, { headers: headers })
       .pipe(
-        tap((data: ITrip) => console.table(data)),
-        catchError(this.handleError<ITrip>('createTrip()'))
+        tap((data: Trip) => console.table(data)),
+        catchError(this.handleError<Trip>('createTrip()'))
       );
   }
 
   // save an edited trip
-  updateTrip(trip: ITrip): Observable<ITrip> {
+  updateTrip(trip: Trip): Observable<Trip> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http
-      .put<ITrip>(this.tripsUrl, trip, { headers: headers })
+      .put<Trip>(this.tripsUrl, trip, { headers: headers })
       .pipe(
-        tap((data: ITrip) => console.table(data)),
-        catchError(this.handleError<ITrip>('createTrip()'))
+        tap((data: Trip) => console.table(data)),
+        catchError(this.handleError<Trip>('createTrip()'))
       );
   }
 
   // delete an existing trip
-  deleteTrip(id: number): Observable<ITrip> {
+  deleteTrip(id: number): Observable<Trip> {
     const url = `${this.tripsUrl}/${id}`;
 
     return this.http
-      .delete<ITrip>(url)
+      .delete<Trip>(url)
       .pipe(
-        tap((data: ITrip) => console.table(data)),
-        catchError(this.handleError<ITrip>('createTrip()'))
+        tap((data: Trip) => console.table(data)),
+        catchError(this.handleError<Trip>('createTrip()'))
     );
   }
 
-  sortByTitle(trips: ITrip[]): ITrip[] {
+  sortByTitle(trips: Trip[]): Trip[] {
     // console.log("Trips sorted alphabetically by title");
-    return (trips = trips.sort((a: ITrip, b: ITrip) =>
+    return (trips = trips.sort((a: Trip, b: Trip) =>
       a.title.localeCompare(b.title)
     ));
   }
 
-  sortByEarliestDate(trips: ITrip[]): ITrip[] {
+  sortByEarliestDate(trips: Trip[]): Trip[] {
     // default for PREVIOUS dates
     // console.log("Trips sorted by earliest date");
 
     // sorting by EARLIEST DATE: sorts dates oldest-newest
     return (trips = trips.sort(
-      (a: ITrip, b: ITrip) =>
+      (a: Trip, b: Trip) =>
         new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
     ));
   }
 
-  sortByLatestDate(trips: ITrip[]): ITrip[] {
+  sortByLatestDate(trips: Trip[]): Trip[] {
     // default for UPCOMING dates
     // console.log("Trips sorted by latest date");
 
     // sorting by LATEST DATE: sorts dates newest-oldest
     return (trips = trips.sort(
-      (a: ITrip, b: ITrip) =>
+      (a: Trip, b: Trip) =>
         new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
     ));
   }
 
   // returns boolean based on whether a trip has multiple destinations or not
-  hasMultipleDestinations(destinations: IDestination[]): boolean {
+  hasMultipleDestinations(destinations: Destination[]): boolean {
     if (destinations.length > 1) {
       return true;
     }

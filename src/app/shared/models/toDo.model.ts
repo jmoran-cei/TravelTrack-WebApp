@@ -1,4 +1,4 @@
-export interface IToDo {
+export interface ToDo {
   task: string
   complete: boolean
 }

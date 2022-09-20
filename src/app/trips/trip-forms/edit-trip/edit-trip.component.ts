@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ITrip } from 'src/app/shared';
+import { Trip } from 'src/app/shared';
 
 @Component({
   templateUrl: 'edit-trip.component.html',
@@ -8,7 +8,7 @@ import { ITrip } from 'src/app/shared';
 })
 export class EditTripComponent implements OnInit {
   isDirty?: boolean;
-  trip!: ITrip;
+  trip!: Trip;
 
   constructor(private route: ActivatedRoute) {}
 

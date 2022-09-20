@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject, Observable } from "rxjs";
-import { IUser } from "../../shared/models/user.model";
+import { User } from "../../shared/models/user.model";
 
 @Injectable()
 export class AuthService {
-  currentUser:IUser = {
+  currentUser:User = {
     username: '',
     password: '',
     firstName: '',

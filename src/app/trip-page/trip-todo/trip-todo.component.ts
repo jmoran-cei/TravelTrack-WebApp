@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
-import { ITrip } from 'src/app/shared';
-import { IToDo } from 'src/app/shared/models/toDo.model';
+import { Trip } from 'src/app/shared';
+import { ToDo } from 'src/app/shared/models/toDo.model';
 import { TripService } from 'src/app/trips';
 
 @Component({
@@ -11,7 +11,7 @@ import { TripService } from 'src/app/trips';
   styleUrls: ['trip-todo.component.css'],
 })
 export class TripToDoComponent implements OnInit {
-  trip!: ITrip;
+  trip!: Trip;
   toDoForm!: FormGroup;
 
   constructor(
@@ -108,15 +108,15 @@ export class TripToDoComponent implements OnInit {
       });
   }
 
-  fitFormValuesToModel(): IToDo[] {
-    var toDoList: IToDo[] = [];
+  fitFormValuesToModel(): ToDo[] {
+    var toDoList: ToDo[] = [];
 
     for (let i in this.tasks.value) {
       var taskText = this.tasks.controls[parseInt(i)].value;
 
       // ignore if task is blank
       if (taskText.trim().length !== 0) {
-        let currentTask: IToDo = {
+        let currentTask: ToDo = {
           task: taskText,
           complete: this.statuses.controls[parseInt(i)].value,
         };
