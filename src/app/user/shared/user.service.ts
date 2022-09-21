@@ -6,7 +6,6 @@ import {
   Observable,
   of,
   retry,
-  shareReplay,
   take,
   tap,
 } from 'rxjs';
@@ -18,7 +17,7 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  // have to grab users this way in order to get them from angular web api(can only get by 'id' not by a 'username')
+  // have to grab users this way in order to get them from angular web api (can only get by 'id' not by a 'username')
   users = this.http
     .get<IUser[]>(this.usersUrl)
     .pipe(retry(2), catchError(this.handleError('getUsers()', [])));
