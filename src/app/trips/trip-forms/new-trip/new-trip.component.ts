@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ITrip } from 'src/app/shared';
+import { Trip } from 'src/app/shared';
 
 // this function will be probably used in other components down the road (e.g. edit-profile)
 // What seems like the most 'fitting' spot to put this?
@@ -22,7 +22,7 @@ export class NewTripComponent implements OnInit {
   pageTitle!: string;
   pageTitleDefault = 'Your New Trip';
   @Input() isEditing!: boolean;
-  @Input() existingTrip!: ITrip;
+  @Input() existingTrip!: Trip;
 
   // updated from child component via @Output()
   // method for updating the page's title to match the user's title of their new trip

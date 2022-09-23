@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IToDo } from 'src/app/shared/models/toDo.model';
+import { ToDo } from 'src/app/shared/models/toDo.model';
 
 @Component({
   selector: 'app-todo-list',
@@ -11,7 +11,7 @@ export class ToDoListComponent {
 }
 
 export type toDoListProps = {
-  toDo: IToDo[];
+  toDo: ToDo[];
   display: {
     all?: boolean; // set true to display all tasks
     complete?: boolean; // set true to display only complete

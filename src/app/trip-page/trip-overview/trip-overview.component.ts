@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { membersListProps } from '..';
-import { ITrip } from '../../shared/models/trip.model';
+import { Trip } from '../../shared/models/trip.model';
 import { calendarDateProps } from '../calendar-date/calendar-date.component';
 import { TripDataService } from '../shared/trip-data.service';
 import { toDoListProps } from '../todo-list/todo-list.component';
@@ -12,7 +12,7 @@ import { factProps } from '../trip-fact/trip-fact.component';
   styleUrls: ['trip-overview.component.css'],
 })
 export class TripOverviewComponent implements OnInit {
-  trip?: ITrip;
+  trip?: Trip;
   destinationsFact?: factProps;
   toDoFact?: factProps;
   photosFact?: factProps;

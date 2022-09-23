@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ITrip } from '../../../shared/models/trip.model';
+import { Trip } from '../../../shared/models/trip.model';
 import { TripService } from '../../shared/trip.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { TripService } from '../../shared/trip.service';
 export class TripsTitleSectionComponent {
   @Input() title = '';
   @Input() collapseID = '';
-  @Input() tripList: ITrip[] = [];
+  @Input() tripList: Trip[] = [];
   @Input() sortToggle = '';
 
   constructor(public tripService: TripService) {}

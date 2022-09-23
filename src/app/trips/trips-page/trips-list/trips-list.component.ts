@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { ITrip } from "../../../shared/models/trip.model";
+import { Trip } from "../../../shared/models/trip.model";
 
 @Component({
   templateUrl: 'trips-list.component.html',
@@ -9,8 +9,8 @@ import { ITrip } from "../../../shared/models/trip.model";
 
 export class TripsListComponent implements OnInit {
   currentTime = new Date()
-  upcomingTrips: ITrip[] = []
-  previousTrips: ITrip[] = []
+  upcomingTrips: Trip[] = []
+  previousTrips: Trip[] = []
 
   // displayed on new-trip-thumbnail
     // title and description for "create new trip" thumbnail in UPCOMING trip section
@@ -37,11 +37,11 @@ export class TripsListComponent implements OnInit {
     // get all upcoming trips
     this.upcomingTrips = this.route.snapshot.data['trips']
       .filter(
-        (trip:ITrip) =>  new Date(trip.endDate).getTime() >= this.currentTime.getTime() )
+        (trip:Trip) =>  new Date(trip.endDate).getTime() >= this.currentTime.getTime() )
 
     // get all previous trips
     this.previousTrips = this.route.snapshot.data['trips']
-      .filter( (trip:ITrip) =>  new Date(trip.endDate).getTime() < this.currentTime.getTime() )
+      .filter( (trip:Trip) =>  new Date(trip.endDate).getTime() < this.currentTime.getTime() )
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IDestination } from 'src/app/shared';
+import { Destination } from 'src/app/shared';
 
 @Component({
   selector: 'app-destinations-list',
@@ -7,7 +7,7 @@ import { IDestination } from 'src/app/shared';
   styleUrls: ['app-destinations-list.component.css'],
 })
 export class DestinationsListComponent {
-  @Input() destinations?: IDestination[];
+  @Input() destinations?: Destination[];
   @Input() showIcon!: boolean;
   @Input() showFrame!: boolean;
 }

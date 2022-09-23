@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
-import { AuthService, IUser, UserService } from '../shared';
+import { AuthService, User, UserService } from '../shared';
 
 @Component({
   templateUrl: 'edit-profile.component.html',
@@ -23,7 +23,7 @@ export class EditProfileComponent implements OnInit {
     private auth: AuthService
   ) {}
 
-  get user(): IUser {
+  get user(): User {
     return this.auth.currentUser;
   }
   get firstName(): FormControl {
@@ -73,7 +73,7 @@ export class EditProfileComponent implements OnInit {
       });
   }
 
-  savedUserObject(): IUser {
+  savedUserObject(): User {
     return {
       id: this.user.id,
       firstName: this.firstName.value,

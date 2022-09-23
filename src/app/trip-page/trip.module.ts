@@ -4,9 +4,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 
 import {
-  TripItineraryComponent,
   TripPageComponent,
-  TripPhotosComponent,
   TripSidebarComponent,
   TripToDoComponent,
   tripRoutes,
@@ -23,9 +21,7 @@ import { SharedModule } from "../shared/module/shared.module";
     SharedModule,
   ],
   declarations: [
-    TripItineraryComponent,
     TripPageComponent,
-    TripPhotosComponent,
     TripSidebarComponent,
     TripToDoComponent,
     TripSidebarOptionComponent

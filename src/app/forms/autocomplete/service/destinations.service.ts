@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IDestination } from 'src/app/shared';
+import { Destination } from 'src/app/shared';
 
 @Injectable()
 export class DestinationsService {
@@ -10,16 +10,16 @@ export class DestinationsService {
   */
 
   // holds all entered destinations from API by user
-  tempDestinations: IDestination[] = [];
+  tempDestinations: Destination[] = [];
   // saves destination from holding array when user hits add/remove destination
-  savedDestinations: IDestination[] = [];
+  savedDestinations: Destination[] = [];
 
-  addTempDestination(destination: IDestination) {
+  addTempDestination(destination: Destination) {
     this.tempDestinations.push(destination);
   }
 
   saveDestination() {
-    let destination: IDestination;
+    let destination: Destination;
     destination = this.tempDestinations[this.tempDestinations.length - 1];
 
     this.savedDestinations.push(destination);

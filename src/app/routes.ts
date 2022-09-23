@@ -1,5 +1,4 @@
 import { Routes } from "@angular/router";
-import { BucketlistComponent } from "./bucketlist/bucketlist.component";
 import { Error404Component } from "./errors/404.component";
 import { HomePageComponent } from "./home/home-page.component";
 import {
@@ -15,7 +14,6 @@ import { AuthGuard } from "./user/shared/auth.guard";
 
 export const appRoutes:Routes =[
   {path: 'home', component: HomePageComponent},
-  {path: 'bucketlist', component: BucketlistComponent, canActivate: [AuthGuard]},
   {path: 'trips', component: TripsListComponent, resolve: {trips:TripListResolver}, canActivate: [AuthGuard]},
   {path: 'trips/new', component: NewTripComponent, canActivate: [AuthGuard], canDeactivate: ['canDeactivateTripForm']},
   {

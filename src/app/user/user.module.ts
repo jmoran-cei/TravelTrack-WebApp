@@ -7,7 +7,6 @@ import { userRoutes } from "./user.routes";
 import {
   EditProfileComponent,
   LoginComponent,
-  SettingsComponent,
   UserService,
   NewAccountComponent
 } from './index'
@@ -29,7 +28,6 @@ import { SharedModule } from "../shared/module/shared.module";
   ],
   declarations: [
     EditProfileComponent,
-    SettingsComponent,
     LoginComponent,
     NewAccountComponent,
   ],

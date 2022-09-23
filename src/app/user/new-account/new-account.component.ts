@@ -8,7 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { take, tap } from 'rxjs';
 import { UsernameValidator } from 'src/app/forms/validators/userExists.validator';
-import { IUser, UserService } from '../shared';
+import { User, UserService } from '../shared';
 
 @Component({
   templateUrl: 'new-account.component.html',
@@ -73,7 +73,7 @@ export class NewAccountComponent implements OnInit {
       });
   }
 
-  newUserObject(): IUser {
+  newUserObject(): User {
     return {
       id: Date.now().valueOf(), // unique
       firstName: this.firstName.value,

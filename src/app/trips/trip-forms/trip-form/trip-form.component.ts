@@ -18,10 +18,10 @@ import { Router } from '@angular/router';
 import { forkJoin, map, Observable, Subscription, take } from 'rxjs';
 import { datesInOrderValidator } from 'src/app/forms';
 import { DestinationsService } from 'src/app/forms/autocomplete/service/destinations.service';
-import { ITrip } from 'src/app/shared';
+import { Trip } from 'src/app/shared';
 import { TripService } from '../../shared';
 import { NewTripComponent } from '../../.';
-import { AuthService, IUser, UserService } from 'src/app/user';
+import { AuthService, User, UserService } from 'src/app/user';
 import { UsernameValidator } from 'src/app/forms/validators/userExists.validator';
 
 @Component({
@@ -35,10 +35,10 @@ export class TripFormComponent implements OnInit, OnDestroy {
   @Output() changeTitle = new EventEmitter();
   pageTitleDefault!: string;
   @Input() isEditing!: boolean;
-  @Input() existingTrip!: ITrip;
+  @Input() existingTrip!: Trip;
 
   // component props
-  submittedTrip!: ITrip;
+  submittedTrip!: Trip;
   tripForm!: FormGroup;
   title?: FormControl;
   details?: FormControl;
@@ -177,7 +177,7 @@ export class TripFormComponent implements OnInit, OnDestroy {
   }
 
   // intialize new trip
-  initializeTrip(): ITrip {
+  initializeTrip(): Trip {
     let id: number;
 
     // if edit form, set to pre-existing id, else set unique id for new trip
@@ -385,13 +385,13 @@ export class TripFormComponent implements OnInit, OnDestroy {
   }
 
   // for each provided username, perform getUser() and place the user object in a UserObjects Array
-  usernamesToUserObjects(usernames: string[]): Observable<IUser[]> {
+  usernamesToUserObjects(usernames: string[]): Observable<User[]> {
     return forkJoin(
       usernames
         .filter(username => username.trim() !== '')
         .map(username => this.userService.getUser(username.trim()))
     ).pipe(
-      map(users=> users.filter((user): user is IUser => user !== undefined))
+      map(users=> users.filter((user): user is User => user !== undefined))
     );
   }
 

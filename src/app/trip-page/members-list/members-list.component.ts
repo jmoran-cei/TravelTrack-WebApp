@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IUser } from 'src/app/shared';
+import { User } from 'src/app/shared';
 import { AuthService } from 'src/app/user';
 
 @Component({
@@ -14,7 +14,7 @@ export class MembersListComponent {
 }
 
 export type membersListProps = {
-  members: IUser[];
+  members: User[];
   showIcon?: boolean;
   showFrame?: boolean;
 };

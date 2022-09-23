@@ -8,8 +8,6 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DataService } from './shared/data/data.service';
 import { HttpClientModule } from '@angular/common/http';
 
-// components
-import { BucketlistComponent } from './bucketlist/bucketlist.component';
 import { Error404Component } from './errors/404.component';
 import { NavbarComponent } from './nav/navbar.component';
 
@@ -63,7 +61,6 @@ import { SharedModule } from './shared/module/shared.module';
     HomePageComponent,
     HomeSection1Component,
     ColumnBoxComponent,
-    BucketlistComponent,
     Error404Component,
     TripsListComponent,
     TripThumbnailComponent,

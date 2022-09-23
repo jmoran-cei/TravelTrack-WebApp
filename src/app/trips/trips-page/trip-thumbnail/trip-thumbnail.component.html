@@ -20,7 +20,7 @@
           <!-- Destinations -->
           <div class="thumbnail_destinations">
             <!-- toggle destination(s) as singular or plural -->
-            <p>Destination<span *ngIf="multipleDestinations">s</span>:</p>
+            <p>Destination<span *ngIf="trip.destinations.length > 1">s</span>:</p>
 
             <!-- list of trip destinations -->
             <div class="destinations">

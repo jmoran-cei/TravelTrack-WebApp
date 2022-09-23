@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ITrip } from 'src/app/shared';
+import { Trip } from 'src/app/shared';
 
 @Component({
   selector: 'app-trip-sidebar',
@@ -9,7 +9,7 @@ import { ITrip } from 'src/app/shared';
 })
 
 export class TripSidebarComponent implements OnInit {
-  trip?: ITrip;
+  trip?: Trip;
   overview = {
     name: 'Overview',
     subpath: 'overview',
