@@ -6,7 +6,7 @@
       <a [routerLink]="['/home']" routerLinkActive="active"><span class="bi bi-pin-map-fill"></span>TravelTrack</a>
     </div>
 
-  <!-- if user NOT LOGGED IN -->
+    <!-- if user NOT LOGGED IN -->
     <ng-container *ngIf="(isLoggedIn | async) === false">
       <!-- User Icon & Login -->
       <div class="box move-right" id="login">
@@ -15,12 +15,13 @@
 
     </ng-container>
 
-  <!-- if user IS LOGGED IN -->
+    <!-- if user IS LOGGED IN -->
     <ng-container *ngIf="isLoggedIn | async">
 
       <!-- trips tab -->
       <div class="box move-right font400 margin">
-        <a [routerLink]="['/trips']" routerLinkActive="active"><span class="glyphicon glyphicon-calendar"></span>Trips</a>
+        <a [routerLink]="['/trips']" routerLinkActive="active"><span
+            class="glyphicon glyphicon-calendar"></span>Trips</a>
       </div>
 
       <!-- user icon & menu || Hi, Username -->

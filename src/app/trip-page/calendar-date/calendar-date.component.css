@@ -10,10 +10,12 @@
   flex-direction: column;
   justify-content: center;
   background: white;
-  box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+  box-shadow: 0 5px 8px -6px rgba(0, 0, 0, 0.2);
 }
 
-h5, h3, p {
+h5,
+h3,
+p {
   text-align: center;
   margin: 0;
 }

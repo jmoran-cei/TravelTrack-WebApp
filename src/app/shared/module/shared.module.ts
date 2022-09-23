@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DestinationAutocompleteComponent, FormArrayComponent, FormFieldComponent, ValidationAlertComponent } from 'src/app/forms';
+import {
+  DestinationAutocompleteComponent,
+  FormArrayComponent,
+  FormFieldComponent,
+  ValidationAlertComponent,
+} from 'src/app/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { AgmCoreModule } from '@agm/core';
-
-
 
 @NgModule({
   declarations: [
@@ -28,6 +31,6 @@ import { AgmCoreModule } from '@agm/core';
     ValidationAlertComponent,
     FormArrayComponent,
     DestinationAutocompleteComponent,
-  ]
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

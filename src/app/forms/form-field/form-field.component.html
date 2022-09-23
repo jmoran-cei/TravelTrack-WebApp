@@ -1,52 +1,36 @@
 <!-- label -->
-  <!-- field is REQUIRED -->
-  <ng-container *ngIf="isRequired">
-    <label attr.for="{{id}}">
-      {{labelText}}
-    </label>
-  </ng-container>
+<!-- field is REQUIRED -->
+<ng-container *ngIf="isRequired">
+  <label attr.for="{{id}}">
+    {{labelText}}
+  </label>
+</ng-container>
 
-  <!-- field is NOT REQUIRED -->
-  <ng-container *ngIf="!isRequired">
-    <label attr.for="{{id}}">
-      {{labelText}}
-    </label>
-  </ng-container>
+<!-- field is NOT REQUIRED -->
+<ng-container *ngIf="!isRequired">
+  <label attr.for="{{id}}">
+    {{labelText}}
+  </label>
+</ng-container>
 
 
 <!-- input -->
-  <!-- type: TEXT -->
-  <ng-container *ngIf="type!=='date' && type!=='textarea'">
-    <input class="form-control col-md-6"
-      [formControl]="control"
-      id="{{id}}"
-      attr.placeholder="{{placeholder}}"
-      attr.type="{{type}}"
-      [ngClass]="{'input-red': hasInvalidStyling}"
-      attr.disabled="{{isDisabled}}"/>
-  </ng-container>
+<!-- type: TEXT -->
+<ng-container *ngIf="type!=='date' && type!=='textarea'">
+  <input class="form-control col-md-6" [formControl]="control" id="{{id}}" attr.placeholder="{{placeholder}}"
+    attr.type="{{type}}" [ngClass]="{'input-red': hasInvalidStyling}" attr.disabled="{{isDisabled}}" />
+</ng-container>
 
-  <!-- type: DATE -->
-  <ng-container *ngIf="type==='date'">
-    <input class="form-control col-md-6"
-      [formControl]="control"
-      id="{{id}}"
-      attr.placeholder="{{placeholder}}"
-      attr.type="{{type}}"
-      min="1900-01-01"
-      max="2100-01-01"
-      [ngClass]="{'input-red': hasInvalidStyling}"
-      attr.disabled="{{isDisabled}}"/>
-  </ng-container>
+<!-- type: DATE -->
+<ng-container *ngIf="type==='date'">
+  <input class="form-control col-md-6" [formControl]="control" id="{{id}}" attr.placeholder="{{placeholder}}"
+    attr.type="{{type}}" min="1900-01-01" max="2100-01-01" [ngClass]="{'input-red': hasInvalidStyling}"
+    attr.disabled="{{isDisabled}}" />
+</ng-container>
 
-  <!-- type: TEXT AREA -->
-  <ng-container *ngIf="type==='textarea'">
-    <textarea class="form-control col-md-6"
-      [formControl]="control"
-      id="{{id}}"
-      attr.placeholder="{{placeholder}}"
-      attr.type="{{type}}" rows="3" cols="80"
-      [ngClass]="{'input-red': hasInvalidStyling}"
-      attr.disabled="{{isDisabled}}">
+<!-- type: TEXT AREA -->
+<ng-container *ngIf="type==='textarea'">
+  <textarea class="form-control col-md-6" [formControl]="control" id="{{id}}" attr.placeholder="{{placeholder}}"
+    attr.type="{{type}}" rows="3" cols="80" [ngClass]="{'input-red': hasInvalidStyling}" attr.disabled="{{isDisabled}}">
     </textarea>
-  </ng-container>
+</ng-container>

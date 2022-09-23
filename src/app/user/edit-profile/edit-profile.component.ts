@@ -80,7 +80,6 @@ export class EditProfileComponent implements OnInit {
       lastName: this.lastName.value,
       username: this.username.value,
       password: this.password.value,
-      address: [], // I'll be removing address property from model, data, etc.
       pictureURL: 'assets/images/users/dummy1.jpg',
     };
   }

@@ -1,9 +1,9 @@
-  // services
-export * from './user.service'
+// services
+export * from './user.service';
 export * from './authentication.service';
 
-  // models
-export * from '../../shared/models/user.model'
+// models
+export * from '../../shared/models/user.model';
 
-  // guards
-export * from './auth.guard'
+// guards
+export * from './auth.guard';

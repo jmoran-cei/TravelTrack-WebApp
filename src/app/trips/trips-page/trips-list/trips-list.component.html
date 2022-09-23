@@ -5,8 +5,8 @@
   <!-- UPCOMING TRIPS -->
   <div class="title_and_thumbnail_area">
     <!-- TITLE SECTION -->
-    <app-trips-title-section [collapseID]="upcomingCollapse" [title]="upcomingTrips_SectionTitle" [tripList]="upcomingTrips"
-      sortToggle="sortByEarliestDate">
+    <app-trips-title-section [collapseID]="upcomingCollapse" [title]="upcomingTrips_SectionTitle"
+      [tripList]="upcomingTrips" sortToggle="sortByEarliestDate">
     </app-trips-title-section>
 
     <!-- THUMBNAILS SECTION -->
@@ -35,13 +35,13 @@
   <!-- PREVIOUS TRIPS -->
   <div class="title_and_thumbnail_area marg-btm">
     <!-- TITLE SECTION -->
-    <app-trips-title-section [collapseID]="previousCollapse" [title]="previousTrips_SectionTitle" [tripList]="previousTrips"
-    sortToggle="sortByLatestDate">
-  </app-trips-title-section>
+    <app-trips-title-section [collapseID]="previousCollapse" [title]="previousTrips_SectionTitle"
+      [tripList]="previousTrips" sortToggle="sortByLatestDate">
+    </app-trips-title-section>
 
-  <!-- THUMBNAILS SECTION -->
-  <div class="thumbnail-section container-fluid">
-    <!-- all thumbnails -->
+    <!-- THUMBNAILS SECTION -->
+    <div class="thumbnail-section container-fluid">
+      <!-- all thumbnails -->
       <div class="collapse in row-fluid" id="{{previousCollapse}}">
 
         <!-- list of upcoming trip thumbnails (sorted to have most recent previous trips at the top)-->

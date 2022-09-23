@@ -4,34 +4,31 @@
 }
 
 /* CREATE ACCOUNT button */
-  #create-account-btn {
-    color: rgb(0, 0, 0);
-    font-size: 18px;
-    background-image: linear-gradient( to bottom right, #a7b6e0, #859ad4);
-    border:none;
-    padding: 15px 30px;
-  }
-  #create-account-btn:hover {
-    color: rgb(43, 43, 43);
-    background-image: linear-gradient( to bottom right, #859ad4, #a7b6e0);
-  }
+#create-account-btn {
+  color: rgb(0, 0, 0);
+  font-size: 18px;
+  background-image: linear-gradient(to bottom right, #a7b6e0, #859ad4);
+  border: none;
+  padding: 15px 30px;
+}
+#create-account-btn:hover {
+  color: rgb(43, 43, 43);
+  background-image: linear-gradient(to bottom right, #859ad4, #a7b6e0);
+}
 /* take out black outline from all button clicks */
-  .btn {
-    outline: none;
-  }
-  .btn:active {
-    outline: none;
-  }
-
+.btn {
+  outline: none;
+}
+.btn:active {
+  outline: none;
+}
 
 /* descriptive box section */
-  .col-container {
-    display: table;
-    width: 100%;
-  }
-  .col {
-    padding: 0;
-    display: table-cell;
-  }
-
-
+.col-container {
+  display: table;
+  width: 100%;
+}
+.col {
+  padding: 0;
+  display: table-cell;
+}

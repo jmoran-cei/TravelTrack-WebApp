@@ -1,6 +1,6 @@
-  // services
-export * from './trip.service'
+// services
+export * from './trip.service';
 
-  // pipes
-export * from './pipes/byLatestDateFirst.pipe'
-export * from './pipes/byEarliestDateFirst.pipe'
+// pipes
+export * from '../../shared/pipes/byLatestDateFirst.pipe';
+export * from '../../shared/pipes/byEarliestDateFirst.pipe';

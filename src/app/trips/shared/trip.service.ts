@@ -5,7 +5,6 @@ import { AuthService, User } from 'src/app/user/shared';
 import { Destination } from '../../shared/models/destination.model';
 import { Trip } from '../../shared/models/trip.model';
 
-
 @Injectable()
 export class TripService {
   tripsUrl = '/api/trips';
@@ -14,20 +13,21 @@ export class TripService {
 
   // get all trips
   getTrips(): Observable<Trip[]> {
-    return this.http
-      .get<Trip[]>(this.tripsUrl)
-      .pipe(
-        map((trips) => this.filterTripsByUsername(trips, this.auth.currentUser.username)),
-        retry(2),
-        catchError(this.handleError<Trip[]>('getTrips()', []),
-      ));
+    return this.http.get<Trip[]>(this.tripsUrl).pipe(
+      map((trips) =>
+        this.filterTripsByUsername(trips, this.auth.currentUser.username)
+      ),
+      retry(2),
+      catchError(this.handleError<Trip[]>('getTrips()', []))
+    );
   }
 
   filterTripsByUsername(trips: Trip[], username: string): Trip[] {
-    const filteredTrips = trips.filter((trip:Trip) => {
-      return (trip.members || [])
-      .some((member: User) => member.username === username)
-    })
+    const filteredTrips = trips.filter((trip: Trip) => {
+      return (trip.members || []).some(
+        (member: User) => member.username === username
+      );
+    });
 
     return filteredTrips;
   }
@@ -38,45 +38,36 @@ export class TripService {
 
     return this.http
       .get<Trip>(url)
-      .pipe(
-        retry(2),
-        catchError(this.handleError<Trip>('getTrip()')
-      ));
+      .pipe(retry(2), catchError(this.handleError<Trip>('getTrip()')));
   }
 
   // create new trip
   createTrip(trip: Trip): Observable<Trip> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    return this.http
-      .post<Trip>(this.tripsUrl, trip, { headers: headers })
-      .pipe(
-        tap((data: Trip) => console.table(data)),
-        catchError(this.handleError<Trip>('createTrip()'))
-      );
+    return this.http.post<Trip>(this.tripsUrl, trip, { headers: headers }).pipe(
+      tap((data: Trip) => console.table(data)),
+      catchError(this.handleError<Trip>('createTrip()'))
+    );
   }
 
   // save an edited trip
   updateTrip(trip: Trip): Observable<Trip> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    return this.http
-      .put<Trip>(this.tripsUrl, trip, { headers: headers })
-      .pipe(
-        tap((data: Trip) => console.table(data)),
-        catchError(this.handleError<Trip>('createTrip()'))
-      );
+    return this.http.put<Trip>(this.tripsUrl, trip, { headers: headers }).pipe(
+      tap((data: Trip) => console.table(data)),
+      catchError(this.handleError<Trip>('createTrip()'))
+    );
   }
 
   // delete an existing trip
   deleteTrip(id: number): Observable<Trip> {
     const url = `${this.tripsUrl}/${id}`;
 
-    return this.http
-      .delete<Trip>(url)
-      .pipe(
-        tap((data: Trip) => console.table(data)),
-        catchError(this.handleError<Trip>('createTrip()'))
+    return this.http.delete<Trip>(url).pipe(
+      tap((data: Trip) => console.table(data)),
+      catchError(this.handleError<Trip>('createTrip()'))
     );
   }
 
@@ -110,7 +101,10 @@ export class TripService {
   }
 
   // function for handling errors
-  private handleError<Trip>(operation = 'operation', result?: Trip): (error: any) => Observable<Trip> {
+  private handleError<Trip>(
+    operation = 'operation',
+    result?: Trip
+  ): (error: any) => Observable<Trip> {
     return (error: any): Observable<Trip> => {
       console.error(error);
       return of(result as Trip);

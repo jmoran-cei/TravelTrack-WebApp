@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
   templateUrl: 'trip-sidebar-option.component.html',
   styleUrls: ['trip-sidebar-option.component.css'],
 })
-
 export class TripSidebarOptionComponent {
   @Input() properties!: Properties;
 

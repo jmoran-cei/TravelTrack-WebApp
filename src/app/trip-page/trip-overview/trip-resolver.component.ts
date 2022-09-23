@@ -27,7 +27,7 @@ export class TripResolver implements Resolve<any> {
       .getTrip(route.params['id'])
       .pipe(take(1))
       .subscribe((response) => {
-        if (!response || !this.checkUserIsMemberOfTrip(response)){
+        if (!response || !this.checkUserIsMemberOfTrip(response)) {
           this.router.navigate(['404']); // if trip doesn't exist, re-route to 404
         }
       });

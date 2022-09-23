@@ -1,168 +1,169 @@
 /* background image */
-  #bg-img {
-    position: fixed;
-    z-index: -6;
-    width: 100%;
-    bottom: -20%;
-    opacity: .2;
-  }
+#bg-img {
+  position: fixed;
+  z-index: -6;
+  width: 100%;
+  bottom: -20%;
+  opacity: 0.2;
+}
 
 /* center divs of content */
-  .allcontent-center {
-    min-height: 800px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.allcontent-center {
+  min-height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /* set all page content width 100% */
-  .content-fullwidth {
-    width: 100%;
-  }
+.content-fullwidth {
+  width: 100%;
+}
 /* set login-side content to 80% (squishes input boxes) */
-  .logincontent-80width {
-    width: 80%;
-  }
+.logincontent-80width {
+  width: 80%;
+}
 
 /* entire card for login area */
-  .card {
-    padding: 0;
-    margin: 20px auto;
-    margin-bottom: 50px;
-    max-height: 500px;
-    max-width: 900px;
-    width: 100%;
-    background: hsla(0, 0%, 100%, 0.8);
-    backdrop-filter: blur(5px);
-    border-radius: 10px;
-    box-shadow: .8px .8px 15px .8px rgba(0,0,0,.1);
-    overflow: hidden;
-  }
+.card {
+  padding: 0;
+  margin: 20px auto;
+  margin-bottom: 50px;
+  max-height: 500px;
+  max-width: 900px;
+  width: 100%;
+  background: hsla(0, 0%, 100%, 0.8);
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  box-shadow: 0.8px 0.8px 15px 0.8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
 
 /* logo icon & site title */
-  h1 {
-    margin: 30px 0;
-    font-size: 50px;
-  }
-  h1 a {
-    color: #859ad4;
-    text-decoration: none;
-  }
+h1 {
+  margin: 30px 0;
+  font-size: 50px;
+}
+h1 a {
+  color: #859ad4;
+  text-decoration: none;
+}
 
 /* image side of card (on left) */
-  .img-side {
-    padding: 0;
-    overflow: hidden;
-  }
-  .card-img {
-    height: 500px;
-  }
+.img-side {
+  padding: 0;
+  overflow: hidden;
+}
+.card-img {
+  height: 500px;
+}
 
 /* login content side of card (on right) */
-  .login-side {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 500px;
-    padding: 30px 40px;
-    padding-right: 55px;
+.login-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  padding: 30px 40px;
+  padding-right: 55px;
+}
+
+/* title: (logo) Travel Track */
+.card-title {
+  margin-top: 20px;
+  font-size: 25px;
+}
+
+/* title: Sign into your account */
+h3 {
+  margin: 0;
+}
+.subtitle {
+  margin-bottom: 5px;
+  font-size: 27px;
+}
+
+/* logo icon */
+.bi-pin-map-fill {
+  color: #859ad4;
+}
+
+/* flexbox for horiz. centering */
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* login button */
+.login-btn {
+  font-size: 15px;
+  color: white;
+  background-color: #859ad4;
+  padding: 5px 40px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.login-btn:hover {
+  background-color: #9fb3eb;
+}
+
+/* validation stylings */
+/* left side: red, green toggle based on state */
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 5px solid #42a948; /* green */
+}
+.ng-invalid:not(form) {
+  border-left: 5px solid #a94442; /* red */
+}
+
+/* invalid alert  */
+.alert-placeholder {
+  height: 27px;
+  width: 100%;
+  align-items: center;
+}
+.alert {
+  z-index: -2;
+  transform: translateY(7px);
+  font-size: 12px;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 5px 0px;
+}
+.alert-danger {
+  margin: 0;
+}
+.alert > p {
+  transform: translateY(-4px);
+}
+/* ------ */
+
+/* forgot password */
+.forgot-pwd:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* create account button */
+.btn-primary {
+  font-size: 15px;
+  color: white;
+  background-color: rgb(31, 31, 31);
+}
+.btn-primary:hover {
+  background-color: rgb(71, 71, 71);
+}
+
+/* allows login content to stay on the page for smaller devices */
+@media (max-width: 1000px) {
+  .row .col-md-8 {
+    float: left;
+    width: 66.668%;
   }
-
-  /* title: (logo) Travel Track */
-    .card-title {
-      margin-top: 20px;
-      font-size: 25px;
-    }
-
-  /* title: Sign into your account */
-    h3 {
-      margin: 0
-    }
-    .subtitle {
-      margin-bottom: 5px;
-      font-size: 27px;
-    }
-
-  /* logo icon */
-    .bi-pin-map-fill {
-      color: #859ad4;
-    }
-
-  /* flexbox for horiz. centering */
-    .flex {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-
-    /* login button */
-    .login-btn {
-      font-size: 15px;
-      color: white;
-      background-color: #859ad4;
-      padding: 5px 40px;
-      margin-top: 15px;
-      margin-bottom: 15px;
-    }
-    .login-btn:hover {
-      background-color: #9fb3eb;
-    }
-
-    /* validation stylings */
-    /* left side: red, green toggle based on state */
-    .ng-valid[required], .ng-valid.required  {
-      border-left: 5px solid #42A948; /* green */
-    }
-    .ng-invalid:not(form)  {
-      border-left: 5px solid #a94442; /* red */
-    }
-
-    /* invalid alert  */
-    .alert-placeholder {
-      height:27px;
-      width: 100%;
-      align-items: center;
-    }
-    .alert {
-      z-index: -2;
-      transform: translateY(7px);
-      font-size: 12px;
-      width:100%;
-      margin-bottom: 0;
-      padding: 5px 0px;
-    }
-    .alert-danger {
-      margin:0;
-    }
-    .alert > p {
-      transform: translateY(-4px);
-    }
-  /* ------ */
-
-  /* forgot password */
-  .forgot-pwd:hover {
-    text-decoration: none;
-    cursor:pointer;
+  .row .col-md-4 {
+    float: left;
+    width: 33.332%;
   }
-
-  /* create account button */
-    .btn-primary {
-      font-size: 15px;
-      color: white;
-      background-color: rgb(31, 31, 31);
-    }
-    .btn-primary:hover {
-      background-color: rgb(71, 71, 71);
-    }
-
-  /* allows login content to stay on the page for smaller devices */
-    @media (max-width:1000px) {
-      .row .col-md-8 {
-          float:left;
-          width:66.668%;
-      }
-      .row .col-md-4 {
-          float:left;
-          width:33.332%;
-      }
-    }
+}

@@ -1,12 +1,10 @@
-import { Component } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-travel-app',
-  templateUrl: 'travel-app.component.html'
+  templateUrl: 'travel-app.component.html',
 })
-
 export class TravelAppComponent {
-
-  constructor(public router:Router) {}
+  constructor(public router: Router) {}
 }

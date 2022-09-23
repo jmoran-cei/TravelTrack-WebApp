@@ -1,6 +1,8 @@
-import { AbstractControl } from "@angular/forms";
+import { AbstractControl } from '@angular/forms';
 
-export function datesInOrderValidator (c: AbstractControl): { [key: string]: boolean } | null {
+export function datesInOrderValidator(
+  c: AbstractControl
+): { [key: string]: boolean } | null {
   const startDate = c.get('startDate');
   const endDate = c.get('endDate');
 
@@ -9,7 +11,7 @@ export function datesInOrderValidator (c: AbstractControl): { [key: string]: boo
   }
 
   if (startDate?.value > endDate?.value) {
-    return { 'notInOrder': true};
+    return { notInOrder: true };
   }
   return null;
 }

@@ -31,7 +31,6 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Jonathan',
               lastName: 'Moran',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
             {
@@ -39,7 +38,6 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Dummy',
               lastName: 'User',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
             {
@@ -47,12 +45,9 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Fake',
               lastName: 'User',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
           ],
-          photos: [],
-          itinerary: [],
           toDo: [
             {
               task: 'pack clothes',
@@ -104,7 +99,6 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Jonathan',
               lastName: 'Moran',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
             {
@@ -112,7 +106,6 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Dummy',
               lastName: 'User',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
             {
@@ -120,12 +113,9 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Fake',
               lastName: 'User',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
           ],
-          photos: [],
-          itinerary: [],
           toDo: [
             {
               task: 'pack clothes',
@@ -171,7 +161,6 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Jonathan',
               lastName: 'Moran',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
             {
@@ -179,7 +168,6 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Dummy',
               lastName: 'User',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
             {
@@ -187,12 +175,9 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Fake',
               lastName: 'User',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
           ],
-          photos: [],
-          itinerary: [],
           toDo: [
             {
               task: 'pack clothes',
@@ -238,12 +223,9 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Dummy',
               lastName: 'User',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
           ],
-          photos: [],
-          itinerary: [],
           toDo: [],
           imgUrl: 'assets/images/trips/hawaii1.jpg',
         },
@@ -268,12 +250,9 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Dummy',
               lastName: 'User',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
           ],
-          photos: [],
-          itinerary: [],
           toDo: [],
           imgUrl: 'assets/images/trips/ireland1.jpg',
         },
@@ -285,7 +264,6 @@ export class DataService implements InMemoryDbService {
           password: 'P@ssw0rd',
           firstName: 'Jonathan',
           lastName: 'Moran',
-          address: [],
           pictureURL: 'assets/images/users/dummy1.jpg',
         },
         {
@@ -294,7 +272,6 @@ export class DataService implements InMemoryDbService {
           password: 'P@ssw0rd',
           firstName: 'Dummy',
           lastName: 'User',
-          address: [],
           pictureURL: 'assets/images/users/dummy1.jpg',
         },
         {
@@ -303,7 +280,6 @@ export class DataService implements InMemoryDbService {
           password: 'P@ssw0rd',
           firstName: 'Fake',
           lastName: 'User',
-          address: [],
           pictureURL: 'assets/images/users/dummy1.jpg',
         },
       ],

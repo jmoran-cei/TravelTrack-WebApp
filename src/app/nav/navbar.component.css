@@ -10,7 +10,7 @@
   color: rgb(31, 31, 31);
   height: 70px;
   font-size: 15px;
-  box-shadow: 0 1.4px 6px 0 rgba(0,0,0,.2);
+  box-shadow: 0 1.4px 6px 0 rgba(0, 0, 0, 0.2);
   border-top: 1px solid rgb(185, 185, 185);
   border-radius: 0;
   z-index: 1;
@@ -48,7 +48,7 @@ a {
 }
 /* when routerlinkactive */
 .active {
-  color:#859ad4;
+  color: #859ad4;
 }
 
 /* box: used to define placement / set up tabs (trips, bucket list, user icon)  */
@@ -68,7 +68,6 @@ a {
   color: #859ad4;
 }
 
-
 /* Travel Track Title */
 h3 {
   margin: 0;
@@ -79,7 +78,7 @@ h3 {
   font-size: 27px;
   font-weight: 600;
 }
-.nav-title:hover a{
+.nav-title:hover a {
   color: #859ad4;
 }
 .bi-pin-map-fill {
@@ -97,9 +96,8 @@ h3 {
   transform: translateY(7%); /* aids in visual appeal of centering */
 }
 .box:hover label {
-  color:#859ad4;
+  color: #859ad4;
 }
-
 
 /* Trips */
 .glyphicon-calendar {
@@ -108,19 +106,17 @@ h3 {
   margin-right: 5px;
 }
 
-
 /* Bucket List */
 .bi-bucket-fill {
   display: inline-flex;
   font-size: medium;
-  transform:translateY(5%); /* aids in visual appeal of centering */
+  transform: translateY(5%); /* aids in visual appeal of centering */
   margin-right: 5px;
 }
 
-
 /* Search */
 .navbar-form {
-  transform: scale(1.0);
+  transform: scale(1);
   margin: 0;
   padding: 0;
 }
@@ -132,140 +128,137 @@ h3 {
   border-color: transparent;
 }
 .btn-info:hover {
-  background-color: rgb(31,31,31);
+  background-color: rgb(31, 31, 31);
   border-color: transparent;
 }
-
-
-
 
 /* "Hi, Username" */
 .hi-username label {
   transform: translateY(7%); /* aids in visual appeal of centering */
 }
 
-
 /* User Menu */
 .dropdown {
   margin: 0 10px;
 }
-  /* user icon as button */
-  .dropdown .btn {
-    padding: 3px 5px;
-    background-color: transparent;
-  }
-  .glyphicon-user {
-    font-size: 18px;
-  }
-  .box:hover .glyphicon-user,.box:hover .hi-username {
-    color:#859ad4;
-  }
-  .dropbtn {
-    color: white;
-    padding: 8px;
-    cursor: pointer;
-  }
-  /* all content in dropdown */
-  .dropdown-content {
-    width: 111%;
-    display: none;
-    margin-right: 0;
-    right: -20px;
-    top: 100%;
-    min-width: 160px;
-    max-width: 185px;
-    position: absolute;
-    background-color: white;
-    border-radius: 4px;
-    z-index: 1;
-    box-shadow: 0px 2px 2px 2px rgba(0,0,0,.2);
-  }
-    /* condition class for .dropdown-content */
-    /* condition: user's first name is longer than 9 characters, so align the dropdown from the left */
-    .dropdown-left {
-      left:10px;
-    }
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-    .dropdown-content a {
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-    }
-    .dropdown-content a:hover {
-      background-color: #859ad4;
-      color: rgb(31,31,31);
-    }
-    /* top box in dropdown: includes user profile pic, full name, and username */
-    .user-details {
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      padding: 6px 6px;
-      height: 60px;
-      max-width: 260px;
-      max-height: 80px;
-    }
-      /* wrap profile pic */
-      .img-wrapper {
-        margin-left: 3px;
-        margin-right: 3px;
-        overflow: hidden;
-        height: 30px;
-        width: 30px;
-        border-radius: 50%;
-      }
-      .move-down { /* this will be probably get updated when I figure out how I'll have profile pictures set up (cropping, dimensions, etc.) */
-        transform: translateY(10%); /* currently adjusted for dummy profile */
-      }
-      /* user profile pic image */
-      .user-picture {
-        transform: scale(2.1); /* currently adjusted for dummy profile */
-        height: 100%;
-        width: 100%;
-      }
-      /* container for text content */
-      .user-text-content {
-        padding-top: 6px;
-        margin-left: 1px;
-        margin-right: 1px;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        width: 75%;
-        max-width: 207px;
-      }
-        /* full name text */
-        .name {
-          position: relative;
-          text-align: left;
-          height: 50%;
-          font-size: 11.5px;
-          padding: 1.2px 0;
-        }
-        /* username text */
-        .username {
-          position: relative;
-          text-align: left;
-          padding: 1.2px 0;
-          height: 50%;
-          font-size: 10px;
-          font-style: italic;
-          color: darkslategray;
-        }
-        .user-text-content p {
-          top: 20%;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          min-width: 25px;
-          max-width: 130px;
-        }
-        .dropdown-content a {
-          font-size: 12.5px;
-        }
-
+/* user icon as button */
+.dropdown .btn {
+  padding: 3px 5px;
+  background-color: transparent;
+}
+.glyphicon-user {
+  font-size: 18px;
+}
+.box:hover .glyphicon-user,
+.box:hover .hi-username {
+  color: #859ad4;
+}
+.dropbtn {
+  color: white;
+  padding: 8px;
+  cursor: pointer;
+}
+/* all content in dropdown */
+.dropdown-content {
+  width: 111%;
+  display: none;
+  margin-right: 0;
+  right: -20px;
+  top: 100%;
+  min-width: 160px;
+  max-width: 185px;
+  position: absolute;
+  background-color: white;
+  border-radius: 4px;
+  z-index: 1;
+  box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+/* condition class for .dropdown-content */
+/* condition: user's first name is longer than 9 characters, so align the dropdown from the left */
+.dropdown-left {
+  left: 10px;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown-content a {
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-content a:hover {
+  background-color: #859ad4;
+  color: rgb(31, 31, 31);
+}
+/* top box in dropdown: includes user profile pic, full name, and username */
+.user-details {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 6px 6px;
+  height: 60px;
+  max-width: 260px;
+  max-height: 80px;
+}
+/* wrap profile pic */
+.img-wrapper {
+  margin-left: 3px;
+  margin-right: 3px;
+  overflow: hidden;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
+.move-down {
+  /* this will be probably get updated when I figure out how I'll have profile pictures set up (cropping, dimensions, etc.) */
+  transform: translateY(10%); /* currently adjusted for dummy profile */
+}
+/* user profile pic image */
+.user-picture {
+  transform: scale(2.1); /* currently adjusted for dummy profile */
+  height: 100%;
+  width: 100%;
+}
+/* container for text content */
+.user-text-content {
+  padding-top: 6px;
+  margin-left: 1px;
+  margin-right: 1px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 75%;
+  max-width: 207px;
+}
+/* full name text */
+.name {
+  position: relative;
+  text-align: left;
+  height: 50%;
+  font-size: 11.5px;
+  padding: 1.2px 0;
+}
+/* username text */
+.username {
+  position: relative;
+  text-align: left;
+  padding: 1.2px 0;
+  height: 50%;
+  font-size: 10px;
+  font-style: italic;
+  color: darkslategray;
+}
+.user-text-content p {
+  top: 20%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  min-width: 25px;
+  max-width: 130px;
+}
+.dropdown-content a {
+  font-size: 12.5px;
+}
 
 @media (max-width: 660px) {
   .navbar {
@@ -275,6 +268,6 @@ h3 {
 /* Hide search bar if view gets too small*/
 @media (max-width: 1100px) {
   #searchForm {
-    display:none;
+    display: none;
   }
 }

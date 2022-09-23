@@ -3,7 +3,6 @@
   margin-top: 25px;
 }
 
-
 /* submit, cancel, and delete */
 .buttons {
   float: right;
@@ -21,7 +20,7 @@
 .btn {
   margin: 0 0px;
   border: none;
-  outline: none
+  outline: none;
 }
 .btn:active {
   outline: none;
@@ -80,7 +79,6 @@
   display: none;
   position: absolute;
 }
-
 
 @media (min-width: 1800px) {
   .buttons-narrow {

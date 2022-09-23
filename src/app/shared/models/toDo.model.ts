@@ -1,4 +1,4 @@
 export interface ToDo {
-  task: string
-  complete: boolean
+  task: string;
+  complete: boolean;
 }
