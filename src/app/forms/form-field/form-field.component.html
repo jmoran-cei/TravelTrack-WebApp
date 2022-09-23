@@ -16,13 +16,14 @@
 
 <!-- input -->
   <!-- type: TEXT -->
-  <ng-container *ngIf="type==='text'">
+  <ng-container *ngIf="type!=='date' && type!=='textarea'">
     <input class="form-control col-md-6"
       [formControl]="control"
       id="{{id}}"
       attr.placeholder="{{placeholder}}"
       attr.type="{{type}}"
-      [ngClass]="{'input-red': hasInvalidStyling}"/>
+      [ngClass]="{'input-red': hasInvalidStyling}"
+      attr.disabled="{{isDisabled}}"/>
   </ng-container>
 
   <!-- type: DATE -->
@@ -34,7 +35,8 @@
       attr.type="{{type}}"
       min="1900-01-01"
       max="2100-01-01"
-      [ngClass]="{'input-red': hasInvalidStyling}"/>
+      [ngClass]="{'input-red': hasInvalidStyling}"
+      attr.disabled="{{isDisabled}}"/>
   </ng-container>
 
   <!-- type: TEXT AREA -->
@@ -44,6 +46,7 @@
       id="{{id}}"
       attr.placeholder="{{placeholder}}"
       attr.type="{{type}}" rows="3" cols="80"
-      [ngClass]="{'input-red': hasInvalidStyling}">
+      [ngClass]="{'input-red': hasInvalidStyling}"
+      attr.disabled="{{isDisabled}}">
     </textarea>
   </ng-container>

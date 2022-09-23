@@ -12,13 +12,15 @@ import {
   tripRoutes,
   TripSidebarOptionComponent
 } from '.'
+import { SharedModule } from "../shared/module/shared.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forChild(tripRoutes)
+    RouterModule.forChild(tripRoutes),
+    SharedModule,
   ],
   declarations: [
     TripItineraryComponent,

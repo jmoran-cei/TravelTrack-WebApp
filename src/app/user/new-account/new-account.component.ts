@@ -1,24 +1,87 @@
-import { Component } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
+import { take, tap } from 'rxjs';
+import { UsernameValidator } from 'src/app/forms/validators/userExists.validator';
+import { IUser, UserService } from '../shared';
 
 @Component({
   templateUrl: 'new-account.component.html',
-  styleUrls: ['new-account.component.css']
+  styleUrls: ['new-account.component.css'],
 })
+export class NewAccountComponent implements OnInit {
+  mouseoverSubmit?: boolean;
+  accountForm!: FormGroup;
 
-export class NewAccountComponent {
-  mouseoverSubmit?:boolean
-  //firstName?:string
-  //lastName?:string
-  //username?:string
-  //password?:string
-
-  constructor(private router:Router) {}
-
-  createAccount() { //funcionality will be further implemeneted in the near future
-    alert('You have successfully created an account! Please sign in. \n(Custom alert will be used in the future..)')
-    this.router.navigate(['/user/login'])
+  get firstName(): FormControl {
+    return <FormControl>this.accountForm.get('firstName');
+  }
+  get lastName(): FormControl {
+    return <FormControl>this.accountForm.get('lastName');
+  }
+  get username(): FormControl {
+    return <FormControl>this.accountForm.get('username');
+  }
+  get password(): FormControl {
+    return <FormControl>this.accountForm.get('password');
   }
 
-}
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private userService: UserService
+  ) {}
 
+  ngOnInit() {
+    this.createAccountForm();
+  }
+
+  createAccountForm() {
+    this.accountForm = this.fb.group({
+      firstName: this.fb.control('', [Validators.required]),
+      lastName: this.fb.control('', [Validators.required]),
+      username: this.fb.control(
+        '',
+        [Validators.required, Validators.email],
+        [UsernameValidator.createValidator(this.userService, true)]
+      ),
+      password: this.fb.control('', [
+        Validators.required,
+        Validators.pattern(
+          '(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$'
+        ),
+      ]),
+    });
+  }
+
+  createAccount() {
+    //funcionality will be further implemeneted in the near future
+    this.accountForm.markAllAsTouched();
+    if (this.accountForm.invalid) return;
+
+    this.userService
+      .createUser(this.newUserObject())
+      .pipe(take(1), tap((newUser) => console.table(newUser)))
+      .subscribe(() => {
+        alert('You have successfully created an account! Please sign in.');
+        this.router.navigate(['/user/login']);
+      });
+  }
+
+  newUserObject(): IUser {
+    return {
+      id: Date.now().valueOf(), // unique
+      firstName: this.firstName.value,
+      lastName: this.lastName.value,
+      username: this.username.value,
+      password: this.password.value,
+      address: [],
+      pictureURL: 'assets/images/users/dummy1.jpg',
+    };
+  }
+}

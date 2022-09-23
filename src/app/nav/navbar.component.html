@@ -47,24 +47,24 @@
         <button class="btn drop-btn" id="personal-menu"><span class="glyphicon glyphicon-user"></span></button>
 
         <!-- menu (adjusts based on length of first name)-->
-        <div class="dropdown-content" [ngClass]="{'dropdown-left': auth.currentUser.firstName.length>9}">
+        <div class="dropdown-content" [ngClass]="{'dropdown-left': currentUser.firstName.length>9}">
           <!-- if first name is long, dropdown is aligned left -->
           <div class="user-details">
             <!-- user profile picture -->
             <div class="img-wrapper ">
               <div class="move-down">
-                <img src="{{auth.currentUser.pictureURL}}" class="user-picture" />
+                <img src="{{currentUser.pictureURL}}" class="user-picture" />
               </div>
             </div>
             <div class="user-text-content">
               <!-- First and Last Name -->
               <div class="name">
-                <p>{{auth.currentUser.firstName}} {{auth.currentUser.lastName}}</p>
+                <p>{{currentUser.firstName}} {{currentUser.lastName}}</p>
               </div>
 
               <!-- Username -->
               <div class="username">
-                <p>{{auth.currentUser.username}}</p>
+                <p>{{currentUser.username}}</p>
               </div>
             </div>
           </div>
@@ -77,7 +77,7 @@
         <!-- "Hi, User" -->
         <div class="hi-username">
           <label for="personal-menu" class="font400">
-            Hi, {{adjustNameLength(auth.currentUser.firstName,17)}}
+            Hi, {{adjustNameLength(currentUser.firstName,17)}}
           </label>
         </div>
       </div>

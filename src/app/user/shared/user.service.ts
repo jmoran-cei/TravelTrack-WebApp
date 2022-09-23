@@ -1,45 +1,83 @@
-import { Injectable } from "@angular/core";
-import { delay, Observable, of } from "rxjs";
-import { IUser } from "../../shared/models/user.model";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import {
+  catchError,
+  map,
+  Observable,
+  of,
+  retry,
+  take,
+  tap,
+} from 'rxjs';
+import { IUser } from '.';
 
 @Injectable()
 export class UserService {
-  getUserByUsername(username:string):IUser {
-    return USERS.find((user:IUser) => user.username === username)!
-  }
+  usersUrl = '/api/users';
 
-  // my next PR will have CRUD using in-mem api for user service and implementation will differ
-  // I saved user related work for last to be more efficient with manually testing, etc. while implementing other features
-  checkUsernameExists(username: string): Observable<boolean> {
-    return of(this.getUserByUsername(username) !== undefined).pipe(
-      delay(500)
+  constructor(private http: HttpClient) {}
+
+  // have to grab users this way in order to get them from angular web api (can only get by 'id' not by a 'username')
+  users = this.http
+    .get<IUser[]>(this.usersUrl)
+    .pipe(retry(2), catchError(this.handleError('getUsers()', [])));
+
+  // check if user is in users
+  getUser(username: string): Observable<IUser | undefined> {
+    return this.users.pipe(
+      take(1),
+      map((users: IUser[]) => {
+        return users.find((user) => user.username === username);
+      })
     );
   }
-}
 
-const USERS:IUser[] = [
-  {
-    username: 'jmoran@ceiamerica.com',
-    password: 'P@ssw0rd',
-    firstName: 'Jonathan',
-    lastName: 'Moran',
-    address: [],
-    pictureURL: 'assets/images/dummy1.jpg'
-  },
-  {
-    username: 'dummyuser@dummy.dum',
-    password: 'P@ssw0rd',
-    firstName: 'Dummy',
-    lastName: 'User',
-    address: [],
-    pictureURL: 'assets/images/users/dummy1.jpg'
-  },
-  {
-    username: 'fakeuser@fakey.fake',
-    password: 'P@ssw0rd',
-    firstName: 'Fake',
-    lastName: 'User',
-    address: [],
-    pictureURL: 'assets/images/users/dummy1.jpg'
+  // create new user account
+  createUser(user: IUser): Observable<IUser> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http
+      .post<IUser>(this.usersUrl, user, { headers: headers })
+      .pipe(
+        tap((data: IUser) => console.table(data)),
+        catchError(this.handleError<IUser>('createUser()'))
+      );
   }
-]
+
+  // update user account
+  updateUser(user: IUser): Observable<IUser> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http
+      .put<IUser>(this.usersUrl, user, { headers: headers })
+      .pipe(
+        tap((data: IUser) => console.table(data)),
+        catchError(this.handleError<IUser>('updateUser()'))
+      );
+  }
+
+  // check if user exists
+  checkUsernameExists(username: string): Observable<boolean> {
+    var userValid = false;
+
+    return this.getUser(username).pipe(
+      map((result) => {
+        if (result !== undefined) {
+          return (userValid = true);
+        } else {
+          return (userValid = false);
+        }
+      })
+    );
+  }
+
+  private handleError<IUser>(
+    operation = 'operation',
+    result?: IUser
+  ): (error: any) => Observable<IUser> {
+    return (error: any): Observable<IUser> => {
+      console.error('error: ', error.status);
+      return of(result as IUser);
+    };
+  }
+}

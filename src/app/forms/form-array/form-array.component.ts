@@ -73,7 +73,7 @@ export class FormArrayComponent implements OnInit {
       return new FormControl('',Validators.required);
     }
     if (this.formArrayName === 'members') {
-      return new FormControl('', [], [UsernameValidator.createValidator(this.userService)]);
+      return new FormControl('', [], [UsernameValidator.createValidator(this.userService, false)]);
     }
     return new FormControl('');
   }

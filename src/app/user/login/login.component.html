@@ -1,5 +1,5 @@
 <!-- background image -->
-<img id="bg-img" src="assets/images/general/form-bg.jpg" alt="background-image"/>
+<img id="bg-img" src="assets/images/general/form-bg.jpg" alt="background-image" />
 
 <!-- page container -->
 <section class="allcontent-center">
@@ -22,56 +22,67 @@
 
         <!-- login content side: right side of card -->
         <div class="col-md-8 login-side">
-            <div class="logincontent-80width">
+          <div class="logincontent-80width">
 
-              <div class="card-body">
-                <!-- Subtitle: SIGN INTO YOUR ACCOUNT -->
-                <h3 class="card-title subtitle">Sign into your account.</h3>
+            <div class="card-body">
+              <!-- Subtitle: SIGN INTO YOUR ACCOUNT -->
+              <h3 class="card-title subtitle">Sign into your account.</h3>
 
-                <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value.username, loginForm.value.password)">
-                  <!-- USERNAME -->
-                  <div class="flex">
-                    <!-- alert placement -->
-                    <div class="alert-placeholder flex">
-                      <div class="alert alert-danger"
-                        [hidden]="username.valid || (!mouseoverLogin && (username.valid || username.untouched))">
-                        <p>Username is required</p>
-                      </div>
+              <form (ngSubmit)="login(username.value, password.value)" novalidate [formGroup]="loginForm">
+                <!-- USERNAME -->
+                <div class="flex">
+                  <!-- alert placement -->
+                  <div class="alert-placeholder flex">
+                    <div class="alert alert-danger" [hidden]="!invalidAttempt">
+                      <p>Invalid username or password</p>
                     </div>
-                    <!-- input box -->
-                    <input required type="username" id="username" #username="ngModel" (ngModel)="username"
-                      name="username" class="form-control form-control-lg ng-invalid" placeholder="Username" />
-                  </div>
-
-                  <!-- PASSWORD -->
-                  <div class="flex">
-                    <!-- alert placement -->
-                    <div class="alert-placeholder flex">
-                      <div class="alert alert-danger"
-                        [hidden]="password.valid || (!mouseoverLogin && (password.valid || password.untouched))">
-                        <p>Password is required</p>
-                      </div>
+                    <div class="alert alert-danger" *ngIf="!invalidAttempt"
+                      [hidden]="username.valid || (!mouseoverLogin && (username.valid || username.untouched))">
+                      <p>
+                        {{ username.hasError('required') ? 'Username is required' : '' }}
+                        {{ username.hasError('email') && !username.hasError('required') ? 'Username must be an email' : '' }}
+                      </p>
                     </div>
-                    <!-- input box -->
-                    <input required type="password" id="password" #password="ngModel" (ngModel)="password"
-                      name="password" class="form-control form-control-lg ng-invalid" placeholder="Password" />
                   </div>
+                  <!-- input box -->
+                  <input formControlName="username" class="form-control form-control-lg ng-invalid" required
+                    placeholder="Username" />
+                </div>
 
-                  <!-- update mouseoverLogin variable -->
-                  <span (mouseenter)="mouseoverLogin=true" (mouseleave)="mouseoverLogin=false">
-                    <!-- LOGIN button -->
-                    <button type="submit" [disabled]="!loginForm.valid" class="btn btn-default login-btn">Login</button>
-                  </span>
-                  <p class="card-text"><a class="forgot-pwd">Forgot password?</a></p>
-                </form>
+                <!-- PASSWORD -->
+                <div class="flex">
+                  <!-- alert placement -->
+                  <div class="alert-placeholder flex">
+                    <div class="alert alert-danger" [hidden]="!invalidAttempt">
+                      <p>Invalid username or password</p>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="!invalidAttempt"
+                      [hidden]="password.valid || (!mouseoverLogin && (password.valid || password.untouched))">
+                      <p *ngIf="!invalidAttempt">
+                        {{ password.hasError('required') ? 'Password is required' : '' }}
+                      </p>
+                    </div>
+                  </div>
+                  <!-- input box -->
+                  <input formControlName="password" class="form-control form-control-lg ng-invalid" required
+                    placeholder="Password" type="password" />
+                </div>
 
-                <hr />
-                <!-- CREATE ACCOUNT button -->
-                <button type="submit" class="btn btn-primary" [routerLink]="['/user/new-account']">Create a new account</button>
-              </div>
+                <!-- update mouseoverLogin variable -->
+                <span (mouseenter)="mouseoverLogin=true" (mouseleave)="mouseoverLogin=false">
+                  <!-- LOGIN button -->
+                  <button type="submit" [disabled]="!loginForm.valid" class="btn btn-default login-btn">Login</button>
+                </span>
+                <p class="card-text"><a class="forgot-pwd">Forgot password?</a></p>
+              </form>
+
+              <hr />
+              <!-- CREATE ACCOUNT button -->
+              <button type="submit" class="btn btn-primary" [routerLink]="['/user/new-account']">Create a new account</button>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </section>

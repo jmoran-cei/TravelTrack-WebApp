@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
-import { filter, Subscription, take } from "rxjs";
+import { filter, Subscription } from "rxjs";
+import { IUser } from "../user";
 import { AuthService } from "../user/shared/authentication.service";
 
 @Component({
@@ -10,15 +11,18 @@ import { AuthService } from "../user/shared/authentication.service";
 })
 
 export class NavbarComponent implements OnInit, OnDestroy {
-  isLoggedIn= this.auth.isLoggedIn$.pipe(take(1));
+  isLoggedIn= this.auth.isLoggedIn$;
+  currentUser: IUser;
   path!:string;
   isTripPage!:boolean;
   pathSubscription!: Subscription;
 
   constructor(
-    public auth:AuthService,
+    private auth:AuthService,
     private router:Router
-  ) { }
+  ) {
+    this.currentUser = auth.currentUser;
+  }
 
   ngOnInit() {
     this.pathSubscription = this.router.events

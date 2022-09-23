@@ -32,7 +32,7 @@ export class DataService implements InMemoryDbService {
               firstName: 'Jonathan',
               lastName: 'Moran',
               address: [],
-              pictureURL: 'assets/images/dummy1.jpg'
+              pictureURL: 'assets/images/users/dummy1.jpg',
             },
             {
               username: 'dummyuser@dummy.dum',
@@ -40,7 +40,7 @@ export class DataService implements InMemoryDbService {
               firstName: 'Dummy',
               lastName: 'User',
               address: [],
-              pictureURL: 'assets/images/users/dummy1.jpg'
+              pictureURL: 'assets/images/users/dummy1.jpg',
             },
             {
               username: 'fakeuser@fakey.fake',
@@ -48,8 +48,8 @@ export class DataService implements InMemoryDbService {
               firstName: 'Fake',
               lastName: 'User',
               address: [],
-              pictureURL: 'assets/images/users/dummy1.jpg'
-            }
+              pictureURL: 'assets/images/users/dummy1.jpg',
+            },
           ],
           photos: [],
           itinerary: [],
@@ -80,7 +80,8 @@ export class DataService implements InMemoryDbService {
         {
           id: 2,
           title: 'Myrtle Beach and Charleston Family Vacay 2022',
-          details: 'Oremlay ipsumyay olorday itsay ametyay, onsectetuercay adipiscingyay elityay. Edsay itaevay eolay inyay iamday empersay orttitorpay. Ullamnay idyay augueyay. Aecenasmay atyay acuslay isquay islnay auctoryay imperdietyay. Integeryay incidunttay acinialay elitvay. Uspendissesay aretraphay. Uisday ariusvay. Ellentesquepay abitanthay orbimay istiquetray enectussay etyay etusnay etyay alesuadamay amesfay acyay urpistay egestasyay.',
+          details:
+            'Oremlay ipsumyay olorday itsay ametyay, onsectetuercay adipiscingyay elityay. Edsay itaevay eolay inyay iamday empersay orttitorpay. Ullamnay idyay augueyay. Aecenasmay atyay acuslay isquay islnay auctoryay imperdietyay. Integeryay incidunttay acinialay elitvay. Uspendissesay aretraphay. Uisday ariusvay. Ellentesquepay abitanthay orbimay istiquetray enectussay etyay etusnay etyay alesuadamay amesfay acyay urpistay egestasyay.',
           startDate: new Date('5/27/2022'),
           endDate: new Date('6/5/2022'),
           destinations: [
@@ -104,7 +105,7 @@ export class DataService implements InMemoryDbService {
               firstName: 'Jonathan',
               lastName: 'Moran',
               address: [],
-              pictureURL: 'assets/images/dummy1.jpg'
+              pictureURL: 'assets/images/users/dummy1.jpg',
             },
             {
               username: 'dummyuser@dummy.dum',
@@ -112,7 +113,7 @@ export class DataService implements InMemoryDbService {
               firstName: 'Dummy',
               lastName: 'User',
               address: [],
-              pictureURL: 'assets/images/users/dummy1.jpg'
+              pictureURL: 'assets/images/users/dummy1.jpg',
             },
             {
               username: 'fakeuser@fakey.fake',
@@ -120,8 +121,8 @@ export class DataService implements InMemoryDbService {
               firstName: 'Fake',
               lastName: 'User',
               address: [],
-              pictureURL: 'assets/images/users/dummy1.jpg'
-            }
+              pictureURL: 'assets/images/users/dummy1.jpg',
+            },
           ],
           photos: [],
           itinerary: [],
@@ -171,7 +172,7 @@ export class DataService implements InMemoryDbService {
               firstName: 'Jonathan',
               lastName: 'Moran',
               address: [],
-              pictureURL: 'assets/images/dummy1.jpg'
+              pictureURL: 'assets/images/users/dummy1.jpg',
             },
             {
               username: 'dummyuser@dummy.dum',
@@ -179,7 +180,7 @@ export class DataService implements InMemoryDbService {
               firstName: 'Dummy',
               lastName: 'User',
               address: [],
-              pictureURL: 'assets/images/users/dummy1.jpg'
+              pictureURL: 'assets/images/users/dummy1.jpg',
             },
             {
               username: 'fakeuser@fakey.fake',
@@ -187,8 +188,8 @@ export class DataService implements InMemoryDbService {
               firstName: 'Fake',
               lastName: 'User',
               address: [],
-              pictureURL: 'assets/images/users/dummy1.jpg'
-            }
+              pictureURL: 'assets/images/users/dummy1.jpg',
+            },
           ],
           photos: [],
           itinerary: [],
@@ -238,7 +239,7 @@ export class DataService implements InMemoryDbService {
               firstName: 'Dummy',
               lastName: 'User',
               address: [],
-              pictureURL: 'assets/images/users/dummy1.jpg'
+              pictureURL: 'assets/images/users/dummy1.jpg',
             },
           ],
           photos: [],
@@ -268,7 +269,7 @@ export class DataService implements InMemoryDbService {
               firstName: 'Dummy',
               lastName: 'User',
               address: [],
-              pictureURL: 'assets/images/users/dummy1.jpg'
+              pictureURL: 'assets/images/users/dummy1.jpg',
             },
           ],
           photos: [],
@@ -277,32 +278,35 @@ export class DataService implements InMemoryDbService {
           imgUrl: 'assets/images/trips/ireland1.jpg',
         },
       ],
-      Users: [
+      users: [
         {
+          id: 1,
           username: 'jmoran@ceiamerica.com',
           password: 'P@ssw0rd',
           firstName: 'Jonathan',
           lastName: 'Moran',
           address: [],
-          pictureURL: 'assets/images/dummy1.jpg'
+          pictureURL: 'assets/images/users/dummy1.jpg',
         },
         {
+          id: 1,
           username: 'dummyuser@dummy.dum',
           password: 'P@ssw0rd',
           firstName: 'Dummy',
           lastName: 'User',
           address: [],
-          pictureURL: 'assets/images/users/dummy1.jpg'
+          pictureURL: 'assets/images/users/dummy1.jpg',
         },
         {
+          id: 1,
           username: 'fakeuser@fakey.fake',
           password: 'P@ssw0rd',
           firstName: 'Fake',
           lastName: 'User',
           address: [],
-          pictureURL: 'assets/images/users/dummy1.jpg'
-        }
-      ]
+          pictureURL: 'assets/images/users/dummy1.jpg',
+        },
+      ],
     };
   }
 }
