@@ -16,23 +16,11 @@ export class TripSidebarComponent implements OnInit {
     icon: 'bi bi-briefcase',
     activeIcon: 'bi bi-briefcase-fill',
   };
-  itinerary = {
-    name: 'Itinerary',
-    subpath: 'itinerary',
-    icon: 'bi bi-geo-alt',
-    activeIcon: 'bi bi-geo-alt-fill',
-  };
   toDo = {
     name: 'To Do',
     subpath: 'todo',
     icon: 'bi bi-clipboard2-check',
     activeIcon: 'bi bi-clipboard2-check-fill',
-  };
-  photos = {
-    name: 'Photo Collection',
-    subpath: 'photos',
-    icon: 'bi bi-camera',
-    activeIcon: 'bi bi-camera-fill',
   };
   edit = {
     name: 'Edit Trip',

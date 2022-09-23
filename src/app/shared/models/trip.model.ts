@@ -9,10 +9,7 @@ export interface Trip {
   startDate: Date
   endDate: Date
   destinations: Destination[]
-  //temporarily type never[]
   members: User[]
-  photos: never[]   //update
-  itinerary: never[]  //update
   toDo: ToDo[]
   imgUrl: string
 }

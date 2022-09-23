@@ -51,8 +51,6 @@ export class DataService implements InMemoryDbService {
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
           ],
-          photos: [],
-          itinerary: [],
           toDo: [
             {
               task: 'pack clothes',
@@ -124,8 +122,6 @@ export class DataService implements InMemoryDbService {
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
           ],
-          photos: [],
-          itinerary: [],
           toDo: [
             {
               task: 'pack clothes',
@@ -191,8 +187,6 @@ export class DataService implements InMemoryDbService {
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
           ],
-          photos: [],
-          itinerary: [],
           toDo: [
             {
               task: 'pack clothes',
@@ -242,8 +236,6 @@ export class DataService implements InMemoryDbService {
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
           ],
-          photos: [],
-          itinerary: [],
           toDo: [],
           imgUrl: 'assets/images/trips/hawaii1.jpg',
         },
@@ -272,8 +264,6 @@ export class DataService implements InMemoryDbService {
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
           ],
-          photos: [],
-          itinerary: [],
           toDo: [],
           imgUrl: 'assets/images/trips/ireland1.jpg',
         },

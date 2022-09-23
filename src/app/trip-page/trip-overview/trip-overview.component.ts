@@ -15,7 +15,6 @@ export class TripOverviewComponent implements OnInit {
   trip?: Trip;
   destinationsFact?: factProps;
   toDoFact?: factProps;
-  photosFact?: factProps;
   daysUntilFact?: factProps;
   durationFact?: factProps;
   calStartDate?: calendarDateProps;
@@ -65,12 +64,6 @@ export class TripOverviewComponent implements OnInit {
       icon: 'bi bi-check2-circle',
       digit: this.trip?.toDo?.length!,
       text: this.trip?.toDo?.length === 1 ? 'task' : 'tasks',
-      color: 'white',
-    };
-    this.photosFact = {
-      icon: 'bi bi-camera-fill',
-      digit: this.trip?.photos?.length!,
-      text: this.trip?.photos?.length === 1 ? 'photo' : 'photos',
       color: 'white',
     };
     this.durationFact = {
