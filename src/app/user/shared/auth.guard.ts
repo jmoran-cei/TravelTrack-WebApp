@@ -16,14 +16,12 @@ export class AuthGuard implements CanActivate {
       this.authenticated = value;
     });
 
-    this.isLoggedIn.unsubscribe();
     // console.log("authenticated =", this.authenticated)
     if (this.authenticated) {
       return true;
     }
-    // temporarily commented out: don't need to be redirected to login while developing other pages
-    // this.router.navigate(['/user/login'])
-    // return false
-    return true;
+    // comment out when testing & return true
+    this.router.navigate(['/user/login'])
+    return false
   }
 }

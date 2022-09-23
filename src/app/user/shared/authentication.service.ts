@@ -43,6 +43,13 @@ export class AuthService {
 
   logoutUser() {
     this.isLoggedIn.next(false);
+    this.currentUser = {
+      username: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+      pictureURL: '',
+    };
     this.router.navigate(['/user/login']);
   }
 }

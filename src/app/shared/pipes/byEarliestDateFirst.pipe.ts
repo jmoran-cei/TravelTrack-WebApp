@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Trip } from '../../../shared/models/trip.model';
+import { Trip } from '../models/trip.model';
 
 @Pipe({
   name: 'byEarliestDate',
