@@ -1,14 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  catchError,
-  map,
-  Observable,
-  of,
-  retry,
-  take,
-  tap,
-} from 'rxjs';
+import { catchError, map, Observable, of, retry, take, tap } from 'rxjs';
 import { User } from '.';
 
 @Injectable()
@@ -36,24 +28,20 @@ export class UserService {
   createUser(user: User): Observable<User> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    return this.http
-      .post<User>(this.usersUrl, user, { headers: headers })
-      .pipe(
-        tap((data: User) => console.table(data)),
-        catchError(this.handleError<User>('createUser()'))
-      );
+    return this.http.post<User>(this.usersUrl, user, { headers: headers }).pipe(
+      tap((data: User) => console.table(data)),
+      catchError(this.handleError<User>('createUser()'))
+    );
   }
 
   // update user account
   updateUser(user: User): Observable<User> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    return this.http
-      .put<User>(this.usersUrl, user, { headers: headers })
-      .pipe(
-        tap((data: User) => console.table(data)),
-        catchError(this.handleError<User>('updateUser()'))
-      );
+    return this.http.put<User>(this.usersUrl, user, { headers: headers }).pipe(
+      tap((data: User) => console.table(data)),
+      catchError(this.handleError<User>('updateUser()'))
+    );
   }
 
   // check if user exists

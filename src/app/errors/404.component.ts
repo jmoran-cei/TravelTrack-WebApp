@@ -1,10 +1,7 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
   templateUrl: '404.component.html',
-  styleUrls: ['404.component.css']
+  styleUrls: ['404.component.css'],
 })
-
-export class Error404Component {
-
-}
+export class Error404Component {}

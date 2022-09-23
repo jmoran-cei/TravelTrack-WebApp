@@ -1,18 +1,11 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-validation-alert',
-  template: `
-
-    <div *ngIf="validationBoolean" [ngClass]="{'alert alert-danger': enableStyling }">
-      <span class="glyphicon glyphicon glyphicon-remove-circle"></span> {{alertText}}
-    </div>
-
-  `
+  templateUrl: 'validation-alert.component.html',
 })
-
 export class ValidationAlertComponent {
-  @Input() alertText?:string;
-  @Input() validationBoolean?:boolean;
-  @Input() enableStyling=true //defaulted to true (will be used more, than not)
+  @Input() alertText?: string;
+  @Input() validationBoolean?: boolean;
+  @Input() enableStyling = true; //defaulted to true (will be used more, than not)
 }

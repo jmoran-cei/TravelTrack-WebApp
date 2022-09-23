@@ -130,7 +130,7 @@ export class TripToDoComponent implements OnInit {
 
   onSubmit() {
     this.trip.toDo = this.fitFormValuesToModel();
-    console.log(this.trip.toDo)
+    console.log(this.trip.toDo);
     this.updateTrip();
   }
 

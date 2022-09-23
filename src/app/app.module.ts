@@ -24,14 +24,10 @@ import {
   TripsTitleSectionComponent,
   DestinationsListComponent,
   TripFormComponent,
-  EditTripComponent
+  EditTripComponent,
 } from './trips/index';
 
-import {
-  UserService,
-  AuthService,
-  AuthGuard
-} from './user';
+import { UserService, AuthService, AuthGuard } from './user';
 
 import {
   HomePageComponent,
@@ -39,9 +35,7 @@ import {
   ColumnBoxComponent,
 } from './home';
 
-import {
-  DestinationsService
-} from './forms';
+import { DestinationsService } from './forms';
 
 import {
   TripOverviewComponent,
@@ -50,8 +44,8 @@ import {
   TripDataService,
   CalendarDateComponent,
   ToDoListComponent,
-  MembersListComponent
-} from './trip-page'
+  MembersListComponent,
+} from './trip-page';
 import { SharedModule } from './shared/module/shared.module';
 
 @NgModule({
@@ -76,7 +70,7 @@ import { SharedModule } from './shared/module/shared.module';
     TripFactComponent,
     CalendarDateComponent,
     ToDoListComponent,
-    MembersListComponent
+    MembersListComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -97,6 +91,6 @@ import { SharedModule } from './shared/module/shared.module';
     TripDataService,
     { provide: 'canDeactivateTripForm', useValue: checkDirtyState },
   ],
-  bootstrap: [TravelAppComponent]
+  bootstrap: [TravelAppComponent],
 })
-export class AppModule { }
+export class AppModule {}

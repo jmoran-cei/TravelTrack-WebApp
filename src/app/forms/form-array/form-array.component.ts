@@ -12,7 +12,6 @@ import { Trip } from 'src/app/shared/models/trip.model';
 import { DestinationsService } from '../autocomplete/service/destinations.service';
 import { UsernameValidator } from '../validators/userExists.validator';
 
-
 @Component({
   selector: 'app-form-array',
   templateUrl: 'form-array.component.html',
@@ -58,36 +57,46 @@ export class FormArrayComponent implements OnInit {
   ngOnInit() {
     this.form = this.rootFormGroup.control;
     this.array = this.form.get(this.formArrayName) as FormControl;
-    this.alertMessage = this.itemText + ' must be valid before adding another ' + this.itemText + '.';
+    this.alertMessage =
+      this.itemText +
+      ' must be valid before adding another ' +
+      this.itemText +
+      '.';
     this.autocompletePlaceholder = this.placeholder;
   }
 
   // get values array
-  get values():FormArray {
+  get values(): FormArray {
     return <FormArray>this.form.get(this.formArrayName);
   }
 
   // value methods
-  buildValues():FormControl {
+  buildValues(): FormControl {
     if (this.isRequired) {
-      return new FormControl('',Validators.required);
+      return new FormControl('', Validators.required);
     }
     if (this.formArrayName === 'members') {
-      return new FormControl('', [], [UsernameValidator.createValidator(this.userService, false)]);
+      return new FormControl(
+        '',
+        [],
+        [UsernameValidator.createValidator(this.userService, false)]
+      );
     }
     return new FormControl('');
   }
   addValue(i: number) {
     // if its for destinations, save the destination object
     if (this.formArrayName === 'destinations') {
-
       this.destinationsService.saveDestination();
 
       // set saved/dest displayed form value
       let dest = this.destinationsService.savedDestinations[i];
       // autocomplete doesn't update the value when selecting a suggested destination, so use their data and display appropriate value
-      let destFormValue = (dest.country === 'United States') ? `${dest.city}, ${dest.region}, USA` : `${dest.city}, ${dest.country}`;
-      this.form.get('destinations.'+i)?.setValue(destFormValue)
+      let destFormValue =
+        dest.country === 'United States'
+          ? `${dest.city}, ${dest.region}, USA`
+          : `${dest.city}, ${dest.country}`;
+      this.form.get('destinations.' + i)?.setValue(destFormValue);
 
       /*
         BUG (only for VIEW):
@@ -108,8 +117,8 @@ export class FormArrayComponent implements OnInit {
     this.values.push(this.buildValues());
 
     // set added value as unchangeable and adjust appearance appropriately
-    this.styleDivUnchangeable(this.formArrayName,i);
-    this.mouseoverAddValue=false; // disables mouseover add-button immediately
+    this.styleDivUnchangeable(this.formArrayName, i);
+    this.mouseoverAddValue = false; // disables mouseover add-button immediately
   }
   removeValue(i: number) {
     this.values.removeAt(i);
@@ -122,15 +131,15 @@ export class FormArrayComponent implements OnInit {
   // make value disabled and style surrounding div when added
   styleDivUnchangeable(fieldName: string, i: number) {
     // make input DISABLED and remove bottom border
-    let fieldInput = document.getElementById(fieldName+i);
-    fieldInput!.setAttribute('disabled','disabled');
+    let fieldInput = document.getElementById(fieldName + i);
+    fieldInput!.setAttribute('disabled', 'disabled');
 
-    fieldInput!.style.borderBottomColor='transparent';
+    fieldInput!.style.borderBottomColor = 'transparent';
 
     // change div background and border of field
-    let field = document.getElementById(fieldName+'Field'+i)!;
-    field!.style.backgroundColor='#e4e4f4';
-    field!.style.borderRadius='10px';
+    let field = document.getElementById(fieldName + 'Field' + i)!;
+    field!.style.backgroundColor = '#e4e4f4';
+    field!.style.borderRadius = '10px';
   }
   // I could make this ^^^^ still happen without manipulating the DOM
   // by making the input as its own child component and using a boolean for "disabled" binded flag and conditional styling

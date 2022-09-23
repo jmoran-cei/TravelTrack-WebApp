@@ -7,7 +7,6 @@ import { Trip } from 'src/app/shared';
   templateUrl: 'trip-sidebar.component.html',
   styleUrls: ['trip-sidebar.component.css'],
 })
-
 export class TripSidebarComponent implements OnInit {
   trip?: Trip;
   overview = {

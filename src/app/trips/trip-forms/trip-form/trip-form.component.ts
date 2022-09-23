@@ -48,7 +48,6 @@ export class TripFormComponent implements OnInit, OnDestroy {
   formStatusSubscription?: Subscription;
   titleChangesSusbscription?: Subscription;
   destinationChangesSubscription?: Subscription;
-  test: any;
 
   // varying destination alert message
   destinationAlertText?: string;
@@ -293,8 +292,7 @@ export class TripFormComponent implements OnInit, OnDestroy {
     this.tripForm.markAllAsTouched();
     // members is optional , but still has validation per member
     // make sure all required and provided fields are valid
-    if (this.tripForm.invalid && this.members.controls[0].value !== '')
-      return;
+    if (this.tripForm.invalid && this.members.controls[0].value !== '') return;
 
     // double check that blank form array values aren't submitted,
     // and valid but not 'added' values are still added
@@ -363,31 +361,33 @@ export class TripFormComponent implements OnInit, OnDestroy {
     // user must be checked to be included as a member (in order to access the trip in the future)
     this.checkCurrentUserIsAMember();
 
-    this.usernamesToUserObjects(this.members.value).pipe(take(1)).subscribe( (users) => {
-      this.submittedTrip.members = users
+    this.usernamesToUserObjects(this.members.value)
+      .pipe(take(1))
+      .subscribe((users) => {
+        this.submittedTrip.members = users;
 
-      // if edit form, keep trip properties that aren't edited in this form & update trip
-      if (this.isEditing) {
-        this.submittedTrip.toDo = this.existingTrip.toDo;
-        this.submittedTrip.imgUrl = this.existingTrip.imgUrl;
-        this.updateTrip();
-      } else {
-        this.addTrip();
-      }
+        // if edit form, keep trip properties that aren't edited in this form & update trip
+        if (this.isEditing) {
+          this.submittedTrip.toDo = this.existingTrip.toDo;
+          this.submittedTrip.imgUrl = this.existingTrip.imgUrl;
+          this.updateTrip();
+        } else {
+          this.addTrip();
+        }
 
-      console.log('Successfully saved!');
-      console.table(this.submittedTrip);
-    });
+        console.log('Successfully saved!');
+        console.table(this.submittedTrip);
+      });
   }
 
   // for each provided username, perform getUser() and place the user object in a UserObjects Array
   usernamesToUserObjects(usernames: string[]): Observable<User[]> {
     return forkJoin(
       usernames
-        .filter(username => username.trim() !== '')
-        .map(username => this.userService.getUser(username.trim()))
+        .filter((username) => username.trim() !== '')
+        .map((username) => this.userService.getUser(username.trim()))
     ).pipe(
-      map(users=> users.filter((user): user is User => user !== undefined))
+      map((users) => users.filter((user): user is User => user !== undefined))
     );
   }
 

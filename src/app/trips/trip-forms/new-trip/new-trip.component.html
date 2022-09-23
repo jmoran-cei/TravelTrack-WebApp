@@ -11,9 +11,8 @@
 
     <!-- FORM -->
     <section class="card-body">
-      <app-trip-form
-      [pageTitle]="pageTitle" (changeTitle)="updatePageTitle($event)"
-      [isEditing]="isEditing" [existingTrip]="existingTrip">
+      <app-trip-form [pageTitle]="pageTitle" (changeTitle)="updatePageTitle($event)" [isEditing]="isEditing"
+        [existingTrip]="existingTrip">
       </app-trip-form>
     </section>
   </div>

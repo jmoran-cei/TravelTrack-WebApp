@@ -1,19 +1,21 @@
-import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
-import { BehaviorSubject, map, Observable, take } from "rxjs";
-import { User } from "../../shared/models/user.model";
-import { UserService } from "./user.service";
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject, map, Observable, take } from 'rxjs';
+import { User } from '../../shared/models/user.model';
+import { UserService } from './user.service';
 
 @Injectable()
 export class AuthService {
-  currentUser:User = {
+  currentUser: User = {
     username: '',
     password: '',
     firstName: '',
     lastName: '',
     pictureURL: '',
   };
-  private isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
   isLoggedIn$: Observable<boolean> = this.isLoggedIn.asObservable();
 
   constructor(private router: Router, private userService: UserService) {}
@@ -32,7 +34,7 @@ export class AuthService {
             this.isLoggedIn.next(!!this.currentUser);
             return true;
           }
-          console.log(`Incorrect password for ${username}`)
+          console.log(`Incorrect password for ${username}`);
           return false;
         }
       })

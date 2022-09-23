@@ -40,7 +40,8 @@
                       [hidden]="username.valid || (!mouseoverLogin && (username.valid || username.untouched))">
                       <p>
                         {{ username.hasError('required') ? 'Username is required' : '' }}
-                        {{ username.hasError('email') && !username.hasError('required') ? 'Username must be an email' : '' }}
+                        {{ username.hasError('email') && !username.hasError('required') ? 'Username must be an email' :
+                        '' }}
                       </p>
                     </div>
                   </div>
@@ -78,7 +79,8 @@
 
               <hr />
               <!-- CREATE ACCOUNT button -->
-              <button type="submit" class="btn btn-primary" [routerLink]="['/user/new-account']">Create a new account</button>
+              <button type="submit" class="btn btn-primary" [routerLink]="['/user/new-account']">Create a new
+                account</button>
             </div>
           </div>
         </div>

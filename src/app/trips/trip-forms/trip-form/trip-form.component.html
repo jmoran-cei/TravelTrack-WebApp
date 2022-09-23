@@ -4,13 +4,8 @@
   <div>
     <div class="col-xs-12">
       <!-- label & input component -->
-      <app-form-field
-        controlName="title"
-        labelText="Title"
-        type="text"
-        placeholder="Your New Trip"
-        [hasInvalidStyling]="title?.touched && title?.invalid"
-        [isRequired]="true">
+      <app-form-field controlName="title" labelText="Title" type="text" placeholder="Your New Trip"
+        [hasInvalidStyling]="title?.touched && title?.invalid" [isRequired]="true">
       </app-form-field>
     </div>
 
@@ -18,14 +13,12 @@
     <div class="col-xs-12">
       <div *ngIf="this.title?.touched && this.title?.invalid">
         <!-- required -->
-        <app-validation-alert
-          [validationBoolean]="!!this.title?.errors && !!this.title?.errors!['required']"
+        <app-validation-alert [validationBoolean]="!!this.title?.errors && !!this.title?.errors!['required']"
           alertText="Title is required.">
         </app-validation-alert>
 
         <!-- min-length -->
-        <app-validation-alert
-          [validationBoolean]="!!this.title?.errors && !!this.title?.errors!['minlength']"
+        <app-validation-alert [validationBoolean]="!!this.title?.errors && !!this.title?.errors!['minlength']"
           alertText="Title must have at least 3 characters.">
         </app-validation-alert>
       </div>
@@ -38,52 +31,41 @@
   <div>
     <div formGroupName="datesGroup">
       <!-- START DATE -->
-        <div class="col-xs-6 control">
-          <!-- label & input component -->
-          <app-form-field
-            controlName="startDate"
-            labelText="Start Date"
-            type="date"
-            [hasInvalidStyling]="startDate?.touched && startDate?.invalid"
-            [isRequired]="true">
-          </app-form-field>
-        </div>
-        <!-- END DATE -->
-        <div class="col-xs-6 control">
-          <!-- label & input component -->
-          <app-form-field
-            controlName="endDate"
-            labelText="End Date"
-            type="date"
-            [hasInvalidStyling]="endDate?.touched && endDate?.invalid"
-            [isRequired]="true">
-          </app-form-field>
-        </div>
+      <div class="col-xs-6 control">
+        <!-- label & input component -->
+        <app-form-field controlName="startDate" labelText="Start Date" type="date"
+          [hasInvalidStyling]="startDate?.touched && startDate?.invalid" [isRequired]="true">
+        </app-form-field>
       </div>
-      <!-- start date & end date VALIDATION ALERTS -->
-      <div class="col-xs-12">
-        <!-- START DATE validation alert -->
-        <div class="alert-lefthalf">
-          <!-- must match pattern and fit in valid time frame -->
-          <app-validation-alert
-            [validationBoolean]="startDate?.touched && startDate?.invalid"
-            alertText="Date must be valid. Valid time frame: 01/01/1900 - 01/01/2100">
-          </app-validation-alert>
-        </div>
-        <!-- END DATE validation alert -->
-        <div class="alert-righthalf">
-          <!-- must match pattern and fit in valid time frame -->
-          <app-validation-alert
-            [validationBoolean]="endDate?.touched && endDate?.invalid"
-            alertText="Date must be valid. Valid time frame: 01/01/1900 - 01/01/2100">
-          </app-validation-alert>
-        </div>
-        <!-- DATES NOT IN ORDER validation alert (startDate > endDate) -->
-        <app-validation-alert
-          [validationBoolean]="!!this.datesGroup?.errors"
-          alertText="End Date must occur after Start Date.">
+      <!-- END DATE -->
+      <div class="col-xs-6 control">
+        <!-- label & input component -->
+        <app-form-field controlName="endDate" labelText="End Date" type="date"
+          [hasInvalidStyling]="endDate?.touched && endDate?.invalid" [isRequired]="true">
+        </app-form-field>
+      </div>
+    </div>
+    <!-- start date & end date VALIDATION ALERTS -->
+    <div class="col-xs-12">
+      <!-- START DATE validation alert -->
+      <div class="alert-lefthalf">
+        <!-- must match pattern and fit in valid time frame -->
+        <app-validation-alert [validationBoolean]="startDate?.touched && startDate?.invalid"
+          alertText="Date must be valid. Valid time frame: 01/01/1900 - 01/01/2100">
         </app-validation-alert>
       </div>
+      <!-- END DATE validation alert -->
+      <div class="alert-righthalf">
+        <!-- must match pattern and fit in valid time frame -->
+        <app-validation-alert [validationBoolean]="endDate?.touched && endDate?.invalid"
+          alertText="Date must be valid. Valid time frame: 01/01/1900 - 01/01/2100">
+        </app-validation-alert>
+      </div>
+      <!-- DATES NOT IN ORDER validation alert (startDate > endDate) -->
+      <app-validation-alert [validationBoolean]="!!this.datesGroup?.errors"
+        alertText="End Date must occur after Start Date.">
+      </app-validation-alert>
+    </div>
   </div>
   <!--  -->
 
@@ -91,24 +73,16 @@
   <!-- DESTINATIONS (required) -->
   <div>
     <!-- Dynamic Input -->
-    <app-form-array
-      formArrayName="destinations"
-      placeholder="City,  Region,  Country"
-      labelText="Destination(s)"
-      itemText="Destination"
-      [isRequired]="true"
-      [toggleAlert]="true"
-      [isEditing]="isEditing"
+    <app-form-array formArrayName="destinations" placeholder="City,  Region,  Country" labelText="Destination(s)"
+      itemText="Destination" [isRequired]="true" [toggleAlert]="true" [isEditing]="isEditing"
       [existingTrip]="existingTrip">
     </app-form-array>
 
     <!-- destinations VALIDATION ALERTS -->
     <div class="col-xs-12">
       <!-- required (no blank fields) -->
-      <app-validation-alert
-        [validationBoolean]="this.destinations!.touched
-          && this.destinations!.invalid"
-        [alertText]="destinationAlertText">
+      <app-validation-alert [validationBoolean]="this.destinations!.touched
+          && this.destinations!.invalid" [alertText]="destinationAlertText">
       </app-validation-alert>
     </div>
   </div>
@@ -118,20 +92,14 @@
   <!-- MEMBERS -->
   <div>
     <!-- Dynamic Input -->
-    <app-form-array
-      formArrayName="members"
-      placeholder="Username"
-      labelText="Member(s)"
-      itemText="Member"
-      [isRequired]="false"
-      [toggleAlert]="true">
+    <app-form-array formArrayName="members" placeholder="Username" labelText="Member(s)" itemText="Member"
+      [isRequired]="false" [toggleAlert]="true">
     </app-form-array>
 
     <!-- members VALIDATION ALERT (not required, but must be existing user if provided) -->
     <div class="col-xs-12">
       <!-- user exists -->
-      <app-validation-alert
-        [validationBoolean]="this.members!.touched
+      <app-validation-alert [validationBoolean]="this.members!.touched
           && this.members!.invalid && this.members.controls[0].value !== ''"
         alertText="Please provide a valid existing username.  (Note: username is case sensitive)">
       </app-validation-alert>
@@ -141,10 +109,7 @@
 
   <!-- DETAILS -->
   <div class="col-xs-12 control">
-    <app-form-field
-      controlName="details"
-      labelText="Details"
-      type="textarea"
+    <app-form-field controlName="details" labelText="Details" type="textarea"
       placeholder="Share a description of what your trip will be/was about, why you are doing it, etc."
       [isRequired]="false">
     </app-form-field>
@@ -157,7 +122,7 @@
     <!-- ADD -->
     <span data-toggle="tooltip" title="{{this.tripForm.invalid ? this.findInvalidControls() : ''}}">
       <button type="submit" class="btn btn-primary btn-notdelete"
-      [disabled]="this.tripForm.invalid && this.members.controls[0].value !== ''">
+        [disabled]="this.tripForm.invalid && this.members.controls[0].value !== ''">
         <span>{{!isEditing ? 'Add Trip' : 'Save Trip'}}</span>
       </button>
     </span>
@@ -166,11 +131,11 @@
     <button class="btn btn-default btn-notdelete" type="button" (click)="cancel()">Cancel</button>
 
     <!-- DELETE -->
-    <button *ngIf="this.isEditing" [ngClass]="{'hide' : !this.isEditing}"
-      class="btn btn-default btn-delete" type="button" (click)="deleteTrip()">
+    <button *ngIf="this.isEditing" [ngClass]="{'hide' : !this.isEditing}" class="btn btn-default btn-delete"
+      type="button" (click)="deleteTrip()">
       <span class="glyphicon glyphicon-trash"></span>
     </button>
   </div>
 
-<!-- end of form -->
+  <!-- end of form -->
 </form>

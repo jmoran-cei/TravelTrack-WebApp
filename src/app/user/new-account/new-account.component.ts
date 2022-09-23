@@ -66,7 +66,10 @@ export class NewAccountComponent implements OnInit {
 
     this.userService
       .createUser(this.newUserObject())
-      .pipe(take(1), tap((newUser) => console.table(newUser)))
+      .pipe(
+        take(1),
+        tap((newUser) => console.table(newUser))
+      )
       .subscribe(() => {
         alert('You have successfully created an account! Please sign in.');
         this.router.navigate(['/user/login']);

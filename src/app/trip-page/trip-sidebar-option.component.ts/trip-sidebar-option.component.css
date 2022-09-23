@@ -15,7 +15,6 @@
   filter: brightness(1.4);
 }
 
-
 /* icons and text */
 span {
   color: white;
@@ -25,7 +24,6 @@ span {
 .icon {
   font-size: 18px;
 }
-
 
 /* router link active: adjust sidebar-option */
 .option-active {

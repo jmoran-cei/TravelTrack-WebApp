@@ -76,13 +76,16 @@ export class DestinationAutocompleteComponent implements OnInit {
       country: country,
     };
 
-    let formValue = (destination.country === 'United States') ? `${destination.city}, ${destination.region}, U.S.` : `${destination.city}, ${destination.country}`;
+    let formValue =
+      destination.country === 'United States'
+        ? `${destination.city}, ${destination.region}, U.S.`
+        : `${destination.city}, ${destination.country}`;
 
     // set value for destination in form
     // (when clicking/entering on google autocomplete it doesn't update the value automatically, instead it only used the few characters typed)
     let formArray = this.form.get(this.controlName) as FormArray;
     let lastIndex = formArray?.length - 1;
-    this.form.get(this.controlName+'.'+lastIndex)?.setValue(formValue);
+    this.form.get(this.controlName + '.' + lastIndex)?.setValue(formValue);
 
     // add potential destinations to the tempDestinations array in destinations service
     this.destinationsService.addTempDestination(destination);

@@ -1,11 +1,7 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
   templateUrl: 'trip-page.component.html',
-  styleUrls: ['trip-page.component.css']
+  styleUrls: ['trip-page.component.css'],
 })
-
-
-export class TripPageComponent {
-
-}
+export class TripPageComponent {}
