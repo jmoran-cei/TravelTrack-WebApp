@@ -80,7 +80,6 @@ export class NewAccountComponent implements OnInit {
       lastName: this.lastName.value,
       username: this.username.value,
       password: this.password.value,
-      address: [],
       pictureURL: 'assets/images/users/dummy1.jpg',
     };
   }

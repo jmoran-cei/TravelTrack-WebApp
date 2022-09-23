@@ -11,7 +11,6 @@ export class AuthService {
     password: '',
     firstName: '',
     lastName: '',
-    address: [],
     pictureURL: '',
   };
   private isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

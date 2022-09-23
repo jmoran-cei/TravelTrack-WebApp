@@ -6,6 +6,5 @@ export interface User {
   password: string
   firstName: string
   lastName: string
-  address: never[] // temporarily type never
   pictureURL: string
 }

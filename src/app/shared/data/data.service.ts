@@ -31,7 +31,6 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Jonathan',
               lastName: 'Moran',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
             {
@@ -39,7 +38,6 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Dummy',
               lastName: 'User',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
             {
@@ -47,7 +45,6 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Fake',
               lastName: 'User',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
           ],
@@ -102,7 +99,6 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Jonathan',
               lastName: 'Moran',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
             {
@@ -110,7 +106,6 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Dummy',
               lastName: 'User',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
             {
@@ -118,7 +113,6 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Fake',
               lastName: 'User',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
           ],
@@ -167,7 +161,6 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Jonathan',
               lastName: 'Moran',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
             {
@@ -175,7 +168,6 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Dummy',
               lastName: 'User',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
             {
@@ -183,7 +175,6 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Fake',
               lastName: 'User',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
           ],
@@ -232,7 +223,6 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Dummy',
               lastName: 'User',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
           ],
@@ -260,7 +250,6 @@ export class DataService implements InMemoryDbService {
               password: 'P@ssw0rd',
               firstName: 'Dummy',
               lastName: 'User',
-              address: [],
               pictureURL: 'assets/images/users/dummy1.jpg',
             },
           ],
@@ -275,7 +264,6 @@ export class DataService implements InMemoryDbService {
           password: 'P@ssw0rd',
           firstName: 'Jonathan',
           lastName: 'Moran',
-          address: [],
           pictureURL: 'assets/images/users/dummy1.jpg',
         },
         {
@@ -284,7 +272,6 @@ export class DataService implements InMemoryDbService {
           password: 'P@ssw0rd',
           firstName: 'Dummy',
           lastName: 'User',
-          address: [],
           pictureURL: 'assets/images/users/dummy1.jpg',
         },
         {
@@ -293,7 +280,6 @@ export class DataService implements InMemoryDbService {
           password: 'P@ssw0rd',
           firstName: 'Fake',
           lastName: 'User',
-          address: [],
           pictureURL: 'assets/images/users/dummy1.jpg',
         },
       ],
