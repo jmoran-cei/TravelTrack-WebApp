@@ -4,8 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TravelAppComponent } from './travel-app.component';
 import { appRoutes } from './routes';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { DataService } from './shared/data/data.service';
+// import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+// import { DataService } from './shared/data/data.service';
 import { HttpClientModule } from '@angular/common/http';
 
 import { Error404Component } from './errors/404.component';
@@ -76,7 +76,10 @@ import { SharedModule } from './shared/module/shared.module';
     ReactiveFormsModule,
     BrowserModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(DataService),
+    // HttpClientInMemoryWebApiModule.forRoot(DataService, {
+    //   dataEncapsulation: false,
+    //   passThruUnknownUrl: true,
+    // }),
     RouterModule.forRoot(appRoutes),
     SharedModule,
   ],

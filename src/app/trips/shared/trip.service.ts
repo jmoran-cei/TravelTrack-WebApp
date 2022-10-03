@@ -2,12 +2,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of, retry, tap } from 'rxjs';
 import { AuthService, User } from 'src/app/user/shared';
-import { Destination } from '../../shared/models/destination.model';
 import { Trip } from '../../shared/models/trip.model';
 
 @Injectable()
 export class TripService {
-  tripsUrl = '/api/trips';
+  // tripsUrl = '/api/trips'; // temporary: angular in-mem web api
+  tripsUrl = 'https://localhost:7194/api/trips'
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
@@ -55,7 +55,7 @@ export class TripService {
   updateTrip(trip: Trip): Observable<Trip> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    return this.http.put<Trip>(this.tripsUrl, trip, { headers: headers }).pipe(
+    return this.http.put<Trip>(`${this.tripsUrl}/${trip.id}`, trip, { headers: headers }).pipe(
       tap((data: Trip) => console.table(data)),
       catchError(this.handleError<Trip>('createTrip()'))
     );

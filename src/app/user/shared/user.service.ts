@@ -5,7 +5,8 @@ import { User } from '.';
 
 @Injectable()
 export class UserService {
-  usersUrl = '/api/users';
+  // usersUrl = '/api/users'; // temporary: angular in-mem web api
+  usersUrl = 'https://localhost:7194/api/users';
 
   constructor(private http: HttpClient) {}
 
@@ -38,10 +39,14 @@ export class UserService {
   updateUser(user: User): Observable<User> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    return this.http.put<User>(this.usersUrl, user, { headers: headers }).pipe(
-      tap((data: User) => console.table(data)),
-      catchError(this.handleError<User>('updateUser()'))
-    );
+    return this.http
+      .put<User>(`${this.usersUrl}/${user.username}`, user, {
+        headers: headers,
+      })
+      .pipe(
+        tap((data: User) => console.table(data)),
+        catchError(this.handleError<User>('updateUser()'))
+      );
   }
 
   // check if user exists

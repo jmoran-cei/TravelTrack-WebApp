@@ -11,8 +11,8 @@ import {
   NewAccountComponent,
 } from './index';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { DataService } from '../shared';
+// import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+// import { DataService } from '../shared';
 import { SharedModule } from '../shared/module/shared.module';
 
 @NgModule({
@@ -21,7 +21,10 @@ import { SharedModule } from '../shared/module/shared.module';
     FormsModule,
     RouterModule.forChild(userRoutes),
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(DataService),
+    // HttpClientInMemoryWebApiModule.forRoot(DataService, {
+    //   dataEncapsulation: false,
+    //   passThruUnknownUrl: true,
+    // }),
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
