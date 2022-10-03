@@ -11,5 +11,5 @@ export interface Trip {
   destinations: Destination[];
   members: User[];
   toDo: ToDo[];
-  imgUrl: string;
+  imgURL: string;
 }

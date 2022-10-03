@@ -117,6 +117,7 @@ export class TripToDoComponent implements OnInit {
       // ignore if task is blank
       if (taskText.trim().length !== 0) {
         let currentTask: ToDo = {
+          id: parseInt(i),
           task: taskText,
           complete: this.statuses.controls[parseInt(i)].value,
         };

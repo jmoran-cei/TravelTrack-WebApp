@@ -191,7 +191,7 @@ export class TripFormComponent implements OnInit, OnDestroy {
       destinations: [],
       members: [],
       details: '',
-      imgUrl: 'assets/images/trips/default.jpg',
+      imgURL: 'assets/images/trips/default.jpg',
       toDo: [],
     };
   }
@@ -369,7 +369,7 @@ export class TripFormComponent implements OnInit, OnDestroy {
         // if edit form, keep trip properties that aren't edited in this form & update trip
         if (this.isEditing) {
           this.submittedTrip.toDo = this.existingTrip.toDo;
-          this.submittedTrip.imgUrl = this.existingTrip.imgUrl;
+          this.submittedTrip.imgURL = this.existingTrip.imgURL;
           this.updateTrip();
         } else {
           this.addTrip();
