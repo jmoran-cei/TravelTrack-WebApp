@@ -23,6 +23,7 @@ import { TripService } from '../../shared';
 import { NewTripComponent } from '../../.';
 import { AuthService, User, UserService } from 'src/app/user';
 import { UsernameValidator } from 'src/app/forms/validators/userExists.validator';
+import { Member } from 'src/app/shared/models/member.model';
 
 @Component({
   selector: 'app-trip-form',
@@ -364,7 +365,19 @@ export class TripFormComponent implements OnInit, OnDestroy {
     this.usernamesToUserObjects(this.members.value)
       .pipe(take(1))
       .subscribe((users) => {
-        this.submittedTrip.members = users;
+        var submitMembers : Member[] = [];
+        // map to be type Member instead of User (no password, )
+        for (let user of users) {
+          var member: Member = {
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName
+          };
+
+          submitMembers.push(member);
+        }
+        this.submittedTrip.members = submitMembers as User[];
+        console.log(this.submittedTrip.members);
 
         // if edit form, keep trip properties that aren't edited in this form & update trip
         if (this.isEditing) {

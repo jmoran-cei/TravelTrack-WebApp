@@ -215,7 +215,7 @@ h3 {
 }
 /* user profile pic image */
 .user-picture {
-  transform: scale(2.1); /* currently adjusted for dummy profile */
+  transform: scale(0.81); /* currently adjusted for dummy profile */
   height: 100%;
   width: 100%;
 }

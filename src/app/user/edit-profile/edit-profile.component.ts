@@ -75,12 +75,11 @@ export class EditProfileComponent implements OnInit {
 
   savedUserObject(): User {
     return {
-      id: this.user.id,
+      // id: this.user.id, // used for in mem web api
       firstName: this.firstName.value,
       lastName: this.lastName.value,
       username: this.username.value,
       password: this.password.value,
-      pictureURL: 'assets/images/users/dummy1.jpg',
     };
   }
 
