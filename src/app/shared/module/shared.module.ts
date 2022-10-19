@@ -9,6 +9,7 @@ import {
 import { ReactiveFormsModule } from '@angular/forms';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { AgmCoreModule } from '@agm/core';
+import { secrets } from 'src/app/secrets';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { AgmCoreModule } from '@agm/core';
     CommonModule,
     GooglePlaceModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCHB2iGhcuOoU4_eEsYtQA4d5hfs69EFDI',
+      apiKey: secrets.GooglePlacesAPIKey,
       libraries: ['places'],
     }),
   ],
