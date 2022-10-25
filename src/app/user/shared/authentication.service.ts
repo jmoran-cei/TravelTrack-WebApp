@@ -11,7 +11,6 @@ export class AuthService {
     password: '',
     firstName: '',
     lastName: '',
-    pictureURL: '',
   };
   private isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
@@ -48,7 +47,6 @@ export class AuthService {
       password: '',
       firstName: '',
       lastName: '',
-      pictureURL: '',
     };
     this.router.navigate(['/user/login']);
   }

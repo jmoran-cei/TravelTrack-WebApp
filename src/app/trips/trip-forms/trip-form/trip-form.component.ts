@@ -23,6 +23,7 @@ import { TripService } from '../../shared';
 import { NewTripComponent } from '../../.';
 import { AuthService, User, UserService } from 'src/app/user';
 import { UsernameValidator } from 'src/app/forms/validators/userExists.validator';
+import { Member } from 'src/app/shared/models/member.model';
 
 @Component({
   selector: 'app-trip-form',
@@ -179,9 +180,9 @@ export class TripFormComponent implements OnInit, OnDestroy {
   initializeTrip(): Trip {
     let id: number;
 
-    // if edit form, set to pre-existing id, else set unique id for new trip
+    // if edit form, set to pre-existing id, else let backend set Id
     if (this.isEditing) id = this.existingTrip.id;
-    else id = Date.now();
+    else id = 0;
 
     return {
       id: id,
@@ -191,7 +192,7 @@ export class TripFormComponent implements OnInit, OnDestroy {
       destinations: [],
       members: [],
       details: '',
-      imgUrl: 'assets/images/trips/default.jpg',
+      imgURL: 'assets/images/trips/default.jpg',
       toDo: [],
     };
   }
@@ -305,11 +306,11 @@ export class TripFormComponent implements OnInit, OnDestroy {
   // add trip on submit of NEW trip form
   addTrip() {
     // new trip post request
-    this.tripService.createTrip(this.submittedTrip).subscribe(() => {
+    this.tripService.createTrip(this.submittedTrip).subscribe((addedTrip) => {
       // deactivate route guard
       this.tripComponent.isDirty = false;
       //reroute to newly created trip
-      this.router.navigate([`/trips/${this.submittedTrip.id}`]);
+      this.router.navigate([`/trips/${addedTrip.id}`]);
       this.destinationsService.clearAllDestinations();
     });
   }
@@ -317,11 +318,11 @@ export class TripFormComponent implements OnInit, OnDestroy {
   // update trip on submit of EDIT trip form
   updateTrip() {
     // new trip put request
-    this.tripService.updateTrip(this.submittedTrip).subscribe(() => {
+    this.tripService.updateTrip(this.submittedTrip).subscribe((updatedTrip) => {
       // deactivate route guard
       this.tripComponent.isDirty = false;
       //reroute to newly created trip
-      this.router.navigate([`/trips/${this.submittedTrip.id}`]);
+      this.router.navigate([`/trips/${updatedTrip.id}`]);
       this.destinationsService.clearAllDestinations();
     });
   }
@@ -364,12 +365,24 @@ export class TripFormComponent implements OnInit, OnDestroy {
     this.usernamesToUserObjects(this.members.value)
       .pipe(take(1))
       .subscribe((users) => {
-        this.submittedTrip.members = users;
+        var submitMembers : Member[] = [];
+        // map to be type Member instead of User (no password, )
+        for (let user of users) {
+          var member: Member = {
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName
+          };
+
+          submitMembers.push(member);
+        }
+        this.submittedTrip.members = submitMembers as User[];
+        console.log(this.submittedTrip.members);
 
         // if edit form, keep trip properties that aren't edited in this form & update trip
         if (this.isEditing) {
           this.submittedTrip.toDo = this.existingTrip.toDo;
-          this.submittedTrip.imgUrl = this.existingTrip.imgUrl;
+          this.submittedTrip.imgURL = this.existingTrip.imgURL;
           this.updateTrip();
         } else {
           this.addTrip();

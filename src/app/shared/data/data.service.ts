@@ -19,7 +19,7 @@ export class DataService implements InMemoryDbService {
           endDate: new Date('3/20/2022'),
           destinations: [
             {
-              destinationId: 'ChIJw4OtEaZjDowRZCw_jCcczqI',
+              id: 'ChIJw4OtEaZjDowRZCw_jCcczqI',
               city: 'Zemi Beach',
               region: 'West End',
               country: 'Anguilla',
@@ -70,7 +70,7 @@ export class DataService implements InMemoryDbService {
               complete: false,
             },
           ],
-          imgUrl: 'assets/images/trips/anguila1.jpg',
+          imgURL: 'assets/images/trips/anguila1.jpg',
         },
         {
           id: 2,
@@ -81,13 +81,13 @@ export class DataService implements InMemoryDbService {
           endDate: new Date('6/5/2022'),
           destinations: [
             {
-              destinationId: 'ChIJASFVO5VoAIkRGJbQtRWxD7w',
+              id: 'ChIJASFVO5VoAIkRGJbQtRWxD7w',
               city: 'Myrtle Beach',
               region: 'South Carolina',
               country: 'United States',
             },
             {
-              destinationId: 'ChIJdySo3EJ6_ogRa-zhruD3-jU',
+              id: 'ChIJdySo3EJ6_ogRa-zhruD3-jU',
               city: 'Charleston',
               region: 'South Carolina',
               country: 'United States',
@@ -138,7 +138,7 @@ export class DataService implements InMemoryDbService {
               complete: false,
             },
           ],
-          imgUrl: 'assets/images/trips/myrtlebeach1.jpg',
+          imgURL: 'assets/images/trips/myrtlebeach1.jpg',
         },
         {
           id: 3,
@@ -149,7 +149,7 @@ export class DataService implements InMemoryDbService {
           endDate: new Date('11/30/2019'),
           destinations: [
             {
-              destinationId: 'ChIJiaUIy-pTWYgRqHm3fq7XsUo',
+              id: 'ChIJiaUIy-pTWYgRqHm3fq7XsUo',
               city: 'Gatlinburg',
               region: 'Tennessee',
               country: 'United States',
@@ -200,7 +200,7 @@ export class DataService implements InMemoryDbService {
               complete: false,
             },
           ],
-          imgUrl: 'assets/images/trips/gatlinburg1.jpg',
+          imgURL: 'assets/images/trips/gatlinburg1.jpg',
         },
         {
           id: 4,
@@ -211,7 +211,7 @@ export class DataService implements InMemoryDbService {
           endDate: new Date('7/5/2023'),
           destinations: [
             {
-              destinationId: 'ChIJ-endi8cqVXkRbpYfLncR5rI',
+              id: 'ChIJ-endi8cqVXkRbpYfLncR5rI',
               city: 'Lahaina',
               region: 'Hawaii',
               country: 'United States',
@@ -227,7 +227,7 @@ export class DataService implements InMemoryDbService {
             },
           ],
           toDo: [],
-          imgUrl: 'assets/images/trips/hawaii1.jpg',
+          imgURL: 'assets/images/trips/hawaii1.jpg',
         },
         {
           id: 5,
@@ -238,7 +238,7 @@ export class DataService implements InMemoryDbService {
           endDate: new Date('3/20/2023'),
           destinations: [
             {
-              destinationId: 'ChIJL6wn6oAOZ0gRoHExl6nHAAo',
+              id: 'ChIJL6wn6oAOZ0gRoHExl6nHAAo',
               city: 'Dublin',
               region: 'Lienster',
               country: 'Ireland',
@@ -254,7 +254,7 @@ export class DataService implements InMemoryDbService {
             },
           ],
           toDo: [],
-          imgUrl: 'assets/images/trips/ireland1.jpg',
+          imgURL: 'assets/images/trips/ireland1.jpg',
         },
       ],
       users: [

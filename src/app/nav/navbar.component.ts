@@ -13,6 +13,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isLoggedIn = this.auth.isLoggedIn$;
   currentUser: User;
   path!: string;
+  previousPaths: string[] = [''];
   isTripPage!: boolean;
   pathSubscription!: Subscription;
 
@@ -31,6 +32,18 @@ export class NavbarComponent implements OnInit, OnDestroy {
           // is on 'trips/:id' if, subpath is a number (valid trip id)
           this.isTripPage = !isNaN(paths[2] as any);
         else this.isTripPage = false;
+
+        // if user just navigated from /user/profile (to possibly edit their profile info)
+        if (
+          this.previousPaths.length === 3 &&
+          this.previousPaths[1] === 'user' &&
+          this.previousPaths[2] === 'profile'
+        ) {
+          // update user info on navbar
+          this.currentUser = this.auth.currentUser;
+        }
+
+        this.previousPaths = paths;
       });
   }
 

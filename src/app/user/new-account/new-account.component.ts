@@ -78,12 +78,11 @@ export class NewAccountComponent implements OnInit {
 
   newUserObject(): User {
     return {
-      id: Date.now().valueOf(), // unique
+      //id: Date.now().valueOf(), // unique ; used for in mem web api
       firstName: this.firstName.value,
       lastName: this.lastName.value,
       username: this.username.value,
       password: this.password.value,
-      pictureURL: 'assets/images/users/dummy1.jpg',
     };
   }
 }

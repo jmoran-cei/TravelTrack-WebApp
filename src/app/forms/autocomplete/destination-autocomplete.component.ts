@@ -70,7 +70,7 @@ export class DestinationAutocompleteComponent implements OnInit {
     }
 
     const destination = {
-      destinationId: place_id,
+      id: place_id,
       city: city,
       region: region,
       country: country,
