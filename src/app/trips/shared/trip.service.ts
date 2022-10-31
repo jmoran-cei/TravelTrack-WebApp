@@ -1,13 +1,21 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of, retry, tap } from 'rxjs';
+import {
+  catchError,
+  forkJoin,
+  map,
+  Observable,
+  of,
+  retry,
+  switchMap,
+  tap,
+} from 'rxjs';
 import { secrets } from 'src/app/secrets';
 import { AuthService, User } from 'src/app/user/shared';
 import { Trip } from '../../shared/models/trip.model';
 
 @Injectable()
 export class TripService {
-  // tripsUrl = '/api/trips'; // temporary: angular in-mem web api
   tripsUrl = 'https://localhost:7194/api/trips';
   apiKey = secrets.TravelTrackAPIKey;
   // apiKey = 'test'; // uncomment if testing on different machine
@@ -16,7 +24,7 @@ export class TripService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'X-Api-Version': '1.0',
-      'X-Api-Key': this.apiKey
+      'X-Api-Key': this.apiKey,
     }),
   };
 
@@ -28,6 +36,19 @@ export class TripService {
       map((trips) =>
         this.filterTripsByUsername(trips, this.auth.currentUser.username)
       ),
+      switchMap((trips: Trip[]) => {
+        if (trips.length > 0) {
+          // set trip thumbnail images
+          return forkJoin(
+            trips.map((trip: Trip) =>
+              this.getTripImgURL(trip.destinations[0].id!).pipe(
+                map((imgURL: string) => ({ ...trip, imgURL }))
+              )
+            )
+          );
+        }
+        return of(trips);
+      }),
       retry(2),
       catchError(this.handleError<Trip[]>('getTrips()', []))
     );
@@ -47,9 +68,16 @@ export class TripService {
   getTrip(id: number): Observable<Trip> {
     const url = `${this.tripsUrl}/${id}`;
 
-    return this.http
-      .get<Trip>(url, this.headers)
-      .pipe(retry(2), catchError(this.handleError<Trip>('getTrip()')));
+    return this.http.get<Trip>(url, this.headers).pipe(
+      switchMap((trip: Trip) =>
+        // set trip image
+        this.getTripImgURL(trip.destinations[0].id).pipe(
+          map((imgURL: string) => ({ ...trip, imgURL }))
+        )
+      ),
+      retry(2),
+      catchError(this.handleError<Trip>('getTrip()'))
+    );
   }
 
   // create new trip
@@ -107,6 +135,40 @@ export class TripService {
       (a: Trip, b: Trip) =>
         new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
     ));
+  }
+
+  // Unfortunately I can't store the requested Google photos to my DB because they are owned by Google Users (against Google's Terms of Service)
+  // but I can still retrieve a relative trip photo URL by using the stored destination Ids (grabbed from autocomplete when trips are created)
+  getTripImgURL(placeId: string): Observable<string> {
+    return new Observable((obs) => {
+      let getGooglePhotoForTrip = function (placeResult: any, status: any) {
+        if (status != google.maps.places.PlacesServiceStatus.OK) {
+          obs.error(status);
+        } else {
+          var imgUrl = 'assets/images/trips/default.jpg';
+
+          // if google has any photos for the given placeId
+          if (placeResult.photos.length !== 0) {
+            imgUrl = placeResult.photos[1].getUrl({
+              maxWidth: 1280, // at least set one or the other - mandatory
+              maxHeight: undefined,
+            });
+          }
+          obs.next(imgUrl);
+          obs.complete();
+        }
+      };
+
+      var PlacesService = new google.maps.places.PlacesService(
+        document.getElementById('empty')! as HTMLDivElement
+      );
+      PlacesService.getDetails(
+        {
+          placeId: placeId,
+        },
+        getGooglePhotoForTrip
+      );
+    });
   }
 
   // function for handling errors
