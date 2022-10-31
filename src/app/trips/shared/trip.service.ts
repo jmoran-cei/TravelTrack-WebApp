@@ -108,33 +108,36 @@ export class TripService {
     );
   }
 
-  sortByTitle(trips: Trip[]): Trip[] {
-    // console.log("Trips sorted alphabetically by title");
-    return (trips = trips.sort((a: Trip, b: Trip) =>
-      a.title.localeCompare(b.title)
-    ));
+  sortByTitle(trips: Observable<Trip[]>): Observable<Trip[]> {
+    return trips.pipe(
+      map((trips) =>
+        trips.sort((a: Trip, b: Trip) => a.title.localeCompare(b.title))
+      )
+    );
   }
 
-  sortByEarliestDate(trips: Trip[]): Trip[] {
-    // default for PREVIOUS dates
-    // console.log("Trips sorted by earliest date");
-
+  sortByEarliestDate(trips: Observable<Trip[]>): Observable<Trip[]> {
     // sorting by EARLIEST DATE: sorts dates oldest-newest
-    return (trips = trips.sort(
-      (a: Trip, b: Trip) =>
-        new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
-    ));
+    return trips.pipe(
+      map((trips) =>
+        trips.sort(
+          (a: Trip, b: Trip) =>
+            new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+        )
+      )
+    );
   }
 
-  sortByLatestDate(trips: Trip[]): Trip[] {
-    // default for UPCOMING dates
-    // console.log("Trips sorted by latest date");
-
+  sortByLatestDate(trips: Observable<Trip[]>): Observable<Trip[]> {
     // sorting by LATEST DATE: sorts dates newest-oldest
-    return (trips = trips.sort(
-      (a: Trip, b: Trip) =>
-        new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
-    ));
+    return trips.pipe(
+      map((trips) =>
+        trips.sort(
+          (a: Trip, b: Trip) =>
+            new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+        )
+      )
+    );
   }
 
   // Unfortunately I can't store the requested Google photos to my DB because they are owned by Google Users (against Google's Terms of Service)
