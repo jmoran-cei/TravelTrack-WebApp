@@ -78,7 +78,7 @@ export class EditProfileComponent implements OnInit {
       // id: this.user.id, // used for in mem web api
       firstName: this.firstName.value,
       lastName: this.lastName.value,
-      username: this.username.value,
+      username: this.username.value.toLowerCase(),
       password: this.password.value,
     };
   }

@@ -13,7 +13,7 @@ export class UsernameValidator {
     returnOpposite: boolean
   ): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors> => {
-      return userService.checkUsernameExists(control.value).pipe(
+      return userService.checkUsernameExists(control.value.toLowerCase()).pipe(
         map((result: boolean) => {
           if (!returnOpposite) {
             return !result ? { usernameExists: true } : null;

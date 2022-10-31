@@ -68,7 +68,7 @@ export class NewAccountComponent implements OnInit {
       .createUser(this.newUserObject())
       .pipe(
         take(1),
-        tap((newUser) => console.table(newUser))
+        // tap((newUser) => console.table(newUser))
       )
       .subscribe(() => {
         alert('You have successfully created an account! Please sign in.');
@@ -81,7 +81,7 @@ export class NewAccountComponent implements OnInit {
       //id: Date.now().valueOf(), // unique ; used for in mem web api
       firstName: this.firstName.value,
       lastName: this.lastName.value,
-      username: this.username.value,
+      username: this.username.value.toLowerCase(),
       password: this.password.value,
     };
   }
