@@ -153,7 +153,7 @@ export class TripService {
           // if google has any photos for the given placeId
           if (placeResult.photos.length !== 0) {
             imgUrl = placeResult.photos[1].getUrl({
-              maxWidth: 1280, // at least set one or the other - mandatory
+              maxWidth: 1920, // at least set one or the other - mandatory
               maxHeight: undefined,
             });
           }
