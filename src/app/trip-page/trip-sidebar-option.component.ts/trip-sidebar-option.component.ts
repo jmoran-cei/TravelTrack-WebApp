@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationService } from 'src/app/shared';
 
 @Component({
   selector: 'app-trip-sidebar-option',
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class TripSidebarOptionComponent {
   @Input() properties!: Properties;
 
-  constructor(public router: Router) {}
+  constructor(public nav: NavigationService) {}
 }
 
 type Properties = {

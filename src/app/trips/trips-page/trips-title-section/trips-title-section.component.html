@@ -15,7 +15,7 @@
   </h2>
 
   <div class="add-trip">
-    <a class="font700" [routerLink]="['/trips/new']"><span class="glyphicon glyphicon-plus"></span> Add Trip</a>
+    <a class="font700" (click)="nav.navigate(['/trips/new'])"><span class="glyphicon glyphicon-plus"></span> Add Trip</a>
   </div>
 
   <!-- sort: ADD FUNCITONALITY -->
@@ -28,7 +28,7 @@
     <ul class="dropdown-menu">
       <!-- sort by TITLE (A-Z) -->
       <li>
-        <a (click)="tripService.sortByTitle(tripList); sortToggle='sortByTitle';"
+        <a (click)="sortByTitle()"
           [ngClass]="{'sort-toggle': sortToggle==='sortByTitle'}">
           Title (A-Z)
         </a>
@@ -36,7 +36,7 @@
 
       <!-- sort by EARLIEST DATE (new-old) -->
       <li>
-        <a (click)="tripService.sortByEarliestDate(tripList); sortToggle='sortByEarliestDate';"
+        <a (click)="sortByEarliestDate()"
           [ngClass]="{'sort-toggle': sortToggle==='sortByEarliestDate'}">
           Earliest Date
         </a>
@@ -44,7 +44,7 @@
 
       <!-- sort by LATEST DATE (new-old) -->
       <li>
-        <a (click)="tripService.sortByLatestDate(tripList); sortToggle='sortByLatestDate';"
+        <a (click)="sortByLatestDate()"
           [ngClass]="{'sort-toggle': sortToggle==='sortByLatestDate'}">
           Latest Date
         </a>

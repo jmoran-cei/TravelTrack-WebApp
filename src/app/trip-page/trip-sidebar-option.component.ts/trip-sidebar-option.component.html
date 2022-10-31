@@ -1,4 +1,4 @@
-<div class="sidebar-option" [routerLink]="[this.properties.subpath]" routerLinkActive="option-active"
+<div class="sidebar-option" (click)="nav.navigate([this.properties.subpath])" routerLinkActive="option-active"
   #rla="routerLinkActive">
 
   <!-- sidebar option icon -->

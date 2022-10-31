@@ -79,7 +79,7 @@
 
       <!-- empty to do list: to do button -->
       <div *ngIf="trip?.toDo?.length === 0" class="flex-center empty-to-do">
-        <button class="btn btn-primary to-do-btn font700" [routerLink]="['../todo']">Start Tracking Your Tasks</button>
+        <button class="btn btn-primary to-do-btn font700" (click)="nav.navigate(['../todo'])">Start Tracking Your Tasks</button>
       </div>
     </div>
 

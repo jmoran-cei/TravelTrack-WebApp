@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, NgZone } from '@angular/core';
+import { Observable, of, take } from 'rxjs';
+import { NavigationService } from 'src/app/shared';
 import { Trip } from '../../../shared/models/trip.model';
 import { TripService } from '../../shared/trip.service';
 
@@ -10,8 +12,42 @@ import { TripService } from '../../shared/trip.service';
 export class TripsTitleSectionComponent {
   @Input() title = '';
   @Input() collapseID = '';
-  @Input() tripList: Trip[] = [];
+  @Input() tripList: Observable<Trip[]> = of();
   @Input() sortToggle = '';
 
-  constructor(public tripService: TripService) {}
+  constructor(
+    public tripService: TripService,
+    private ngZone: NgZone,
+    public nav: NavigationService
+  ) {}
+
+  sortByTitle() {
+    this.ngZone.run(() => {
+      this.tripService
+        .sortByTitle(this.tripList)
+        .pipe(take(1))
+        .subscribe((trips) => (this.tripList = of(trips)));
+      this.sortToggle = 'sortByTitle';
+    });
+  }
+
+  sortByEarliestDate() {
+    this.ngZone.run(() => {
+      this.tripService
+        .sortByEarliestDate(this.tripList)
+        .pipe(take(1))
+        .subscribe((trips) => (this.tripList = of(trips)));
+      this.sortToggle = 'sortByEarliestDate';
+    });
+  }
+
+  sortByLatestDate() {
+    this.ngZone.run(() => {
+      this.tripService
+        .sortByLatestDate(this.tripList)
+        .pipe(take(1))
+        .subscribe((trips) => (this.tripList = of(trips)));
+      this.sortToggle = 'sortByLatestDate';
+    });
+  }
 }
