@@ -3,85 +3,19 @@
 
 <div class="card">
   <div class="row">
-    <div class="col-xs-12 col-md-4 top">
-      <!-- Edit Profile -->
-      <div class="col-xs-12">
-        <h1>Edit Profile</h1>
-      </div>
 
-      <!-- Image -->
-      <div class="col-xs-12 flex">
-        <img src="assets/images/general/edit-profile.png" alt="user edit icon" />
-      </div>
+    <!-- "Edit Profile" -->
+    <div class="col-xs-12">
+      <h1>Edit Profile</h1>
     </div>
 
-    <div class="col-xs-12 col-md-8 form-container">
-      <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
 
-        <div class="col-xs-6">
-          <!-- First Name -->
-          <app-form-field controlName="firstName" labelText="First Name" type="text" placeholder="First Name"
-            [hasInvalidStyling]="firstName.touched && firstName.invalid" [isRequired]="true">
-          </app-form-field>
-        </div>
+    <div class="col-xs-12 col-md-6">
+      <app-profile-form></app-profile-form>
+    </div>
 
-        <div class="col-xs-6">
-          <!-- Last Name -->
-          <app-form-field controlName="lastName" labelText="Last Name" type="text" placeholder="Last Name"
-            [hasInvalidStyling]="lastName.touched && lastName.invalid" [isRequired]="true">
-          </app-form-field>
-        </div>
-
-        <div class="col-xs-6">
-          <!-- required -->
-          <app-validation-alert [validationBoolean]="firstName.hasError('required')"
-            alertText="First Name is required.">
-          </app-validation-alert>
-        </div>
-
-        <div class="col-xs-6">
-          <!-- required -->
-          <app-validation-alert [validationBoolean]="lastName.hasError('required')" alertText="Last Name is required.">
-          </app-validation-alert>
-        </div>
-
-        <!-- Username -->
-        <div class="col-xs-12">
-          <app-form-field controlName="username" labelText="Username" type="text" placeholder="Username"
-            [hasInvalidStyling]="lastName.touched && lastName.invalid" [isRequired]="true" [isDisabled]="true">
-          </app-form-field>
-        </div>
-
-        <!-- Password -->
-        <div class="col-xs-12">
-          <app-form-field controlName="password" labelText="Password" type="password" placeholder="Password"
-            [hasInvalidStyling]="password.touched && password.invalid" [isRequired]="true">
-          </app-form-field>
-        </div>
-
-        <div class="col-xs-12">
-          <!-- required -->
-          <div *ngIf="password.hasError('required') && !password.touched">
-            <app-validation-alert [validationBoolean]="password.hasError('required')" alertText="Password is required.">
-            </app-validation-alert>
-          </div>
-
-          <!-- pattern -->
-          <div *ngIf="password.hasError('pattern') && !password.touched">
-            <app-validation-alert [validationBoolean]="password.hasError('pattern')"
-              alertText="Must be have least 8 characters, uppercase, lowercase, number, symbol">
-            </app-validation-alert>
-          </div>
-        </div>
-
-        <!-- BUTTONS -->
-        <div class="submit-cancel-btns">
-          <!-- save -->
-          <button type="submit" class="btn btn-primary">Save</button>
-          <!-- cancel -->
-          <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
-        </div>
-      </form>
+    <div class="col-xs-12 col-md-6">
+      <app-change-password-form></app-change-password-form>
     </div>
   </div>
 </div>

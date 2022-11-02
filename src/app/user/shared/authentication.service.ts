@@ -24,16 +24,16 @@ export class AuthService {
       take(1),
       map((result: User | undefined) => {
         if (result === undefined) {
-          console.log(`Could not find a user with username: '${username}'.`);
+          // console.log(`Could not find a user with username: '${username}'.`);
           return false;
         } else {
           if (password === result.password) {
-            console.log('Correct Login!');
+            // console.log('Correct Login!');
             this.currentUser = result;
             this.isLoggedIn.next(!!this.currentUser);
             return true;
           }
-          console.log(`Incorrect password for ${username}`);
+          // console.log(`Incorrect password for ${username}`);
           return false;
         }
       })
