@@ -1,8 +1,4 @@
-// data
-export * from './data/data.service';
-
-// guard functions
-// export * from './guards/checkDirtyState'
+export * from './navigation/navigation.service';
 
 // models
 export * from './models/trip.model';

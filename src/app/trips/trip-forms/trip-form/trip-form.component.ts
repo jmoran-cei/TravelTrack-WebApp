@@ -24,6 +24,7 @@ import { NewTripComponent } from '../../.';
 import { AuthService, User, UserService } from 'src/app/user';
 import { UsernameValidator } from 'src/app/forms/validators/userExists.validator';
 import { Member } from 'src/app/shared/models/member.model';
+import { NavigationService } from 'src/app/shared';
 
 @Component({
   selector: 'app-trip-form',
@@ -69,7 +70,8 @@ export class TripFormComponent implements OnInit, OnDestroy {
     private tripService: TripService,
     private destinationsService: DestinationsService,
     private auth: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    public nav: NavigationService
   ) {}
 
   ngOnInit() {
@@ -310,7 +312,7 @@ export class TripFormComponent implements OnInit, OnDestroy {
       // deactivate route guard
       this.tripComponent.isDirty = false;
       //reroute to newly created trip
-      this.router.navigate([`/trips/${addedTrip.id}`]);
+      this.nav.navigate([`/trips/${addedTrip.id}`]);
       this.destinationsService.clearAllDestinations();
     });
   }
@@ -322,7 +324,7 @@ export class TripFormComponent implements OnInit, OnDestroy {
       // deactivate route guard
       this.tripComponent.isDirty = false;
       //reroute to newly created trip
-      this.router.navigate([`/trips/${updatedTrip.id}`]);
+      this.nav.navigate([`/trips/${updatedTrip.id}`]);
       this.destinationsService.clearAllDestinations();
     });
   }

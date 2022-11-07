@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, of } from 'rxjs';
 import { Trip } from '../../../shared/models/trip.model';
 
 @Component({
@@ -8,8 +9,8 @@ import { Trip } from '../../../shared/models/trip.model';
 })
 export class TripsListComponent implements OnInit {
   currentTime = new Date();
-  upcomingTrips: Trip[] = [];
-  previousTrips: Trip[] = [];
+  upcomingTrips: Observable<Trip[]> = of([]);
+  previousTrips: Observable<Trip[]> = of([]);
 
   // displayed on new-trip-thumbnail
   // title and description for "create new trip" thumbnail in UPCOMING trip section
@@ -36,15 +37,15 @@ export class TripsListComponent implements OnInit {
 
   ngOnInit() {
     // get all upcoming trips
-    this.upcomingTrips = this.route.snapshot.data['trips'].filter(
+    this.upcomingTrips = of(this.route.snapshot.data['trips'].filter(
       (trip: Trip) =>
         new Date(trip.endDate).getTime() >= this.currentTime.getTime()
-    );
+    ));
 
     // get all previous trips
-    this.previousTrips = this.route.snapshot.data['trips'].filter(
+    this.previousTrips = of(this.route.snapshot.data['trips'].filter(
       (trip: Trip) =>
         new Date(trip.endDate).getTime() < this.currentTime.getTime()
-    );
+    ));
   }
 }

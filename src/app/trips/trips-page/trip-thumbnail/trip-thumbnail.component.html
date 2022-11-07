@@ -1,4 +1,4 @@
-<div [routerLink]="['/trips', trip.id]" class="thumbnail_box">
+<div (click)="nav.navigate(['/trips/', trip.id])" class="thumbnail_box">
   <!-- thumbnail image -->
   <img src="{{trip.imgURL}}" alt="{{trip.title}}" class="bg-img" />
 

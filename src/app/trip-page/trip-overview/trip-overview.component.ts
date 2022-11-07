@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NavigationService } from 'src/app/shared';
 import { membersListProps } from '..';
 import { Trip } from '../../shared/models/trip.model';
 import { calendarDateProps } from '../calendar-date/calendar-date.component';
@@ -24,7 +25,8 @@ export class TripOverviewComponent implements OnInit {
 
   constructor(
     private tripDataService: TripDataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public nav: NavigationService
   ) {}
 
   ngOnInit() {

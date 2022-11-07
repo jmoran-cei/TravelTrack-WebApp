@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Trip } from 'src/app/shared';
+import { Component, Input } from '@angular/core';
+import { Trip, NavigationService } from 'src/app/shared';
 import { TripService } from '../../shared/trip.service';
 
 @Component({
@@ -10,5 +10,5 @@ import { TripService } from '../../shared/trip.service';
 export class TripThumbnailComponent {
   @Input() trip!: Trip;
 
-  constructor(public tripService: TripService) {}
+  constructor(public tripService: TripService, public nav: NavigationService) {}
 }

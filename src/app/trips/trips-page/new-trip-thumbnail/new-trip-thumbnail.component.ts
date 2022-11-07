@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { NavigationService } from 'src/app/shared';
 
 @Component({
   selector: 'app-new-trip-thumbnail',
@@ -8,4 +9,6 @@ import { Component, Input } from '@angular/core';
 export class NewTripThumbnailComponent {
   @Input() title = '';
   @Input() description = '';
+
+  constructor(public nav: NavigationService) {}
 }

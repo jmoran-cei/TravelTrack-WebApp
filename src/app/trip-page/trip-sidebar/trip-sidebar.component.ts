@@ -11,19 +11,19 @@ export class TripSidebarComponent implements OnInit {
   trip?: Trip;
   overview = {
     name: 'Overview',
-    subpath: 'overview',
+    subpath: '404',
     icon: 'bi bi-briefcase',
     activeIcon: 'bi bi-briefcase-fill',
   };
   toDo = {
     name: 'To Do',
-    subpath: 'todo',
+    subpath: '404',
     icon: 'bi bi-clipboard2-check',
     activeIcon: 'bi bi-clipboard2-check-fill',
   };
   edit = {
     name: 'Edit Trip',
-    subpath: 'edit',
+    subpath: '404',
     icon: 'bi bi-pencil-square',
     activeIcon: 'bi bi-pencil-square',
   };
@@ -34,5 +34,9 @@ export class TripSidebarComponent implements OnInit {
     this.route.data.forEach((data) => {
       this.trip = data['trip'];
     });
+
+    this.overview.subpath = `trips/${this.trip?.id}/overview`;
+    this.toDo.subpath = `trips/${this.trip?.id}/todo`;
+    this.edit.subpath = `trips/${this.trip?.id}/edit`;
   }
 }

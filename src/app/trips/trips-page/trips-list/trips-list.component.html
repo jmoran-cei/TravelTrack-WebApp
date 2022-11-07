@@ -15,7 +15,7 @@
       <div class="collapse in row-fluid" id="{{upcomingCollapse}}">
 
         <!-- list of upcoming trip thumbnails (sorted to have soonest upcoming trips at the top)-->
-        <ng-container *ngFor="let trip of upcomingTrips | byEarliestDate">
+        <ng-container *ngFor="let trip of (upcomingTrips | byEarliestDate | async)">
           <div class="col-md-6 wrapper">
             <app-trip-thumbnail [trip]="trip"></app-trip-thumbnail>
           </div>
@@ -45,7 +45,7 @@
       <div class="collapse in row-fluid" id="{{previousCollapse}}">
 
         <!-- list of upcoming trip thumbnails (sorted to have most recent previous trips at the top)-->
-        <ng-container *ngFor="let trip of previousTrips | byLatestDate">
+        <ng-container *ngFor="let trip of (previousTrips | byLatestDate | async)">
           <div class="col-md-6 wrapper">
             <app-trip-thumbnail [trip]="trip"></app-trip-thumbnail>
           </div>

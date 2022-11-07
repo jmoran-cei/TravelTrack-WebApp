@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs';
 import { Trip } from 'src/app/shared';
 import { ToDo } from 'src/app/shared/models/toDo.model';
+import { NavigationService } from 'src/app/shared';
 import { TripService } from 'src/app/trips';
 
 @Component({
@@ -15,10 +16,10 @@ export class TripToDoComponent implements OnInit {
   toDoForm!: FormGroup;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private tripService: TripService
+    private tripService: TripService,
+    public nav: NavigationService
   ) {}
 
   ngOnInit() {
@@ -101,10 +102,7 @@ export class TripToDoComponent implements OnInit {
       .updateTrip(this.trip)
       .pipe(take(1))
       .subscribe(() => {
-        // deactivate route guard
-        // this.toDoComponent.isDirty = false;
-        //reroute to newly created trip
-        this.router.navigate([`/trips/${this.trip.id}`]);
+        this.nav.navigate([`/trips/${this.trip.id}`]);
       });
   }
 
@@ -131,11 +129,10 @@ export class TripToDoComponent implements OnInit {
 
   onSubmit() {
     this.trip.toDo = this.fitFormValuesToModel();
-    console.log(this.trip.toDo);
     this.updateTrip();
   }
 
   cancel() {
-    this.router.navigate([`/trips/${this.trip?.id}`]);
+    this.nav.navigate([`/trips/${this.trip?.id}`]);
   }
 }
