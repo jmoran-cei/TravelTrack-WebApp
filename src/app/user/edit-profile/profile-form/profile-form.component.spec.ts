@@ -56,7 +56,7 @@ describe('ProfileFormComponent', () => {
     // inject services for mocking
     authService = TestBed.inject(AuthService);
     userService = TestBed.inject(UserService);
-    
+
     // initialize current logged in user
     spyOn(authService, 'currentUser' as any).and.returnValue(currentUser);
 
@@ -135,17 +135,15 @@ describe('ProfileFormComponent', () => {
   // invalid form attempt
   it('should do nothing when saveProfile() is called and profileForm is invalid', () => {
     spyOn(ProfileFormComponent.prototype, 'saveProfile').and.callThrough();
-    spyOn(authService, 'loginUser' as any);
-    fixture.detectChanges();
+    spyOn(authService, 'loginUser');
 
     // invalid
-    component.profileForm.get('password')!.setValue('');
+    component.password!.setValue('');
 
     // submit, calling saveProfile()
     fixture.debugElement
       .query(By.css('button'))
       .triggerEventHandler('ngSubmit', component.saveProfile());
-    fixture.detectChanges();
 
     // Assert
     expect(component.saveProfile).toHaveBeenCalled(); // before
@@ -156,21 +154,19 @@ describe('ProfileFormComponent', () => {
   // wrong password attempt
   it('should call auth.login() and fail to authenticate with wrong password', () => {
     spyOn(ProfileFormComponent.prototype, 'saveProfile').and.callThrough();
-    spyOn(userService, 'updateUser' as any);
-    spyOn(authService, 'loginUser' as any).and.returnValue(of(false));
-    fixture.detectChanges();
+    spyOn(userService, 'updateUser');
+    spyOn(authService, 'loginUser').and.returnValue(of(false));
 
     // set valid values
-    component.profileForm.get('firstName')!.setValue(currentUser.firstName);
-    component.profileForm.get('lastName')!.setValue(currentUser.lastName);
-    component.profileForm.get('username')!.setValue(currentUser.username);
-    component.profileForm.get('password')!.setValue(currentUser.password);
+    component.firstName!.setValue(currentUser.firstName);
+    component.lastName!.setValue(currentUser.lastName);
+    component.username!.setValue(currentUser.username);
+    component.password!.setValue('wrongP@ssw0rd');
 
     // submit, calling saveProfile()
     fixture.debugElement
       .query(By.css('button'))
       .triggerEventHandler('ngSubmit', component.saveProfile());
-    fixture.detectChanges();
 
     // Assert
     expect(component.saveProfile).toHaveBeenCalled();
@@ -182,46 +178,42 @@ describe('ProfileFormComponent', () => {
   // correct password attempt
   it('should call auth.login() and succesufully authenticate with correct password', () => {
     spyOn(ProfileFormComponent.prototype, 'saveProfile').and.callThrough();
-    spyOn(userService, 'updateUser' as any).and.returnValue(of(changedUser));
-    spyOn(authService, 'loginUser' as any).and.returnValue(of(true));
-    fixture.detectChanges();
+    spyOn(userService, 'updateUser').and.returnValue(of(changedUser));
+    spyOn(authService, 'loginUser').and.returnValue(of(true));
 
     // set valid values
-    component.profileForm.get('firstName')!.setValue(currentUser.firstName);
-    component.profileForm.get('lastName')!.setValue(currentUser.lastName);
-    component.profileForm.get('username')!.setValue(currentUser.username);
-    component.profileForm.get('password')!.setValue(currentUser.password);
+    component.firstName!.setValue(currentUser.firstName);
+    component.lastName!.setValue(currentUser.lastName);
+    component.username!.setValue(currentUser.username);
+    component.password!.setValue(currentUser.password);
 
     // submit, calling saveProfile()
     fixture.debugElement
       .query(By.css('button'))
       .triggerEventHandler('ngSubmit', component.saveProfile());
-    fixture.detectChanges();
 
     // Assert
     expect(component.saveProfile).toHaveBeenCalled(); // before
     expect(authService.loginUser).toHaveBeenCalled();
-    expect(component.invalidProfileFormAttempt).not.toBeTrue();
+    expect(component.invalidProfileFormAttempt).toBeFalse();
     expect(userService.updateUser).toHaveBeenCalled();
   });
 
   // successfully update user
   it('should call userService.updateUser() and successfully update user', () => {
-    spyOn(ProfileFormComponent.prototype, 'saveProfile').and.callThrough();
-    spyOn(userService, 'updateUser' as any).and.returnValue(of(changedUser));
-    spyOn(authService, 'loginUser' as any).and.returnValue(of(true));
+    spyOn(userService, 'updateUser').and.returnValue(of(changedUser));
+    spyOn(authService, 'loginUser').and.returnValue(of(true));
 
     // set valid values
-    component.profileForm.get('firstName')!.setValue(changedUser.firstName);
-    component.profileForm.get('lastName')!.setValue(changedUser.lastName);
-    component.profileForm.get('username')!.setValue(changedUser.username);
-    component.profileForm.get('password')!.setValue(changedUser.password);
+    component.firstName!.setValue(changedUser.firstName);
+    component.lastName!.setValue(changedUser.lastName);
+    component.username!.setValue(changedUser.username);
+    component.password!.setValue(changedUser.password);
 
     // submit, calling saveProfile()
     fixture.debugElement
       .query(By.css('button'))
       .triggerEventHandler('ngSubmit', component.saveProfile());
-    fixture.detectChanges();
 
     // Assert
     expect(authService.loginUser).toHaveBeenCalled(); // before
