@@ -69,7 +69,6 @@ export class ProfileFormComponent implements OnInit {
           this.updateUser(updatedUser);
         } else {
           this.invalidProfileFormAttempt = true;
-          this.profileForm.markAllAsTouched();
         }
       });
   }
