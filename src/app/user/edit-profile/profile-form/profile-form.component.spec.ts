@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { FormFieldComponent, ValidationAlertComponent } from 'src/app/forms';
 import { AuthService, UserService } from '../../shared';
 import { ProfileFormComponent } from './profile-form.component';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/module/shared.module';
 import { UserModule } from '../../user.module';
 import { By } from '@angular/platform-browser';
@@ -11,7 +11,6 @@ import { of } from 'rxjs';
 import { TripsListComponent } from 'src/app/trips';
 
 describe('ProfileFormComponent', () => {
-  // let component: ProfileFormComponent;///
   let fixture: ComponentFixture<ProfileFormComponent>;
   let component: ProfileFormComponent;
   let authService: AuthService;
@@ -57,6 +56,7 @@ describe('ProfileFormComponent', () => {
     // inject services for mocking
     authService = TestBed.inject(AuthService);
     userService = TestBed.inject(UserService);
+    
     // initialize current logged in user
     spyOn(authService, 'currentUser' as any).and.returnValue(currentUser);
 
