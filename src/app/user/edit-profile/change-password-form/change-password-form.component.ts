@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { take } from 'rxjs';
+import { of, switchMap, take } from 'rxjs';
 import {
   matchingPasswordsValidator,
   mismatchingPasswordsValidator,
@@ -68,13 +68,23 @@ export class ChangePasswordFormComponent implements OnInit {
 
     this.auth
       .loginUser(updatedUser.username, this.currentPassword.value)
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        switchMap((valid) => {
+          if (valid) {
+            this.userService.updateUser(updatedUser).pipe(take(1)).subscribe();
+            return of(true);
+          }
+          return of(false);
+        })
+      )
       .subscribe((valid) => {
         if (valid) {
-          this.updateUser(updatedUser);
+          alert('You have successfully changed your password!');
+          this.router.navigate(['/trips']);
+          this.auth.currentUser = updatedUser;
         } else {
           this.invalidPasswordFormAttempt = true;
-          this.passwordForm.markAllAsTouched();
         }
       });
   }
@@ -86,16 +96,5 @@ export class ChangePasswordFormComponent implements OnInit {
       username: this.auth.currentUser.username,
       password: this.newPassword.value,
     };
-  }
-
-  updateUser(updatedUser: User) {
-    return this.userService
-      .updateUser(updatedUser)
-      .pipe(take(1))
-      .subscribe(() => {
-        alert('You have successfully changed your password!');
-        this.router.navigate(['/trips']);
-        this.auth.currentUser = updatedUser;
-      });
   }
 }

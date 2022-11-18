@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { take } from 'rxjs';
+import { of, switchMap, take } from 'rxjs';
 import { AuthService, User, UserService } from '../../shared';
 
 @Component({
@@ -63,11 +63,22 @@ export class ProfileFormComponent implements OnInit {
     // validate password
     this.auth
       .loginUser(updatedUser.username, updatedUser.password)
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        switchMap((valid) => {
+          if (valid) {
+            this.userService.updateUser(updatedUser).pipe(take(1)).subscribe();
+            return of(true);
+          }
+          return of(false);
+        }))
       .subscribe((valid) => {
         if (valid) {
-          this.updateUser(updatedUser);
-        } else {
+          alert('You have successfully updated your personal information!');
+          this.router.navigate(['/trips']);
+          this.auth.currentUser = updatedUser;
+        }
+        else {
           this.invalidProfileFormAttempt = true;
         }
       });
@@ -80,16 +91,5 @@ export class ProfileFormComponent implements OnInit {
       username: this.username.value,
       password: this.password.value,
     };
-  }
-
-  updateUser(updatedUser: User) {
-    return this.userService
-      .updateUser(updatedUser)
-      .pipe(take(1))
-      .subscribe(() => {
-        alert('You have successfully updated your personal information!');
-        this.router.navigate(['/trips']);
-        this.auth.currentUser = updatedUser;
-      });
   }
 }
