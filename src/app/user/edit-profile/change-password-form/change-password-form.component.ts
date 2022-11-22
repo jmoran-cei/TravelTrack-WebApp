@@ -70,19 +70,18 @@ export class ChangePasswordFormComponent implements OnInit {
       .loginUser(updatedUser.username, this.currentPassword.value)
       .pipe(
         take(1),
-        switchMap((valid) => {
-          if (valid) {
-            this.userService.updateUser(updatedUser).pipe(take(1)).subscribe();
-            return of(true);
+        switchMap((authenticated) => {
+          if (authenticated) {
+            return this.userService.updateUser(updatedUser);
           }
           return of(false);
         })
       )
-      .subscribe((valid) => {
-        if (valid) {
+      .subscribe((user) => {
+        if (typeof user === 'object') {
           alert('You have successfully changed your password!');
           this.router.navigate(['/trips']);
-          this.auth.currentUser = updatedUser;
+          this.auth.currentUser = user;
         } else {
           this.invalidPasswordFormAttempt = true;
         }

@@ -65,20 +65,19 @@ export class ProfileFormComponent implements OnInit {
       .loginUser(updatedUser.username, updatedUser.password)
       .pipe(
         take(1),
-        switchMap((valid) => {
-          if (valid) {
-            this.userService.updateUser(updatedUser).pipe(take(1)).subscribe();
-            return of(true);
+        switchMap((authenticated) => {
+          if (authenticated) {
+            return this.userService.updateUser(updatedUser);
           }
           return of(false);
-        }))
-      .subscribe((valid) => {
-        if (valid) {
+        })
+      )
+      .subscribe((user) => {
+        if (typeof user === 'object') {
           alert('You have successfully updated your personal information!');
           this.router.navigate(['/trips']);
-          this.auth.currentUser = updatedUser;
-        }
-        else {
+          this.auth.currentUser = user;
+        } else {
           this.invalidProfileFormAttempt = true;
         }
       });
