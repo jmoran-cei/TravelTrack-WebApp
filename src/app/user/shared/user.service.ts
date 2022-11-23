@@ -28,7 +28,7 @@ export class UserService {
 
   // check if user is in users
   getUser(username: string): Observable<User | undefined> {
-    const url = `${this.usersUrl}/${username}`;
+    const url = `${this.usersUrl}/${username.toLowerCase()}`;
 
     return this.http
       .get<User>(url, this.headers)
@@ -37,18 +37,20 @@ export class UserService {
 
   // create new user account
   createUser(user: User): Observable<User> {
-    return this.http.post<User>(this.usersUrl, user, this.headers).pipe(
-      tap((data: User) => console.table(data)),
-      catchError(this.handleError<User>('createUser()'))
-    );
-  }
+    user.username = user.username.toLowerCase();
 
-  // update user account
-  updateUser(user: User): Observable<User> {
+    return this.http.post<User>(this.usersUrl, user, this.headers).pipe(
+      catchError(this.handleError<User>('createUser()'))
+      );
+    }
+
+    // update user account
+    updateUser(user: User): Observable<User> {
+    user.username = user.username.toLowerCase();
+
     return this.http
       .put<User>(`${this.usersUrl}/${user.username}`, user, this.headers)
       .pipe(
-        tap((data: User) => console.table(data)),
         catchError(this.handleError<User>('updateUser()'))
       );
   }
@@ -57,7 +59,7 @@ export class UserService {
   checkUsernameExists(username: string): Observable<boolean> {
     var userValid = false;
 
-    return this.getUser(username).pipe(
+    return this.getUser(username.toLowerCase()).pipe(
       map((result) => {
         if (result !== undefined) {
           return (userValid = true);
@@ -73,7 +75,6 @@ export class UserService {
     result?: User
   ): (error: any) => Observable<User> {
     return (error: any): Observable<User> => {
-      console.error('error: ', error.status);
       return of(result as User);
     };
   }

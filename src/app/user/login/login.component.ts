@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     this.authService
-      .loginUser(username, password)
+      .loginUser(username.toLowerCase(), password)
       .pipe(take(1))
       .subscribe((valid) => {
         if (valid) {

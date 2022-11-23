@@ -291,7 +291,7 @@ export class TripFormComponent implements OnInit, OnDestroy {
 
   // submit method
   onSubmit() {
-    console.log('Submit button pushed!');
+    // console.log('Submit button pushed!');
     this.tripForm.markAllAsTouched();
     // members is optional , but still has validation per member
     // make sure all required and provided fields are valid
@@ -344,7 +344,7 @@ export class TripFormComponent implements OnInit, OnDestroy {
         .deleteTrip(this.existingTrip.id)
         .pipe(take(1))
         .subscribe((trip) => {
-          console.log('deleted: ', trip);
+          // console.log('deleted: ', trip);
           this.router.navigate(['/trips']);
         });
     }
@@ -367,19 +367,19 @@ export class TripFormComponent implements OnInit, OnDestroy {
     this.usernamesToUserObjects(this.members.value)
       .pipe(take(1))
       .subscribe((users) => {
-        var submitMembers : Member[] = [];
+        var submitMembers: Member[] = [];
         // map to be type Member instead of User (no password, )
         for (let user of users) {
           var member: Member = {
-            username: user.username,
+            username: user.username.toLowerCase(),
             firstName: user.firstName,
-            lastName: user.lastName
+            lastName: user.lastName,
           };
 
           submitMembers.push(member);
         }
         this.submittedTrip.members = submitMembers as User[];
-        console.log(this.submittedTrip.members);
+        // console.log(this.submittedTrip.members);
 
         // if edit form, keep trip properties that aren't edited in this form & update trip
         if (this.isEditing) {
@@ -390,8 +390,8 @@ export class TripFormComponent implements OnInit, OnDestroy {
           this.addTrip();
         }
 
-        console.log('Successfully saved!');
-        console.table(this.submittedTrip);
+        // console.log('Successfully saved!');
+        // console.table(this.submittedTrip);
       });
   }
 
@@ -400,13 +400,15 @@ export class TripFormComponent implements OnInit, OnDestroy {
     return forkJoin(
       usernames
         .filter((username) => username.trim() !== '')
-        .map((username) => this.userService.getUser(username.trim()))
+        .map((username) =>
+          this.userService.getUser(username.trim().toLowerCase())
+        )
     ).pipe(
       map((users) => users.filter((user): user is User => user !== undefined))
     );
   }
 
-  // if they didn't include themselves as a member, then automatically add thehm as a trip member
+  // if they didn't include themselves as a member, then automatically add them as a trip member
   checkCurrentUserIsAMember(): void {
     var userIsMember = false;
 

@@ -32,47 +32,32 @@
 h1 {
   text-align: center;
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 30px;
 }
 
 img {
-  width: 100%;
-}
-
-.form-container {
-  margin-top: 8%;
+  width: 80%;
 }
 
 /* SUBMIT button */
 .btn-primary {
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-bottom: 30px;
   padding: 6px 18px;
-  display: inline-block;
+  float: right;
   font-size: 15px;
   color: white;
   background-color: #859ad4;
-  margin-right: 20px;
 }
 .btn-primary:hover {
   background-color: #9fb3eb;
-}
-
-/* CANCEL buttons */
-.btn-default {
-  padding: 6px 12px;
-  font-size: 15px;
-  color: white;
-  background-color: rgb(31, 31, 31);
-}
-.btn-default:hover {
-  background-color: rgb(71, 71, 71);
-}
-
-.submit-cancel-btns {
-  margin-top: 20px;
-  margin-right: 60px;
-  float: right;
-  display: flex;
-  align-items: center;
 }
 
 @media (max-width: 660px) {
