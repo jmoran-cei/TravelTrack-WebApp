@@ -64,13 +64,13 @@ export class ProfileFormComponent implements OnInit {
     this.auth
       .loginUser(updatedUser.username, updatedUser.password)
       .pipe(
-        take(1),
         switchMap((authenticated) => {
           if (authenticated) {
             return this.userService.updateUser(updatedUser);
           }
           return of(false);
-        })
+        }),
+        take(1)
       )
       .subscribe((user) => {
         if (typeof user === 'object') {

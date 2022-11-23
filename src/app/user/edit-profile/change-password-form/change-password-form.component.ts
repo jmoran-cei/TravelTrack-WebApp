@@ -69,13 +69,13 @@ export class ChangePasswordFormComponent implements OnInit {
     this.auth
       .loginUser(updatedUser.username, this.currentPassword.value)
       .pipe(
-        take(1),
         switchMap((authenticated) => {
           if (authenticated) {
             return this.userService.updateUser(updatedUser);
           }
           return of(false);
-        })
+        }),
+        take(1)
       )
       .subscribe((user) => {
         if (typeof user === 'object') {
