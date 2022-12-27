@@ -42,10 +42,10 @@ export class UserService {
     return this.http.post<User>(this.usersUrl, user, this.headers).pipe(
       catchError(this.handleError<User>('createUser()'))
       );
-    }
+  }
 
-    // update user account
-    updateUser(user: User): Observable<User> {
+  // update user account
+  updateUser(user: User): Observable<User> {
     user.username = user.username.toLowerCase();
 
     return this.http

@@ -67,8 +67,7 @@ export class NewAccountComponent implements OnInit {
     this.userService
       .createUser(this.newUserObject())
       .pipe(
-        take(1),
-        // tap((newUser) => console.table(newUser))
+        take(1)
       )
       .subscribe(() => {
         alert('You have successfully created an account! Please sign in.');

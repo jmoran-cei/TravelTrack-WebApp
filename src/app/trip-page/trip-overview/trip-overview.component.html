@@ -37,7 +37,12 @@
 
   <div class="text-content">
     <!-- details -->
-    <p *ngIf="!!trip?.details" class="details col-xs-12">{{trip?.details}}</p>
+    <div *ngIf="!!trip?.details && trip?.details?.trim() !== ''" class="details-box col-xs-12">
+      <input type="checkbox" id="expand">
+      <p class="details">{{trip?.details}}</p>
+      <label *ngIf="trip!.details.length > 120" id="show-more" for="expand" role="button">show more</label>
+    </div>
+
 
     <!-- destinations -->
     <div class="col-sm-6 col-xs-12">
@@ -79,7 +84,7 @@
 
       <!-- empty to do list: to do button -->
       <div *ngIf="trip?.toDo?.length === 0" class="flex-center empty-to-do">
-        <button class="btn btn-primary to-do-btn font700" (click)="nav.navigate(['../todo'])">Start Tracking Your Tasks</button>
+        <button class="btn btn-primary to-do-btn font700" [routerLink]="['../todo']">Start Tracking Your Tasks</button>
       </div>
     </div>
 

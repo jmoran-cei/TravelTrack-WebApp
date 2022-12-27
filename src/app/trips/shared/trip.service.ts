@@ -8,7 +8,7 @@ import {
   of,
   retry,
   switchMap,
-  tap,
+  take,
 } from 'rxjs';
 import { secrets } from 'src/app/secrets';
 import { AuthService, User } from 'src/app/user/shared';
@@ -27,9 +27,11 @@ export class TripService {
       'X-Api-Key': this.apiKey,
     }),
   };
+  PlacesService = new google.maps.places.PlacesService(
+    document.getElementById('empty')! as HTMLDivElement
+  );
 
   constructor(private http: HttpClient, private auth: AuthService) {}
-
   // get all trips
   getTrips(): Observable<Trip[]> {
     return this.http.get<Trip[]>(this.tripsUrl, this.headers).pipe(
@@ -42,6 +44,7 @@ export class TripService {
           return forkJoin(
             trips.map((trip: Trip) =>
               this.getTripImgURL(trip.destinations[0].id!).pipe(
+                take(1),
                 map((imgURL: string) => ({ ...trip, imgURL }))
               )
             )
@@ -83,7 +86,6 @@ export class TripService {
   // create new trip
   createTrip(trip: Trip): Observable<Trip> {
     return this.http.post<Trip>(this.tripsUrl, trip, this.headers).pipe(
-      tap((data: Trip) => console.table(data)),
       catchError(this.handleError<Trip>('createTrip()'))
     );
   }
@@ -93,7 +95,6 @@ export class TripService {
     return this.http
       .put<Trip>(`${this.tripsUrl}/${trip.id}`, trip, this.headers)
       .pipe(
-        tap((data: Trip) => console.table(data)),
         catchError(this.handleError<Trip>('createTrip()'))
       );
   }
@@ -103,7 +104,6 @@ export class TripService {
     const url = `${this.tripsUrl}/${id}`;
 
     return this.http.delete<Trip>(url, this.headers).pipe(
-      tap((data: Trip) => console.table(data)),
       catchError(this.handleError<Trip>('createTrip()'))
     );
   }
@@ -145,14 +145,16 @@ export class TripService {
   getTripImgURL(placeId: string): Observable<string> {
     return new Observable((obs) => {
       let getGooglePhotoForTrip = function (placeResult: any, status: any) {
+        var imgUrl = 'assets/images/trips/default.jpg';
         if (status != google.maps.places.PlacesServiceStatus.OK) {
-          obs.error(status);
+          // obs.error(status)
+          obs.next(imgUrl);
+          obs.complete();
         } else {
-          var imgUrl = 'assets/images/trips/default.jpg';
 
           // if google has any photos for the given placeId
           if (placeResult.photos.length !== 0) {
-            imgUrl = placeResult.photos[1].getUrl({
+            imgUrl = placeResult.photos[0].getUrl({
               maxWidth: 1920, // at least set one or the other - mandatory
               maxHeight: undefined,
             });
@@ -162,10 +164,7 @@ export class TripService {
         }
       };
 
-      var PlacesService = new google.maps.places.PlacesService(
-        document.getElementById('empty')! as HTMLDivElement
-      );
-      PlacesService.getDetails(
+      this.PlacesService.getDetails(
         {
           placeId: placeId,
         },

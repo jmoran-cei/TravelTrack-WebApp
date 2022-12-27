@@ -16,6 +16,5 @@ export class EditTripComponent implements OnInit {
     this.route.parent?.data.forEach((data) => {
       this.trip = data['trip'];
     });
-    console.log(this.trip);
   }
 }

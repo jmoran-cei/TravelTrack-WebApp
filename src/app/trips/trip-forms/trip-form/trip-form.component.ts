@@ -18,13 +18,12 @@ import { Router } from '@angular/router';
 import { forkJoin, map, Observable, Subscription, take } from 'rxjs';
 import { datesInOrderValidator } from 'src/app/forms';
 import { DestinationsService } from 'src/app/forms/autocomplete/service/destinations.service';
-import { Trip } from 'src/app/shared';
+import { NavigationService, Trip } from 'src/app/shared';
 import { TripService } from '../../shared';
 import { NewTripComponent } from '../../.';
 import { AuthService, User, UserService } from 'src/app/user';
 import { UsernameValidator } from 'src/app/forms/validators/userExists.validator';
 import { Member } from 'src/app/shared/models/member.model';
-import { NavigationService } from 'src/app/shared';
 
 @Component({
   selector: 'app-trip-form',
@@ -291,7 +290,6 @@ export class TripFormComponent implements OnInit, OnDestroy {
 
   // submit method
   onSubmit() {
-    // console.log('Submit button pushed!');
     this.tripForm.markAllAsTouched();
     // members is optional , but still has validation per member
     // make sure all required and provided fields are valid
@@ -331,7 +329,11 @@ export class TripFormComponent implements OnInit, OnDestroy {
 
   // cancel method
   cancel() {
-    this.router.navigate(['/trips']);
+    let path = '/trips';
+    if (this.isEditing) {
+      path = `/trips/${this.existingTrip.id}`
+    }
+    this.nav.navigate([path]);
   }
 
   deleteTrip() {
@@ -343,9 +345,8 @@ export class TripFormComponent implements OnInit, OnDestroy {
       this.tripService
         .deleteTrip(this.existingTrip.id)
         .pipe(take(1))
-        .subscribe((trip) => {
-          // console.log('deleted: ', trip);
-          this.router.navigate(['/trips']);
+        .subscribe(() => {
+          this.nav.navigate(['/trips']);
         });
     }
   }
@@ -379,7 +380,6 @@ export class TripFormComponent implements OnInit, OnDestroy {
           submitMembers.push(member);
         }
         this.submittedTrip.members = submitMembers as User[];
-        // console.log(this.submittedTrip.members);
 
         // if edit form, keep trip properties that aren't edited in this form & update trip
         if (this.isEditing) {
@@ -389,9 +389,6 @@ export class TripFormComponent implements OnInit, OnDestroy {
         } else {
           this.addTrip();
         }
-
-        // console.log('Successfully saved!');
-        // console.table(this.submittedTrip);
       });
   }
 
