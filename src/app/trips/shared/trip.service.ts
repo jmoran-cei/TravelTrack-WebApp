@@ -16,7 +16,7 @@ import { Trip } from '../../shared/models/trip.model';
 
 @Injectable()
 export class TripService {
-  tripsUrl = 'https://localhost:7194/api/trips';
+  tripsUrl = 'https://bootcamp-traveltrackapi.azurewebsites.net/api/trips';
   apiKey = secrets.TravelTrackAPIKey;
   // apiKey = 'test'; // uncomment if testing on different machine
 

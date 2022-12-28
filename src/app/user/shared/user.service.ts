@@ -7,7 +7,7 @@ import { User } from '.';
 @Injectable()
 export class UserService {
   // usersUrl = '/api/users'; // temporary: angular in-mem web api
-  usersUrl = 'https://localhost:7194/api/users';
+  usersUrl = 'https://bootcamp-traveltrackapi.azurewebsites.net/api/users';
   apiKey = secrets.TravelTrackAPIKey;
   // apiKey = 'test'; // uncomment if testing on different machine
 
