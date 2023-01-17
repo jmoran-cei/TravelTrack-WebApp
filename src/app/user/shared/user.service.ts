@@ -1,16 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of, retry, take, tap } from 'rxjs';
-import { secrets } from 'src/app/secrets';
 import { environment } from 'src/environments/environment';
 import { User } from '.';
 
 @Injectable()
 export class UserService {
-  // usersUrl = '/api/users'; // temporary: angular in-mem web api
   usersUrl = environment.TravelTrackAPI + '/api/users';
-  apiKey = secrets.TravelTrackAPIKey;
-  // apiKey = 'test'; // uncomment if testing on different machine
+  apiKey = environment.TravelTrackAPIKey;
 
   headers = {
     headers: new HttpHeaders({

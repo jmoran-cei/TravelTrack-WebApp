@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  TravelTrackAPI: "https://localhost:7194"
+  TravelTrackAPI: "https://localhost:7194",
+  TravelTrackAPIKey: "dev",
+  GooglePlacesAPIKey: "AIzaSyAHFf5atq9RqiJZ41TrepX47Ub2_G_Wm00"
 };
 
 /*
