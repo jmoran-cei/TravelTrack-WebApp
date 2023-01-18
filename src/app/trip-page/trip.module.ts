@@ -9,6 +9,7 @@ import {
   TripToDoComponent,
   tripRoutes,
   TripSidebarOptionComponent,
+  TripPhotosComponent,
 } from '.';
 import { SharedModule } from '../shared/module/shared.module';
 
@@ -24,6 +25,7 @@ import { SharedModule } from '../shared/module/shared.module';
     TripPageComponent,
     TripSidebarComponent,
     TripToDoComponent,
+    TripPhotosComponent,
     TripSidebarOptionComponent,
   ],
   providers: [],

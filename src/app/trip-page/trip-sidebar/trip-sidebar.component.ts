@@ -21,6 +21,12 @@ export class TripSidebarComponent implements OnInit {
     icon: 'bi bi-clipboard2-check',
     activeIcon: 'bi bi-clipboard2-check-fill',
   };
+  photos = {
+    name: 'Photo Collection',
+    subpath: '404',
+    icon: 'bi bi-camera',
+    activeIcon: 'bi bi-camera-fill',
+  };
   edit = {
     name: 'Edit Trip',
     subpath: '404',
@@ -37,6 +43,7 @@ export class TripSidebarComponent implements OnInit {
 
     this.overview.subpath = `trips/${this.trip?.id}/overview`;
     this.toDo.subpath = `trips/${this.trip?.id}/todo`;
+    this.photos.subpath = `trips/${this.trip?.id}/photos`;
     this.edit.subpath = `trips/${this.trip?.id}/edit`;
   }
 }
