@@ -10,16 +10,14 @@ import {
   switchMap,
   take,
 } from 'rxjs';
-import { secrets } from 'src/app/secrets';
 import { AuthService, User } from 'src/app/user/shared';
 import { environment } from 'src/environments/environment';
 import { Trip } from '../../shared/models/trip.model';
 
 @Injectable()
 export class TripService {
-  tripsUrl =  environment.TravelTrackAPI + '/api/trips';
-  apiKey = secrets.TravelTrackAPIKey;
-  // apiKey = 'test'; // uncomment if testing on different machine
+  tripsUrl =  environment.TravelTrackAPI + '/trips';
+  apiKey = environment.TravelTrackAPIKey;
 
   headers = {
     headers: new HttpHeaders({
