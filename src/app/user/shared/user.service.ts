@@ -6,7 +6,7 @@ import { User } from '.';
 
 @Injectable()
 export class UserService {
-  usersUrl = environment.TravelTrackAPI + '/api/users';
+  usersUrl = environment.TravelTrackAPI + '/users';
   apiKey = environment.TravelTrackAPIKey;
 
   headers = {

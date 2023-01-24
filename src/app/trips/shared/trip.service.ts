@@ -16,7 +16,7 @@ import { Trip } from '../../shared/models/trip.model';
 
 @Injectable()
 export class TripService {
-  tripsUrl =  environment.TravelTrackAPI + '/api/trips';
+  tripsUrl =  environment.TravelTrackAPI + '/trips';
   apiKey = environment.TravelTrackAPIKey;
 
   headers = {
