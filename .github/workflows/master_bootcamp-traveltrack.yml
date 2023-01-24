@@ -6,7 +6,7 @@ name: Build and deploy Node.js app to Azure Web App - bootcamp-traveltrack
 on:
   push:
     branches:
-      - master
+      - cloud # changing back to master after successful build/deploy
   workflow_dispatch:
 
 jobs:
@@ -21,12 +21,23 @@ jobs:
         with:
           node-version: '18.x'
 
+      - name: set production environment variables
+        run:
+          path: /bin/bash
+          args:
+            - -excl
+            - |
+              export TRAVELTRACK_API_BASE_URL=${{ secrets.TRAVELTRACK_API_BASE_URL }}
+              export TRAVELTRACK_API_KEY=${{ secrets.TRAVELTRACK_API_KEY }}
+              export GOOGLE_PLACES_API_KEY=${{ secrets.GOOGLE_PLACES_API_KEY }}
+
       - name: npm install, build #, and test
         run: |
           npm install
           npm run build --prod --if-present
         #  npm run test --if-present
-    
+
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
