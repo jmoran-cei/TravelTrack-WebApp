@@ -1,4 +1,68 @@
 <div class="container-fluid">
   <h1 class="font700">{{trip.title}}</h1>
   <h2>Photos</h2>
+
+  <div>
+    <div class="alert alert-info col-xs-12 upload-container">
+
+      <div class="pending-btns">
+        <!-- hidden file select -->
+        <input #fileSelect id="file-select" type="file" (change)="onFileSelected($event)" [accept]="requiredFileType"
+          multiple>
+
+        <!-- trigger file select -->
+        <button class="btn btn-primary" type="button" (click)="fileSelect.click()">Choose Photos From Device</button>
+
+        <!-- files progress message -->
+        <div class="progress-txt " [title]="progressMessage">
+          {{progressMessage}}
+
+          <!-- loading symbol -->
+          <img [hidden]="hideProgress" class="loading-circle"
+            src="assets\images\general\loading-circle.gif" />
+        </div>
+        <!-- <img class="loading-bounce-bar" src="assets\images\general\Loading-Bounce-Bar.gif"/> -->
+
+        <!-- clear files & upload buttons -->
+        <button class="btn clear-all-btn" type="button" (click)="removeAllPendingFiles()">Clear</button>
+        <button class="btn btn-default upload-btn" type="button" (click)="onUpload()"
+          [disabled]="disableUploadBtn">Upload</button>
+      </div>
+
+      <!-- Pending Image Files -->
+      <div>
+        <ng-container *ngFor="let file of (pendingFiles$ | async); let i = index">
+
+          <div class="pending-upload alert">
+            <!-- file image -->
+            <img class="pending-upload-img" [src]="file.ImgUrl">
+
+            <!-- file name -->
+            <p class="pending-upload-txt" title="the file name goes here">{{file?.File?.name}}</p>
+
+            <!-- file size -->
+            <p class="pending-upload-size">{{ file?.File?.size | fileSize }}</p>
+
+            <!-- remove pending file -->
+            <button class="btn remove-btn" type="button" (click)="removePendingFile(file.File)"><i
+                class="bi bi-trash"></i></button>
+          </div>
+
+          <!-- file error msg -->
+          <div class="alert alert-danger" *ngIf="file?.ErrorMessage !== ''">
+            <p>{{file.ErrorMessage}}</p>
+          </div>
+        </ng-container>
+      </div>
+
+
+    </div>
+    --------------------------------
+    <div>
+      <!-- DISPLAY LIST OF ALREADY PRE-EXISING PHOTOS HERE -->
+      <ng-container *ngFor="let photo of (tripPhotos$ | async)">
+        <img [src]="photo.path" [alt]="photo.alt" />
+      </ng-container>
+    </div>
+  </div>
 </div>
