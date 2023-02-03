@@ -30,7 +30,7 @@ export class TripPhotosComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private tripPhotoService: TripPhotoService,
-    public changeDetection: ChangeDetectorRef
+    private changeDetection: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
