@@ -175,7 +175,7 @@ export class TripPhotosComponent implements OnInit {
         }),
       // return false if validation failed
       // reset pendingFiles & progress message
-      switchMap(
+      mergeMap(
         (result: (boolean | PendingFile[] | string)[] ): Observable<boolean | TripPhoto[]> => {
           // submission validation
           if (result[0] as boolean  === false) {
