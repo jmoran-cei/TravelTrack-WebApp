@@ -1,6 +1,6 @@
 export interface TripPhoto {
   id: string;
-  tripId: string;
+  tripId: number;
   fileName: string;
   fileType: string;
   path: string;
