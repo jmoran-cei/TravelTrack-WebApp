@@ -38,6 +38,9 @@
             <!-- not displayed: checkbox -->
             <input #photoselect [id]="photo?.fileName" class="checkbox" type="checkbox" (click)="select();"/>
 
+            <!-- full view icon -->
+            <button class="btn btn-default photo-btn full-view-icon" (click)="displayFullViewImg(photo, i); detect()"><i class="bi bi-fullscreen"></i></button>
+
             <!-- selected status -->
             <div class="selected-status">
               <button class="btn btn-default photo-btn check-icon" type="button" (click)="photoselect.click()">
@@ -53,4 +56,6 @@
     </ng-container>
     </div>
   </div>
+
+  <app-trip-photo-full-view [displayFullView$]="displayFullView$" [displayedPhoto$]="displayedFullPhoto$" [photos$]="tripPhotos$" [currentIndex$]="displayedFullPhotoIndex$"></app-trip-photo-full-view>
 </ng-container>

@@ -146,6 +146,10 @@ p {
   background: rgb(31, 31, 31);
 }
 
+.full-view-icon {
+  font-size: 13px;
+}
+
 .check-icon {
   font-size: 13px;
 }
