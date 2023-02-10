@@ -1,0 +1,156 @@
+.container-fluid {
+  width: 94%;
+  margin-left: max(10px, 5%);
+  margin-right: max(10px, 3%);
+}
+
+p {
+  margin-bottom: 0px;
+}
+
+.photo-list-top-section {
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.photo-list {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.contain {
+  border-radius: 10px;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  float: left;
+  margin-top: 20px;
+  margin-left: 20px;
+  background: rgb(31, 31, 31);
+  overflow: hidden;
+  box-shadow: black 0 2px 2px 0;
+}
+
+.contain:hover {
+  transform: scale(102%);
+}
+
+.checked {
+  transform: scale(102%);
+  box-shadow: black 0 8px 8px 0;
+}
+
+.progress-txt {
+  width: 100%;
+  font-size: 13px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.loading-circle {
+  margin-left: 10px;
+  height: 20px;
+}
+
+#photo-component:hover + #photo-options {
+  display: flex;
+}
+
+#photo-options {
+  position: absolute;
+  top: 0;
+  height: 30px;
+  width: 200px;
+  background: rgb(31, 31, 31);
+  display: none;
+}
+
+#photo-options:hover {
+  display: flex;
+}
+
+.selected-status {
+  margin-left: auto;
+}
+
+.checkbox {
+  display: none;
+}
+
+.btn {
+  height: 35px;
+  font-size: 19px;
+  padding: 4px;
+  margin: 0px;
+  border: none;
+}
+.btn:focus {
+  /* when user tabs (or other focus event) buttons will slightly brighten */
+  filter: brightness(102%);
+  outline: none;
+}
+
+.btn:hover {
+  filter: brightness(102%);
+  border: none;
+}
+.btn:visited {
+  filter: brightness(100%);
+  border: none;
+}
+
+/* SUBMIT button */
+.btn-primary {
+  padding: 6px 18px;
+  display: inline-block;
+  font-size: 15px;
+  color: white;
+  background-color: #859ad4;
+  margin-right: 20px;
+}
+.btn-primary:hover {
+  background-color: #9fb3eb;
+}
+
+/* CANCEL buttons */
+.btn-default {
+  padding: 6px 12px;
+  font-size: 15px;
+  color: white;
+  background-color: rgb(31, 31, 31);
+}
+.btn-default:hover {
+  background-color: rgb(71, 71, 71);
+}
+
+.clear-all-btn {
+  margin-left: auto;
+  padding: 6px 12px;
+  font-size: 15px;
+  background:rgb(255, 255, 255);
+  box-shadow: rgb(194, 194, 194) .5px .5px 1px 1px;
+}
+
+.remove-btn {
+  background: rgb(31, 31, 31);
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+.photo-btn {
+  border-radius: 0;
+  height: 30px;
+  background: rgb(31, 31, 31);
+}
+
+.check-icon {
+  font-size: 13px;
+}
+
+.unhide-flex {
+  display: flex !important;
+}
+

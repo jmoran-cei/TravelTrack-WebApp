@@ -1,0 +1,42 @@
+.photo-container {
+  height: 100%;
+  width: 200px;
+}
+
+.trip-photo {
+  object-fit: cover;
+  text-align: center;
+  height: 100%;
+  width: 200px;
+  background-color: gray;
+}
+
+.bottom-txt-container:hover {
+  display: block;
+}
+
+.bottom-txt-container {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  height: 40px;
+  width: 200px;
+  background: linear-gradient(transparent, black);
+}
+
+.trip-photo:hover + .bottom-txt-container {
+  display: block;
+}
+
+.added-by {
+  margin-left: 10px;
+  position: absolute;
+  bottom: 0;
+  color: white;
+  font-size: 11px;
+
+  /* for text that's too long*/
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

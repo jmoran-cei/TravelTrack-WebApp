@@ -13,6 +13,8 @@ import {
 } from '.';
 import { FileSizePipe } from '../shared';
 import { SharedModule } from '../shared/module/shared.module';
+import { TripPhotosListComponent } from './trip-photos-list/trip-photos-list.component';
+import { TripPhotoComponent } from './trip-photo/trip-photo.component';
 
 @NgModule({
   imports: [
@@ -29,6 +31,8 @@ import { SharedModule } from '../shared/module/shared.module';
     TripPhotosComponent,
     TripSidebarOptionComponent,
     FileSizePipe,
+    TripPhotosListComponent,
+    TripPhotoComponent,
   ],
   providers: [],
 })
