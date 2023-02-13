@@ -79,13 +79,12 @@ export class TripPhotoService {
       let savedFileName = `${tripId}-${file.name}`;
       var data = new FormData();
 
-      //update : instead of tripid parameter inject trip and see its trip.photos.length then use that + Files.length to generate a index for file (helps make sure filenames are unique in blob storage)
       data.append(`image-${savedFileName}`, file, savedFileName); // set file
-      data.append('fileName', savedFileName); // set file
+      data.append('fileName', savedFileName);
       data.append('fileType', file.type);
-      data.append('tripId', `${tripId}`); //set id prop
-      data.append('addedByUser', this.auth.currentUser.username); // set alt prop
-      data.append('alt', file.name); // set alt prop
+      data.append('tripId', `${tripId}`);
+      data.append('addedByUser', this.auth.currentUser.username);
+      data.append('alt', file.name);
 
       formDataArray.push(data);
     }

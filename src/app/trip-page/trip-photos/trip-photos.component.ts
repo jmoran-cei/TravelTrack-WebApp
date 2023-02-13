@@ -23,9 +23,7 @@ export class TripPhotosComponent implements OnInit {
   pendingFiles$: Observable<PendingFile[]> = of([]);
   tripPhotos$: Observable<TripPhoto[]> = of([]);
   requiredFileType: string = '.jpg, .png';
-  progressMessage: string = '';
-  hideProgress: boolean = true;
-  disableUploadBtn: boolean = true;
+  progressMessage: Observable<string> = of(' ');
 
   constructor(
     private route: ActivatedRoute,
@@ -41,11 +39,16 @@ export class TripPhotosComponent implements OnInit {
     this.tripPhotos$ = of(this.trip.photos);
   }
 
+  disableUploadButton(progressMsg: string) {
+    if (progressMsg === ' ' || progressMsg === 'Adding files...' || progressMsg === 'Uploading...') {
+      return true
+    }
+    return false
+  }
+
   // user selected files from device ==> add files to pending images array
   onFileSelected(event: Event): void {
-    this.progressMessage = 'Adding files...';
-    this.hideProgress = false;
-    this.changeDetection.detectChanges();
+    this.progressMessage = of('Adding files...');
 
     this.pendingFiles$
       .pipe(
@@ -74,7 +77,7 @@ export class TripPhotosComponent implements OnInit {
       .subscribe((files) => {
         if (files.length === 0) {
           // if no files selected: reset progress message
-          this.progressMessage = '';
+          this.progressMessage = of(' ');
         }
         this.uploadDocuments(files);
       });
@@ -115,17 +118,12 @@ export class TripPhotosComponent implements OnInit {
 
     // Wait for all promises to be resolved
     await Promise.all(filePromises);
-    this.progressMessage = 'Files are ready for upload!';
-    this.hideProgress = true;
-    this.disableUploadBtn = false;
-    this.changeDetection.detectChanges();
+    this.progressMessage = of('Files are ready for upload!');
   };
 
   // upload all pending files
   onUpload(): void {
-    this.progressMessage = 'Uploading...';
-    this.hideProgress = false;
-    this.changeDetection.detectChanges();
+    this.progressMessage = of('Uploading...');
 
     this.pendingFiles$
     .pipe(
@@ -186,7 +184,7 @@ export class TripPhotosComponent implements OnInit {
           this.pendingFiles$ = of(result[0] as PendingFile[]);
 
           // update progress message for UI
-          this.progressMessage = result[1] as string;
+          this.progressMessage = of(result[1] as string);
 
           // return updated photos
           return this.tripPhotoService.getUpdatedTripPhotos(this.trip.id);
@@ -197,14 +195,12 @@ export class TripPhotosComponent implements OnInit {
       // return trip photos (at least one response was successful and validation passed)
     .subscribe((result: (boolean | TripPhoto[])) => {
       if (result as boolean === false) {
-        this.progressMessage = 'Upload failed. Try again.';
+        this.progressMessage = of('Upload failed. Try again.');
       }
       else {
         this.tripPhotos$ = of(result as TripPhoto[]);
+        this.changeDetection.detectChanges(); // needed for updated photos to render
       }
-      this.hideProgress = true;
-      this.changeDetection.detectChanges();
-      return;
     });
   }
 
@@ -215,10 +211,8 @@ export class TripPhotosComponent implements OnInit {
       .removeFile(this.changeDetection, this.pendingFiles$, file)
       .subscribe((isLastFile) => {
         if (isLastFile) {
-          this.progressMessage = '';
-          this.disableUploadBtn = true;
+          this.progressMessage = of(' ');
         }
-        this.changeDetection.detectChanges();
       });
   }
 
@@ -226,9 +220,7 @@ export class TripPhotosComponent implements OnInit {
   removeAllPendingFiles(): void {
     this.pendingFiles$.pipe(take(1)).subscribe((pendingFiles) => {
       pendingFiles.length = 0;
-      this.disableUploadBtn = true;
-      this.progressMessage = '';
-      this.changeDetection.detectChanges();
+      this.progressMessage = of(' ');
     });
   }
 }
