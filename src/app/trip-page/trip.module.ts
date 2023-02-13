@@ -9,8 +9,13 @@ import {
   TripToDoComponent,
   tripRoutes,
   TripSidebarOptionComponent,
+  TripPhotosComponent,
 } from '.';
+import { FileSizePipe } from '../shared';
 import { SharedModule } from '../shared/module/shared.module';
+import { TripPhotosListComponent } from './trip-photos-list/trip-photos-list.component';
+import { TripPhotoComponent } from './trip-photo/trip-photo.component';
+import { TripPhotoFullViewComponent } from './trip-photo-full-view/trip-photo-full-view.component';
 
 @NgModule({
   imports: [
@@ -24,7 +29,12 @@ import { SharedModule } from '../shared/module/shared.module';
     TripPageComponent,
     TripSidebarComponent,
     TripToDoComponent,
+    TripPhotosComponent,
     TripSidebarOptionComponent,
+    FileSizePipe,
+    TripPhotosListComponent,
+    TripPhotoComponent,
+    TripPhotoFullViewComponent,
   ],
   providers: [],
 })

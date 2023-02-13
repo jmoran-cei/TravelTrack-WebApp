@@ -47,6 +47,9 @@ import {
   MembersListComponent,
 } from './trip-page';
 import { SharedModule } from './shared/module/shared.module';
+import {
+  TripPhotoService,
+} from './shared';
 
 @NgModule({
   declarations: [
@@ -88,6 +91,7 @@ import { SharedModule } from './shared/module/shared.module';
     UserService,
     AuthService,
     DestinationsService,
+    TripPhotoService,
     AuthGuard,
     TripListResolver,
     TripResolver,

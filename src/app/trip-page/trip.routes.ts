@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { TripOverviewComponent, TripToDoComponent } from '.';
+import { TripOverviewComponent, TripToDoComponent, TripPhotosComponent } from '.';
 import { EditTripComponent } from '../trips';
 import { AuthGuard } from '../user';
 
@@ -12,4 +12,5 @@ export const tripRoutes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'todo', component: TripToDoComponent, canActivate: [AuthGuard] },
+  { path: 'photos', component: TripPhotosComponent, canActivate: [AuthGuard] },
 ];

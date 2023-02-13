@@ -1,0 +1,66 @@
+<div class="container-fluid page">
+  <h1 class="font700">{{trip.title}}</h1>
+  <h2>Photos</h2>
+
+  <!-- entire upload file section -->
+  <div class="alert alert-info upload-container">
+    <!-- progress message & buttons -->
+    <ng-container *ngIf="(progressMessage | async) as msg">
+
+      <div class="pending-btns">
+        <!-- hidden file select element -->
+        <input #fileSelect id="file-select" type="file" (change)="onFileSelected($event)" [accept]="requiredFileType"
+          multiple>
+
+        <!-- trigger file select -->
+        <button class="btn btn-primary" type="button" (click)="fileSelect.click()">Add From Device</button>
+
+        <!-- files progress message -->
+        <div class="progress-txt " [title]="msg">
+          {{msg}}
+
+          <!-- loading symbol -->
+          <img *ngIf="msg === 'Adding files...' || msg === 'Uploading...'" class="loading-circle"
+            src="assets\images\general\loading-circle.gif" />
+        </div>
+
+        <!-- clear files & upload buttons -->
+        <button class="btn clear-all-btn" type="button" (click)="removeAllPendingFiles()"
+          *ngIf="!disableUploadButton(msg)">Clear</button>
+        <button class="btn btn-default upload-btn" type="button" (click)="onUpload()"
+          [disabled]="disableUploadButton(msg)">Upload</button>
+
+      </div>
+    </ng-container>
+
+    <!-- Pending Image Files -->
+    <div>
+      <ng-container *ngFor="let file of (pendingFiles$ | async)" #files>
+
+        <div class="pending-upload alert">
+          <!-- file image -->
+          <img class="pending-upload-img" [src]="file.ImgUrl">
+
+          <!-- file name -->
+          <p class="pending-upload-txt" title="the file name goes here">{{file?.File?.name}}</p>
+
+          <!-- file size -->
+          <p class="pending-upload-size">{{ file?.File?.size | fileSize }}</p>
+
+          <!-- remove pending file -->
+          <button class="btn remove-btn" type="button" (click)="removePendingFile(file.File)">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+
+        <!-- file error msg -->
+        <div class="alert alert-danger" *ngIf="file?.ErrorMessage !== ''">
+          <p>{{file.ErrorMessage}}</p>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- Trip Photo List -->
+  <app-trip-photos-list [tripPhotos$]="this.tripPhotos$"></app-trip-photos-list>
+</div>

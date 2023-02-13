@@ -1,0 +1,163 @@
+h1 {
+  margin-top: 30px;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+p {
+  margin-bottom: 0px;
+}
+
+.page {
+  margin-bottom: 70px;
+}
+
+.alert-info {
+  min-height: 100px;
+  /* display: flex; */
+  margin: 50px 0;
+  padding: 25px 40px;
+  color: rgb(31, 31, 31);
+  background-color: #fff;
+  box-shadow: 1px 1px 10px #3792e123;
+  border: none;
+}
+
+.upload-container {
+  padding: 30px 40px;
+}
+
+
+#file-select {
+  display: none;
+}
+
+.pending-btns {
+  display: flex;
+  align-items: center;
+  height: 35px;
+}
+
+.progress-txt {
+  width: 100%;
+  font-size: 13px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.loading-circle {
+  margin-left: 10px;
+  height: 20px;
+}
+
+.pending-upload {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  padding: 15px 20px;
+  background: rgb(237, 237, 237);
+}
+
+.bi {
+  vertical-align: -2px;
+}
+
+.bi-trash {
+  font-size: 20px;
+}
+
+.pending-upload-img {
+  max-width: 60px;
+  max-height: 60px;
+}
+
+.pending-upload-txt {
+  margin: 0 3%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pending-upload-size {
+  margin-left: auto;
+}
+
+/* ------ */
+
+.btn {
+  height: 35px;
+  font-size: 19px;
+  padding: 4px;
+  margin: 0px;
+  border: none;
+}
+.btn:focus {
+  /* when user tabs (or other focus event) buttons will slightly brighten */
+  filter: brightness(102%);
+}
+.btn:hover {
+  filter: brightness(102%);
+  border: none;
+}
+.btn:visited {
+  filter: brightness(100%);
+  border: none;
+}
+
+/* icon buttons */
+.btn-secondary {
+  border: none;
+  background-color: transparent;
+}
+.btn-secondary:hover {
+  border: none;
+  background-color: transparent;
+}
+.btn-secondary:active {
+  border: none;
+  box-shadow: none;
+  color: #859ad4;
+}
+
+/* Add From Device button */
+.btn-primary {
+  padding: 6px 18px;
+  display: inline-block;
+  font-size: 15px;
+  color: white;
+  background-color: #859ad4;
+  margin-right: 20px;
+}
+.btn-primary:hover {
+  background-color: #9fb3eb;
+}
+
+/* Upload button */
+.btn-default {
+  padding: 6px 12px;
+  font-size: 15px;
+  color: white;
+  background-color: rgb(31, 31, 31);
+}
+.btn-default:hover {
+  background-color: rgb(71, 71, 71);
+}
+
+.remove-btn {
+  margin-left: 3%;
+  height: 35px;
+}
+
+.clear-all-btn {
+  margin-left: auto;
+  padding: 6px 12px;
+  font-size: 15px;
+}
+
+.upload-btn {
+  margin-left: 3%;
+}

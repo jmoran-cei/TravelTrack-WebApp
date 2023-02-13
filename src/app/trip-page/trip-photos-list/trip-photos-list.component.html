@@ -1,0 +1,61 @@
+<ng-container *ngIf="(tripPhotos$ | async)!.length>0">
+
+    <!-- progress status & buttons -->
+    <div class="photo-list-top-section">
+      <!-- progress message for photo(s) removal -->
+      <div class="progress-txt" [title]="progressMessage$ | async">
+        {{progressMessage$ | async}}
+
+        <!-- loading symbol -->
+        <img [hidden]="(progressMessage$ | async) !== 'Removing photos...'" class="loading-circle" src="assets\images\general\loading-circle.gif" />
+    </div>
+
+    <!-- select all / clear selection -->
+    <button class="btn clear-all-btn" type="button"
+    (click)="selectAll()">{{ (toggleSelectAll$ | async)  && (selectedCount$ | async) !== 0 ? "Clear Selection" : "Select All" }}
+  </button>
+
+  <!-- delete selected -->
+  <button class="btn btn-default remove-btn" type="button" [disabled]="disableDeleteButton$ | async" (click)="removePhotos()"><i class="bi bi-trash"></i></button>
+
+  </div>
+
+  <!-- list of photos -->
+  <div class="container-fluid">
+
+    <div class="col-xs-12 photo-list">
+      <ng-container *ngFor="let photo of (tripPhotos$ | async); let i = index" #photos>
+
+        <!-- photo container -->
+        <div class="contain" [class.checked]="photoselect.checked">
+
+          <!-- trip-photo component -->
+          <app-trip-photo id="photo-component" [photo]="photo" (click)="photoselect.click()"></app-trip-photo>
+
+          <!-- top bar in photo container -->
+          <div id="photo-options" [class.unhide-flex]="photoselect.checked">
+
+            <!-- not displayed: checkbox -->
+            <input #photoselect [id]="photo?.fileName" class="checkbox" type="checkbox" (click)="select();"/>
+
+            <!-- full view icon -->
+            <button class="btn btn-default photo-btn full-view-icon" (click)="displayFullViewImg(photo, i)"><i class="bi bi-fullscreen"></i></button>
+
+            <!-- selected status -->
+            <div class="selected-status">
+              <button class="btn btn-default photo-btn check-icon" type="button" (click)="photoselect.click()">
+                <!-- not selected icon -->
+                <i class="bi bi-square" *ngIf="!photoselect.checked"></i>
+                <!-- selected icon-->
+                <i class="bi bi-check2-square" *ngIf="photoselect.checked"></i>
+              </button>
+            </div>
+          </div>
+
+      </div>
+    </ng-container>
+    </div>
+  </div>
+
+  <app-trip-photo-full-view [displayFullView$]="displayFullView$" [displayedPhoto$]="displayedFullPhoto$" [photos$]="tripPhotos$" [currentIndex$]="displayedFullPhotoIndex$"></app-trip-photo-full-view>
+</ng-container>

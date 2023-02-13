@@ -1,6 +1,4 @@
-import { User } from 'src/app/user';
-import { Destination } from './destination.model';
-import { ToDo } from './toDo.model';
+import { Destination, ToDo, TripPhoto, User } from '..';
 
 export interface Trip {
   id: number;
@@ -11,5 +9,6 @@ export interface Trip {
   destinations: Destination[];
   members: User[];
   toDo: ToDo[];
+  photos: TripPhoto[];
   imgURL: string;
 }

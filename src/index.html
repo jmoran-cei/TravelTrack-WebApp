@@ -13,8 +13,12 @@
 
 <body>
   <app-travel-app></app-travel-app>
+  <div id="empty"></div>
+  <script> // have to continue to use js lib for current autocomplete implementation to work correctly
+    function initMap() { var map = new google.maps.Map(document.getElementById('empty')); }
+  </script>
   <script type="text/javascript" async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHFf5atq9RqiJZ41TrepX47Ub2_G_Wm00&libraries=places">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMuKb1ptyxzMNRS6RCyfcRZiPyOSQHfog&libraries=places&callback=initMap">
     </script>
 </body>
 

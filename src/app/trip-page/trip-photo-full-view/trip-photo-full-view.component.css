@@ -1,0 +1,110 @@
+
+.full-view-page {
+  /* right below navbar */
+  z-index: 1;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background: rgba(0,0,0,0.5);
+}
+
+.full-view-top-section {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  font-size: 18px;
+}
+
+.bi-x {
+  font-size: 20px;
+  margin-left: -2px;
+}
+
+.x-btn {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  height: 40px;
+  width: 40px;
+  background: rgba(0,0,0,.9);
+}
+
+.left-btn {
+  position: absolute;
+  left: 50px;
+  height: 40px;
+  width: 40px;
+  background: rgba(0,0,0,.9);
+}
+
+.right-btn {
+  position: absolute;
+  right: 50px;
+  height: 40px;
+  width: 40px;
+  background: rgba(0,0,0,.9);
+}
+
+.full-view-img-container {
+  height: 60%;
+  width: 100%;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.full-view-img {
+  max-height: 100%;
+  max-width: auto;
+  min-height: 40px;
+  min-width: 40px;
+  object-fit: contain;
+  align-self: center;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  color: white;
+  text-align: center;
+}
+
+.btn {
+  /* height: 35px; */
+  font-size: 19px;
+  padding: 4px;
+  margin: 0px;
+  border: none;
+}
+.btn:focus {
+  /* when user tabs (or other focus event) buttons will slightly brighten */
+  filter: brightness(102%);
+  outline: none;
+}
+
+.btn:hover {
+  filter: brightness(102%);
+  border: none;
+}
+.btn:visited {
+  filter: brightness(100%);
+  border: none;
+}
+
+/* close full view button */
+.btn-default {
+  padding: 6px 12px;
+  font-size: 15px;
+  color: white;
+  background-color: rgb(31, 31, 31);
+}
+.btn-default:hover {
+  background-color: rgb(71, 71, 71);
+}

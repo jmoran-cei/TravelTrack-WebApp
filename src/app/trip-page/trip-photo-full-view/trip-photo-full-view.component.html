@@ -1,0 +1,36 @@
+<!-- display full image -->
+<ng-container *ngIf="(displayFullView$ | async)">
+
+  <div class="full-view-page">
+    <ng-container *ngIf="(displayedPhoto$ | async) as photo">
+      <div class="full-view-top-section">
+        <!-- photo details -->
+        <div>
+          <p><i class="bi bi-card-image"></i> {{photo?.alt}}</p>
+          <p><i class="bi bi-person"></i> {{photo?.addedByUser}}</p>
+        </div>
+
+        <!-- close out button -->
+        <button class="btn btn-default x-btn" type="button" (click)="hideFullViewImg()"><i class="bi bi-x"></i></button>
+        <button class="btn btn-default x-btn" type="button" (click)="hideFullViewImg()"><i class="bi bi-x"></i></button>
+      </div>
+
+      <div class="full-view-img-container">
+        <!-- left arrow -->
+        <button class="btn btn-default left-btn" type="button" (click)="nextImage(-1)"
+          *ngIf="(currentIndex$ | async) !== 0">
+          <i class="bi bi-arrow-left"></i>
+        </button>
+
+        <!-- displayed photo -->
+        <img class="full-view-img" [src]="photo?.path" [alt]="photo?.alt">
+
+        <!-- right arrow -->
+        <button class="btn btn-default right-btn" type="button" (click)="nextImage(1)"
+          *ngIf="(currentIndex$ | async) !== (photos$ | async)!.length - 1">
+          <i class="bi bi-arrow-right"></i>
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>
