@@ -1,61 +1,54 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subject, take } from 'rxjs';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { mergeMap, Observable, of, take } from 'rxjs';
 import { TripPhoto } from 'src/app/shared';
 
 @Component({
   selector: 'app-trip-photo-full-view',
   templateUrl: './trip-photo-full-view.component.html',
-  styleUrls: ['./trip-photo-full-view.component.css']
+  styleUrls: ['./trip-photo-full-view.component.css'],
 })
-export class TripPhotoFullViewComponent implements OnChanges {
-  initTrip: TripPhoto = {
-    id: '',
-    tripId: 0,
-    fileName: '',
-    fileType: '',
-    path: '',
-    addedByUser: '',
-    alt: '',
-  }
-  @Input() displayFullView$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  @Input() photos$?: Observable<TripPhoto[]>;
-  @Input() displayedPhoto$?: BehaviorSubject<TripPhoto> = new BehaviorSubject(this.initTrip);
-  @Input() currentIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(-1);
-  photosArrayLength?: number;
+export class TripPhotoFullViewComponent {
+  @Input() displayFullView$!: Observable<boolean>;
+  @Input() photos$: Observable<TripPhoto[]> = of([]);
+  @Input() displayedPhoto$!: Observable<TripPhoto>;
+  @Input() currentIndex$!: Observable<number>;
 
-  get displayedPhoto() {
-    return this.displayedPhoto$?.getValue();
-  }
-
-  get currentIndex() {
-    return this.currentIndex$?.getValue()
-  }
 
   constructor(
     private changeDetection: ChangeDetectorRef
   ) { }
 
-  ngOnChanges(): void {
-    this.photos$?.pipe(take(1)).subscribe((photos) => {
-      this.photosArrayLength = photos.length;
-    });
-  }
-
-
+  // closes the full view
   hideFullViewImg() {
-    this.displayFullView$.next(false);
-    this.changeDetection.detectChanges();
+    this.displayFullView$ = of(false);
+    this.changeDetection.detectChanges(); // updates UI for use case that photo(s) were deleted or uploaded before selecting
   }
 
+  // i = -1 --> display image to left
+  // i = 1 --> display image to the right
+  // updates displayedPhoto$ and currentIndex$
   nextImage(i: number) {
-    this.photos$?.pipe(take(1)).subscribe((photos) => {
-      if (i > (photos.length - 1) || i < 0) {
-        return
-      }
-      this.currentIndex$.next(i);
-      this.displayedPhoto$?.next(photos[i]);
-      this.changeDetection.detectChanges();
-    })
-  }
+    this.currentIndex$
+      .pipe(
+        mergeMap((currentIndex): Observable<number> => {
+          // increment or decrement currentIndex
+          currentIndex = currentIndex + i;
 
+          return this.photos$.pipe(
+            mergeMap((photos): Observable<any> => {
+              // update photo
+              this.displayedPhoto$ = of(photos[currentIndex]);
+
+              return of(currentIndex);
+            })
+          );
+        }),
+        take(1)
+      )
+      .subscribe((v) => {
+        // update index
+        this.currentIndex$ = of(v);
+        this.changeDetection.detectChanges(); // updates UI for use case that photo(s) were deleted or uploaded before selecting
+      });
+  }
 }

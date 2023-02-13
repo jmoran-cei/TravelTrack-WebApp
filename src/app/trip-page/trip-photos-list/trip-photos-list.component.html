@@ -3,7 +3,7 @@
     <!-- progress status & buttons -->
     <div class="photo-list-top-section">
       <!-- progress message for photo(s) removal -->
-      <div class="progress-txt" [title]="progressMessage$">
+      <div class="progress-txt" [title]="progressMessage$ | async">
         {{progressMessage$ | async}}
 
         <!-- loading symbol -->
@@ -39,7 +39,7 @@
             <input #photoselect [id]="photo?.fileName" class="checkbox" type="checkbox" (click)="select();"/>
 
             <!-- full view icon -->
-            <button class="btn btn-default photo-btn full-view-icon" (click)="displayFullViewImg(photo, i); detect()"><i class="bi bi-fullscreen"></i></button>
+            <button class="btn btn-default photo-btn full-view-icon" (click)="displayFullViewImg(photo, i)"><i class="bi bi-fullscreen"></i></button>
 
             <!-- selected status -->
             <div class="selected-status">

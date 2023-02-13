@@ -3,11 +3,10 @@ import {
   Component,
   ElementRef,
   Input,
-  OnInit,
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subject, take } from 'rxjs';
+import { BehaviorSubject, Observable, of, take } from 'rxjs';
 import { TripPhoto, TripPhotoService } from 'src/app/shared';
 
 @Component({
@@ -16,15 +15,6 @@ import { TripPhoto, TripPhotoService } from 'src/app/shared';
   styleUrls: ['./trip-photos-list.component.css'],
 })
 export class TripPhotosListComponent {
-  initTripPhoto: TripPhoto = {
-    id: '',
-    tripId: 0,
-    fileName: '',
-    fileType: '',
-    path: '',
-    addedByUser: '',
-    alt: '',
-  }
   @Input() tripPhotos$: Observable<TripPhoto[]> = of([]);
   @ViewChildren('photoselect') private photos!: QueryList<ElementRef>;
   progressMessage$: BehaviorSubject<string> = new BehaviorSubject('');
@@ -32,10 +22,11 @@ export class TripPhotosListComponent {
   toggleSelectAll$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   disableDeleteButton$: BehaviorSubject<boolean> = new BehaviorSubject(true);
 
+
   // values for trip-photo-full-view child component
-  displayFullView$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  displayedFullPhoto$?: BehaviorSubject<TripPhoto> = new BehaviorSubject(this.initTripPhoto);
-  displayedFullPhotoIndex$: BehaviorSubject<number> = new BehaviorSubject(-1);
+  displayFullView$: Observable<boolean> = of(false);
+  displayedFullPhoto$!: Observable<TripPhoto>;
+  displayedFullPhotoIndex$!: Observable<number>;
 
   constructor(
     private tripPhotoService: TripPhotoService,
@@ -65,15 +56,14 @@ export class TripPhotosListComponent {
   }
 
   displayFullViewImg(photo: TripPhoto, index: number): void {
-    this.displayedFullPhotoIndex$.next(index);
-    this.displayFullView$.next(true);
-    this.displayedFullPhoto$?.next(photo);
+    this.displayedFullPhotoIndex$ = of(index);
+    this.displayFullView$ = of(true);
+    this.displayedFullPhoto$ = of(photo);
     this.detect(); // updates UI for use case that photo(s) were deleted or uploaded before selecting
   }
 
   selectAll(): void {
     // if not all selected already --> select all
-
       if (this.toggleSelectAll$.getValue() === false) {
         for (let p of this.photos) {
           p.nativeElement.checked = true;
@@ -90,8 +80,7 @@ export class TripPhotosListComponent {
         this.toggleSelectAll$.next(false);
         this.disableDeleteButton$.next(true);
       }
-      this.detect() // updates UI for use case that photo(s) were deleted or uploaded before selecting
-
+      this.detect(); // updates UI for use case that photo(s) were deleted or uploaded before selecting
   }
 
   removePhotos(): void {
@@ -129,6 +118,7 @@ export class TripPhotosListComponent {
           next: (updatedTrip) => {
             // update trip photos
             this.tripPhotos$ = of(updatedTrip.photos);
+            this.detect();
 
             // UI changes
             this.selectedCount$.next(0);
@@ -138,7 +128,7 @@ export class TripPhotosListComponent {
 
             // clear message after a few seconds
             setTimeout(() => {
-              this.progressMessage$.next('');
+              this.progressMessage$.next(' ');
             }, 3000);
           },
           error: () => {
