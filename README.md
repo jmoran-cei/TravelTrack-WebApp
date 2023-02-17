@@ -85,7 +85,7 @@ This section outlines added/unadded features for this project. <u>Click on each 
             <li>Overview✔️</li>
             <li>To Do✔️</li>
             <li>Itinerary❌</li>
-            <li>Photos❌</li>
+            <li>Photos✔️</li>
             <li>Edit Trip✔️</li>
         </ul>
     <li>Trip List Scroll --- right-side panel❌</li>
@@ -102,11 +102,10 @@ This section outlines added/unadded features for this project. <u>Click on each 
             <li>add/remove/edit events for day by day basis❌</li>
             <li>Google autocomplete for addresses/places❌</li>
         </ul>
-    <li>Trip Photos❌</li>
+    <li>Trip Photos✔️</li>
         <ul>
-            <li>add multiple photo files and upload them❌</li>
-            <li>display photos list❌</li>
-            <li>drag + drop❌</li>
+            <li>add multiple photo files and upload them✔️</li>
+            <li>display photos list✔️</li>
         </ul>
     <li>Edit Trip✔️</li>
         <ul><li>
