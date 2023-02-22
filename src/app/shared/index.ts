@@ -9,6 +9,7 @@ export * from './models/destination.model';
 export * from './models/toDo.model';
 export * from './models/tripPhoto.model';
 export * from './models/pendingFile.model';
+export * from './models/idTokenClaims.model';
 
 // pipes
 export * from './pipes/byEarliestDateFirst.pipe'

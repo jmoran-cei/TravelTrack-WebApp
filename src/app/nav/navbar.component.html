@@ -9,59 +9,62 @@
     <!-- if user NOT LOGGED IN -->
     <ng-container *ngIf="(isLoggedIn | async) === false">
       <!-- User Icon & Login -->
-      <div class="box move-right" id="login">
-        <a [routerLink]="['/user/login']"><span class="glyphicon glyphicon-user"></span> Login</a>
+      <div class="box move-right" id="login" (click)="login()">
+        <a><span class="glyphicon glyphicon-user"></span> Login</a>
       </div>
 
     </ng-container>
 
     <!-- if user IS LOGGED IN -->
     <ng-container *ngIf="isLoggedIn | async">
+      <ng-container *ngIf="(currentUser$ | async) as currentUser">
 
-      <!-- trips tab -->
-      <div class="box move-right font400 margin">
-        <a [routerLink]="['/trips']" routerLinkActive="active"><span
-            class="glyphicon glyphicon-calendar"></span>Trips</a>
-      </div>
+        <!-- trips tab -->
+        <div class="box move-right font400 margin">
+          <a [routerLink]="['/trips']" routerLinkActive="active"><span
+              class="glyphicon glyphicon-calendar"></span>Trips</a>
+        </div>
 
-      <!-- user icon & menu || Hi, Username -->
-      <div class="dropdown box">
-        <!-- icon -->
-        <button class="btn drop-btn" id="personal-menu"><span class="glyphicon glyphicon-user"></span></button>
+        <!-- user icon & menu || Hi, Username -->
 
-        <!-- menu (adjusts based on length of first name)-->
-        <div class="dropdown-content" [ngClass]="{'dropdown-left': currentUser.firstName.length>9}">
-          <!-- if first name is long, dropdown is aligned left -->
-          <div class="user-details">
-            <!-- user profile picture -->
-            <div class="img-wrapper ">
-              <div class="move-down">
-                <img src="assets/images/general/profile-img.png" class="user-picture" />
+        <div class="dropdown box">
+          <!-- icon -->
+          <button class="btn drop-btn" id="personal-menu"><span class="glyphicon glyphicon-user"></span></button>
+
+          <!-- menu (adjusts based on length of first name)-->
+          <div class="dropdown-content" [ngClass]="{'dropdown-left': currentUser.firstName.length>9}">
+            <!-- if first name is long, dropdown is aligned left -->
+            <div class="user-details">
+              <!-- user profile picture -->
+              <div class="img-wrapper ">
+                <div class="move-down">
+                  <img src="assets/images/general/profile-img.png" class="user-picture" />
+                </div>
+              </div>
+              <div class="user-text-content">
+                <!-- First and Last Name -->
+                <div class="name">
+                  <p>{{currentUser.firstName}} {{currentUser.lastName}}</p>
+                </div>
+
+                <!-- Username -->
+                <div class="username">
+                  <p>{{currentUser.username}}</p>
+                </div>
               </div>
             </div>
-            <div class="user-text-content">
-              <!-- First and Last Name -->
-              <div class="name">
-                <p>{{currentUser.firstName}} {{currentUser.lastName}}</p>
-              </div>
-
-              <!-- Username -->
-              <div class="username">
-                <p>{{currentUser.username}}</p>
-              </div>
-            </div>
+            <a [routerLink]="['user/profile']">Edit Profile</a>
+            <a (click)="logoutUser()">Logout</a>
           </div>
-          <a [routerLink]="['user/profile']">Edit Profile</a>
-          <a (click)="logoutUser()">Logout</a>
-        </div>
 
-        <!-- "Hi, User" -->
-        <div class="hi-username">
-          <label for="personal-menu" class="font400">
-            Hi, {{adjustNameLength(currentUser.firstName,17)}}
-          </label>
+          <!-- "Hi, User" -->
+          <div class="hi-username">
+            <label for="personal-menu" class="font400">
+              Hi, {{adjustNameLength(currentUser.firstName,17)}}
+            </label>
+          </div>
         </div>
-      </div>
+      </ng-container>
     </ng-container>
 
   </nav>

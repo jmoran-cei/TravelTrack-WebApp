@@ -1,6 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter, Subscription } from 'rxjs';
+import { MsalService } from '@azure/msal-angular';
+import { AuthenticationResult } from '@azure/msal-browser';
+import { catchError, filter, Observable, Subscription, take } from 'rxjs';
+import { loginRequest } from '../auth-config';
+import { WebRequestService } from '../shared/services/web-request.service';
 import { User } from '../user';
 import { AuthService } from '../user/shared/authentication.service';
 
@@ -11,14 +15,20 @@ import { AuthService } from '../user/shared/authentication.service';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   isLoggedIn = this.auth.isLoggedIn$;
-  currentUser: User;
+  currentUser$: Observable<User>;
   path!: string;
   previousPaths: string[] = [''];
   isTripPage!: boolean;
   pathSubscription!: Subscription;
 
-  constructor(private auth: AuthService, private router: Router) {
-    this.currentUser = auth.currentUser;
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private msal: MsalService,
+    private webRequestService: WebRequestService
+  )
+  {
+    this.currentUser$ = auth.currentUser$;
   }
 
   ngOnInit() {
@@ -40,7 +50,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
           this.previousPaths[2] === 'profile'
         ) {
           // update user info on navbar
-          this.currentUser = this.auth.currentUser;
+          this.currentUser$ = this.auth.currentUser$;
         }
 
         this.previousPaths = paths;
@@ -58,7 +68,23 @@ export class NavbarComponent implements OnInit, OnDestroy {
     return name;
   }
 
+  login() {
+    this.msal
+      .loginRedirect(loginRequest)
+      .pipe(
+        catchError(
+          this.webRequestService.handleError<AuthenticationResult>(
+            'loginPopup()'
+          )
+        ),
+        take(1)
+      )
+      .subscribe();
+  }
+
   logoutUser() {
-    this.auth.logoutUser();
+    this.msal.logout().subscribe(() => {
+      this.auth.logoutUser();
+    });
   }
 }
