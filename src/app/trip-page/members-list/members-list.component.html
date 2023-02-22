@@ -4,8 +4,8 @@
     <div [ngClass]="{'frame' : props?.showFrame}">
       <!-- icon  -->
       <div *ngIf="props?.showIcon" class="icon">
-        <span *ngIf="member.username === auth.currentUser.username" class="bi bi-person-lines-fill"></span>
-        <span *ngIf="member.username !== auth.currentUser.username" class="bi bi-person-square"></span>
+        <span *ngIf="member.username === currentUserUsername" class="bi bi-person-lines-fill"></span>
+        <span *ngIf="member.username !== currentUserUsername" class="bi bi-person-square"></span>
       </div>
 
       <div class="member-info">

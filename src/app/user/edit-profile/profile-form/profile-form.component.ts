@@ -26,7 +26,7 @@ export class ProfileFormComponent implements OnInit {
   ) {}
 
   get user(): User {
-    return this.auth.currentUser;
+    return this.auth.getCurrentUser();
   }
   get firstName(): FormControl {
     return <FormControl>this.profileForm.get('firstName');
@@ -76,7 +76,7 @@ export class ProfileFormComponent implements OnInit {
         if (typeof user === 'object') {
           alert('You have successfully updated your personal information!');
           this.router.navigate(['/trips']);
-          this.auth.currentUser = user;
+          this.auth.setCurrentUser(user);
         } else {
           this.invalidProfileFormAttempt = true;
         }

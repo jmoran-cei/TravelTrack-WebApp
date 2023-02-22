@@ -16,7 +16,7 @@ export class TripResolver implements Resolve<any> {
   // verify if the user is a member of the trip
   checkUserIsMemberOfTrip(trip: Trip): boolean {
     for (let member of trip.members) {
-      if (member.username === this.auth.currentUser.username) return true;
+      if (member.username === this.auth.getCurrentUser().username) return true;
     }
 
     return false;

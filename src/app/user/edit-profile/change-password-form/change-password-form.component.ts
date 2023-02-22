@@ -81,7 +81,7 @@ export class ChangePasswordFormComponent implements OnInit {
         if (typeof user === 'object') {
           alert('You have successfully changed your password!');
           this.router.navigate(['/trips']);
-          this.auth.currentUser = user;
+          this.auth.setCurrentUser(user);
         } else {
           this.invalidPasswordFormAttempt = true;
         }
@@ -90,9 +90,9 @@ export class ChangePasswordFormComponent implements OnInit {
 
   passwordFormUserObject(): User {
     return {
-      firstName: this.auth.currentUser.firstName,
-      lastName: this.auth.currentUser.lastName,
-      username: this.auth.currentUser.username,
+      firstName: this.auth.getCurrentUser().firstName,
+      lastName: this.auth.getCurrentUser().lastName,
+      username: this.auth.getCurrentUser().username,
       password: this.newPassword.value,
     };
   }

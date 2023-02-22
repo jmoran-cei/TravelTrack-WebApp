@@ -412,13 +412,13 @@ export class TripFormComponent implements OnInit, OnDestroy {
     var userIsMember = false;
 
     for (let member of this.members.value) {
-      if (member.trim() === this.auth.currentUser.username) {
+      if (member.trim() === this.auth.getCurrentUser().username) {
         userIsMember = true;
       }
     }
 
     if (!userIsMember) {
-      this.members.push(new FormControl(this.auth.currentUser.username));
+      this.members.push(new FormControl(this.auth.getCurrentUser().username));
     }
   }
 
