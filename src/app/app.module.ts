@@ -6,7 +6,7 @@ import { TravelAppComponent } from './travel-app.component';
 import { appRoutes } from './routes';
 // import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 // import { DataService } from './shared/data/data.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { Error404Component } from './errors/404.component';
 import { NavbarComponent } from './nav/navbar.component';
@@ -47,9 +47,49 @@ import {
   MembersListComponent,
 } from './trip-page';
 import { SharedModule } from './shared/module/shared.module';
+import { TripPhotoService } from './shared';
+
 import {
-  TripPhotoService,
-} from './shared';
+  IPublicClientApplication,
+  PublicClientApplication,
+} from '@azure/msal-browser';
+import {
+  MsalModule,
+  MsalGuardConfiguration,
+  MSAL_INSTANCE,
+  MSAL_INTERCEPTOR_CONFIG,
+  MSAL_GUARD_CONFIG,
+  MsalInterceptorConfiguration,
+  MsalInterceptor,
+  MsalBroadcastService,
+  MsalService,
+  MsalGuard,
+} from '@azure/msal-angular';
+
+import {
+  msalConfig,
+  msalGuardConfig,
+  msalInterceptorConfig,
+} from './auth-config';
+import { MsalRedirectComponent } from './msal-redirect/msal-redirect.component';
+
+/**************************************
+ * MSAL SET UP
+ */
+export function MSALInstanceFactory(): IPublicClientApplication {
+  return new PublicClientApplication(msalConfig);
+}
+
+export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
+  return msalInterceptorConfig;
+}
+
+export function MSALGuardConfigFactory(): MsalGuardConfiguration {
+  return msalGuardConfig;
+}
+/*
+ * MSAL SET UP
+/**************************************/
 
 @NgModule({
   declarations: [
@@ -74,17 +114,15 @@ import {
     CalendarDateComponent,
     ToDoListComponent,
     MembersListComponent,
+    MsalRedirectComponent
   ],
   imports: [
     ReactiveFormsModule,
     BrowserModule,
     HttpClientModule,
-    // HttpClientInMemoryWebApiModule.forRoot(DataService, {
-    //   dataEncapsulation: false,
-    //   passThruUnknownUrl: true,
-    // }),
     RouterModule.forRoot(appRoutes),
     SharedModule,
+    MsalModule
   ],
   providers: [
     TripService,
@@ -97,7 +135,27 @@ import {
     TripResolver,
     TripDataService,
     { provide: 'canDeactivateTripForm', useValue: checkDirtyState },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MsalInterceptor,
+      multi: true
+    },
+    {
+      provide: MSAL_INSTANCE,
+      useFactory: MSALInstanceFactory
+    },
+    {
+      provide: MSAL_GUARD_CONFIG,
+      useFactory: MSALGuardConfigFactory
+    },
+    {
+      provide: MSAL_INTERCEPTOR_CONFIG,
+      useFactory: MSALInterceptorConfigFactory
+    },
+    MsalService,
+    MsalGuard,
+    MsalBroadcastService
   ],
-  bootstrap: [TravelAppComponent],
+  bootstrap: [TravelAppComponent, MsalRedirectComponent],
 })
 export class AppModule {}
