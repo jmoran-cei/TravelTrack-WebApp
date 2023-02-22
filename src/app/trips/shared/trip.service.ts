@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   catchError,
@@ -10,32 +10,27 @@ import {
   switchMap,
   take,
 } from 'rxjs';
+import { WebRequestService } from 'src/app/shared/services/web-request.service';
 import { AuthService, User } from 'src/app/user/shared';
 import { environment } from 'src/environments/environment';
 import { Trip } from '../../shared/models/trip.model';
 
 @Injectable()
 export class TripService {
-  tripsUrl =  environment.TravelTrackAPI + '/trips';
+  tripsUrl = 'https://localhost:7194/api' + '/trips';
   apiKey = environment.TravelTrackAPIKey;
 
-  headers = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'X-Api-Version': '1.0',
-      'X-Api-Key': this.apiKey,
-    }),
-  };
   PlacesService = new google.maps.places.PlacesService(
     document.getElementById('empty')! as HTMLDivElement
   );
 
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(private http: HttpClient, private auth: AuthService, private webRequestService: WebRequestService) {}
+
   // get all trips
   getTrips(): Observable<Trip[]> {
-    return this.http.get<Trip[]>(this.tripsUrl, this.headers).pipe(
+    return this.http.get<Trip[]>(this.tripsUrl, this.webRequestService.headers).pipe(
       map((trips) =>
-        this.filterTripsByUsername(trips, this.auth.currentUser.username)
+        this.filterTripsByUsername(trips, this.auth.getCurrentUser().username)
       ),
       switchMap((trips: Trip[]) => {
         if (trips.length > 0) {
@@ -52,7 +47,7 @@ export class TripService {
         return of(trips);
       }),
       retry(2),
-      catchError(this.handleError<Trip[]>('getTrips()', []))
+      catchError(this.webRequestService.handleError<Trip[]>('getTrips()', []))
     );
   }
 
@@ -70,7 +65,7 @@ export class TripService {
   getTrip(id: number): Observable<Trip> {
     const url = `${this.tripsUrl}/${id}`;
 
-    return this.http.get<Trip>(url, this.headers).pipe(
+    return this.http.get<Trip>(url, this.webRequestService.headers).pipe(
       switchMap((trip: Trip) =>
         // set trip image
         this.getTripImgURL(trip.destinations[0].id).pipe(
@@ -78,33 +73,31 @@ export class TripService {
         )
       ),
       retry(2),
-      catchError(this.handleError<Trip>('getTrip()'))
+      catchError(this.webRequestService.handleError<Trip>('getTrip()'))
     );
   }
 
   // create new trip
   createTrip(trip: Trip): Observable<Trip> {
-    return this.http.post<Trip>(this.tripsUrl, trip, this.headers).pipe(
-      catchError(this.handleError<Trip>('createTrip()'))
-    );
+    return this.http
+      .post<Trip>(this.tripsUrl, trip, this.webRequestService.headers)
+      .pipe(catchError(this.webRequestService.handleError<Trip>('createTrip()')));
   }
 
   // save an edited trip
   updateTrip(trip: Trip): Observable<Trip> {
     return this.http
-      .put<Trip>(`${this.tripsUrl}/${trip.id}`, trip, this.headers)
-      .pipe(
-        catchError(this.handleError<Trip>('createTrip()'))
-      );
+      .put<Trip>(`${this.tripsUrl}/${trip.id}`, trip, this.webRequestService.headers)
+      .pipe(catchError(this.webRequestService.handleError<Trip>('createTrip()')));
   }
 
   // delete an existing trip
   deleteTrip(id: number): Observable<Trip> {
     const url = `${this.tripsUrl}/${id}`;
 
-    return this.http.delete<Trip>(url, this.headers).pipe(
-      catchError(this.handleError<Trip>('createTrip()'))
-    );
+    return this.http
+      .delete<Trip>(url, this.webRequestService.headers)
+      .pipe(catchError(this.webRequestService.handleError<Trip>('createTrip()')));
   }
 
   sortByTitle(trips: Observable<Trip[]>): Observable<Trip[]> {
@@ -150,7 +143,6 @@ export class TripService {
           obs.next(imgUrl);
           obs.complete();
         } else {
-
           // if google has any photos for the given placeId
           if (placeResult.photos.length !== 0) {
             imgUrl = placeResult.photos[0].getUrl({
@@ -170,16 +162,5 @@ export class TripService {
         getGooglePhotoForTrip
       );
     });
-  }
-
-  // function for handling errors
-  private handleError<Trip>(
-    operation = 'operation',
-    result?: Trip
-  ): (error: any) => Observable<Trip> {
-    return (error: any): Observable<Trip> => {
-      console.error(error);
-      return of(result as Trip);
-    };
   }
 }
