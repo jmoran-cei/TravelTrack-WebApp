@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import { userRoutes } from './user.routes';
 import {
   EditProfileComponent,
-  LoginComponent,
   UserService,
   NewAccountComponent,
 } from './index';
@@ -33,7 +32,6 @@ import { ProfileFormComponent } from './edit-profile/profile-form/profile-form.c
   ],
   declarations: [
     EditProfileComponent,
-    LoginComponent,
     NewAccountComponent,
     ProfileFormComponent,
     ChangePasswordFormComponent,
