@@ -21,7 +21,7 @@
   <!-- show/hide 'CREATE ACCOUNT' based on iuser's logged-in status -->
   <ng-container *ngIf="(isLoggedIn | async) === false">
     <!-- 'CREATE ACCOUNT' button -->
-    <button id="create-account-btn" class="btn btn-primary" [routerLink]="['/user/new-account']">Create a TravelTrack
+    <button id="create-account-btn" class="btn btn-primary" (click)="loginSignUp()">Create a TravelTrack
       Account</button>
   </ng-container>
 

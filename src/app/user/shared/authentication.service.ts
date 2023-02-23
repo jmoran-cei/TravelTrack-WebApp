@@ -1,7 +1,8 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { BehaviorSubject, map, Observable, take } from 'rxjs';
+import { MsalService } from '@azure/msal-angular';
+import { AuthenticationResult } from '@azure/msal-browser';
+import { BehaviorSubject, catchError, map, Observable, take } from 'rxjs';
+import { loginRequest } from 'src/app/auth-config';
 import { WebRequestService } from 'src/app/shared/services/web-request.service';
 import { User } from '../../shared/models/user.model';
 import { UserService } from './user.service';
@@ -28,7 +29,7 @@ export class AuthService {
   );
   isLoggedIn$: Observable<boolean> = this.isLoggedIn.asObservable();
 
-  constructor(private router: Router, private userService: UserService, private webRequestService: WebRequestService) {}
+  constructor(private userService: UserService, private webRequestService: WebRequestService, private msal: MsalService) {}
 
   setCurrentUser(currentUser: User):void {
     this.currentUser.next(currentUser);
@@ -41,6 +42,7 @@ export class AuthService {
   setLoginStatus(status: boolean):void {
     this.isLoggedIn.next(status);
   }
+
 
   // OLD METHOD - will be deleted soon --- avoiding temporary errors during current development
   loginUser(username: string, password: string): Observable<boolean> {
@@ -62,7 +64,29 @@ export class AuthService {
   }
 
 
+  // login redirect to Azure AD B2C page
+  login() {
+    this.msal
+      .loginRedirect(loginRequest)
+      .pipe(
+        catchError(
+          this.webRequestService.handleError<AuthenticationResult>(
+            'loginPopup()'
+          )
+        ),
+        take(1)
+      )
+      .subscribe();
+  }
+
   // logout
+  logout() {
+    this.msal.logout().subscribe(() => {
+      this.logoutUser();
+    });
+  }
+
+  // reset auth service props
   logoutUser() {
     this.webRequestService.setAccessToken('');
     this.setLoginStatus(false);

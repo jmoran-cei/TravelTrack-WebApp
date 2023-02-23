@@ -65,6 +65,7 @@ a {
   font-size: 18px;
 }
 .box:hover > a {
+  cursor: pointer;
   color: #859ad4;
 }
 

@@ -1,10 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { MsalService } from '@azure/msal-angular';
-import { AuthenticationResult } from '@azure/msal-browser';
-import { catchError, filter, Observable, Subscription, take } from 'rxjs';
-import { loginRequest } from '../auth-config';
-import { WebRequestService } from '../shared/services/web-request.service';
+import { filter, Observable, Subscription, take } from 'rxjs';
 import { User } from '../user';
 import { AuthService } from '../user/shared/authentication.service';
 
@@ -24,8 +20,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private msal: MsalService,
-    private webRequestService: WebRequestService
   )
   {
     this.currentUser$ = auth.currentUser$;
@@ -69,22 +63,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   login() {
-    this.msal
-      .loginRedirect(loginRequest)
-      .pipe(
-        catchError(
-          this.webRequestService.handleError<AuthenticationResult>(
-            'loginPopup()'
-          )
-        ),
-        take(1)
-      )
-      .subscribe();
+    this.auth.login();
   }
 
   logoutUser() {
-    this.msal.logout().subscribe(() => {
-      this.auth.logoutUser();
-    });
+    this.auth.logout();
   }
 }

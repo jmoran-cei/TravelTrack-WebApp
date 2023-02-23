@@ -9,8 +9,8 @@
     <!-- if user NOT LOGGED IN -->
     <ng-container *ngIf="(isLoggedIn | async) === false">
       <!-- User Icon & Login -->
-      <div class="box move-right" id="login" (click)="login()">
-        <a><span class="glyphicon glyphicon-user"></span> Login</a>
+      <div class="box move-right" id="login">
+        <a (click)="login()"><span class="glyphicon glyphicon-user"></span> Login</a>
       </div>
 
     </ng-container>

@@ -10,4 +10,8 @@ export class HomePageComponent {
   isLoggedIn = this.auth.isLoggedIn$.pipe(take(1));
 
   constructor(public auth: AuthService) {}
+
+  loginSignUp() {
+    this.auth.login();
+  }
 }
