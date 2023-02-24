@@ -7,7 +7,7 @@ import {
   TripsListComponent,
 } from './trips';
 import { TripPageComponent, TripResolver } from './trip-page';
-import { AuthGuard } from './user/shared/auth.guard';
+import { MsalGuard } from '@azure/msal-angular';
 
 export const appRoutes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -15,19 +15,19 @@ export const appRoutes: Routes = [
     path: 'trips',
     component: TripsListComponent,
     resolve: { trips: TripListResolver },
-    canActivate: [AuthGuard],
+    canActivate: [ MsalGuard],
   },
   {
     path: 'trips/new',
     component: NewTripComponent,
-    canActivate: [AuthGuard],
+    canActivate: [MsalGuard],
     canDeactivate: ['canDeactivateTripForm'],
   },
   {
     path: 'trips/:id',
     component: TripPageComponent,
     resolve: { trip: TripResolver },
-    canActivate: [AuthGuard],
+    canActivate: [MsalGuard],
     runGuardsAndResolvers: 'always',
     loadChildren: () =>
       import('./trip-page/trip.module').then((m) => m.TripModule),

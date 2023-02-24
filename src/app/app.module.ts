@@ -27,7 +27,7 @@ import {
   EditTripComponent,
 } from './trips/index';
 
-import { UserService, AuthService, AuthGuard } from './user';
+import { UserService, AuthService } from './user';
 
 import {
   HomePageComponent,
@@ -130,7 +130,6 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     AuthService,
     DestinationsService,
     TripPhotoService,
-    AuthGuard,
     TripListResolver,
     TripResolver,
     TripDataService,

@@ -1,16 +1,16 @@
 import { Routes } from '@angular/router';
+import { MsalGuard } from '@azure/msal-angular';
 
 import {
   NewAccountComponent,
-  EditProfileComponent,
-  AuthGuard,
+  EditProfileComponent
 } from '.';
 
 export const userRoutes: Routes = [
   {
     path: 'profile',
     component: EditProfileComponent,
-    canActivate: [AuthGuard],
+    canActivate: [MsalGuard],
   },
   { path: 'new-account', component: NewAccountComponent },
 ];

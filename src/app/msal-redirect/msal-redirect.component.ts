@@ -27,7 +27,7 @@ export class MsalRedirectComponent implements OnInit, OnDestroy {
       .handleRedirectObservable()
       .subscribe((result) => {
         // ignore until auth result provided
-        if (result === undefined || result === null) {
+        if (!result) {
           return;
         }
 
@@ -50,7 +50,7 @@ export class MsalRedirectComponent implements OnInit, OnDestroy {
             .pipe(take(1))
             .subscribe((user) =>
               // welcome user to app
-              window.alert(
+              window.confirm(
                 `Welcome to Travel Track, ${user.firstName}! We're excited to help you track your journey.`
               )
             );
@@ -64,6 +64,7 @@ export class MsalRedirectComponent implements OnInit, OnDestroy {
     this.redirectSubscription.unsubscribe();
   }
 
+  // update user data
   userLoggedIn(user: User) {
     this.auth.setCurrentUser(user);
     this.auth.setLoginStatus(true);

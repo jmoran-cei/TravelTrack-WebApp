@@ -8,6 +8,7 @@ import {
 } from '@azure/msal-browser';
 import {
   BehaviorSubject,
+  catchError,
   filter,
   Observable,
   of,
@@ -37,15 +38,29 @@ export class WebRequestService {
   travelTrackAPIAccessToken$: Observable<string> =
     this.travelTrackAPIAccessToken.asObservable();
 
+  constructor(private broadcastService: MsalBroadcastService) {
+    if (localStorage.getItem('app.accessToken')) {
+      this.setAccessToken(localStorage.getItem('app.accessToken')!);
+    }
+  }
+
+  /****
+   * Access Token Methods
+   */
+
   getAccessToken(): string {
     return this.travelTrackAPIAccessToken.value;
   }
 
+  // saves access token in angular and session
   setAccessToken(token: string): void {
     this.travelTrackAPIAccessToken.next(token);
+    localStorage.setItem('app.accessToken', token);
+    this.updateAuthorizationHeader(token);
   }
 
-  updateAccessToken(): void {
+  // calls access token request and sets it to behvaior su
+  updateAccessToken() {
     this.aquireAccessToken().subscribe((result: EventMessage) => {
       let payload = result?.payload as AuthenticationResult;
       let token = payload.accessToken;
@@ -53,18 +68,21 @@ export class WebRequestService {
     });
   }
 
-  constructor(private broadcastService: MsalBroadcastService) {}
-
+  // request for access token
   aquireAccessToken(): Observable<EventMessage> {
     return this.broadcastService.msalSubject$.pipe(
       filter(
         (msg: EventMessage) => msg.eventType === EventType.ACQUIRE_TOKEN_SUCCESS
       ),
+      catchError(this.handleError<EventMessage>('aquireAccessToken()')),
       take(1)
     );
   }
 
-  // updateAccessToken()
+  /****
+   * Header Methods
+   */
+
   updateAuthorizationHeader(token: string): void {
     if (token !== undefined) {
       this.setAuthorizationHeader(`Bearer ${token}`);

@@ -11,21 +11,17 @@ import { AuthService } from '../user/shared/authentication.service';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   isLoggedIn = this.auth.isLoggedIn$;
-  currentUser$: Observable<User>;
+  currentUser$!: Observable<User>;
   path!: string;
   previousPaths: string[] = [''];
   isTripPage!: boolean;
   pathSubscription!: Subscription;
 
-  constructor(
-    private auth: AuthService,
-    private router: Router,
-  )
-  {
-    this.currentUser$ = auth.currentUser$;
-  }
+  constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit() {
+    this.currentUser$ = this.auth.currentUser$.pipe(take(1));
+
     this.pathSubscription = this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -55,6 +51,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.pathSubscription.unsubscribe();
   }
 
+  // cuts long name lengths with '...' to fit UI
   adjustNameLength(name: string, numChars: number) {
     if (name.length > numChars) {
       return name.substring(0, numChars) + '..';
@@ -62,10 +59,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
     return name;
   }
 
+  // redirect to Azure AD B2C login page
   login() {
     this.auth.login();
   }
 
+  // logout and redirect to /home
   logoutUser() {
     this.auth.logout();
   }

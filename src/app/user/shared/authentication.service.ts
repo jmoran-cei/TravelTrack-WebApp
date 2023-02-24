@@ -9,12 +9,15 @@ import { UserService } from './user.service';
 
 @Injectable()
 export class AuthService {
+  storedUsername: string | null = localStorage.getItem('app.user.username');
+  storedFirstName: string | null = localStorage.getItem('app.user.firstName');
+  storedLastName: string | null = localStorage.getItem('app.user.lastName');
   // current user
   currentUserInit: User = {
-    username: '',
-    password: '',
-    firstName: '',
-    lastName: '',
+    username: this.storedUsername ? this.storedUsername : '',
+    password: '', // deleting and reimplementing when updating API
+    firstName: this.storedFirstName ? this.storedFirstName : '',
+    lastName: this.storedLastName ? this.storedLastName : '',
   };
 
   // logged in user object
@@ -29,20 +32,72 @@ export class AuthService {
   );
   isLoggedIn$: Observable<boolean> = this.isLoggedIn.asObservable();
 
-  constructor(private userService: UserService, private webRequestService: WebRequestService, private msal: MsalService) {}
+  constructor(
+    private userService: UserService,
+    private webRequestService: WebRequestService,
+    private msal: MsalService
+  ) {
+    // if session data exists
+    if (localStorage.getItem('app.isLoggedIn') === 'true') {
+      this.setLoginStatus(true);
+      // update angular variables for session
+      if (this.updateAngularUserInfo()) {
+      } else {
+        this.sessionRestoreFailed();
+      }
+    } else {
+      this.setLoginStatus(false);
+    }
+  }
 
-  setCurrentUser(currentUser: User):void {
+  setCurrentUser(currentUser: User): void {
     this.currentUser.next(currentUser);
+    // store current user
+    localStorage.setItem('app.user.username', `${currentUser.username}`);
+    localStorage.setItem('app.user.firstName', `${currentUser.firstName}`);
+    localStorage.setItem('app.user.lastName', `${currentUser.lastName}`);
   }
 
   getCurrentUser(): User {
     return this.currentUser.value;
   }
 
-  setLoginStatus(status: boolean):void {
+  setLoginStatus(status: boolean): void {
     this.isLoggedIn.next(status);
+    if (status === false) {
+      localStorage.clear(); // clear session data
+    } else {
+      localStorage.setItem('app.isLoggedIn', 'true');
+    }
   }
 
+  // user re-opens tab / refreshes
+  // update angular user object
+  updateAngularUserInfo(): boolean {
+    // update user object
+    let username = localStorage.getItem('app.user.username');
+
+    if (username) {
+      this.userService.getUser(username).subscribe((user) => {
+        if (!user) {
+          this.sessionRestoreFailed();
+          return;
+        }
+        this.setCurrentUser(user);
+      });
+      return true;
+    }
+    return false;
+  }
+
+  // something went wrong trying to get correct session data
+  sessionRestoreFailed(): void {
+    this.setLoginStatus(false);
+    window.confirm(
+      'We had to log you out because something went wrong. You must login to start a new session.'
+    );
+    this.login();
+  }
 
   // OLD METHOD - will be deleted soon --- avoiding temporary errors during current development
   loginUser(username: string, password: string): Observable<boolean> {
@@ -63,31 +118,29 @@ export class AuthService {
     );
   }
 
-
   // login redirect to Azure AD B2C page
-  login() {
+  login(): void {
     this.msal
       .loginRedirect(loginRequest)
       .pipe(
+        take(1),
         catchError(
           this.webRequestService.handleError<AuthenticationResult>(
             'loginPopup()'
           )
-        ),
-        take(1)
+        )
       )
       .subscribe();
   }
 
   // logout
-  logout() {
-    this.msal.logout().subscribe(() => {
-      this.logoutUser();
-    });
+  logout(): void {
+    this.logoutUser();
+    this.msal.logout().subscribe();
   }
 
   // reset auth service props
-  logoutUser() {
+  logoutUser(): void {
     this.webRequestService.setAccessToken('');
     this.setLoginStatus(false);
     this.setCurrentUser({
