@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter, Observable, Subscription, take } from 'rxjs';
-import { User } from '../user';
+import { filter, Subscription, take } from 'rxjs';
+import { UserService } from '../user';
 import { AuthService } from '../user/shared/authentication.service';
 
 @Component({
@@ -11,17 +11,18 @@ import { AuthService } from '../user/shared/authentication.service';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   isLoggedIn = this.auth.isLoggedIn$;
-  currentUser$!: Observable<User>;
+  currentUser$ = this.auth.currentUser$;
   path!: string;
-  previousPaths: string[] = [''];
   isTripPage!: boolean;
   pathSubscription!: Subscription;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
-    this.currentUser$ = this.auth.currentUser$.pipe(take(1));
-
     this.pathSubscription = this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -32,18 +33,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
           // is on 'trips/:id' if, subpath is a number (valid trip id)
           this.isTripPage = !isNaN(paths[2] as any);
         else this.isTripPage = false;
-
-        // if user just navigated from /user/profile (to possibly edit their profile info)
-        if (
-          this.previousPaths.length === 3 &&
-          this.previousPaths[1] === 'user' &&
-          this.previousPaths[2] === 'profile'
-        ) {
-          // update user info on navbar
-          this.currentUser$ = this.auth.currentUser$;
-        }
-
-        this.previousPaths = paths;
       });
   }
 
@@ -67,5 +56,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   // logout and redirect to /home
   logoutUser() {
     this.auth.logout();
+  }
+
+  editProfile() {
+    this.userService.editProfile();
   }
 }

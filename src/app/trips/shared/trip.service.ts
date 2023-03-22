@@ -17,7 +17,7 @@ import { Trip } from '../../shared/models/trip.model';
 
 @Injectable()
 export class TripService {
-  tripsUrl = 'https://localhost:7194/api' + '/trips';
+  tripsUrl = environment.TravelTrackAPI + '/trips/v1';
   apiKey = environment.TravelTrackAPIKey;
 
   PlacesService = new google.maps.places.PlacesService(

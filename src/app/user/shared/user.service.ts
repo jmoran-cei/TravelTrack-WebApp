@@ -1,15 +1,18 @@
-import { HttpClient, HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of, retry, take, tap } from 'rxjs';
+import { MsalService } from '@azure/msal-angular';
+import { AuthenticationResult } from '@azure/msal-browser';
+import { catchError, map, Observable, of, retry, take } from 'rxjs';
+import { editProfileRequest } from 'src/app/auth-config';
 import { WebRequestService } from 'src/app/shared/services/web-request.service';
 import { environment } from 'src/environments/environment';
 import { User } from '.';
 
 @Injectable()
 export class UserService {
-  usersUrl = environment.TravelTrackAPI + '/users';
+  usersUrl = environment.TravelTrackAPI + '/users/v1';
 
-  constructor(private http: HttpClient, private webRequestService: WebRequestService) {}
+  constructor(private http: HttpClient, private webRequestService: WebRequestService, private msal: MsalService) {}
 
   // have to grab users this way in order to get them from angular web api (can only get by 'id' not by a 'username')
   users = this.http
@@ -22,7 +25,7 @@ export class UserService {
 
     return this.http
       .get<User>(url, this.webRequestService.headers)
-      .pipe(take(1), retry(2), catchError(this.webRequestService.handleError<User>('getUser()')), tap((v)=> {console.log(v)}));
+      .pipe(take(1), retry(2), catchError(this.webRequestService.handleError<User>('getUser()')));
   }
 
   // create new user account
@@ -58,5 +61,19 @@ export class UserService {
         }
       })
     );
+  }
+
+  editProfile(): void {
+    this.msal
+    .loginRedirect(editProfileRequest)
+    .pipe(
+      take(1),
+      catchError(
+        this.webRequestService.handleError<AuthenticationResult>(
+          'editProfile()'
+        )
+      )
+    )
+    .subscribe();
   }
 }

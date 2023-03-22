@@ -21,7 +21,7 @@ import { WebRequestService } from './web-request.service';
   providedIn: 'root',
 })
 export class TripPhotoService {
-  photosUrl = environment.TravelTrackAPI + '/trips'; // doesn't exist yet
+  photosUrl = environment.TravelTrackAPI + '/trips/v1'; // doesn't exist yet
 
   constructor(
     private http: HttpClient,
@@ -39,14 +39,14 @@ export class TripPhotoService {
   uploadPhotoFile(fd: FormData, tripId: number): Observable<Trip> {
     //update
     return this.http
-      .put<Trip>(`${this.photosUrl}/${tripId}/addphoto`, fd, this.webRequestService.headers)
+      .put<Trip>(`${this.photosUrl}/addphoto/${tripId}`, fd, this.webRequestService.headers)
       .pipe(catchError(this.webRequestService.handleError<Trip>('uploadImage()')));
   }
 
   // delete a trip photo
   deletePhotos(photos: TripPhoto[], tripId: number): Observable<Trip> {
     return this.http
-      .put<Trip>(`${this.photosUrl}/${tripId}/removephotos`, photos, this.webRequestService.headers)
+      .put<Trip>(`${this.photosUrl}/removephotos/${tripId}`, photos, this.webRequestService.headers)
       .pipe(catchError(this.webRequestService.handleError<Trip>('deleteImage()')));
   }
   // --------------------------------------

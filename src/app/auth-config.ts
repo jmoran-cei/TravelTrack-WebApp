@@ -1,4 +1,7 @@
-import { MsalGuardConfiguration, MsalInterceptorConfiguration } from '@azure/msal-angular';
+import {
+  MsalGuardConfiguration,
+  MsalInterceptorConfiguration,
+} from '@azure/msal-angular';
 import {
   LogLevel,
   Configuration,
@@ -6,7 +9,6 @@ import {
   InteractionType,
 } from '@azure/msal-browser';
 import { environment } from 'src/environments/environment';
-
 
 const isIE =
   window.navigator.userAgent.indexOf('MSIE ') > -1 ||
@@ -16,7 +18,8 @@ const isIE =
  * User Flows and Custom Policies for B2C application,
  ***********************************************************/
 export const b2cPolicies = {
-  names: { // User Flows
+  names: {
+    // User Flows
     signUpSignIn: 'B2C_1_SignUpSignIn',
     editProfile: 'B2C_1_ProfileEdit',
     passwordReset: 'B2C_1_PasswordReset',
@@ -36,14 +39,14 @@ export const b2cPolicies = {
     },
   },
   authorityDomain: 'TravelTrackApp.b2clogin.com',
-  scopes: [ // all scopes for full access to Travel Track API
+  scopes: [
+    // all scopes for full access to Travel Track API
     'https://TravelTrackApp.onmicrosoft.com/TravelTrack/api/Trips.Read',
     'https://TravelTrackApp.onmicrosoft.com/TravelTrack/api/Trips.Write',
     'https://TravelTrackApp.onmicrosoft.com/TravelTrack/api/User.Read',
     'https://TravelTrackApp.onmicrosoft.com/TravelTrack/api/User.Write',
   ],
 };
-
 
 /***********************************************************
  * MSAL:
@@ -54,8 +57,8 @@ export const msalConfig: Configuration = {
     clientId: environment.ADClientId,
     authority: b2cPolicies.authorities.signUpSignIn.authority,
     knownAuthorities: [b2cPolicies.authorityDomain], // Mark B2C tenant domain as trusted.
-    redirectUri: '/', // Points to window.location.origin. Registed URI on Azure portal/App Registration.
-    postLogoutRedirectUri: '/',
+    redirectUri: window.location.origin, // Points to window.location.origin. Registed URI on Azure portal/App Registration.
+    postLogoutRedirectUri: window.location.origin,
     //  navigateToLoginRequestUrl:true
   },
   cache: {
@@ -64,43 +67,39 @@ export const msalConfig: Configuration = {
   },
   system: {
     loggerOptions: {
-      loggerCallback(logLevel: LogLevel, message: string) {
-        // console.log(message); // still being used in dev
-      },
       logLevel: LogLevel.Verbose,
       piiLoggingEnabled: false,
     },
   },
 };
 
-
-
 /***********************************************************
  * Setup protectedResourceMap value
-***********************************************************/
+ ***********************************************************/
 const protectedResourceMap = new Map<string, Array<string>>();
-protectedResourceMap.set(
-  environment.TravelTrackAPI + '/trips',
-  b2cPolicies.scopes
-  );
+protectedResourceMap.set(environment.TravelTrackAPI, b2cPolicies.scopes);
 
 /***********************************************************
  * MSAL:
  * MsalInterceptorConfiguration object to be passed to MSAL instance on creation.
-***********************************************************/
+ ***********************************************************/
 export const msalInterceptorConfig: MsalInterceptorConfiguration = {
   interactionType: InteractionType.Redirect,
   protectedResourceMap,
 };
 
-
-
 /***********************************************************
  * Scopes will be prompted for user consent during sign-in.
  * By default, MSAL.js will add OIDC scopes (openid, profile, email) to any login request.
-***********************************************************/
+ ***********************************************************/
 export const loginRequest = {
-  scopes: ['email']
+  authority: b2cPolicies.authorities.signUpSignIn.authority,
+  scopes: b2cPolicies.scopes,
+};
+
+export const editProfileRequest = {
+  authority: b2cPolicies.authorities.editProfile.authority,
+  scopes: b2cPolicies.scopes,
 };
 
 /***********************************************************
@@ -111,5 +110,3 @@ export const msalGuardConfig: MsalGuardConfiguration = {
   interactionType: InteractionType.Redirect,
   authRequest: loginRequest,
 };
-
-

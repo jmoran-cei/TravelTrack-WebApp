@@ -10,6 +10,7 @@ export * from './models/toDo.model';
 export * from './models/tripPhoto.model';
 export * from './models/pendingFile.model';
 export * from './models/idTokenClaims.model';
+export * from './models/headers.model';
 
 // pipes
 export * from './pipes/byEarliestDateFirst.pipe'

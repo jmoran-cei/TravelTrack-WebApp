@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
-import { AuthenticationResult } from '@azure/msal-browser';
+import { AccountInfo, AuthenticationResult } from '@azure/msal-browser';
 import { BehaviorSubject, catchError, map, Observable, take } from 'rxjs';
 import { loginRequest } from 'src/app/auth-config';
 import { WebRequestService } from 'src/app/shared/services/web-request.service';
@@ -9,18 +9,10 @@ import { UserService } from './user.service';
 
 @Injectable()
 export class AuthService {
-  storedUsername: string | null = localStorage.getItem('app.user.username');
-  storedFirstName: string | null = localStorage.getItem('app.user.firstName');
-  storedLastName: string | null = localStorage.getItem('app.user.lastName');
-  // current user
-  currentUserInit: User = {
-    username: this.storedUsername ? this.storedUsername : '',
-    password: '', // deleting and reimplementing when updating API
-    firstName: this.storedFirstName ? this.storedFirstName : '',
-    lastName: this.storedLastName ? this.storedLastName : '',
-  };
+  // initialize user
+  currentUserInit: User = this.getUserData();
 
-  // logged in user object
+  // logged-in user object
   private currentUser: BehaviorSubject<User> = new BehaviorSubject<User>(
     this.currentUserInit
   );
@@ -37,29 +29,56 @@ export class AuthService {
     private webRequestService: WebRequestService,
     private msal: MsalService
   ) {
-    // if session data exists
-    if (localStorage.getItem('app.isLoggedIn') === 'true') {
+    // if user has an account logged-in in the cache
+    if (this.msal.instance.getAllAccounts().length > 0) {
       this.setLoginStatus(true);
-      // update angular variables for session
-      if (this.updateAngularUserInfo()) {
-      } else {
-        this.sessionRestoreFailed();
-      }
     } else {
       this.setLoginStatus(false);
     }
   }
 
-  setCurrentUser(currentUser: User): void {
-    this.currentUser.next(currentUser);
-    // store current user
-    localStorage.setItem('app.user.username', `${currentUser.username}`);
-    localStorage.setItem('app.user.firstName', `${currentUser.firstName}`);
-    localStorage.setItem('app.user.lastName', `${currentUser.lastName}`);
+  setCurrentUser(): void {
+    this.currentUser.next(this.getUserData());
   }
 
   getCurrentUser(): User {
     return this.currentUser.value;
+  }
+
+  getIdTokenClaims(accountInfo: AccountInfo) {
+    return accountInfo.idTokenClaims!;
+  }
+
+  // gets cached User data if it exists
+  // always has updated user data
+  getUserData(): User {
+    // check cache for local account(s)
+    let localAccounts: AccountInfo[] = this.msal.instance.getAllAccounts();
+    if (!localAccounts || localAccounts.length < 1) {
+      return {
+        username: '',
+        firstName: '',
+        lastName: '',
+        password: '',
+      } as User;
+    }
+
+    // sort to have most recently updated cached account version
+    localAccounts.sort((a: AccountInfo, b: AccountInfo) => {
+      let aClaims = this.getIdTokenClaims(a);
+      let bClaims = this.getIdTokenClaims(b);
+
+      return bClaims.auth_time! - aClaims.auth_time!;
+    });
+
+    let userInfo = localAccounts[0].idTokenClaims;
+
+    return {
+      username: userInfo?.emails![0],
+      firstName: (userInfo as any).given_name,
+      lastName: (userInfo as any).family_name,
+      password: 'implementation changed in upcoming commit', // changing frontend model
+    } as User;
   }
 
   setLoginStatus(status: boolean): void {
@@ -69,34 +88,6 @@ export class AuthService {
     } else {
       localStorage.setItem('app.isLoggedIn', 'true');
     }
-  }
-
-  // user re-opens tab / refreshes
-  // update angular user object
-  updateAngularUserInfo(): boolean {
-    // update user object
-    let username = localStorage.getItem('app.user.username');
-
-    if (username) {
-      this.userService.getUser(username).subscribe((user) => {
-        if (!user) {
-          this.sessionRestoreFailed();
-          return;
-        }
-        this.setCurrentUser(user);
-      });
-      return true;
-    }
-    return false;
-  }
-
-  // something went wrong trying to get correct session data
-  sessionRestoreFailed(): void {
-    this.setLoginStatus(false);
-    window.confirm(
-      'We had to log you out because something went wrong. You must login to start a new session.'
-    );
-    this.login();
   }
 
   // OLD METHOD - will be deleted soon --- avoiding temporary errors during current development
@@ -125,9 +116,7 @@ export class AuthService {
       .pipe(
         take(1),
         catchError(
-          this.webRequestService.handleError<AuthenticationResult>(
-            'loginPopup()'
-          )
+          this.webRequestService.handleError<AuthenticationResult>('login()')
         )
       )
       .subscribe();
@@ -141,13 +130,7 @@ export class AuthService {
 
   // reset auth service props
   logoutUser(): void {
-    this.webRequestService.setAccessToken('');
     this.setLoginStatus(false);
-    this.setCurrentUser({
-      username: '',
-      password: '',
-      firstName: '',
-      lastName: '',
-    });
+    this.setCurrentUser();
   }
 }
