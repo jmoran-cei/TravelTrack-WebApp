@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/shared';
-import { AuthService } from 'src/app/user';
+import { AuthService } from 'src/app/shared';
 
 @Component({
   selector: 'app-members-list',

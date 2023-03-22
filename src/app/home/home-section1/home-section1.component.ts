@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { take } from 'rxjs';
-import { AuthService } from 'src/app/user';
+import { AuthService } from 'src/app/shared';
 
 @Component({
   selector: 'app-home-section1',

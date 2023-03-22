@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { take } from 'rxjs';
-import { AuthService } from '../user/shared/authentication.service';
+import { AuthService } from '../shared/services/authentication.service';
 
 @Component({
   templateUrl: 'home-page.component.html',

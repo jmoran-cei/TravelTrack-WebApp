@@ -14,16 +14,15 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import { forkJoin, map, Observable, Subscription, take } from 'rxjs';
 import { datesInOrderValidator } from 'src/app/forms';
 import { DestinationsService } from 'src/app/forms/autocomplete/service/destinations.service';
 import { NavigationService, Trip } from 'src/app/shared';
 import { TripService } from '../../shared';
 import { NewTripComponent } from '../../.';
-import { AuthService, User, UserService } from 'src/app/user';
+import { AuthService, User, UserService } from 'src/app/shared';
 import { UsernameValidator } from 'src/app/forms/validators/userExists.validator';
-import { Member } from 'src/app/shared/models/member.model';
+import { Member } from 'src/app/shared';
 
 @Component({
   selector: 'app-trip-form',
@@ -63,7 +62,6 @@ export class TripFormComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private router: Router,
     private fb: FormBuilder,
     private tripComponent: NewTripComponent,
     private tripService: TripService,

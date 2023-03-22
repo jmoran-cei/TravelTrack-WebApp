@@ -4,7 +4,7 @@ import { MsalService } from '@azure/msal-angular';
 import { catchError, mergeMap, Observable, of, Subscription } from 'rxjs';
 import { b2cPolicies } from '../auth-config';
 import { IdTokenClaims } from '../shared';
-import { AuthService, User, UserService } from '../user';
+import { AuthService, User, UserService } from '../shared';
 
 @Component({
   selector: 'app-msal-redirect',

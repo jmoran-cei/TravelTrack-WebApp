@@ -15,7 +15,7 @@ export const appRoutes: Routes = [
     path: 'trips',
     component: TripsListComponent,
     resolve: { trips: TripListResolver },
-    canActivate: [ MsalGuard],
+    canActivate: [MsalGuard],
   },
   {
     path: 'trips/new',
@@ -34,9 +34,5 @@ export const appRoutes: Routes = [
   },
   { path: '404', component: Error404Component },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  {
-    path: 'user',
-    loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
-  },
   { path: '**', component: Error404Component }, // if page doesn't exist, display 404 page
 ];

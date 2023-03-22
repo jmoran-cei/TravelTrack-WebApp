@@ -27,8 +27,6 @@ import {
   EditTripComponent,
 } from './trips/index';
 
-import { UserService, AuthService } from './user';
-
 import {
   HomePageComponent,
   HomeSection1Component,
@@ -47,7 +45,7 @@ import {
   MembersListComponent,
 } from './trip-page';
 import { SharedModule } from './shared/module/shared.module';
-import { TripPhotoService } from './shared';
+import { AuthService, TripPhotoService, UserService } from './shared';
 
 import {
   IPublicClientApplication,
@@ -87,8 +85,6 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
 export function MSALGuardConfigFactory(): MsalGuardConfiguration {
   return msalGuardConfig;
 }
-/*
- * MSAL SET UP
 /**************************************/
 
 @NgModule({
@@ -114,7 +110,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     CalendarDateComponent,
     ToDoListComponent,
     MembersListComponent,
-    MsalRedirectComponent
+    MsalRedirectComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -122,7 +118,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     SharedModule,
-    MsalModule
+    MsalModule,
   ],
   providers: [
     TripService,
@@ -137,23 +133,23 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: MsalInterceptor,
-      multi: true
+      multi: true,
     },
     {
       provide: MSAL_INSTANCE,
-      useFactory: MSALInstanceFactory
+      useFactory: MSALInstanceFactory,
     },
     {
       provide: MSAL_GUARD_CONFIG,
-      useFactory: MSALGuardConfigFactory
+      useFactory: MSALGuardConfigFactory,
     },
     {
       provide: MSAL_INTERCEPTOR_CONFIG,
-      useFactory: MSALInterceptorConfigFactory
+      useFactory: MSALInterceptorConfigFactory,
     },
     MsalService,
     MsalGuard,
-    MsalBroadcastService
+    MsalBroadcastService,
   ],
   bootstrap: [TravelAppComponent, MsalRedirectComponent],
 })

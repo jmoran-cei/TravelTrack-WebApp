@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Options } from 'ngx-google-places-autocomplete/objects/options/options';
-import { UserService } from 'src/app/user';
+import { UserService } from 'src/app/shared';
 import { Trip } from 'src/app/shared/models/trip.model';
 import { DestinationsService } from '../autocomplete/service/destinations.service';
 import { UsernameValidator } from '../validators/userExists.validator';

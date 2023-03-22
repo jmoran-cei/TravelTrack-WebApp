@@ -6,18 +6,25 @@ import { catchError, map, Observable, of, retry, take } from 'rxjs';
 import { editProfileRequest } from 'src/app/auth-config';
 import { WebRequestService } from 'src/app/shared/services/web-request.service';
 import { environment } from 'src/environments/environment';
-import { User } from '.';
+import { User } from '../../shared';
 
 @Injectable()
 export class UserService {
   usersUrl = environment.TravelTrackAPI + '/users/v1';
 
-  constructor(private http: HttpClient, private webRequestService: WebRequestService, private msal: MsalService) {}
+  constructor(
+    private http: HttpClient,
+    private webRequestService: WebRequestService,
+    private msal: MsalService
+  ) {}
 
   // have to grab users this way in order to get them from angular web api (can only get by 'id' not by a 'username')
   users = this.http
     .get<User[]>(this.usersUrl, this.webRequestService.headers)
-    .pipe(retry(2), catchError(this.webRequestService.handleError('getUsers()', [])));
+    .pipe(
+      retry(2),
+      catchError(this.webRequestService.handleError('getUsers()', []))
+    );
 
   // check if user is in users
   getUser(username: string): Observable<User | undefined> {
@@ -25,15 +32,21 @@ export class UserService {
 
     return this.http
       .get<User>(url, this.webRequestService.headers)
-      .pipe(take(1), retry(2), catchError(this.webRequestService.handleError<User>('getUser()')));
+      .pipe(
+        take(1),
+        retry(2),
+        catchError(this.webRequestService.handleError<User>('getUser()'))
+      );
   }
 
   // create new user account
   createUser(user: User): Observable<User> {
     user.username = user.username.toLowerCase();
 
-    return this.http.post<User>(this.usersUrl, user, this.webRequestService.headers).pipe(
-      catchError(this.webRequestService.handleError<User>('createUser()'))
+    return this.http
+      .post<User>(this.usersUrl, user, this.webRequestService.headers)
+      .pipe(
+        catchError(this.webRequestService.handleError<User>('createUser()'))
       );
   }
 
@@ -42,7 +55,11 @@ export class UserService {
     user.username = user.username.toLowerCase();
 
     return this.http
-      .put<User>(`${this.usersUrl}/${user.username}`, user, this.webRequestService.headers)
+      .put<User>(
+        `${this.usersUrl}/${user.username}`,
+        user,
+        this.webRequestService.headers
+      )
       .pipe(
         catchError(this.webRequestService.handleError<User>('updateUser()'))
       );
@@ -65,15 +82,15 @@ export class UserService {
 
   editProfile(): void {
     this.msal
-    .loginRedirect(editProfileRequest)
-    .pipe(
-      take(1),
-      catchError(
-        this.webRequestService.handleError<AuthenticationResult>(
-          'editProfile()'
+      .loginRedirect(editProfileRequest)
+      .pipe(
+        take(1),
+        catchError(
+          this.webRequestService.handleError<AuthenticationResult>(
+            'editProfile()'
+          )
         )
       )
-    )
-    .subscribe();
+      .subscribe();
   }
 }

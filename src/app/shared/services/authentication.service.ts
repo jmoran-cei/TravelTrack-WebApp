@@ -4,7 +4,7 @@ import { AccountInfo, AuthenticationResult } from '@azure/msal-browser';
 import { BehaviorSubject, catchError, map, Observable, take } from 'rxjs';
 import { loginRequest } from 'src/app/auth-config';
 import { WebRequestService } from 'src/app/shared/services/web-request.service';
-import { User } from '../../shared/models/user.model';
+import { User } from '../models/user.model';
 import { UserService } from './user.service';
 
 @Injectable()
