@@ -14,7 +14,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { forkJoin, map, Observable, Subscription, take } from 'rxjs';
+import { forkJoin, map, Observable, Subscription, take, tap } from 'rxjs';
 import { datesInOrderValidator } from 'src/app/forms';
 import { DestinationsService } from 'src/app/forms/autocomplete/service/destinations.service';
 import { NavigationService, Trip } from 'src/app/shared';
@@ -371,7 +371,9 @@ export class TripFormComponent implements OnInit, OnDestroy {
         // map to be type Member instead of User (no password, )
         for (let user of users) {
           var member: Member = {
+            id: user.id,
             username: user.username.toLowerCase(),
+            displayName: user.displayName,
             firstName: user.firstName,
             lastName: user.lastName,
           };

@@ -7,10 +7,11 @@ import { editProfileRequest } from 'src/app/auth-config';
 import { WebRequestService } from 'src/app/shared/services/web-request.service';
 import { environment } from 'src/environments/environment';
 import { User } from '../../shared';
+import { MinimalUser } from '../models/minimalUser.model';
 
 @Injectable()
 export class UserService {
-  usersUrl = environment.TravelTrackAPI + '/users/v1';
+  usersUrl = environment.TravelTrackAPI + '/users';
 
   constructor(
     private http: HttpClient,
@@ -18,9 +19,8 @@ export class UserService {
     private msal: MsalService
   ) {}
 
-  // have to grab users this way in order to get them from angular web api (can only get by 'id' not by a 'username')
   users = this.http
-    .get<User[]>(this.usersUrl, this.webRequestService.headers)
+    .get<MinimalUser[]>(this.usersUrl, this.webRequestService.headers)
     .pipe(
       retry(2),
       catchError(this.webRequestService.handleError('getUsers()', []))
@@ -30,39 +30,17 @@ export class UserService {
   getUser(username: string): Observable<User | undefined> {
     const url = `${this.usersUrl}/${username.toLowerCase()}`;
 
-    return this.http
-      .get<User>(url, this.webRequestService.headers)
-      .pipe(
-        take(1),
-        retry(2),
-        catchError(this.webRequestService.handleError<User>('getUser()'))
-      );
-  }
+    if (username === "") {
+      return of(undefined);
+    }
 
-  // create new user account
-  createUser(user: User): Observable<User> {
-    user.username = user.username.toLowerCase();
-
-    return this.http
-      .post<User>(this.usersUrl, user, this.webRequestService.headers)
-      .pipe(
-        catchError(this.webRequestService.handleError<User>('createUser()'))
-      );
-  }
-
-  // update user account
-  updateUser(user: User): Observable<User> {
-    user.username = user.username.toLowerCase();
-
-    return this.http
-      .put<User>(
-        `${this.usersUrl}/${user.username}`,
-        user,
-        this.webRequestService.headers
-      )
-      .pipe(
-        catchError(this.webRequestService.handleError<User>('updateUser()'))
-      );
+    return this.http.get<User>(url, this.webRequestService.headers).pipe(
+      take(1),
+      catchError((err) => {
+          this.webRequestService.handleError<User>('getUser()', err);
+          return of(undefined);
+      })
+    );
   }
 
   // check if user exists
@@ -71,7 +49,9 @@ export class UserService {
 
     return this.getUser(username.toLowerCase()).pipe(
       map((result) => {
+        console.log('response: ', result);
         if (result !== undefined) {
+          console.log(true);
           return (userValid = true);
         } else {
           return (userValid = false);

@@ -56,10 +56,11 @@ export class AuthService {
     let localAccounts: AccountInfo[] = this.msal.instance.getAllAccounts();
     if (!localAccounts || localAccounts.length < 1) {
       return {
+        id: '',
         username: '',
+        displayName: '',
         firstName: '',
         lastName: '',
-        password: '',
       } as User;
     }
 
@@ -74,10 +75,11 @@ export class AuthService {
     let userInfo = localAccounts[0].idTokenClaims;
 
     return {
+      id: userInfo?.oid,
       username: userInfo?.emails![0],
+      displayName: userInfo?.name,
       firstName: (userInfo as any).given_name,
       lastName: (userInfo as any).family_name,
-      password: 'implementation changed in upcoming commit', // changing frontend model
     } as User;
   }
 
@@ -88,25 +90,6 @@ export class AuthService {
     } else {
       localStorage.setItem('app.isLoggedIn', 'true');
     }
-  }
-
-  // OLD METHOD - will be deleted soon --- avoiding temporary errors during current development
-  loginUser(username: string, password: string): Observable<boolean> {
-    return this.userService.getUser(username).pipe(
-      take(1),
-      map((result: User | undefined) => {
-        if (result === undefined) {
-          return false;
-        } else {
-          if (password === result.password) {
-            // this.currentUser = result; // avoiding more errors temporarily
-            this.isLoggedIn.next(!!this.currentUser);
-            return true;
-          }
-          return false;
-        }
-      })
-    );
   }
 
   // login redirect to Azure AD B2C page

@@ -100,7 +100,7 @@
     <div class="col-xs-12">
       <!-- user exists -->
       <app-validation-alert [validationBoolean]="this.members!.touched
-          && this.members!.invalid && this.members.controls[0].value !== ''"
+          && !!this.members.controls[this.members.length-1].errors && this.members.controls[this.members.length-1].value !== ''"
         alertText="Please provide a valid existing username.">
       </app-validation-alert>
     </div>

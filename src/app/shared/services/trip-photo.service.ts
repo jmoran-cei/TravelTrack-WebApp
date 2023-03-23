@@ -12,7 +12,7 @@ import {
   take,
 } from 'rxjs';
 import { TripService } from 'src/app/trips';
-import { AuthService } from 'src/app/user';
+import { AuthService } from 'src/app/shared';
 import { environment } from 'src/environments/environment';
 import { PendingFile, Trip, TripPhoto } from '..';
 import { WebRequestService } from './web-request.service';
@@ -21,7 +21,7 @@ import { WebRequestService } from './web-request.service';
   providedIn: 'root',
 })
 export class TripPhotoService {
-  photosUrl = environment.TravelTrackAPI + '/trips/v1'; // doesn't exist yet
+  photosUrl = environment.TravelTrackAPI + '/trips'; // doesn't exist yet
 
   constructor(
     private http: HttpClient,

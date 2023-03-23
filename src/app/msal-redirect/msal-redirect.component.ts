@@ -18,7 +18,6 @@ export class MsalRedirectComponent implements OnInit, OnDestroy {
   constructor(
     private msal: MsalService,
     private auth: AuthService,
-    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -37,10 +36,11 @@ export class MsalRedirectComponent implements OnInit, OnDestroy {
 
           // set user
           const user = {
+            id: idTokenClaims.oid,
             username: result?.account?.username as string,
+            displayName: result?.account?.name as string,
             firstName: idTokenClaims.given_name,
             lastName: idTokenClaims.family_name,
-            password: 'takeoutofimplementation', // changing DTOs and backend user implementation in future commit, password in frontend will cease to exist
           };
 
           // check what user flow policy was utilized
@@ -49,7 +49,6 @@ export class MsalRedirectComponent implements OnInit, OnDestroy {
             // if user just signed up, provide welcome message
             if (idTokenClaims.newUser) {
               this.msg = `Welcome to Travel Track, ${user.firstName}! We're excited to help you track your journey.`;
-              return this.userService.createUser(user);
             }
             // user logged in
             return of(user);

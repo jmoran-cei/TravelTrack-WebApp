@@ -11,13 +11,13 @@ import {
   take,
 } from 'rxjs';
 import { WebRequestService } from 'src/app/shared/services/web-request.service';
-import { AuthService, User } from 'src/app/user/shared';
+import { AuthService, User } from 'src/app/shared';
 import { environment } from 'src/environments/environment';
 import { Trip } from '../../shared/models/trip.model';
 
 @Injectable()
 export class TripService {
-  tripsUrl = environment.TravelTrackAPI + '/trips/v1';
+  tripsUrl = environment.TravelTrackAPI + '/trips';
   apiKey = environment.TravelTrackAPIKey;
 
   PlacesService = new google.maps.places.PlacesService(
@@ -26,9 +26,9 @@ export class TripService {
 
   constructor(private http: HttpClient, private auth: AuthService, private webRequestService: WebRequestService) {}
 
-  // get all trips
-  getTrips(): Observable<Trip[]> {
-    return this.http.get<Trip[]>(this.tripsUrl, this.webRequestService.headers).pipe(
+  // get all trips for the current user
+  getCurrentUserTrips(): Observable<Trip[]> {
+    return this.http.get<Trip[]>(this.tripsUrl + '/user/' + this.auth.getCurrentUser().id, this.webRequestService.headers).pipe(
       map((trips) =>
         this.filterTripsByUsername(trips, this.auth.getCurrentUser().username)
       ),
