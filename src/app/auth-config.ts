@@ -39,13 +39,7 @@ export const b2cPolicies = {
     },
   },
   authorityDomain: 'TravelTrackApp.b2clogin.com',
-  scopes: [
-    // all scopes for full access to Travel Track API
-    'https://TravelTrackApp.onmicrosoft.com/TravelTrack/api/Trips.Read',
-    'https://TravelTrackApp.onmicrosoft.com/TravelTrack/api/Trips.Write',
-    'https://TravelTrackApp.onmicrosoft.com/TravelTrack/api/User.Read',
-    'https://TravelTrackApp.onmicrosoft.com/TravelTrack/api/User.Write',
-  ],
+  scopes: environment.ADB2CScopes,
 };
 
 /***********************************************************
