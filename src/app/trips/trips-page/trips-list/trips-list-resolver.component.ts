@@ -7,6 +7,6 @@ export class TripListResolver implements Resolve<any> {
   constructor(private tripService: TripService) {}
 
   resolve() {
-    return this.tripService.getTrips();
+    return this.tripService.getCurrentUserTrips();
   }
 }

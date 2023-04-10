@@ -1,7 +1,7 @@
 export interface User {
-  //id?: number; // had to add this for in mem web api
+  id: string;
   username: string;
-  password: string;
+  displayName: string;
   firstName: string;
   lastName: string;
 }

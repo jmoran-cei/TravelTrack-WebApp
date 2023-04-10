@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter, Subscription } from 'rxjs';
-import { User } from '../user';
-import { AuthService } from '../user/shared/authentication.service';
+import { filter, Subscription, take } from 'rxjs';
+import { AuthService, UserService } from '../shared';
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,15 +10,16 @@ import { AuthService } from '../user/shared/authentication.service';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   isLoggedIn = this.auth.isLoggedIn$;
-  currentUser: User;
+  currentUser$ = this.auth.currentUser$;
   path!: string;
-  previousPaths: string[] = [''];
   isTripPage!: boolean;
   pathSubscription!: Subscription;
 
-  constructor(private auth: AuthService, private router: Router) {
-    this.currentUser = auth.currentUser;
-  }
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
     this.pathSubscription = this.router.events
@@ -32,18 +32,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
           // is on 'trips/:id' if, subpath is a number (valid trip id)
           this.isTripPage = !isNaN(paths[2] as any);
         else this.isTripPage = false;
-
-        // if user just navigated from /user/profile (to possibly edit their profile info)
-        if (
-          this.previousPaths.length === 3 &&
-          this.previousPaths[1] === 'user' &&
-          this.previousPaths[2] === 'profile'
-        ) {
-          // update user info on navbar
-          this.currentUser = this.auth.currentUser;
-        }
-
-        this.previousPaths = paths;
       });
   }
 
@@ -51,6 +39,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.pathSubscription.unsubscribe();
   }
 
+  // cuts long name lengths with '...' to fit UI
   adjustNameLength(name: string, numChars: number) {
     if (name.length > numChars) {
       return name.substring(0, numChars) + '..';
@@ -58,7 +47,17 @@ export class NavbarComponent implements OnInit, OnDestroy {
     return name;
   }
 
+  // redirect to Azure AD B2C login page
+  login() {
+    this.auth.login();
+  }
+
+  // logout and redirect to /home
   logoutUser() {
-    this.auth.logoutUser();
+    this.auth.logout();
+  }
+
+  editProfile() {
+    this.userService.editProfile();
   }
 }

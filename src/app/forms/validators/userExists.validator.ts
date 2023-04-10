@@ -5,7 +5,7 @@ import {
 } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UserService } from 'src/app/user';
+import { UserService } from 'src/app/shared';
 
 export class UsernameValidator {
   static createValidator(

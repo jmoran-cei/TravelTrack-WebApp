@@ -1,7 +1,6 @@
 import {
   HttpClient,
   HttpErrorResponse,
-  HttpHeaders,
 } from '@angular/common/http';
 import { ChangeDetectorRef, Injectable } from '@angular/core';
 import {
@@ -11,31 +10,24 @@ import {
   Observable,
   of,
   take,
-  throwError,
 } from 'rxjs';
 import { TripService } from 'src/app/trips';
-import { AuthService } from 'src/app/user';
+import { AuthService } from 'src/app/shared';
 import { environment } from 'src/environments/environment';
 import { PendingFile, Trip, TripPhoto } from '..';
+import { WebRequestService } from './web-request.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TripPhotoService {
   photosUrl = environment.TravelTrackAPI + '/trips'; // doesn't exist yet
-  apiKey = environment.TravelTrackAPIKey;
-
-  headers = {
-    headers: new HttpHeaders({
-      'X-Api-Version': '1.0',
-      'X-Api-Key': this.apiKey,
-    }),
-  };
 
   constructor(
     private http: HttpClient,
     private auth: AuthService,
-    private tripService: TripService
+    private tripService: TripService,
+    private webRequestService: WebRequestService
   ) {}
 
   detectChanges(changeDetection: ChangeDetectorRef) {
@@ -47,15 +39,15 @@ export class TripPhotoService {
   uploadPhotoFile(fd: FormData, tripId: number): Observable<Trip> {
     //update
     return this.http
-      .put<Trip>(`${this.photosUrl}/${tripId}/addphoto`, fd, this.headers)
-      .pipe(catchError(this.handleError<Trip>('uploadImage()')));
+      .put<Trip>(`${this.photosUrl}/addphoto/${tripId}`, fd, this.webRequestService.headers)
+      .pipe(catchError(this.webRequestService.handleError<Trip>('uploadImage()')));
   }
 
   // delete a trip photo
   deletePhotos(photos: TripPhoto[], tripId: number): Observable<Trip> {
     return this.http
-      .put<Trip>(`${this.photosUrl}/${tripId}/removephotos`, photos, this.headers)
-      .pipe(catchError(this.handleError<Trip>('deleteImage()')));
+      .put<Trip>(`${this.photosUrl}/removephotos/${tripId}`, photos, this.webRequestService.headers)
+      .pipe(catchError(this.webRequestService.handleError<Trip>('deleteImage()')));
   }
   // --------------------------------------
 
@@ -83,7 +75,7 @@ export class TripPhotoService {
       data.append('fileName', savedFileName);
       data.append('fileType', file.type);
       data.append('tripId', `${tripId}`);
-      data.append('addedByUser', this.auth.currentUser.username);
+      data.append('addedByUser', this.auth.getCurrentUser().username);
       data.append('alt', file.name);
 
       formDataArray.push(data);
@@ -202,20 +194,5 @@ export class TripPhotoService {
       }),
       take(1)
     );
-  }
-
-  // function for handling errors
-  private handleError<Trip>(
-    operation = 'operation',
-    result?: Trip
-  ): (error: any) => Observable<Trip> {
-    return (error: any): Observable<Trip> => {
-      console.error(error);
-
-      if (error instanceof (HttpErrorResponse || Error)) {
-        return throwError(() => error);
-      }
-      return of(result as Trip);
-    };
   }
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { take } from 'rxjs';
-import { AuthService } from 'src/app/user';
+import { AuthService } from 'src/app/shared';
 
 @Component({
   selector: 'app-home-section1',
@@ -11,4 +11,8 @@ export class HomeSection1Component {
   isLoggedIn = this.auth.isLoggedIn$.pipe(take(1));
 
   constructor(public auth: AuthService) {}
+
+  loginSignUp() {
+    this.auth.login();
+  }
 }
